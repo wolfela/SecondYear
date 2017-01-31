@@ -13,6 +13,8 @@ function setup {
 
 function run {
   echo "Starting up docker..."
+  docker-machine start coolbeans-host
+  eval "$(docker-machine env coolbeans-host)"
   docker-compose up -d
 }
 
