@@ -20,14 +20,21 @@ function setup-db {
   docker-compose run web python ./manage.py migrate
 }
 
+function shutdown {
+  docker-compose down
+}
+
 if [ "$1" == "setup" ]; then
   setup
   run
   setup-db
+  shutdown
 elif [ "$1" == "run" ]; then
   run
 elif [ "$1" == "rebuild" ]; then
   docker-compose build
+elif [ "$1" == "shutdown" ]; then
+  shutdown
 else
-  echo './build.sh [setup|run|rebuild]'
+  echo './build.sh [setup|run|rebuild|shutdown]'
 fi
