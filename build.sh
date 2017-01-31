@@ -19,10 +19,12 @@ function run {
 }
 
 function setup-db {
+  eval "$(docker-machine env coolbeans-host)"
   docker-compose run web python ./manage.py migrate
 }
 
 function shutdown {
+  eval "$(docker-machine env coolbeans-host)"
   docker-compose down
 }
 
