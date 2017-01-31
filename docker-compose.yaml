@@ -1,0 +1,21 @@
+version: '2'
+services:
+ db:
+   image: mariadb
+   restart: always
+   env_file: .env
+   ports:
+    - "33060:3306"
+ web:
+   build: .
+   restart: always
+   command: python manage.py runserver 0.0.0.0:8000
+   env_file: .env
+   volumes:
+     - .:/code
+   ports:
+     - "8000:8000"
+   depends_on:
+     - db
+   links:
+     - db
