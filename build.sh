@@ -9,6 +9,10 @@ function setup {
   else
     echo "$(docker-machine ip coolbeans-host) coolbeans.dev" | sudo tee --append /etc/hosts > /dev/null
   fi
+
+  cp .env.example .env
+  echo "Please change the value of SECRET_KEY in .env, then press any key to continue."
+  read _DUMMY_
 }
 
 function run {
