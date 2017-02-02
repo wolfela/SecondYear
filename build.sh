@@ -32,11 +32,21 @@ function shutdown {
   docker-compose stop
 }
 
+function install-node-modules {
+  echo "Installing node modules..."
+  npm install
+}
+
 if [ "$1" == "setup" ]; then
   setup
   run
   setup-db
   shutdown
+  install-node-modules
+
+  echo 'Gulp setup is now complete. To compile scss and javascript files, run `gulp watch`.'
+  echo 'Docker setup complete. IMPORTANT: If you ever want to run docker commands, run `eval "$(docker-machine env coolbeans-host)"` before you do so!'
+  echo 'This will put you in the correct context.'
 elif [ "$1" == "run" ]; then
   run
 elif [ "$1" == "rebuild" ]; then
