@@ -25,7 +25,7 @@ function setup-db {
 
 function shutdown {
   eval "$(docker-machine env coolbeans-host)"
-  docker-compose down
+  docker-compose stop
 }
 
 if [ "$1" == "setup" ]; then
