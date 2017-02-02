@@ -1,9 +1,16 @@
 version: '2'
+
+volumes:
+  db-data:
+    driver: local
+
 services:
  db:
    image: mariadb
    restart: always
    env_file: .env
+   volumes:
+    - db-data:/var/lib/mysql
    ports:
     - "33060:3306"
  web:
