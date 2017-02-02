@@ -5,6 +5,16 @@ volumes:
     driver: local
 
 services:
+ nginx:
+  image: nginx:mainline-alpine
+  volumes:
+    - .:/code
+    - ./config/nginx:/etc/nginx/conf.d
+    - ./static:/static
+  ports:
+    - "8000:8000"
+  depends_on:
+    - web
  db:
    image: mariadb
    restart: always
@@ -19,9 +29,8 @@ services:
    env_file: .env
    volumes:
      - .:/code
-   ports:
-     - "8000:8000"
+     - ./static:/static
    depends_on:
      - db
-   links:
-     - db
+   expose:
+     - "8000"
