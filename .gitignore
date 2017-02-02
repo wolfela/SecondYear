@@ -181,3 +181,8 @@ jspm_packages
 
 # Yarn Integrity file
 .yarn-integrity
+
+
+static/admin/*
+static/css/*
+static/js/*
