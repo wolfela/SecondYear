@@ -1,4 +1,4 @@
-# LOCAL USE ONLY. Exposes sshd of the web to the local machine.
+# For production use.
 
 version: '2'
 
@@ -23,13 +23,9 @@ services:
    env_file: .env
    volumes:
     - db-data:/var/lib/mysql
-   # Expose port 33060 for external MySQL clients
-   ports:
-    - "33060:3306"
  web:
-   build:
-     context: .
-     dockerfile: web-dev.Dockerfile
+   build: .
+   dockerfile: web-production.Dockerfile
    restart: always
    env_file: .env
    volumes:
@@ -39,5 +35,3 @@ services:
      - db
    expose:
      - "8000"
-   ports:
-     - "2222:22"
