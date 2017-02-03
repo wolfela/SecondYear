@@ -3,7 +3,6 @@ ENV PYTHONUNBUFFERED 1
 RUN apk update && apk upgrade && \
     apk add build-base gcc abuild binutils bash mariadb-dev openssh && \
     rm -rf /var/cache/apk/*
-RUN touch /var/log/lastlog
 RUN rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
 RUN mkdir /code
 ADD requirements.txt /code/

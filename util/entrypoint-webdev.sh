@@ -15,12 +15,20 @@ if [ ! -d "/var/run/sshd" ]; then
   mkdir -p /var/run/sshd
 fi
 
-adduser -D docker -s /bin/bash && echo "docker:password" | chpasswd
-chown -R docker:docker /code
-chown -R docker:docker /static
-chown -R docker:docker /home/docker
-echo 'cd /code && export $(cat .env | xargs)' > /home/docker/.profile
+ret=false
+getent passwd $1 >/dev/null 2>&1 && ret=true
+
+if [ !$ret ]; then
+  echo "Creating docker user..."
+  adduser -D docker -s /bin/bash && echo "docker:password" | chpasswd
+  chown -R docker:docker /code
+  chown -R docker:docker /static
+  chown -R docker:docker /home/docker
+  echo 'cd /code && export $(cat .env | xargs)' > /home/docker/.profile
+fi
 
 echo "Starting ssh..."
-/usr/sbin/sshd -D
-python /code/manage.py runserver 0.0.0.0:8000
+/usr/sbin/sshd
+
+echo "Starting Django..."
+exec "$@"
