@@ -17,6 +17,10 @@ function setup-db {
   docker-compose exec web python ./manage.py migrate
 }
 
+function reinstall-deps {
+  echo "Reinstalling dependencies..."
+}
+
 function shutdown {
   docker-compose stop
 }
@@ -24,6 +28,11 @@ function shutdown {
 function install-node-modules {
   echo "Installing node modules..."
   npm install
+}
+
+function install-python-deps {
+  echo "Installing Python dependencies..."
+  docker-compose exec web pip install -r requirements.txt
 }
 
 if [ "$1" == "setup" ]; then
@@ -39,6 +48,9 @@ elif [ "$1" == "run" ]; then
   run
 elif [ "$1" == "rebuild" ]; then
   docker-compose build
+elif [ "$1" == "reinstall-deps" ]; then
+  install-python-deps
+  install-node-modules
 elif [ "$1" == "shutdown" ]; then
   shutdown
 else
