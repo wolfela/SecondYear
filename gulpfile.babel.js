@@ -40,7 +40,7 @@ gulp.task('scss', () => {
                 .pipe(gulpif(!util.env.production, sourcemaps.init()))
                 .pipe(sass.sync({
                     outputStyle: (util.env.production) ? 'compressed' : 'nested',
-                    includePaths: ['./node_modules']
+                    includePaths: ['./node_modules/foundation-sites/scss']
                 }).on('error', sass.logError))
                 .pipe(gulpif(!util.env.production, sourcemaps.write('.')))
                 .pipe(gulp.dest(scssPaths.dest))
