@@ -1,8 +1,12 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db.models import EmailField, CharField
+from safedelete import SOFT_DELETE
+from safedelete.models import SafeDeleteMixin
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, SafeDeleteMixin):
+    _safedelete_policy = SOFT_DELETE
+
     email = EmailField(max_length=200, unique=True)
     first_name = CharField(max_length=50)
     last_name = CharField(max_length=50)
@@ -12,5 +16,3 @@ class User(AbstractBaseUser):
 
     def get_short_name(self):
         return self.first_name
-
-    
