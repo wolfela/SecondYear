@@ -65,7 +65,3 @@ gulp.task('watch', () => {
     gulp.watch(`${dirs.scssSrc}/**/*.scss`, ['scss']);
     gulp.watch(`${dirs.jsSrc}/**/*.js`, ['js']);
 });
-
-gulp.task('default', () => {
-    gulp.start('scss', 'js');
-});
