@@ -3,7 +3,7 @@ from django.db.models import EmailField, CharField
 from safedelete import SOFT_DELETE
 from safedelete.models import SafeDeleteMixin
 
-from coolbeans.app.models import TimeStampedModel
+from coolbeans.app.models.base import TimeStampedModel
 
 
 class UserModel(AbstractBaseUser, TimeStampedModel, SafeDeleteMixin):
