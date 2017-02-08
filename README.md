@@ -18,6 +18,7 @@ The following commands are exposed in `build.sh`:
 
     * `setup` - sets up Docker, install npm dependencies and migrate the database.
     * `run` - Runs Docker.
+    * `migrate` - Migrates the database.
     * `rebuild` - Rebuild the Docker containers - this will wipe your database as well!
     * `reinstall-deps` - Reinstalls Python and npm dependencies.
     * `shutdown` - Shuts down the Docker instances.
