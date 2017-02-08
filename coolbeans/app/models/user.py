@@ -18,3 +18,6 @@ class UserModel(AbstractBaseUser, TimeStampedModel, SafeDeleteMixin):
 
     def get_short_name(self):
         return self.first_name
+
+    class Meta:
+        app_label = 'app'

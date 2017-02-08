@@ -1,6 +1,8 @@
 from django.db.models import DateTimeField
 from django.db.models import Model
 
+# Discoverable model imports
+from coolbeans.app.models.user import UserModel
 
 class TimeStampedModel(Model):
     """
@@ -12,3 +14,5 @@ class TimeStampedModel(Model):
 
     class Meta:
         abstract = True
+
+
