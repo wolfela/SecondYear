@@ -12,7 +12,11 @@ function run {
   docker-compose up -d
 }
 
-function setup-db {
+function make-shell {
+  docker-compose exec web /bin/bash
+}
+
+function migrate-db {
   echo "Migrating database..."
   docker-compose exec web python ./manage.py migrate
 }
@@ -38,7 +42,7 @@ function install-python-deps {
 if [ "$1" == "setup" ]; then
   setup
   run
-  setup-db
+  migrate-db
   shutdown
   install-node-modules
 
@@ -51,6 +55,10 @@ elif [ "$1" == "rebuild" ]; then
 elif [ "$1" == "reinstall-deps" ]; then
   install-python-deps
   install-node-modules
+elif [ "$1" == "migrate" ]; then
+  migrate-db
+elif [ "$1" == "make-shell" ]; then
+  make-shell
 elif [ "$1" == "shutdown" ]; then
   shutdown
 else
