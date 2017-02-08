@@ -6,7 +6,7 @@ from safedelete.models import SafeDeleteMixin
 from coolbeans.app.models import TimeStampedModel
 
 
-class User(AbstractBaseUser, TimeStampedModel, SafeDeleteMixin):
+class UserModel(AbstractBaseUser, TimeStampedModel, SafeDeleteMixin):
     _safedelete_policy = SOFT_DELETE
 
     email = EmailField(max_length=200, unique=True)
