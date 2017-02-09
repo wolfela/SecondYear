@@ -79,7 +79,7 @@ DATABASES = {
         'PORT': os.getenv("DATABASE_PORT"),
         'OPTIONS': {
             # Sets SQL Strict Mode
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
         }
     }
 }
