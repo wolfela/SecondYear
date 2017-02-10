@@ -1,4 +1,3 @@
-//Dickbutt
 $(document).ready(function() {
 
     var $menuButton = $(".hamburger"),
