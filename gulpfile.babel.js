@@ -20,7 +20,8 @@ const dirs = {
 const scssPaths = {
     srcs: [
         `${dirs.scssSrc}/student-app.scss`,
-        `${dirs.scssSrc}/teacher-app.scss`
+        `${dirs.scssSrc}/teacher-app.scss`,
+        `${dirs.scssSrc}/app.scss`
     ],
     dest: `${dirs.dest}/css`
 };
@@ -40,7 +41,7 @@ gulp.task('scss', () => {
                 .pipe(gulpif(!util.env.production, sourcemaps.init()))
                 .pipe(sass.sync({
                     outputStyle: (util.env.production) ? 'compressed' : 'nested',
-                    includePaths: ['./node_modules/foundation-sites/scss']
+                    includePaths: ['./node_modules/foundation-sites/scss','./node_modules/motion-ui/src']
                 }).on('error', sass.logError))
                 .pipe(gulpif(!util.env.production, sourcemaps.write('.')))
                 .pipe(gulp.dest(scssPaths.dest))
