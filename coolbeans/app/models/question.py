@@ -33,10 +33,6 @@ class MCQQuestionModel(QuestionModel):
     question = ForeignKey(QuestionModel, on_delete=CASCADE)
     score = PositiveIntegerField()
 
-    class Meta:
-        verbose_name = "Multiple Choice Question"
-        verbose_name_plural = "Multiple Choice Questions"
-
     def check_if_correct(self, choice):
         answer = Answer.objects.get(id = choice)
 
@@ -49,6 +45,9 @@ class MCQQuestionModel(QuestionModel):
         return [(answer.id, answer.content) for answer in
                 Answer.objects.filter(mcq = self)]
 
+    class Meta:
+        verbose_name = "Multiple Choice Question"
+        verbose_name_plural = "Multiple Choice Questions"
 
 
 class Answer(TimeStampedModel, SafeDeleteMixin):
