@@ -24,6 +24,15 @@ class QuestionModel(TimeStampedModel, SafeDeleteMixin):
     class Meta:
         abstract = True
 
+    def check_answer(self, answer):
+        """
+        Checks whether the supplied answer is correct.
+
+        :param answer: The answer provided.
+        :return: bool Whether the answer is correct.
+        """
+        raise NotImplementedError()
+
 
 class MCQQuestionModel(QuestionModel):
     """
@@ -37,8 +46,14 @@ class MCQQuestionModel(QuestionModel):
         verbose_name = "Multiple Choice Question"
         verbose_name_plural = "Multiple Choice Questions"
 
-    def check_if_correct(self, choice):
-        answer = Answer.objects.get(id = choice)
+    def check_answer(self, choice):
+        """
+        Checks whether the supplied answer is correct.
+
+        :param choice: The answer provided.
+        :return: bool Whether the answer is correct.
+        """
+        answer = Answer.objects.get(id=choice)
 
         if answer.correct is True:
             return True
