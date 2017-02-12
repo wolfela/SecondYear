@@ -1,5 +1,5 @@
 from django.db.models import CASCADE
-from django.db.models import CharField, PositiveIntegerField, BooleanField
+from django.db.models import CharField, PositiveIntegerField, BooleanField, TextField
 from django.db.models import ForeignKey
 from model_utils.managers import InheritanceManager
 from safedelete import SOFT_DELETE
@@ -29,6 +29,13 @@ class QuestionModel(TimeStampedModel, SafeDeleteMixin):
         :return: bool Whether the answer is correct.
         """
         raise NotImplementedError()
+
+
+class PlaceholderQuestionModel(QuestionModel):
+    """
+    A question model for placeholder information.
+    """
+    information = TextField()
 
 
 class MCQQuestionModel(QuestionModel):
