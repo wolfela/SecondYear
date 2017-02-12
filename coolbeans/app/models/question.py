@@ -21,9 +21,6 @@ class QuestionModel(TimeStampedModel, SafeDeleteMixin):
 
     objects = InheritanceManager()
 
-    class Meta:
-        abstract = True
-
     def check_answer(self, answer):
         """
         Checks whether the supplied answer is correct.
