@@ -42,7 +42,6 @@ class MCQQuestionModel(QuestionModel):
     """
     An MCQ Question Type.
     """
-    task = "Choose a correct answer" #default task info for each question type, just an idea I'm not sure if we need it
     question = ForeignKey(QuestionModel, on_delete=CASCADE)
     score = PositiveIntegerField()
 
@@ -84,3 +83,28 @@ class Answer(TimeStampedModel, SafeDeleteMixin):
     class Meta:
         verbose_name = "Answer"
         verbose_name_plural = "Answers"
+
+class TFQuestionModel(QuestionModel):
+    """
+    A True or False Question Type.
+    """
+    question = ForeignKey(QuestionModel, on_delete=CASCADE)
+    correct = BooleanField(blank = False)
+    score = PositiveIntegerField()
+
+    class Meta:
+        verbose_name = "True or False Question"
+        verbose_name_plural = "True or False Questions"
+
+    def check_answer(self, choice):
+        """
+        Checks whether the supplied answer is correct.
+
+        :param choice: The answer provided.
+        :return: bool Whether the answer is correct.
+        """
+
+        if self.correct == choice:
+            return True
+        else:
+            return False
