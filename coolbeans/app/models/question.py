@@ -76,7 +76,7 @@ class Answer(TimeStampedModel, SafeDeleteMixin):
     """
     mcq = ForeignKey(MCQQuestionModel, on_delete=CASCADE)
     content  = CharField(max_length=255, blank = False)
-    correct = BooleanField(blank = False)
+    correct = BooleanField(blank = False, default = False)
 
     def __str__(self):
         return self.content
