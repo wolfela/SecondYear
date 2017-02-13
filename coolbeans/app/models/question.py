@@ -89,7 +89,8 @@ class TFQuestionModel(QuestionModel):
     A True or False Question Type.
     """
     question = ForeignKey(QuestionModel, on_delete=CASCADE)
-    correct = BooleanField(blank = False)
+    title = CharField(max_length=500)
+    answer = BooleanField(blank=False)
     score = PositiveIntegerField()
 
     class Meta:
@@ -104,7 +105,4 @@ class TFQuestionModel(QuestionModel):
         :return: bool Whether the answer is correct.
         """
 
-        if self.correct == choice:
-            return True
-        else:
-            return False
+        return self.correct == choice
