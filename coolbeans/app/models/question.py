@@ -1,6 +1,7 @@
 from django.db.models import CASCADE
 from django.db.models import CharField, PositiveIntegerField, BooleanField, TextField
 from django.db.models import ForeignKey
+from django.contrib.postgres.fields import ArrayField
 from model_utils.managers import InheritanceManager
 from safedelete import SOFT_DELETE
 from safedelete.models import SafeDeleteMixin
@@ -52,6 +53,8 @@ class MCQQuestionModel(QuestionModel):
     An MCQ Question Type.
     """
     question = ForeignKey(QuestionModel, on_delete=CASCADE)
+    answers = ArrayField(CharField(max_length=255, blank = False))
+    correct = CharField(max_length=255, blank = False)
     score = PositiveIntegerField()
 
     class Meta:
@@ -65,33 +68,12 @@ class MCQQuestionModel(QuestionModel):
         :param choice: The answer provided.
         :return: bool Whether the answer is correct.
         """
-        answer = Answer.objects.get(id=choice)
 
-        if answer.correct is True:
-            return True
-        else:
-            return False
+        return self.correct == choice
 
     def get_answers_list(self):
-        return [(answer.id, answer.content) for answer in
-                Answer.objects.filter(mcq = self)]
+        return self.answers.extend(self.correct) #TO DO: sort out display order
 
-
-
-class Answer(TimeStampedModel, SafeDeleteMixin):
-    """
-    Answer type for MCQ question
-    """
-    mcq = ForeignKey(MCQQuestionModel, on_delete=CASCADE)
-    content  = CharField(max_length=255, blank = False)
-    correct = BooleanField(blank = False, default = False)
-
-    def __str__(self):
-        return self.content
-
-    class Meta:
-        verbose_name = "Answer"
-        verbose_name_plural = "Answers"
 
 class TFQuestionModel(QuestionModel):
     """
