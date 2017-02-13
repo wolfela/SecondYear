@@ -105,4 +105,4 @@ class TFQuestionModel(QuestionModel):
         :return: bool Whether the answer is correct.
         """
 
-        return self.correct == choice
+        return self.answer is choice
