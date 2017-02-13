@@ -38,6 +38,15 @@ class PlaceholderQuestionModel(QuestionModel):
     information = TextField()
 
 
+    def check_answer(self, answer):
+        """
+        Checks whether the supplied answer is correct.
+
+        :param answer: The answer provided.
+        :return: bool Whether the answer is correct.
+        """
+        return None # undefined behaviour
+
 class MCQQuestionModel(QuestionModel):
     """
     An MCQ Question Type.
