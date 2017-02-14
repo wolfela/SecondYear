@@ -27,6 +27,15 @@ $(document).ready(function() {
 	wordPairs.push(new Word('wordA3', 'wordB3'));
 	wordPairs.push(new Word('wordA4', 'wordB4'));
 	wordPairs.push(new Word('wordA5', 'wordB5'));
+
+	function getWordPair(key) {
+		for(i = 0; i < wordPairs.length; i++) {
+			if(key == wordPairs[i].langA) {
+				return wordPairs[i];
+			}
+		}
+		return null;
+	}
 	
 	var wordsLangA = [];
 	var wordsLangB = [];
@@ -51,6 +60,8 @@ $(document).ready(function() {
 		$buttonA.text(wordA);
 		$buttonB.text(wordB);
 	}
+
+	var pairsInWindow = 5;
 
 	// IN ACTION
 	var drawnBetween = [];	// to fill with Drawn objects for buttons to draw lines between
@@ -81,6 +92,7 @@ $(document).ready(function() {
 			}
 			
 		}
+		//drawBetween.filter(Object);
 	}
 
 	var langAregex = RegExp('langA');
@@ -118,7 +130,42 @@ $(document).ready(function() {
 			$selectedButton = $(this);
 		}
 
-		// for checking if all buttons have been
+
+		// for checking if all buttons have been linked
+		if(drawnBetween.length == pairsInWindow) {
+            /*print('ob: ' + drawnBetween[0].$left.attr('id') + ' pairs: ' + pairsInWindow);
+			print('ob: ' + drawnBetween[0].$right.attr('id') + ' pairs: ' + pairsInWindow);
+			print('ob: ' + drawnBetween[1].$left.attr('id') + ' pairs: ' + pairsInWindow);
+			print('ob: ' + drawnBetween[1].$right.attr('id') + ' pairs: ' + pairsInWindow);
+			print('ob: ' + drawnBetween[2].$left.attr('id') + ' pairs: ' + pairsInWindow);
+			print('ob: ' + drawnBetween[2].$right.attr('id') + ' pairs: ' + pairsInWindow);
+			print('ob: ' + drawnBetween[3].$left.attr('id') + ' pairs: ' + pairsInWindow);
+			print('ob: ' + drawnBetween[3].$right.attr('id') + ' pairs: ' + pairsInWindow);
+			print('ob: ' + drawnBetween[4].$left.attr('id') + ' pairs: ' + pairsInWindow);
+			print('ob: ' + drawnBetween[4].$right.attr('id') + ' pairs: ' + pairsInWindow);*/
+
+			for(j = 0; j < drawnBetween.length; j++) {
+				var $left = drawnBetween[j].$left;
+				var $right = drawnBetween[j].$right;
+
+				var pair = getWordPair($left.text());
+				
+				var answerText = pair.langB;
+				
+				$left.removeClass('success alert');
+				$right.removeClass('success alert');
+
+				if($right.text() == answerText) {
+					$left.addClass('success');
+					$right.addClass('success');
+				} else {
+					$left.addClass('alert');
+					$right.addClass('alert');
+				}
+                
+				
+			}
+		}		
 	});
 
 });
@@ -131,6 +178,10 @@ function shuffle(array) {
         array[j] = temp;
     }
     return array;
+}
+
+function print(msg) {
+	document.writeln(msg);
 }
 
 
