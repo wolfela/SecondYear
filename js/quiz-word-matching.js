@@ -63,6 +63,8 @@ $(document).ready(function() {
 
 	var pairsInWindow = 5;
 
+    $('#message').hide();
+
 	// IN ACTION
 	var drawnBetween = [];	// to fill with Drawn objects for buttons to draw lines between
 	function Drawn($leftButton, $rightButton) { this.$left = $leftButton; this.$right = $rightButton }
@@ -143,6 +145,8 @@ $(document).ready(function() {
 			print('ob: ' + drawnBetween[3].$right.attr('id') + ' pairs: ' + pairsInWindow);
 			print('ob: ' + drawnBetween[4].$left.attr('id') + ' pairs: ' + pairsInWindow);
 			print('ob: ' + drawnBetween[4].$right.attr('id') + ' pairs: ' + pairsInWindow);*/
+            
+            var correct = 0;
 
 			for(j = 0; j < drawnBetween.length; j++) {
 				var $left = drawnBetween[j].$left;
@@ -156,16 +160,28 @@ $(document).ready(function() {
 				$right.removeClass('success alert');
 
 				if($right.text() == answerText) {
+                    correct++;
 					$left.addClass('success');
 					$right.addClass('success');
 				} else {
 					$left.addClass('alert');
 					$right.addClass('alert');
 				}
-                
 				
 			}
-		}		
+            var $message = $('#message');
+            $message.show();
+            $message.removeClass('success alert');
+            if(correct == pairsInWindow) {
+                $message.html('<h5>Success!</h5><p>You got every word correct :) Press next to continue</p>');
+                $message.addClass('success');
+            } else {
+                $message.html('<h5>:(</h5><p>You got some answers wrong. Why don\'t you try again?</p>');
+                $message.addClass('alert');
+            }
+		} else {
+            $('#message').hide();
+        }		
 	});
 
 });
