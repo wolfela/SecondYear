@@ -54,21 +54,29 @@ $(document).ready(function() {
 
 	// IN ACTION
 	var drawnBetween = [];	// to fill with Drawn objects for buttons to draw lines between
-	function Drawn(left, right) { this.left = left; this.right = right }
+	function Drawn($leftButton, $rightButton) { this.$left = $leftButton; this.$right = $rightButton }
 	function refreshLines() {
 
 		context.clearRect(0, 0, $canvas.width(), $canvas.height());
 		for(i = 0; i < drawnBetween.length; i++) {
-			draw(drawnBetween[i].left, drawnBetween[i].right);		
+			var link = drawnBetween[i];
+			var leftPos = link.$left.position();
+			var rightPos = link.$right.position();
+
+			leftPos.left += link.$left.width();
+			leftPos.top += (link.$left.height() / 2)
+
+			rightPos.top += (link.$right.height() / 2)
+			
+			draw(leftPos, rightPos);		
 		}
 
 	}
 
-	function removeIfExists(pos) {
+	function removeIfExists($button) {
 		for(i = 0; i < drawnBetween.length; i++) {
-			var item = drawnBetween[i];');
-			if((item.left.left == pos.left && item.left.top == pos.top) || 
-				(item.right.left == pos.left && item.right.top == pos.top)) {			
+			var item = drawnBetween[i];	
+			if($button.attr('id') == item.$left.attr('id') || $button.attr('id') == item.$right.attr('id')) {		
 				drawnBetween.splice(i, 1);
 			}
 			
@@ -80,6 +88,8 @@ $(document).ready(function() {
 	var $selectedButton = null;
 
 	$('.button').click(function() {
+
+		// for drawing lines
 		if($selectedButton != null) {
 			var firstButtonId = $selectedButton.attr('id');
 			var secondButtonId = $(this).attr('id');
@@ -89,24 +99,14 @@ $(document).ready(function() {
 			//	without drawing
 			if(!((langAregex.test(firstButtonId) && langAregex.test(secondButtonId)) || 
 				(langBregex.test(firstButtonId) && langBregex.test(secondButtonId)))) {
-
-				var from = $selectedButton.position();
-				from.top += ($selectedButton.height() / 2);
-
-				var to = $(this).position();
-				to.top += ($(this).height() / 2);
 				
+				removeIfExists($selectedButton);
+				removeIfExists($(this));
 
 				if(langAregex.test(firstButtonId)) {
-					from.left += $selectedButton.width();
-					removeIfExists(from);
-					removeIfExists(to);
-					drawnBetween.push(new Drawn(from, to));
+					drawnBetween.push(new Drawn($selectedButton, $(this)));
 				} else {
-					to.left += $selectedButton.width();
-					removeIfExists(from);
-					removeIfExists(to);
-					drawnBetween.push(new Drawn(to, from));
+					drawnBetween.push(new Drawn($(this), $selectedButton));
 				}
 
 				refreshLines();
@@ -117,6 +117,8 @@ $(document).ready(function() {
 		} else {
 			$selectedButton = $(this);
 		}
+
+		// for checking if all buttons have been
 	});
 
 });
