@@ -1,7 +1,7 @@
 from django.db.models import CASCADE
 from django.db.models import CharField, PositiveIntegerField, BooleanField, TextField
 from django.db.models import ForeignKey
-from django.contrib.postgres.fields import ArrayField
+from django_mysql.models import ListCharField
 from model_utils.managers import InheritanceManager
 from safedelete import SOFT_DELETE
 from safedelete.models import SafeDeleteMixin
@@ -53,7 +53,7 @@ class MCQQuestionModel(QuestionModel):
     An MCQ Question Type.
     """
     question = ForeignKey(QuestionModel, on_delete=CASCADE)
-    answers = ArrayField(CharField(max_length=255, blank = False))
+    answers = ListCharField(base_field = CharField(max_length=255, blank = False))
     correct = CharField(max_length=255, blank = False)
     score = PositiveIntegerField()
 
