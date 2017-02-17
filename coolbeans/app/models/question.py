@@ -111,7 +111,7 @@ class WMQuestionModel(QuestionModel):
     A Word Matching Question Type.
     """
     title = CharField(max_length=500)
-    answers = ListCharField(base_field = CharField(max_length=255, blank = False))
+    answers = ListCharField(base_field = CharField(max_length=500, blank = False))
     score = PositiveIntegerField()
 
     class Meta:
