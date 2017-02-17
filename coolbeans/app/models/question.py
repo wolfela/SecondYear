@@ -17,7 +17,7 @@ class QuestionModel(TimeStampedModel, SafeDeleteMixin):
     _safedelete_policy = SOFT_DELETE
 
     quiz = ForeignKey(QuizModel, on_delete=CASCADE)
-    parent = ForeignKey('self', on_delete=CASCADE)
+    display_with = ForeignKey('self', on_delete=CASCADE)
     display_order = PositiveIntegerField()
 
     objects = InheritanceManager()
@@ -30,6 +30,10 @@ class QuestionModel(TimeStampedModel, SafeDeleteMixin):
         :return: bool Whether the answer is correct.
         """
         raise NotImplementedError()
+
+    def get_the_group(self):
+
+        return QuestionModel.objects.filter(display_with = self)
 
 
 class PlaceholderQuestionModel(QuestionModel):
