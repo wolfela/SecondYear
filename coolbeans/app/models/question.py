@@ -104,3 +104,32 @@ class TFQuestionModel(QuestionModel):
         """
 
         return self.answer is choice
+
+
+class WMQuestionModel(QuestionModel):
+    """
+    A Word Matching Question Type.
+    """
+    title = CharField(max_length=500)
+    answers = ListCharField(base_field = CharField(max_length=255, blank = False))
+    score = PositiveIntegerField()
+
+    class Meta:
+        verbose_name = "Word Matching Question"
+        verbose_name_plural = "Word Matching Questions"
+
+    def check_answer(self, choice):
+        """
+        Checks whether the supplied answer is correct.
+
+        :param choice: The answer provided in "left | right" format
+        :return: bool Whether the answer is correct.
+        """
+
+        for a in self.answers:
+            if(a==choice):
+                return True
+
+        return False
+
+
