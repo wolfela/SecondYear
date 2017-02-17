@@ -60,7 +60,6 @@ class MCQQuestionModel(QuestionModel):
     """
     An MCQ Question Type.
     """
-    question = ForeignKey(QuestionModel, on_delete=CASCADE)
     answers = ListCharField(base_field = CharField(max_length=255, blank = False))
     correct = CharField(max_length=255, blank = False)
     score = PositiveIntegerField()
@@ -87,7 +86,6 @@ class TFQuestionModel(QuestionModel):
     """
     A True or False Question Type.
     """
-    question = ForeignKey(QuestionModel, on_delete=CASCADE)
     title = CharField(max_length=500)
     answer = BooleanField(blank=False)
     score = PositiveIntegerField()
@@ -105,3 +103,4 @@ class TFQuestionModel(QuestionModel):
         """
 
         return self.answer is choice
+
