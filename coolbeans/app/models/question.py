@@ -60,9 +60,9 @@ class MCQQuestionModel(QuestionModel):
     """
     An MCQ Question Type.
     """
-    title = CharField(max_length = 500, blank = False)
-    answers = ListCharField(base_field = CharField(max_length=255, blank = False))
-    correct = CharField(max_length = 255, blank = False)
+    title = CharField(max_length=500, blank=False)
+    answers = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False))
+    correct = CharField(max_length=255, blank=False)
     score = PositiveIntegerField()
 
     class Meta:
@@ -111,7 +111,7 @@ class WMQuestionModel(QuestionModel):
     A Word Matching Question Type.
     """
     title = CharField(max_length=500)
-    answers = ListCharField(base_field = CharField(max_length=500, blank = False))
+    answers = ListCharField(max_length=500, base_field=CharField(max_length=500, blank = False))
     score = PositiveIntegerField()
 
     class Meta:
