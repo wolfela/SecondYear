@@ -22,6 +22,7 @@ const scssPaths = {
         `${dirs.scssSrc}/student-app.scss`,
         `${dirs.scssSrc}/teacher-app.scss`,
         `${dirs.scssSrc}/quiz-word-matching.scss`,
+        `${dirs.scssSrc}/quiz-editor-word-matching.scss`,
         `${dirs.scssSrc}/app.scss`
     ],
     dest: `${dirs.dest}/css`
