@@ -1,6 +1,5 @@
 from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, DestroyModelMixin
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
-from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from coolbeans.api.serializers.user import PublicUserSerializer
