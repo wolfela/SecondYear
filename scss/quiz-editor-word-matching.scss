@@ -1,0 +1,62 @@
+@import "foundation";
+
+$back-color: #EDEDED;
+
+
+body {
+	background-color: $back-color;
+}
+
+.center {
+	margin: auto;
+	width: 80%;
+}
+
+.center-text {
+	text-align: center;
+}
+
+#canvas {
+	margin: auto;
+	margin-top: 2%;
+	width: 80%;
+	height: 540px;
+	padding: 20px;
+	background-color: #FFFFFF;
+	border-radius: 30px;
+	z-index: -1;
+}
+
+.div-col {
+	margin-left: 2%;
+	float: left;
+	width: auto;
+	padding: 2%;
+	border: gray solid 1px;
+}
+
+.cell {
+	vertical-align: top;
+}
+
+div {
+	borde: red solid 1px;
+}
+
+.label {
+	float: left;
+	margin-left: 1.5%;
+	margin-right: 4%;
+}
+
+.editor-input {
+	width: 80%;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
