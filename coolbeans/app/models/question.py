@@ -83,7 +83,7 @@ class MCQQuestionModel(QuestionModel):
         return self.answers.extend(self.correct) #TO DO: sort out display order
 
 
-class TFQuestionModel(QuestionModel):
+class TrueFalseQuestionModel(QuestionModel):
     """
     A True or False Question Type.
     """
@@ -106,7 +106,7 @@ class TFQuestionModel(QuestionModel):
         return self.answer is choice
 
 
-class WMQuestionModel(QuestionModel):
+class WordMatchingQuestionModel(QuestionModel):
     """
     A Word Matching Question Type.
     """
@@ -129,9 +129,9 @@ class WMQuestionModel(QuestionModel):
         return False #toimplement
 
 
-class WOQuestionModel(QuestionModel):
+class WordScrambleQuestionModel(QuestionModel):
     """
-    A Word Ordering Question Type.
+    A Word Scrable Question Type.
     """
     title = CharField(max_length=500)
     answer = CharField(max_length=500, blank = False)
@@ -139,8 +139,8 @@ class WOQuestionModel(QuestionModel):
     score = PositiveIntegerField()
 
     class Meta:
-        verbose_name = "Word Ordering Question"
-        verbose_name_plural = "Word Ordering Questions"
+        verbose_name = "Word Scramble Question"
+        verbose_name_plural = "Word Scramble Questions"
 
     def check_answer(self, choice):
         """
