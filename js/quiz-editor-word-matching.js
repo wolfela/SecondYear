@@ -1,10 +1,6 @@
 var wordPairs = [];
 function Word(langA, langB, page) { this.langA = langA; this.langB = langB, this.page = page };
 $(document).ready(function() {
-	$('#word-sets-div').hide();
-	$('#editing-div').show();
-	
-	
 
 	wordPairs.push(new Word('wordA1ddddddgrtrehth', 'wordB1ghpowh', 1));
 	wordPairs.push(new Word('wordA2fbdfbd', 'wordB2drfbhdfhbd', 1));
@@ -12,15 +8,14 @@ $(document).ready(function() {
 	wordPairs.push(new Word('wordA4edgfew', 'wordB4esfesf', 2));
 	wordPairs.push(new Word('wordA5', 'wordB5', 3));
 
-	//addTable(wordPairs);
-	addWordEditor(wordPairs, 1);
+	addTable(wordPairs);
 	
 });
 
 addIfNotExists = function(array, elem) {
 	var exists = false;
 	for(a = 0; a < array.length; a++) {
-		if(array[a] === elem) {
+		if(array[a] == elem) {
 			exists = true;
 		}
 	}
@@ -33,6 +28,8 @@ addIfNotExists = function(array, elem) {
 }
 
 addTable = function(pairsArray) {
+	$('#editing-div').hide();
+	$('#word-sets-div').show();
 	$('#table').empty();
 	$('#table').append('<tr id="row1"></td>');
 
@@ -82,6 +79,13 @@ addTable = function(pairsArray) {
 		var buttonGroup = '<div class=button-group>' + editButton + deleteButton + '</div>'; 
 		$('#page' + pageNumbers[l]).append(buttonGroup);
 
+		// click listener for edit buttons
+		$('#edit-page' + pageNum).click(function() {
+			var num = $(this).attr('id').substring(9);
+			addWordEditor(wordPairs, num);
+			
+		});
+
 		// click listener for delete buttons
 		$('#delete' + pageNum).click(function() {
 			var page = $(this).attr('id').substring(6);
@@ -99,6 +103,9 @@ addTable = function(pairsArray) {
 
 
 addWordEditor = function(array, page) {
+	$('#word-sets-div').hide();
+	$('#editing-div').show();
+
 	$('#editing-div').empty();
 	$('#editing-div').append('<div id="editing-table-div"><div>');
 	$('#editing-table-div').append('<table id="editing-table"></table>');
@@ -130,7 +137,7 @@ addWordEditor = function(array, page) {
 	// adding add button
 	$('#editing-table').append('<td><a class="button editor-add" id="add-pair-button">Add</a></td>');
 	$('#add-pair-button').click(function() {
-		pairs.push(new Word('', '', page));;
+		pairs.push(new Word('', '', page));
 		addWordEditor(pairs, page);
 		
 	});
@@ -138,9 +145,18 @@ addWordEditor = function(array, page) {
 	// adding save button
 	$('#editing-div').append('<button type="button" class="success button" id="save-pairs-button">Save</button>');
 	$('#save-pairs-button').click(function() {
+		// updating words
+		for(w = 0; w < pairs.length; w++) {
+			pairs[w].langA = $('#wordA' + w).val();
+			pairs[w].langB = $('#wordB' + w).val();
+		}
+
 		for(j = 0; j < pairs.length; j++) {
 			wordPairs = addIfNotExists(wordPairs, pairs[j]);
+			//document.write('(' + pairs[j].langA + ',' + pairs[j].langB + ',' + pairs[j].page + ') ');
 		}
+		
+		addTable(wordPairs);
 	});
 	
 }
