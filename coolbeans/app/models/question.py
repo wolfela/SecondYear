@@ -1,7 +1,7 @@
 from django.db.models import CASCADE
 from django.db.models import CharField, PositiveIntegerField, BooleanField, TextField
 from django.db.models import ForeignKey
-from django_mysql.models import ListCharField
+from django_mysql.models import ListCharField, JSONField
 from model_utils.managers import InheritanceManager
 from safedelete import SOFT_DELETE
 from safedelete.models import SafeDeleteMixin
@@ -111,7 +111,7 @@ class WMQuestionModel(QuestionModel):
     A Word Matching Question Type.
     """
     title = CharField(max_length=500)
-    answers = ListCharField(max_length=500, base_field=CharField(max_length=500, blank = False))
+    answers = JSONField() #format: { 'pairs' : [ {'left': 'whatever; , 'right' : 'whatever'} or [left,right]]}
     score = PositiveIntegerField()
 
     class Meta:
@@ -126,10 +126,30 @@ class WMQuestionModel(QuestionModel):
         :return: bool Whether the answer is correct.
         """
 
-        for a in self.answers:
-            if(a==choice):
-                return True
+        return False #toimplement
 
-        return False
+
+class WOQuestionModel(QuestionModel):
+    """
+    A Word Ordering Question Type.
+    """
+    title = CharField(max_length=500)
+    answer = CharField(max_length=500, blank = False)
+    display_order = CharField(max_length=500, blank = False)
+    score = PositiveIntegerField()
+
+    class Meta:
+        verbose_name = "Word Ordering Question"
+        verbose_name_plural = "Word Ordering Questions"
+
+    def check_answer(self, choice):
+        """
+        Checks whether the supplied answer is correct.
+
+        :param choice: The answer provided
+        :return: bool Whether the answer is correct.
+        """
+
+        return choice==self.answer
 
 
