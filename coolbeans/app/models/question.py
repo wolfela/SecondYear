@@ -135,7 +135,7 @@ class WordScrambleQuestionModel(QuestionModel):
     """
     title = CharField(max_length=500)
     answer = CharField(max_length=500, blank = False)
-    display_order = CharField(max_length=500, blank = False)
+    scrambled_sentence = CharField(max_length=500, blank = False)
     score = PositiveIntegerField()
 
     class Meta:
