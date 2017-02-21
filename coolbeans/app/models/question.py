@@ -1,10 +1,11 @@
 from django.db.models import CASCADE
 from django.db.models import CharField, PositiveIntegerField, BooleanField, TextField
 from django.db.models import ForeignKey
-from django_mysql.models import ListCharField, JSONField
+from django_mysql.models import ListCharField
 from model_utils.managers import InheritanceManager
 from safedelete import SOFT_DELETE
 from safedelete.models import SafeDeleteMixin
+from django.core.exceptions import ObjectDoesNotExist
 
 from coolbeans.app.models.base import TimeStampedModel
 from coolbeans.app.models.quiz import QuizModel
@@ -111,22 +112,35 @@ class WordMatchingQuestionModel(QuestionModel):
     A Word Matching Question Type.
     """
     title = CharField(max_length=500)
-    answers = JSONField() #format: { 'pairs' : [ {'left': 'whatever; , 'right' : 'whatever'} or [left,right]]}
     score = PositiveIntegerField()
 
     class Meta:
         verbose_name = "Word Matching Question"
         verbose_name_plural = "Word Matching Questions"
 
-    def check_answer(self, choice):
+    def check_answer(self, choice, answer):
         """
         Checks whether the supplied answer is correct.
 
         :param choice: The answer provided in "left | right" format
         :return: bool Whether the answer is correct.
         """
+        try:
+            pair= Pair.objects.filter(question = self).get(left_value=choice)
+        except ObjectDoesNotExist:
+            print("Wrong entry or choice does not exist")
 
-        return False #toimplement
+        return pair.right_value == answer
+
+
+class Pair(TimeStampedModel, SafeDeleteMixin):
+    """
+    A pair value for a word matching question type
+    """
+    question = ForeignKey(WordMatchingQuestionModel, on_delete=CASCADE)
+    left_value = CharField(max_length=500, blank=False)
+    right_value = CharField(max_length=500, blank = False)
+
 
 
 class WordScrambleQuestionModel(QuestionModel):
