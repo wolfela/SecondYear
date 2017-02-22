@@ -1,12 +1,20 @@
+import json
+from json.decoder import JSONDecodeError
+
+from bs4 import BeautifulSoup
 from django.db.models import CASCADE
 from django.db.models import CharField, PositiveIntegerField, BooleanField, TextField
 from django.db.models import ForeignKey
+from django_bleach.models import BleachField
 from django_mysql.models import ListCharField
+from jsonschema import ValidationError
+from jsonschema import validate
 from model_utils.managers import InheritanceManager
 from safedelete import SOFT_DELETE
 from safedelete.models import SafeDeleteMixin
 from django.core.exceptions import ObjectDoesNotExist
 
+from coolbeans.app.exceptions import HTMLParseError
 from coolbeans.app.models.base import TimeStampedModel
 from coolbeans.app.models.quiz import QuizModel
 
@@ -167,3 +175,36 @@ class WordScrambleQuestionModel(QuestionModel):
         return choice==self.answer
 
 
+class GapFillQuestionModel(QuestionModel):
+    """
+    A Question Type for gap fill type questions.
+    """
+
+    # Gap schema: <gap answers="['answer1', 'answer2']" />
+    text = BleachField(allowed_tags=["gap"], allowed_attributes=["answers"])
+    gap_tag_schema = {
+        "type": "array",
+        "items": {
+            "type": "string"
+        }
+    }
+
+    def _clean_fields(self):
+        super().clean_fields()
+
+    # TODO This should be a view method
+    def check_html(self, html):
+        """
+        Checks if the HTML fragment can be accepted. Validates all <gap> tags to see if they conform to the standard.
+        :param html:
+        :return:
+        """
+        bs = BeautifulSoup(html, 'html.parser')
+        for tag in bs.find_all('gap'):
+            if not tag.has_attr('answers'):
+                raise HTMLParseError("One of the gaps is missing an 'answers' attribute")
+            try:
+                validate(json.loads(tag['answers']), self.gap_tag_schema)
+            except (JSONDecodeError, ValidationError) as e:
+                raise HTMLParseError("Gap JSON parsing failed: Invalid syntax") from e
+        return True
