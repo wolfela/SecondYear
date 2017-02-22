@@ -1,12 +1,11 @@
 var wordPairs = [];
 function Word(langA, langB, page) { this.langA = langA; this.langB = langB, this.page = page };
-$(document).ready(function() {
+wordPairs.push(new Word('wordA1ddddddgrtrehth', 'wordB1ghpowh', 1));
+wordPairs.push(new Word('wordA2fbdfbd', 'wordB2drfbhdfhbd', 1));wordPairs.push(new Word('wordA3', 'wordB3', 1));
+wordPairs.push(new Word('wordA4edgfew', 'wordB4esfesf', 2));
+wordPairs.push(new Word('wordA5', 'wordB5', 3));
 
-	wordPairs.push(new Word('wordA1ddddddgrtrehth', 'wordB1ghpowh', 1));
-	wordPairs.push(new Word('wordA2fbdfbd', 'wordB2drfbhdfhbd', 1));
-	wordPairs.push(new Word('wordA3', 'wordB3', 1));
-	wordPairs.push(new Word('wordA4edgfew', 'wordB4esfesf', 2));
-	wordPairs.push(new Word('wordA5', 'wordB5', 3));
+$(document).ready(function() {
 
 	addTable(wordPairs);
 	
@@ -94,10 +93,21 @@ addTable = function(pairsArray) {
 					wordPairs.splice(m, 1);
 					m--;
 				}
-			}
-			addTable(wordPairs);		
+			};
+			addTable(wordPairs);	
 		});
 	}
+
+	$('#add-page-button').unbind('click').bind('click', function() {
+		var maxPage = 1;
+		for(i = 0; i < wordPairs.length; i++) {
+			maxPage = Math.max(wordPairs[i].page, maxPage);
+		}
+		
+		wordPairs.push(new Word('Word A', 'Word B', maxPage + 1));
+		//document.writeln(maxPage);
+		addWordEditor(wordPairs, maxPage + 1);
+	});
 
 }
 
@@ -153,7 +163,6 @@ addWordEditor = function(array, page) {
 
 		for(j = 0; j < pairs.length; j++) {
 			wordPairs = addIfNotExists(wordPairs, pairs[j]);
-			//document.write('(' + pairs[j].langA + ',' + pairs[j].langB + ',' + pairs[j].page + ') ');
 		}
 		
 		addTable(wordPairs);
