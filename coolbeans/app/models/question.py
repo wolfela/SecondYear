@@ -180,7 +180,7 @@ class GapFillQuestionModel(QuestionModel):
     A Question Type for gap fill type questions.
     """
 
-    # Gap schema: <gap answers="['answer1', 'answer2']" />
+    # Gap schema: <gap answers='["answer1", "answer2"]' />
     text = BleachField(allowed_tags=["gap"], allowed_attributes=["answers"])
     gap_tag_schema = {
         "type": "array",
