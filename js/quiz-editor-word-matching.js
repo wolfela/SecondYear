@@ -130,7 +130,7 @@ addWordEditor = function(array, page) {
 	for(j = 0; j < pairs.length; j++) {
 		var row = '<tr id="pair' + j + '"></tr>';
 		var wordA = '<td><input type="text" class="editor-input" id="wordA' + j + '" value="' + pairs[j].langA + '" placeholder="<insert language A here>" aria-describedby="exampleHelpTex"></td>';
-		var wordB = '<td><input type="text" class="editor-input" id="wordB' + j + '" value="' + pairs[j].langB + '" placeholder="<insert language A here>" aria-describedby="exampleHelpTex"></td>';
+		var wordB = '<td><input type="text" class="editor-input" id="wordB' + j + '" value="' + pairs[j].langB + '" placeholder="<insert language B here>" aria-describedby="exampleHelpTex"></td>';
 		var deleteButton = '<td><button type="button" class="alert button editor-delete" id="editor-delete' + j + '">Delete</button></td></tr>';
 		
 		$('#editing-table').append(row);
@@ -147,6 +147,11 @@ addWordEditor = function(array, page) {
 	// adding add button
 	$('#editing-table').append('<td><a class="button editor-add" id="add-pair-button">Add</a></td>');
 	$('#add-pair-button').click(function() {
+		var newPairs = [];
+		for(w = 0; w < pairs.length; w++) {
+			pairs[w].langA = $('#wordA' + w).val();
+			pairs[w].langB = $('#wordB' + w).val();
+		}
 		pairs.push(new Word('', '', page));
 		addWordEditor(pairs, page);
 		
@@ -159,6 +164,13 @@ addWordEditor = function(array, page) {
 		for(w = 0; w < pairs.length; w++) {
 			pairs[w].langA = $('#wordA' + w).val();
 			pairs[w].langB = $('#wordB' + w).val();
+		}
+
+		for(i = 0; i < wordPairs.length; i++) {
+			if(wordPairs[i].page == page) {
+				wordPairs.splice(i, 1);
+				i--;
+			}
 		}
 
 		for(j = 0; j < pairs.length; j++) {
