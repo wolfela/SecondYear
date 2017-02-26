@@ -1,0 +1,61 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+    <link rel="stylesheet" href="./static/css/app.css">
+	 <link rel="stylesheet" href="./static/css/mcq-display.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Oswald&amp;subset=latin-ext" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container"> <!-- start of container -->
+      <div class="title-bar">	<!-- start of title bar -->
+        <span class="title-bar-title">LQ 		//		TEACHER</span>
+        <div class="title-bar-right">	<!-- start of title bar right -->
+          <button class="logoutButton">LOGOUT</button>
+        </div>	<!-- end of title bar right -->
+			
+      </div>	<!-- start of title bar -->
+      <div class="content scroll-content">		
+		<h2 class = "mcqheading">Question x</h2>
+		
+		<p class="questions">Question goes here?</p></br>
+
+		<div>
+			<input type="checkbox" class="checkbox">
+			<p class="answer">answer 1</p></br>
+
+			<input type="checkbox" class="checkbox">
+			<p class="answer">answer 2</p></br>
+
+						<input type="checkbox" class="checkbox">
+			<p class="answer">answer 3</p></br>
+
+						<input type="checkbox" class="checkbox">
+			<p class="answer">answer 4</p></br>
+		</div>
+      </div>  <!-- end of content -->
+    </div>	<!-- end of container -->
+
+    <div class="sidebar">
+      <button class="hamburger" type="button">
+        <span class="topLine"></span>
+        <span class="innerLine"></span>
+        <span class="bottomLine"></span>
+      </button>
+      <div class="menu-content">
+        <nav class="menu-left">
+          <a href="#">Create Quiz</a>
+          <a href="#">View Quizzes</a>
+        </nav>
+      </div>
+    </div>
+
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/what-input/dist/what-input.js"></script>
+    <script src="./node_modules/foundation-sites/dist/js/foundation.js"></script>
+    <script src="./js/menuAnimation.js"></script>
+  </body>
+</html>
