@@ -1,5 +1,8 @@
-
-$('.button').click(function(){addField()});
+$(document).ready(function() {
+	$('.button').click(function() {
+		addField();
+	});
+});
 
 var amount = 4;
 
