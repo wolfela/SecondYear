@@ -1,0 +1,64 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+    <link rel="stylesheet" href="./static/css/app.css">
+	 <link rel="stylesheet" href="./static/css/mcq.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Oswald&amp;subset=latin-ext" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container"> <!-- start of container -->
+      <div class="title-bar">	<!-- start of title bar -->
+        <span class="title-bar-title">LQ 		//		TEACHER</span>
+        <div class="title-bar-right">	<!-- start of title bar right -->
+          <button class="logoutButton">LOGOUT</button>
+        </div>	<!-- end of title bar right -->
+			
+      </div>	<!-- start of title bar -->
+      <div class="content scroll-content">		
+          <h2 class = "mcqheading">MCQ Quiz Creation</h2>
+            <label>
+              <h4>Type your question below</h4>
+                <textarea class = "mcqtextareas" placeholder="Type your question in here"></textarea>
+            </label>
+            <label>
+              <h4>Type your answers below</h4>
+                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
+                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
+                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
+                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
+                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
+                <!--<div style = "float: right;">
+                  <a href="#0" style = "margin-left: 1.4rem;"class="button">Add field</a>
+                </div>-->
+            </label>
+            <label>		
+              <button type="button" class="success button mysavebutton">Save</button>
+              <button type="button" class="button cancelbutton">Cancel</button>
+            </label>
+      </div>  <!-- end of content -->
+    </div>	<!-- end of container -->
+
+    <div class="sidebar">
+      <button class="hamburger" type="button">
+        <span class="topLine"></span>
+        <span class="innerLine"></span>
+        <span class="bottomLine"></span>
+      </button>
+      <div class="menu-content">
+        <nav class="menu-left">
+          <a href="#">Create Quiz</a>
+          <a href="#">View Quizzes</a>
+        </nav>
+      </div>
+    </div>
+
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/what-input/dist/what-input.js"></script>
+    <script src="./node_modules/foundation-sites/dist/js/foundation.js"></script>
+    <script src="./js/menuAnimation.js"></script>
+  </body>
+</html>
