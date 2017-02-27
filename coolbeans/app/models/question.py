@@ -40,7 +40,7 @@ class QuestionModel(TimeStampedModel, SafeDeleteMixin):
         """
         raise NotImplementedError()
 
-    def get_the_group(self):
+    def get_children(self):
         """
         Returns all the questions that are displayed together
         :return: all the questions displayed together
