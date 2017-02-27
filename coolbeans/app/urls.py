@@ -1,10 +1,10 @@
 from django.conf.urls import url
 from django.views.generic import RedirectView
 
-from coolbeans.app.views import base, quiz, user
+from coolbeans.app.views import base, quiz, user, question
 
 urlpatterns = [
-    url(r'^', base.IndexView.as_view()),
+    url(r'^$', base.IndexView.as_view()),
     # User functions
     url(r'^login/$', user.LoginView.as_view()),
     url(r'^logout/$', user.LogoutView.as_view()),
@@ -22,6 +22,7 @@ urlpatterns = [
     # Quiz editing functions
     url(r'^quiz/create$', quiz.QuizCreateView.as_view()),
     url(r'^quiz/(?P<id_or_slug>[a-z0-9]+(?:-[a-z0-9]+)*)/edit$', quiz.QuizEditView.as_view()),
+
 
     # TODO: Admin routes
 ]
