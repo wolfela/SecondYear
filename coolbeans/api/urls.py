@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from rest_framework.compat import include
+from django.conf.urls import include
 from rest_framework_nested.routers import SimpleRouter, NestedSimpleRouter
 
 from coolbeans.api.views.question import QuestionViewSet
