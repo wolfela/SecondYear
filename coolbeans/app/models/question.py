@@ -134,9 +134,10 @@ class WordMatchingQuestionModel(QuestionModel):
         :return: bool Whether the answer is correct.
         """
         try:
-            pair= Pair.objects.filter(question = self).get(left_value=choice)
+            pair = Pair.objects.filter(question=self).get(left_value=choice)
         except ObjectDoesNotExist:
             print("Wrong entry or choice does not exist")
+            raise
 
         return pair.right_value == answer
 
