@@ -33,7 +33,7 @@ addTable = function(pairsArray) {
 	$('#table').append('<tr id="row1"></td>');
 
 	var pageNumbers = [];
-	var colLimit = 2;
+	var colLimit = 1;
 	var pagesAdded = 0;
 
 	
