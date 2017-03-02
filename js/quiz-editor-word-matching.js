@@ -1,11 +1,15 @@
 var wordPairs = [];
 function Word(langA, langB, page) { this.langA = langA; this.langB = langB, this.page = page };
-wordPairs.push(new Word('wordA1ddddddgrtrehth', 'wordB1ghpowh', 1));
-wordPairs.push(new Word('wordA2fbdfbd', 'wordB2drfbhdfhbd', 1));wordPairs.push(new Word('wordA3', 'wordB3', 1));
-wordPairs.push(new Word('wordA4edgfew', 'wordB4esfesf', 2));
-wordPairs.push(new Word('wordA5', 'wordB5', 3));
 
 $(document).ready(function() {
+
+	if(wordPairs.length === 0) {
+		wordPairs.push(new Word('wordA1ddddddgrtrehth', 'wordB1ghpowh', 1));
+		wordPairs.push(new Word('wordA2fbdfbd', 'wordB2drfbhdfhbd', 1));
+		wordPairs.push(new Word('wordA3', 'wordB3', 1));
+		wordPairs.push(new Word('wordA4edgfew', 'wordB4esfesf', 2));
+		wordPairs.push(new Word('wordA5', 'wordB5', 3));
+	}
 
 	addTable(wordPairs);
 	
