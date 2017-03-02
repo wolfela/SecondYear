@@ -116,6 +116,7 @@ MENU BUTTON
   transform: rotate(135deg);
 }
 
+
 /*
 MENU BAR
 */
@@ -159,7 +160,6 @@ MENU BAR
 /*
 BODY
 */
-
 .content {
   background: $BaseColour;
   position: absolute;
@@ -167,6 +167,24 @@ BODY
   left: 60px;
   height: 100%;
   width: 100%;
+}
+
+/*
+LOGIN PAGE
+*/
+
+$medium-gray: #cacaca;
+$global-padding: 1rem;
+$global-radius: 3px;
+
+$form-border-color: $medium-gray;
+$form-padding: $global-padding;
+$form-radius: $global-radius;
+
+.log-in-form {
+  border: 1px solid $form-border-color;
+  padding: $form-padding;
+  border-radius: $form-radius;
 }
 
 /*
