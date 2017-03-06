@@ -4,7 +4,7 @@ from json.decoder import JSONDecodeError
 from bs4 import BeautifulSoup
 from django.db.models import CASCADE
 from django.db.models import CharField, PositiveIntegerField, BooleanField, TextField
-from django.db.models import ForeignKey
+from django.db.models import ForeignKey, Model
 from django_bleach.models import BleachField
 from django_mysql.models import ListCharField
 from jsonschema import ValidationError
@@ -19,15 +19,29 @@ from coolbeans.app.models.base import TimeStampedModel
 from coolbeans.app.models.quiz import QuizModel
 
 
-class QuestionModel(TimeStampedModel, SafeDeleteMixin):
+class TestModel(Model):
+    name = PositiveIntegerField(blank=True, default=1)
+    quiz = ForeignKey(QuizModel, on_delete=CASCADE)
+
+
+class TestModelll(TimeStampedModel, SafeDeleteMixin):
+    _safedelete_policy = SOFT_DELETE
+    name = PositiveIntegerField(blank=True, default=1)
+    quiz = ForeignKey(QuizModel, on_delete=CASCADE)
+
+
+
+
+class BaseQuestionModel(TimeStampedModel, SafeDeleteMixin):
     """
     A base model for a Question.
     """
+
     _safedelete_policy = SOFT_DELETE
 
     quiz = ForeignKey(QuizModel, on_delete=CASCADE)
-    display_with = ForeignKey('self', on_delete=CASCADE)
-    display_order = PositiveIntegerField()
+    display_with = ForeignKey('self', on_delete=CASCADE, blank=True, null=True)
+    display_order = PositiveIntegerField(blank=True, default=1)
 
     objects = InheritanceManager()
 
@@ -46,10 +60,9 @@ class QuestionModel(TimeStampedModel, SafeDeleteMixin):
         :return: all the questions displayed together
         """
 
-        return QuestionModel.objects.filter(display_with = self)
+        return BaseQuestionModel.objects.filter(display_with = self)
 
-
-class PlaceholderQuestionModel(QuestionModel):
+class PlaceholderQuestionModel(BaseQuestionModel):
     """
     A question model for placeholder information.
     """
@@ -65,14 +78,15 @@ class PlaceholderQuestionModel(QuestionModel):
         """
         return None # undefined behaviour
 
-class MCQQuestionModel(QuestionModel):
+
+class MultipleChoiceModel(BaseQuestionModel):
     """
     An MCQ Question Type.
     """
     title = CharField(max_length=500, blank=False)
     answers = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False))
     correct = CharField(max_length=255, blank=False)
-    score = PositiveIntegerField()
+    score = PositiveIntegerField(blank=True, default=1)
 
     class Meta:
         verbose_name = "Multiple Choice Question"
@@ -92,7 +106,8 @@ class MCQQuestionModel(QuestionModel):
         return self.answers.extend(self.correct) #TO DO: sort out display order
 
 
-class TrueFalseQuestionModel(QuestionModel):
+
+class TrueFalseQuestionModel(BaseQuestionModel):
     """
     A True or False Question Type.
     """
@@ -115,7 +130,7 @@ class TrueFalseQuestionModel(QuestionModel):
         return self.answer is choice
 
 
-class WordMatchingQuestionModel(QuestionModel):
+class WordMatchingQuestionModel(BaseQuestionModel):
     """
     A Word Matching Question Type.
     """
@@ -152,7 +167,7 @@ class Pair(TimeStampedModel, SafeDeleteMixin):
 
 
 
-class WordScrambleQuestionModel(QuestionModel):
+class WordScrambleQuestionModel(BaseQuestionModel):
     """
     A Word Scrable Question Type.
     """
@@ -176,7 +191,7 @@ class WordScrambleQuestionModel(QuestionModel):
         return choice==self.answer
 
 
-class GapFillQuestionModel(QuestionModel):
+class GapFillQuestionModel(BaseQuestionModel):
     """
     A Question Type for gap fill type questions.
     """

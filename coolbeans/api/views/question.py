@@ -3,7 +3,7 @@ from rest_framework.mixins import DestroyModelMixin, UpdateModelMixin, RetrieveM
 from rest_framework.viewsets import GenericViewSet
 
 from coolbeans.api.serializers.question import QuestionSerializer
-from coolbeans.app.models import QuestionModel
+from coolbeans.app.models import BaseQuestionModel
 
 
 class QuestionSubclassesFieldsMixin:
@@ -14,7 +14,7 @@ class QuestionSubclassesFieldsMixin:
     """
 
     def get_queryset(self):
-        return QuestionModel.objects.select_subclasses()
+        return BaseQuestionModel.objects.select_subclasses()
 
 
 class QuestionViewSet(GenericViewSet,
