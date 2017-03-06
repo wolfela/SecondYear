@@ -5,11 +5,13 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template</title>
-    <link rel="stylesheet" href="./static/css/app.css">
-	<link rel="stylesheet" href="./static/css/mcq-update.css">
+    <link rel="stylesheet" href="../../../static/css/app.css">
+	<link rel="stylesheet" href="../../../static/css/mcq-update.css">
     <link href="https://fonts.googleapis.com/css?family=Lato|Oswald&amp;subset=latin-ext" rel="stylesheet">
-	<script type="text/javascript" src="./static/js/mcq-creation-update.js"></script>
-	<script src="./node_modules/jquery/dist/jquery.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.js"></script>
+	<script type="text/javascript" src="../../../static/js/mcq-creation-update.js"></script>
+{#	<script src="../../../node_modules/jquery/dist/jquery.js"></script>#}
   </head>
   <body>
     <div class="container"> <!-- start of container -->
@@ -25,23 +27,23 @@
 			<label><h2 class="mcqheading">MCQ Quiz Creation</h2></label>
 			<div>
 				<h4>Type your question below</h4>
-				<textarea class="mcqtextareas" placeholder="Type your question in here"></textarea>
+				<textarea class="mcqtextareas" placeholder="Type your question in here" id="title"></textarea>
 			</div>
 			
 			<h4>Type your answers below</h4>
 			
 			<div id="addAnswer">
-				<input type="checkbox" class="checkbox">
-				<input type="text" class="mcqinputbox" placeholder="Type your answer in here"></br>
+				<input type="checkbox" class="checkbox" id="ch1">
+				<input type="text" class="mcqinputbox" placeholder="Type your answer in here" id="a1"></br>
 
-				<input type="checkbox" class="checkbox">
-				<input type="text" class="mcqinputbox" placeholder="Type your answer in here"></br>
+				<input type="checkbox" class="checkbox" id="ch2">
+				<input type="text" class="mcqinputbox" placeholder="Type your answer in here" id="a2"></br>
 
-				<input type="checkbox" class="checkbox">
-				<input type="text" class="mcqinputbox" placeholder="Type your answer in here"></br>
+				<input type="checkbox" class="checkbox" id="ch3">
+				<input type="text" class="mcqinputbox" placeholder="Type your answer in here" id="a3"></br>
 
-				<input type="checkbox" class="checkbox">
-				<input type="text" class="mcqinputbox" placeholder="Type your answer in here"></br>
+				<input type="checkbox" class="checkbox" id="ch4">
+				<input type="text" class="mcqinputbox" placeholder="Type your answer in here" id="a4"></br>
 				
 			</div>
 
@@ -51,8 +53,8 @@
 			</div>	
 
 			<div class="buttondiv">		
-              <button type="button" class="success button mysavebutton">Save</button>
-              <button type="button" class="button cancelbutton">Cancel</button>
+              <button type="button" class="success button mysavebutton", id="saveQuestion">Save</button>
+              <button type="button" class="button cancelbutton" id="cancelQuestion">Cancel</button>
             </div>
 
 		</form>
@@ -73,10 +75,10 @@
       </div>
     </div>
 
-    <script src="./node_modules/jquery/dist/jquery.js"></script>
-    <script src="./node_modules/what-input/dist/what-input.js"></script>
-    <script src="./node_modules/foundation-sites/dist/js/foundation.js"></script>
-    <script src="./js/menuAnimation.js"></script>
-    <script src="./js/mcq-creation-update.js"></script>
+{#    <script src="../../../node_modules/jquery/dist/jquery.js"></script>#}
+{#    <script src="../../../node_modules/what-input/dist/what-input.js"></script>#}
+{#    <script src="../../../node_modules/foundation-sites/dist/js/foundation.js"></script>#}
+    <script src="../../../static/js/menuAnimation.js"></script>
+{#    <script src="../../../js/mcq-creation-update.js"></script>#}
   </body>
 </html>
