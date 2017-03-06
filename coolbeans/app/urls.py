@@ -1,7 +1,9 @@
 from django.conf.urls import url
 from django.views.generic import RedirectView
 
-from coolbeans.app.views import base, quiz, user, question
+from coolbeans.app.views import base, user, question
+from coolbeans.app.views.quiz import attempt
+from coolbeans.app.views.quiz import editor
 
 urlpatterns = [
     url(r'^$', base.IndexView.as_view()),
@@ -15,13 +17,16 @@ urlpatterns = [
 
     # Quiz functions
     url(r'^quiz', RedirectView.as_view(url="quiz/list")),
-    url(r'^quiz/list$', quiz.QuizListView.as_view()),
-    url(r'^quiz/(?P<id_or_slug>[a-z0-9]+(?:-[a-z0-9]+)*)/$', quiz.QuizDetailView.as_view()),
-    url(r'^quiz/(?P<id_or_slug>[a-z0-9]+(?:-[a-z0-9]+)*)/attempt$', quiz.AttemptQuizView.as_view()),
+    url(r'^quiz/list$', attempt.QuizListView.as_view()),
+    url(r'^quiz/(?P<id_or_slug>[a-z0-9]+(?:-[a-z0-9]+)*)/$', attempt.QuizDetailView.as_view()),
+    url(r'^quiz/(?P<id_or_slug>[a-z0-9]+(?:-[a-z0-9]+)*)/attempt$', attempt.AttemptQuizView.as_view()),
 
     # Quiz editing functions
-    url(r'^quiz/create$', quiz.QuizCreateView.as_view()),
-    url(r'^quiz/(?P<id_or_slug>[a-z0-9]+(?:-[a-z0-9]+)*)/edit$', quiz.QuizEditView.as_view()),
+    url(r'^quiz/editor$', editor.QuizListView.as_view()),
+    url(r'^quiz/editor/create$', editor.QuizCreateView.as_view()),
+    url(r'^quiz/editor/(?P<id_or_slug>[a-z0-9]+(?:-[a-z0-9]+)*)/$', editor.QuestionListView.as_view()),
+    url(r'^quiz/editor/(?P<id_or_slug>[a-z0-9]+(?:-[a-z0-9]+)*)/create_question$', editor.QuestionCreateView.as_view()),
+    url(r'^quiz/editor/(?P<id_or_slug>[a-z0-9]+(?:-[a-z0-9]+)*)/(?P<question_id>[0-9]+)$', editor.QuestionEditView.as_view()),
 
     # Question editing functions
     url(r'^mcq/$', question.MCQCreateView.as_view()),
