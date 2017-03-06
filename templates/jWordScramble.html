@@ -1,0 +1,49 @@
+{% extends "jTemplate-LoggedIn.html" %}
+
+ {% block title %} WordScramble{% endblock %} 
+ {% block head %} 
+	{{ super() }}
+ {% endblock %}
+  
+{% block content %}
+	<div class="medium-6 medium-centered large-4 large-centered columns">
+
+    <form>
+      <div class="row column log-in-form">
+        <h4 class="text-center">Create a Sentence Scramble Question</h4>
+		<input id="manuel-mode" type="checkbox"><label for="manual-mode">Manually Scramble?</label>
+        <label>Enter the sentence to be scrambled
+          <input type="text" placeholder="This is the sentence to be scrambled">
+        </label>
+		 <label>Confirm the sentence to be scrambled
+          <input type="text" placeholder="This is the sentence to be scrambled">
+        </label>
+		
+		 <label>Enter the scrambled version of your sentence
+          <input type="text" placeholder="This is the scrambled sentence">
+        </label>
+		
+		<label>Confirm the scrambled version of your sentence
+          <input type="text" placeholder="This is the scrambled sentence">
+        </label>
+      
+        <p><a type="submit" class="button expanded">Save Question</a></p>
+		
+        <p class="text-left-side text-center text-right-side"><a href="#">Previous     </a><a href="#">Next</a></p>   
+		<p class="text-center"><a href="#">Back</a></p>   
+		
+      </div>
+    </form>
+	
+    </div>
+{% endblock %}
+
+{% block sidebarContent %}
+	<a href="#">Create Quiz</a>
+    <a href="#">View Quizzes</a>
+{% endblock %}
+
+
+
+
+

@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def template_test():
-    return render_template('jWordScramble.html', content="?",)
+    return render_template('jMCQ-Display.html', content="?",)
 	
 	
 

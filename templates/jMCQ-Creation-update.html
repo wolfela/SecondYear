@@ -1,0 +1,61 @@
+{% extends "jTemplate-LoggedIn.html" %}
+
+ {% block title %}MCQ-Creation-update{% endblock %} 
+ {% block head %} 
+	{{ super() }}
+	<link rel="stylesheet" href="./static/css/mcq-update.css">
+	 <script type="text/javascript" src="./static/js/mcq-creation-update.js"></script>
+	<script src="./node_modules/jquery/dist/jquery.js"></script>
+ {% endblock %}
+  
+{% block content %}
+
+ <div class="scroll-content">		
+         <form>  
+			<label><h2 class="mcqheading">MCQ Quiz Creation</h2></label>
+			<div>
+				<h4>Type your question below</h4>
+				<textarea class="mcqtextareas" placeholder="Type your question in here"></textarea>
+			</div>
+			
+			<h4>Type your answers below</h4>
+			
+			<div id="addAnswer">
+				<input type="checkbox" class="checkbox" id="mcqcheckbox0">
+				<input type="text" class="mcqinputbox" id="mcqinputbox0" placeholder="Type your answer in here"></br>
+
+				<input type="checkbox" class="checkbox" id="mcqcheckbox1">
+				<input type="text" class="mcqinputbox" id="mcqinputbox1" placeholder="Type your answer in here"></br>
+
+				<input type="checkbox" class="checkbox"id="mcqcheckbox2">
+				<input type="text" class="mcqinputbox" id="mcqinputbox2" placeholder="Type your answer in here"></br>
+
+				<input type="checkbox" class="checkbox" id="mcqcheckbox3">
+				<input type="text" class="mcqinputbox" id="mcqinputbox3" placeholder="Type your answer in here"></br>
+				
+			</div>
+
+			<div class="button-group inputbuttons">
+					<button type="button" class="button" id="addField">Add field</button>
+  					<button type="button" class="button" id="removeField">Remove field</button></br>
+			</div>	
+
+			<div class="buttondiv">		
+              <button type="button" class="success button mysavebutton">Save</button>
+              <button type="button" class="button cancelbutton">Cancel</button>
+            </div>
+
+		</form>
+
+
+{% endblock %}
+
+{% block sidebarContent %}
+	<a href="#">Create Quiz</a>
+    <a href="#">View Quizzes</a>
+{% endblock %}
+{% block extraJS %}
+    <script src="./static/js/mcq-creation-update.js"></script>
+{% endblock %}
+
+
