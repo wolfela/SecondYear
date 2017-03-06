@@ -1,0 +1,28 @@
+{% extends "jTemplate-NotLoggedIn.html" %}
+
+ {% block title %}Login-page{% endblock %} 
+ {% block head %} 
+	{{ super() }}
+ {% endblock %}
+  
+	  {% block content %}
+			<div class="medium-6 medium-centered large-4 large-centered columns">
+
+    <form>
+      <div class="row column log-in-form">
+        <h4 class="text-center">Log in with your email account</h4>
+        <label>Email
+          <input type="text" placeholder="somebody@example.com">
+        </label>
+        <label>Password
+          <input type="text" placeholder="Password">
+        </label>
+        <input id="teacher-login" type="checkbox"><label for="teacher-login">Teacher Login</label>
+        <p><a type="submit" class="button expanded">Log In</a></p>
+        <p class="text-left"><a href="#">Forgot your password?</a></p>   
+		<p class="text-right"><a href="#">Register</a></p>  
+      </div>
+    </form>
+		{% endblock %}
+
+
