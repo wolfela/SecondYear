@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template</title>
     <link rel="stylesheet" href="./static/css/app.css">
-	 <link rel="stylesheet" href="./static/css/mcq.css">
+	<link rel="stylesheet" href="./static/css/mcq-update.css">
     <link href="https://fonts.googleapis.com/css?family=Lato|Oswald&amp;subset=latin-ext" rel="stylesheet">
+	<script type="text/javascript" src="./static/js/mcq-creation-update.js"></script>
+	<script src="./node_modules/jquery/dist/jquery.js"></script>
   </head>
   <body>
     <div class="container"> <!-- start of container -->
@@ -19,27 +21,42 @@
 			
       </div>	<!-- start of title bar -->
       <div class="content scroll-content">		
-          <h2 class = "mcqheading">MCQ Quiz Creation</h2>
-            <label>
-              <h4>Type your question below</h4>
-                <textarea class = "mcqtextareas" placeholder="Type your question in here"></textarea>
-            </label>
-            <label>
-              <h4>Type your answers below</h4>
-                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
-                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
-                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
-                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
-                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
-                <!--<div style = "float: right;">
-                  <a href="#0" style = "margin-left: 1.4rem;"class="button">Add field</a>
-                </div>-->
-            </label>
-            <label>		
+		<form>  
+			<label><h2 class="mcqheading">MCQ Quiz Creation</h2></label>
+			<div>
+				<h4>Type your question below</h4>
+				<textarea class="mcqtextareas" placeholder="Type your question in here"></textarea>
+			</div>
+			
+			<h4>Type your answers below</h4>
+			
+			<div id="addAnswer">
+				<input type="checkbox" class="checkbox" id="mcqcheckbox0">
+				<input type="text" class="mcqinputbox" id="mcqinputbox0" placeholder="Type your answer in here"></br>
+
+				<input type="checkbox" class="checkbox" id="mcqcheckbox1">
+				<input type="text" class="mcqinputbox" id="mcqinputbox1" placeholder="Type your answer in here"></br>
+
+				<input type="checkbox" class="checkbox"id="mcqcheckbox2">
+				<input type="text" class="mcqinputbox" id="mcqinputbox2" placeholder="Type your answer in here"></br>
+
+				<input type="checkbox" class="checkbox" id="mcqcheckbox3">
+				<input type="text" class="mcqinputbox" id="mcqinputbox3" placeholder="Type your answer in here"></br>
+				
+			</div>
+
+			<div class="button-group inputbuttons">
+					<button type="button" class="button" id="addField">Add field</button>
+  					<button type="button" class="button" id="removeField">Remove field</button></br>
+			</div>	
+
+			<div class="buttondiv">		
               <button type="button" class="success button mysavebutton">Save</button>
               <button type="button" class="button cancelbutton">Cancel</button>
-            </label>
-      </div>  <!-- end of content -->
+            </div>
+
+		</form>
+		</div>  <!-- end of content -->
     </div>	<!-- end of container -->
 
     <div class="sidebar">
@@ -60,5 +77,6 @@
     <script src="./node_modules/what-input/dist/what-input.js"></script>
     <script src="./node_modules/foundation-sites/dist/js/foundation.js"></script>
     <script src="./js/menuAnimation.js"></script>
+    <script src="./js/mcq-creation-update.js"></script>
   </body>
 </html>

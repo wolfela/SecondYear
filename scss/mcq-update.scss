@@ -1,0 +1,57 @@
+h4 {	
+	text-align: left;
+	margin-left: 1.4rem;
+	border-bottom: 2px solid black;
+	width: 90%;
+}
+
+.scroll-content{
+	height: 600px;
+	overflow: auto;
+}
+
+.mcqheading{
+	text-align: center;
+	font-weight: bold;
+}
+
+.mcqtextareas{
+	margin-left: 1.4rem; 
+	height: 100px;
+	width: 90%;
+}
+
+.mcqinputbox{
+	display: inline-block; 
+	width: 88%;
+}
+
+.checkbox{
+	margin-left: 1.4rem; 
+	margin-right: 0.4rem;
+}
+
+.inputbuttons{
+	width: 90%;
+	text-align: right;
+	margin-left: 1.4rem;
+}
+
+.buttondiv{
+	clear: both;
+}
+
+.mysavebutton{
+	display: block; 
+	margin-left: auto; 
+	margin-right: auto; 
+	width: 70%;
+}
+
+.cancelbutton{
+	display: block;
+	margin-left: auto; 
+	margin-right: auto; 
+	margin-bottom: 40px;
+	width: 70%
+}
