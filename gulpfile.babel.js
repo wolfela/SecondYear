@@ -28,20 +28,20 @@ const jsPaths = {
     srcs: [
         `${dirs.jsSrc}/student-app.js`,
         `${dirs.jsSrc}/teacher-app.js`,
-        `${dirs.jsSrc}/mcq-creation-update.js`,
-        `${dirs.jsSrc}/menuAnimation.js`
+		`${dirs.jsSrc}/mcq-creation-update.js`,
+		`${dirs.jsSrc}/menuAnimation.js`
     ],
     dest: `${dirs.dest}` // For some reason vinyl-source-stream will prepend /js to the final output path
 };
 
 gulp.task('scss', () => {
     return gulp.src(scssPaths.srcs)
-        .pipe(foreach(function (stream, file) {
+        .pipe(foreach(function(stream, file) {
             return stream
                 .pipe(gulpif(!util.env.production, sourcemaps.init()))
                 .pipe(sass.sync({
                     outputStyle: (util.env.production) ? 'compressed' : 'nested',
-                    includePaths: ['./node_modules/foundation-sites/scss', './node_modules/motion-ui/src']
+                    includePaths: ['./node_modules/foundation-sites/scss','./node_modules/motion-ui/src']
                 }).on('error', sass.logError))
                 .pipe(gulpif(!util.env.production, sourcemaps.write('.')))
                 .pipe(gulp.dest(scssPaths.dest))

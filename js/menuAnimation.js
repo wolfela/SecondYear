@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    let $menuButton = $(".hamburger"),
+    var $menuButton = $(".hamburger"),
         $content = $(".container"),
         $menu = $(".menu-content"),
         $sidebar = $(".sidebar"),
