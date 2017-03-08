@@ -19,12 +19,9 @@ const dirs = {
 
 const scssPaths = {
     srcs: [
-        `${dirs.scssSrc}/student-app.scss`,
-        `${dirs.scssSrc}/teacher-app.scss`,
         `${dirs.scssSrc}/app.scss`,
-		`${dirs.scssSrc}/mcq.scss`,
-		`${dirs.scssSrc}/mcq-update.scss`,
-		`${dirs.scssSrc}/mcq-display.scss`
+        `${dirs.scssSrc}/mcq-update.scss`,
+        `${dirs.scssSrc}/mcq-display.scss`
     ],
     dest: `${dirs.dest}/css`
 };
