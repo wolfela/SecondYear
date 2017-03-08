@@ -1,7 +1,8 @@
-@charset "utf-8";
+@charset 'utf-8';
 
 @import 'settings';
 @import 'foundation';
+@import 'motion-ui';
 
 @include foundation-everything;
 
@@ -12,7 +13,8 @@ $HighlightColour: #EF3737;
 $LogoColour: #1e1e1e;
 $LoginColour: #488C3A;
 
-body {
+
+body{
   overflow: hidden;
   background: #303030;
 }
@@ -21,14 +23,14 @@ body {
 TITLE
 */
 
-.title-bar {
+.title-bar{
   width: 100%;
   height: 100px;
   background: $HeaderColour;
   z-index: 5;
 }
 
-.title-bar-title {
+.title-bar-title{
   font-family: 'Oswald', 'sans-serif';
   position: fixed;
   left: 80px;
@@ -41,7 +43,7 @@ TITLE
 MENU BUTTON
 */
 
-.hamburger {
+.hamburger{
   width: 40px;
   height: 30px;
   position: relative;
@@ -55,15 +57,15 @@ MENU BUTTON
   -webkit-transition: .2s linear;
   -moz-transition: .2s linear;
   -o-transition: .2s linear;
-  transition: .2s linear;
+  transition: .2s linear ;
   cursor: pointer;
 
-  &:hover span {
+  &:hover span{
     background: $HighlightColour;
   }
 }
 
-.topLine, .innerLine, .bottomLine {
+.topLine, .innerLine, .bottomLine{
   display: block;
   position: absolute;
   height: 4px;
@@ -82,15 +84,15 @@ MENU BUTTON
   transition: .1s linear;
 }
 
-.topLine {
+.topLine{
   top: 0;
 }
 
-.innerLine {
+.innerLine{
   top: 10px;
 }
 
-.bottomLine {
+.bottomLine{
   top: 20px;
 }
 
@@ -102,11 +104,11 @@ MENU BUTTON
   transform: rotate(-135deg);
 }
 
-.hamburger.cross .innerLine {
+.hamburger.cross .innerLine{
   opacity: 0;
 }
 
-.hamburger.cross .bottomLine {
+.hamburger.cross .bottomLine{
   top: 10px;
   -webkit-transform: rotate(135deg);
   -moz-transform: rotate(135deg);
@@ -114,10 +116,11 @@ MENU BUTTON
   transform: rotate(135deg);
 }
 
+
 /*
 MENU BAR
 */
-.sidebar {
+.sidebar{
   position: absolute;
   width: 60px;
   top: 0;
@@ -126,7 +129,7 @@ MENU BAR
   background: $MenuColour;
 }
 
-.menu-content {
+.menu-content{
   display: block;
   position: absolute;
   opacity: 1;
@@ -138,19 +141,19 @@ MENU BAR
   padding-top: 20px;
 }
 
-.menu-content a {
+.menu-content a{
   text-decoration: none;
   color: $BaseColour;
   padding: 15px;
   display: block;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0,0,0,0.3);
 }
 
-.menu-content a:first-child {
-  border-top: 1px solid rgba(0, 0, 0, 0.3);
+.menu-content a:first-child{
+  border-top: 1px solid rgba(0,0,0,0.3);
 }
 
-.menu-content a:hover {
+.menu-content a:hover{
   color: $HighlightColour;
 }
 
@@ -188,7 +191,7 @@ $form-radius: $global-radius;
 LOGIN BUTTON
  */
 
-.loginButton {
+.loginButton{
   top: 30px;
   width: 80px;
   border: none;
@@ -197,10 +200,10 @@ LOGIN BUTTON
   font-family: "Oswald", "sans-serif";
   color: $LoginColour;
   font-size: 25px;
-  border-left: 1px solid rgba(0, 0, 0, 0.3);
+  border-left: 1px solid rgba(0,0,0,0.3);
   margin-top: 20px;
 }
 
-.loginButton:hover {
+.loginButton:hover{
   color: $HighlightColour;
 }
