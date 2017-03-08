@@ -7,19 +7,19 @@ function getSelected() {
     return CKEDITOR.instances.gapFillInput.getSelection().getSelectedText();
 }
 
-function correctFormat(text){
+function correctFormat(text) {
     var data = CKEDITOR.instances.gapFillInput.getData();
     var html = '<span style="color:red">' + text.trim() + '</span>';
-    var pos = data.search(html)+html.length;
-    if(!/\s/.test(data.charAt(pos))){
-        CKEDITOR.instances.gapFillInput.setData([data.slice(0,pos),'&nbsp;',data.slice(pos)].join(''));
+    var pos = data.search(html) + html.length;
+    if (!/\s/.test(data.charAt(pos))) {
+        CKEDITOR.instances.gapFillInput.setData([data.slice(0, pos), '&nbsp;', data.slice(pos)].join(''));
     }
 
 }
 
-function addGap(){
+function addGap() {
     var text = getSelected();
-    if(text.length!=0) {
+    if (text.length != 0) {
         var editor = CKEDITOR.instances.gapFillInput;
         if (editor.mode == 'wysiwyg') {
             editor.insertHtml('<span style="color:red">' + text + '</span>');
@@ -32,16 +32,16 @@ function addGap(){
 
 function deleteGap() {
     var text = getSelected();
-    if(text.length!=0) {
+    if (text.length != 0) {
         var selection = getSelected().trim();
         var editor = CKEDITOR.instances.gapFillInput;
         editor.insertHtml(selection);
     }
 }
 
-function removeHTML(html){
-    for(var i =0;i<html.length;i++){
-        html[i] = html[i].replace(/<[^>]*>/g,"")
+function removeHTML(html) {
+    for (var i = 0; i < html.length; i++) {
+        html[i] = html[i].replace(/<[^>]*>/g, "")
     }
 }
 
@@ -54,8 +54,8 @@ function createQuiz() {
     //Get gaps
     var gaps = [];
     var gap = /<span[^>]*>[^>]*<\/span>/g.exec(data);
-    if(gap!=null) {
+    if (gap != null) {
         gaps.push(gap.toString().replace(/<\/?span[^>]*>/g, ''));
     }
-    displayQuiz(gaps,spanless);
+    displayQuiz(gaps, spanless);
 }
