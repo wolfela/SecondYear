@@ -20,6 +20,8 @@ const dirs = {
 const scssPaths = {
     srcs: [
         `${dirs.scssSrc}/app.scss`,
+        `${dirs.scssSrc}/mcq-update.scss`,
+        `${dirs.scssSrc}/mcq-display.scss`
     ],
     dest: `${dirs.dest}/css`
 };
