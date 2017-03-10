@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template</title>
     <link rel="stylesheet" href="../../../static/css/app.css">
-	<link rel="stylesheet" href="../../../static/css/mcq-update.css">
+	<link rel="stylesheet" href="../../../static/css/mc-update.css">
     <link href="https://fonts.googleapis.com/css?family=Lato|Oswald&amp;subset=latin-ext" rel="stylesheet">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.js"></script>
-	<script type="text/javascript" src="../../../static/js/mcq-creation-update.js"></script>
+	<script type="text/javascript" src="../../../static/js/mc-creation-update.js"></script>
 {#	<script src="../../../node_modules/jquery/dist/jquery.js"></script>#}
   </head>
   <body>
@@ -24,7 +24,7 @@
       </div>	<!-- start of title bar -->
       <div class="content scroll-content">		
 
-      				<form action="/mcq/save/" method="post">
+      				<form action="/mc/save/" method="post">
       				<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     			<label for="name">Save:  </label>
     			<input id="correct" type="text" name="correct" value="correct answer">
@@ -34,7 +34,7 @@
 			</form>
 
 
-			<form target="_blank" action="/mcq/preview/" method="post">
+			<form target="_blank" action="/mc/preview/" method="post">
       				<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     			<label for="name">Preview: </label>
     			<input id="correct" type="text" name="correct" value="correct answer">
@@ -53,10 +53,10 @@
 
 
 
-			<label><h2 class="mcqheading">MCQ Quiz Creation</h2></label>
+			<label><h2 class="mcheading">MCQ Quiz Creation</h2></label>
 			<div>
 				<h4>Type your question below</h4>
-				<textarea class="mcqtextareas" placeholder="Type your question in here" id="title"></textarea>
+				<textarea class="mctextareas" placeholder="Type your question in here" id="title"></textarea>
 			</div>
 			
 			<h4>Type your answers below</h4>
@@ -66,16 +66,16 @@
 			
 			<div id="addAnswer">
 				<input type="checkbox" class="checkbox" id="ch1">
-				<input type="text" class="mcqinputbox" placeholder="Type your answer in here" id="a1"></br>
+				<input type="text" class="mcinputbox" placeholder="Type your answer in here" id="a1"></br>
 
 				<input type="checkbox" class="checkbox" id="ch2">
-				<input type="text" class="mcqinputbox" placeholder="Type your answer in here" id="a2"></br>
+				<input type="text" class="mcinputbox" placeholder="Type your answer in here" id="a2"></br>
 
 				<input type="checkbox" class="checkbox" id="ch3">
-				<input type="text" class="mcqinputbox" placeholder="Type your answer in here" id="a3"></br>
+				<input type="text" class="mcinputbox" placeholder="Type your answer in here" id="a3"></br>
 
 				<input type="checkbox" class="checkbox" id="ch4">
-				<input type="text" class="mcqinputbox" placeholder="Type your answer in here" id="a4"></br>
+				<input type="text" class="mcinputbox" placeholder="Type your answer in here" id="a4"></br>
 				
 			</div>
 
@@ -112,6 +112,6 @@
 {#    <script src="../../../node_modules/what-input/dist/what-input.js"></script>#}
 {#    <script src="../../../node_modules/foundation-sites/dist/js/foundation.js"></script>#}
     <script src="../../../static/js/menuAnimation.js"></script>
-{#    <script src="../../../js/mcq-creation-update.js"></script>#}
+{#    <script src="../../../js/mc-creation-update.js"></script>#}
   </body>
 </html>
