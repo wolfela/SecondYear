@@ -21,48 +21,17 @@
         </div>  <!-- end of title bar right -->
       
       </div>  <!-- start of title bar -->
-      <div class="content scroll-content">    
-    <h2 class = "mcqheading">Question x</h2>
+      
+{% block content %}
+
+<div class="mcqheading"> <h1>{{ question.title }}</h1></div>
+{% for answer in question.answers %}
+<div class="mcqtextareas"> <p>{{ answer }}</p></div>
+{% endfor %}
+<div class="mcqtextareas"> <p>{{ question.correct }}</p></div>
     
-    <p class="questions" id=q>Question goes here?</p></br>
+{% endblock %}
 
-
-    <form method="get">
-      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-     <p> {{ form.correct.value() }} </p>
-      <p> {{ form.answers.value() }} </p>
-      <p> {{ form.title.value() }} </p>
-    </form>
-
-    <div>
-      <input type="checkbox" class="checkbox">
-      <p class="answer" id=a1> answer 1</p></br>
-
-      <input type="checkbox" class="checkbox">
-      <p class="answer" id=a2>answer 2</p></br>
-
-            <input type="checkbox" class="checkbox">
-      <p class="answer" id=a3>answer 3</p></br>
-
-            <input type="checkbox" class="checkbox">
-      <p class="answer" id=a4>answer 4</p></br>
-    </div>
-      </div>  <!-- end of content -->
-    </div>  <!-- end of container -->
-
-    <div class="sidebar">
-      <button class="hamburger" type="button">
-        <span class="topLine"></span>
-        <span class="innerLine"></span>
-        <span class="bottomLine"></span>
-      </button>
-      <div class="menu-content">
-        <nav class="menu-left">
-          <a href="#">Create Quiz</a>
-          <a href="#">View Quizzes</a>
-        </nav>
-      </div>
-    </div>
 
     <script src="./node_modules/jquery/dist/jquery.js"></script>
     <script src="./node_modules/what-input/dist/what-input.js"></script>
