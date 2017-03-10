@@ -1,17 +1,5 @@
 from django.forms import ModelForm
-<<<<<<< HEAD
-from coolbeans.app.models.question import MultipleChoiceModel
-
-# Create the form class.
-
-class MCQForm(ModelForm):
-    class Meta:
-        model = MultipleChoiceModel
-        fields = '__all__'
-=======
 from coolbeans.app.models.question import MultipleChoiceModel, TrueFalseQuestionModel, WordMatchingQuestionModel, WordScrambleQuestionModel, GapFillQuestionModel
-
-
 
 # Create the form class.
 
@@ -43,4 +31,3 @@ class GFForm(ModelForm):
     class Meta:
         model = GapFillQuestionModel
         fields = '__all__'
->>>>>>> allviews
