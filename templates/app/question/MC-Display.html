@@ -1,0 +1,60 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+    <link rel="stylesheet" href="../../../static/css/app.css">
+   <link rel="stylesheet" href="../../../static/css/mcq-display.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Oswald&amp;subset=latin-ext" rel="stylesheet">
+    {#  <script src="../../../node_modules/jquery/dist/jquery.js"></script>#}
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
+  <body>
+
+    <div class="container"> <!-- start of container -->
+      <div class="title-bar"> <!-- start of title bar -->
+        <span class="title-bar-title">LQ    //    TEACHER</span>
+        <div class="title-bar-right"> <!-- start of title bar right -->
+          <button class="logoutButton">LOGOUT</button>
+        </div>  <!-- end of title bar right -->
+      
+      </div>  <!-- start of title bar -->
+      
+{% block content %}
+
+<div class="mcqheading"> <h1>{{ question.title }}</h1></div>
+{% for answer in question.answers %}
+<div class="mcqtextareas"> <p>{{ answer }}</p></div>
+{% endfor %}
+<div class="mcqtextareas"> <p>{{ question.correct }}</p></div>
+    
+{% endblock %}
+
+
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/what-input/dist/what-input.js"></script>
+    <script src="./node_modules/foundation-sites/dist/js/foundation.js"></script>
+    <script src="./js/menuAnimation.js"></script>
+  </body>
+</html>
+
+<!-- <script type="text/javascript">
+    $(function () {
+        if (window.opener != null && !window.opener.closed) {
+            var parent = $(window.opener.document).contents();
+            console.log(parent.find("#a1").val());
+            var data1 = parent.find("#a1").val();
+            var data2 = parent.find("#a2").val();
+            var data3 = parent.find("#a3").val();
+            var data4 = parent.find("#a4").val();
+            var t = parent.find("#title").val();
+            $("#a1").html(data1);
+            $("#a2").html(data2);
+            $("#a3").html(data3);
+            $("#a4").html(data4);
+            $("#q").html(t);
+        }
+    });
+</script> -->

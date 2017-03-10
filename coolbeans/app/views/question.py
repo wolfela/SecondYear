@@ -1,44 +1,153 @@
 from django.views.generic import TemplateView
 from django.template import RequestContext
 
-from coolbeans.app.forms import MCQForm
-from django.shortcuts import render
+from coolbeans.app.forms import MCForm, TFForm, WMForm, WSForm
+from coolbeans.app.models.question import MultipleChoiceModel, WordScrambleQuestionModel, TrueFalseQuestionModel, WordMatchingQuestionModel, GapFillQuestionModel
+from django.shortcuts import render, get_object_or_404, redirect
 
 
-
-class MCQCreateView(TemplateView):
+class MCCreateView(TemplateView):
     """
     A view for creating Multiple Choice Questions
     """
-    template_name = "app/question/MCQ-Creation-update.html"
+    template_name = "app/question/MC-Creation.html"
+
+    def previewMC(request):
+        return preview(request, 'MC', MCForm)
+
+    def saveMC(request):
+        return save(request, 'MC', MCForm)
 
 
-    def preview(request):
-        """
-        Method for previewing the question
-        :return:
-        """
-        if request.method == 'POST':
-            form = MCQForm(request.POST)
-            if form.is_valid():
-                return render(request, 'app/question/MCQ-Display.html', {'form': form})
+class MCQuestionView(TemplateView):
+    template_name = "app/question/MC-Display.html"
+
+    def show_question(request, pk):
+        question = get_object_or_404(MultipleChoiceModel, pk=pk)
+        return render(request, 'app/question/MC-Display.html', {'question': question})
+
+
+class TFCreateView(TemplateView):
+    """
+    A view for creating Multiple Choice Questions
+    """
+    template_name = "app/question/TF-Creation.html"
+
+    def previewTF(request):
+        return preview(request, 'TF', TFForm)
+
+    def saveTF(request):
+        return save(request, 'TF', TFForm)
+
+
+class TFQuestionView(TemplateView):
+    template_name = "app/question/TF-Display.html"
+
+    def show_question(request, pk):
+        question = get_object_or_404(TrueFalseQuestionModel, pk=pk)
+        return render(request, 'app/question/TF-Display.html', {'question': question})
+
+
+class WMCreateView(TemplateView):
+    """
+    A view for creating Word Match Questions
+    """
+    template_name = "app/question/WM-Creation.html"
+
+
+    def previewWM(request):
+        return preview(request, 'WM', WMForm)
+
+
+    def saveWM(request):
+        return save(request, 'WM', WMForm)
+
+
+class WMQuestionView(TemplateView):
+    template_name = "app/question/WM-Display.html"
+
+    def show_question(request, pk):
+        question = get_object_or_404(WordMatchingQuestionModel, pk=pk)
+        return render(request, 'app/question/WM-Display.html', {'question': question})
+
+
+class WSCreateView(TemplateView):
+    """
+    A view for creating Word Scramble Questions
+    """
+    template_name = "app/question/WS-Creation.html"
+
+
+    def previewWS(request):
+        return preview(request, 'WS', WSForm)
+
+
+    def saveWS(request):
+        return save(request, 'WS', WSForm)
+
+
+class WSQuestionView(TemplateView):
+    template_name = "app/question/WS-Display.html"
+
+    def show_question(request, pk):
+        question = get_object_or_404(WordScrambleQuestionModel, pk=pk)
+        return render(request, 'app/question/WS-Display.html', {'question': question})
+
+
+class GFCreateView(TemplateView):
+    """
+    A view for creating Word Scramble Questions
+    """
+    template_name = "app/question/GF-Creation.html"
+
+
+    def previewGF(request):
+        return preview(request, 'GF', GFForm)
+
+
+    def saveGF(request):
+        return save(request, 'GF', GFForm)
+
+
+class GFQuestionView(TemplateView):
+    template_name = "app/question/GF-Display.html"
+
+    def show_question(request, pk):
+        question = get_object_or_404(GapFillQuestionModel, pk=pk)
+        return render(request, 'app/question/GF-Display.html', {'question': question})
+
+
+def preview(request, type, formtype):
+    pathDisplay = 'app/question/' + type + '-Preview.html'
+    """
+    Method for previewing the question
+    :return:
+    """
+    if request.method == 'POST':
+        form = formtype(request.POST)
+        if form.is_valid():
+            return render(request, pathDisplay, {'form': form})
+    else:
+        form = formtype()
+
+    return render(request, pathDisplay, {'form': form})
+
+
+def save(request, type, formtype):
+    pathCreation = 'app/question/' + type + '-Creation.html'
+    pathType = '/' + type
+    """
+    Method for saving the question, right now its a preview as well, to be fixed
+    :return:
+    """
+    if request.method == 'POST':
+        form = formtype(request.POST)
+        if form.is_valid():
+            question = form.save()
+            return redirect(type.lower())
         else:
-            form = MCQForm()
+            form = formtype()
 
-        return render(request, 'app/question/MCQ-Display.html', {'form': form})
+    return render(request, pathType, {'form': form}, context_instance=RequestContext(request))
 
-    def save(request):
-        """
-        Method for saving the quuestion, right now its a preview as well, to be fixed
-        :return:
-        """
-        if request.method == 'POST':
-            form = MCQForm(request.POST)
-            if form.is_valid():
-                form.save(commit=False)
-                return render(request, 'app/question/MCQ-Display.html', {'form': form})
-        else:
-            form = MCQForm()
-
-        return render(request, '/mcq2', {'form': form},context_instance=RequestContext(request))
 
