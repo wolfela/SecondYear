@@ -13,26 +13,6 @@
   </head>
   <body>
 
-
-<script type="text/javascript">
-    $(function () {
-        if (window.opener != null && !window.opener.closed) {
-            var parent = $(window.opener.document).contents();
-            console.log(parent.find("#a1").val());
-            var data1 = parent.find("#a1").val();
-            var data2 = parent.find("#a2").val();
-            var data3 = parent.find("#a3").val();
-            var data4 = parent.find("#a4").val();
-            var t = parent.find("#title").val();
-            $("#a1").html(data1);
-            $("#a2").html(data2);
-            $("#a3").html(data3);
-            $("#a4").html(data4);
-            $("#q").html(t);
-        }
-    });
-</script>
-
     <div class="container"> <!-- start of container -->
       <div class="title-bar"> <!-- start of title bar -->
         <span class="title-bar-title">LQ    //    TEACHER</span>
@@ -45,6 +25,14 @@
     <h2 class = "mcqheading">Question x</h2>
     
     <p class="questions" id=q>Question goes here?</p></br>
+
+
+    <form method="get">
+      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+     <p> {{ form.correct.value() }} </p>
+      <p> {{ form.answers.value() }} </p>
+      <p> {{ form.title.value() }} </p>
+    </form>
 
     <div>
       <input type="checkbox" class="checkbox">
@@ -82,3 +70,22 @@
     <script src="./js/menuAnimation.js"></script>
   </body>
 </html>
+
+<!-- <script type="text/javascript">
+    $(function () {
+        if (window.opener != null && !window.opener.closed) {
+            var parent = $(window.opener.document).contents();
+            console.log(parent.find("#a1").val());
+            var data1 = parent.find("#a1").val();
+            var data2 = parent.find("#a2").val();
+            var data3 = parent.find("#a3").val();
+            var data4 = parent.find("#a4").val();
+            var t = parent.find("#title").val();
+            $("#a1").html(data1);
+            $("#a2").html(data2);
+            $("#a3").html(data3);
+            $("#a4").html(data4);
+            $("#q").html(t);
+        }
+    });
+</script> -->

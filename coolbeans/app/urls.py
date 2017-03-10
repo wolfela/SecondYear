@@ -29,9 +29,9 @@ urlpatterns = [
     url(r'^quiz/editor/(?P<id_or_slug>[a-z0-9]+(?:-[a-z0-9]+)*)/(?P<question_id>[0-9]+)$', editor.QuestionEditView.as_view()),
 
     # Question editing functions
-    url(r'^mcq/$', question.MCQCreateView.as_view()),
-    url(r'^mcq2/$', question.MCQView.as_view()),
-    url(r'^mcq/ajax/validate/$', question.validate, name='validate'),
+    url(r'^mcq/$', question.MCQCreateView.as_view(), name='mcq'),
+    url(r'^mcq/preview/$', question.MCQCreateView.preview, name='preview'),
+    url(r'^mcq/save/$', question.MCQCreateView.save, name='save'),
     #url(r'^mcq/ajax/validatee/$', question.validatee, name='validatee'),
 
     # TODO: Admin routes

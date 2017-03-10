@@ -23,7 +23,36 @@
 			
       </div>	<!-- start of title bar -->
       <div class="content scroll-content">		
+
+      				<form action="/mcq/save/" method="post">
+      				<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    			<label for="name">Save:  </label>
+    			<input id="correct" type="text" name="correct" value="correct answer">
+				<input id="answers" type="text" name="answers" value="the rest of answers">
+				<input id="title" type="text" name="title" value="title">
+    			<input type="submit" value="OK">
+			</form>
+
+
+			<form target="_blank" action="/mcq/preview/" method="post">
+      				<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    			<label for="name">Preview: </label>
+    			<input id="correct" type="text" name="correct" value="correct answer">
+				<input id="answers" type="text" name="answers" value="the rest of answers">
+				<input id="title" type="text" name="title" value="title">
+    			<input type="submit" value="OK">
+			</form>
+			
 		<form>  
+
+
+
+      				
+			
+		 
+
+
+
 			<label><h2 class="mcqheading">MCQ Quiz Creation</h2></label>
 			<div>
 				<h4>Type your question below</h4>
@@ -31,6 +60,9 @@
 			</div>
 			
 			<h4>Type your answers below</h4>
+
+
+
 			
 			<div id="addAnswer">
 				<input type="checkbox" class="checkbox" id="ch1">
@@ -51,6 +83,7 @@
 					<button type="button" class="button" id="addField">Add field</button>
   					<button type="button" class="button" id="removeField">Remove field</button></br>
 			</div>	
+
 
 			<div class="buttondiv">		
               <button type="button" class="success button mysavebutton", id="saveQuestion">Save</button>

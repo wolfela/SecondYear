@@ -19,18 +19,6 @@ from coolbeans.app.models.base import TimeStampedModel
 from coolbeans.app.models.quiz import QuizModel
 
 
-class TestModel(Model):
-    name = PositiveIntegerField(blank=True, default=1)
-    quiz = ForeignKey(QuizModel, on_delete=CASCADE)
-
-
-class TestModelll(TimeStampedModel, SafeDeleteMixin):
-    _safedelete_policy = SOFT_DELETE
-    name = PositiveIntegerField(blank=True, default=1)
-    quiz = ForeignKey(QuizModel, on_delete=CASCADE)
-
-
-
 
 class BaseQuestionModel(TimeStampedModel, SafeDeleteMixin):
     """
@@ -39,7 +27,7 @@ class BaseQuestionModel(TimeStampedModel, SafeDeleteMixin):
 
     _safedelete_policy = SOFT_DELETE
 
-    quiz = ForeignKey(QuizModel, on_delete=CASCADE)
+    quiz = ForeignKey(QuizModel, on_delete=CASCADE, blank=True, null=True)
     display_with = ForeignKey('self', on_delete=CASCADE, blank=True, null=True)
     display_order = PositiveIntegerField(blank=True, default=1)
 
@@ -61,6 +49,8 @@ class BaseQuestionModel(TimeStampedModel, SafeDeleteMixin):
         """
 
         return BaseQuestionModel.objects.filter(display_with = self)
+
+
 
 class PlaceholderQuestionModel(BaseQuestionModel):
     """
@@ -86,7 +76,7 @@ class MultipleChoiceModel(BaseQuestionModel):
     title = CharField(max_length=500, blank=False)
     answers = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False))
     correct = CharField(max_length=255, blank=False)
-    score = PositiveIntegerField(blank=True, default=1)
+    score = PositiveIntegerField(blank=True, default=1, null=True)
 
     class Meta:
         verbose_name = "Multiple Choice Question"
