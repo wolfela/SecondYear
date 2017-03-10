@@ -1,46 +1,120 @@
 from django.views.generic import TemplateView
 from django.template import RequestContext
 
-from coolbeans.app.forms import MCQForm
-from coolbeans.app.forms import DNDForm
-from coolbeans.app.models.question import MultipleChoiceModel
+from coolbeans.app.forms import MCForm, TFForm, WMForm, WSForm
+from coolbeans.app.models.question import MultipleChoiceModel, WordScrambleQuestionModel, TrueFalseQuestionModel, WordMatchingQuestionModel, GapFillQuestionModel
 from django.shortcuts import render, get_object_or_404, redirect
 
 
-class MCQCreateView(TemplateView):
+class MCCreateView(TemplateView):
     """
     A view for creating Multiple Choice Questions
     """
-    template_name = "app/question/MCQ-Creation.html"
+    template_name = "app/question/MC-Creation.html"
 
-    def previewMCQ(request):
-        return preview(request, 'MCQ', MCQForm)
+    def previewMC(request):
+        return preview(request, 'MC', MCForm)
 
-    def saveMCQ(request):
-        return save(request, 'MCQ', MCQForm)
+    def saveMC(request):
+        return save(request, 'MC', MCForm)
 
 
-class MCQQuestionView(TemplateView):
-    template_name = "app/question/MCQ-Display.html"
+class MCQuestionView(TemplateView):
+    template_name = "app/question/MC-Display.html"
 
     def show_question(request, pk):
         question = get_object_or_404(MultipleChoiceModel, pk=pk)
-        return render(request, 'app/question/MCQ-Display.html', {'question': question})
+        return render(request, 'app/question/MC-Display.html', {'question': question})
 
 
-class DNDCreateView(TemplateView):
+class TFCreateView(TemplateView):
     """
     A view for creating Multiple Choice Questions
     """
-    template_name = "app/question/DND-Creation.html"
+    template_name = "app/question/TF-Creation.html"
+
+    def previewTF(request):
+        return preview(request, 'TF', TFForm)
+
+    def saveTF(request):
+        return save(request, 'TF', TFForm)
 
 
-    def previewDND(request):
-        return preview(request, 'DND', DNDForm)
+class TFQuestionView(TemplateView):
+    template_name = "app/question/TF-Display.html"
+
+    def show_question(request, pk):
+        question = get_object_or_404(TrueFalseQuestionModel, pk=pk)
+        return render(request, 'app/question/TF-Display.html', {'question': question})
 
 
-    def saveDND(request):
-        return save(request, 'DND', DNDForm)
+class WMCreateView(TemplateView):
+    """
+    A view for creating Word Match Questions
+    """
+    template_name = "app/question/WM-Creation.html"
+
+
+    def previewWM(request):
+        return preview(request, 'WM', WMForm)
+
+
+    def saveWM(request):
+        return save(request, 'WM', WMForm)
+
+
+class WMQuestionView(TemplateView):
+    template_name = "app/question/WM-Display.html"
+
+    def show_question(request, pk):
+        question = get_object_or_404(WordMatchingQuestionModel, pk=pk)
+        return render(request, 'app/question/WM-Display.html', {'question': question})
+
+
+class WSCreateView(TemplateView):
+    """
+    A view for creating Word Scramble Questions
+    """
+    template_name = "app/question/WS-Creation.html"
+
+
+    def previewWS(request):
+        return preview(request, 'WS', WSForm)
+
+
+    def saveWS(request):
+        return save(request, 'WS', WSForm)
+
+
+class WSQuestionView(TemplateView):
+    template_name = "app/question/WS-Display.html"
+
+    def show_question(request, pk):
+        question = get_object_or_404(WordScrambleQuestionModel, pk=pk)
+        return render(request, 'app/question/WS-Display.html', {'question': question})
+
+
+class GFCreateView(TemplateView):
+    """
+    A view for creating Word Scramble Questions
+    """
+    template_name = "app/question/GF-Creation.html"
+
+
+    def previewGF(request):
+        return preview(request, 'GF', GFForm)
+
+
+    def saveGF(request):
+        return save(request, 'GF', GFForm)
+
+
+class GFQuestionView(TemplateView):
+    template_name = "app/question/GF-Display.html"
+
+    def show_question(request, pk):
+        question = get_object_or_404(GapFillQuestionModel, pk=pk)
+        return render(request, 'app/question/GF-Display.html', {'question': question})
 
 
 def preview(request, type, formtype):
@@ -62,7 +136,6 @@ def preview(request, type, formtype):
 def save(request, type, formtype):
     pathCreation = 'app/question/' + type + '-Creation.html'
     pathType = '/' + type
-    pathShowSaved = type + 'question'
     """
     Method for saving the question, right now its a preview as well, to be fixed
     :return:
@@ -71,9 +144,9 @@ def save(request, type, formtype):
         form = formtype(request.POST)
         if form.is_valid():
             question = form.save()
-            return redirect(pathShowSaved, pk=question.pk)
+            return redirect(type.lower())
         else:
-            form = DNDForm()
+            form = formtype()
 
     return render(request, pathType, {'form': form}, context_instance=RequestContext(request))
 

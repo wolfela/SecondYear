@@ -156,10 +156,9 @@ class Pair(TimeStampedModel, SafeDeleteMixin):
     right_value = CharField(max_length=500, blank = False)
 
 
-
 class WordScrambleQuestionModel(BaseQuestionModel):
     """
-    A Word Scrable Question Type.
+    A Word Scrabble Question Type.
     """
     title = CharField(max_length=500)
     answer = CharField(max_length=500, blank = False)
