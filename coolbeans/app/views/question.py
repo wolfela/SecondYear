@@ -3,7 +3,8 @@ from django.template import RequestContext
 
 from coolbeans.app.forms import MCQForm
 from coolbeans.app.forms import DNDForm
-from django.shortcuts import render
+from coolbeans.app.models.question import MultipleChoiceModel
+from django.shortcuts import render, get_object_or_404, redirect
 
 
 class MCQCreateView(TemplateView):
@@ -13,10 +14,18 @@ class MCQCreateView(TemplateView):
     template_name = "app/question/MCQ-Creation.html"
 
     def previewMCQ(request):
-        preview(request, 'MCQ', MCQForm)
+        return preview(request, 'MCQ', MCQForm)
 
     def saveMCQ(request):
-        save(request, 'MCQ', MCQForm)
+        return save(request, 'MCQ', MCQForm)
+
+
+class MCQQuestionView(TemplateView):
+    template_name = "app/question/MCQ-Display.html"
+
+    def show_question(request, pk):
+        question = get_object_or_404(MultipleChoiceModel, pk=pk)
+        return render(request, 'app/question/MCQ-Display.html', {'question': question})
 
 
 class DNDCreateView(TemplateView):
@@ -27,11 +36,11 @@ class DNDCreateView(TemplateView):
 
 
     def previewDND(request):
-        preview(request, 'DND', DNDForm)
+        return preview(request, 'DND', DNDForm)
 
 
     def saveDND(request):
-        save(request, 'DND', DNDForm)
+        return save(request, 'DND', DNDForm)
 
 
 def preview(request, type, formtype):
@@ -51,8 +60,9 @@ def preview(request, type, formtype):
 
 
 def save(request, type, formtype):
-    pathCreation = 'app/question' + type + '-Creation.html'
+    pathCreation = 'app/question/' + type + '-Creation.html'
     pathType = '/' + type
+    pathShowSaved = type + 'question'
     """
     Method for saving the question, right now its a preview as well, to be fixed
     :return:
@@ -60,11 +70,11 @@ def save(request, type, formtype):
     if request.method == 'POST':
         form = formtype(request.POST)
         if form.is_valid():
-            form.save(commit=False)
-            return render(request, pathCreation, {'form': form})
+            question = form.save()
+            return redirect(pathShowSaved, pk=question.pk)
         else:
             form = DNDForm()
 
-        return render(request, pathType, {'form': form}, context_instance=RequestContext(request))
+    return render(request, pathType, {'form': form}, context_instance=RequestContext(request))
 
 

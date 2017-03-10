@@ -93,8 +93,7 @@ class MultipleChoiceModel(BaseQuestionModel):
         return self.correct == choice
 
     def get_answers_list(self):
-        return self.answers.extend(self.correct) #TO DO: sort out display order
-
+        return self.answers.extend(self.correct) #TO DO: sort out display order+
 
 
 class TrueFalseQuestionModel(BaseQuestionModel):
