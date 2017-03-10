@@ -13,6 +13,7 @@ from model_utils.managers import InheritanceManager
 from safedelete import SOFT_DELETE
 from safedelete.models import SafeDeleteMixin
 from django.core.exceptions import ObjectDoesNotExist
+import random
 
 from coolbeans.app.exceptions import HTMLParseError
 from coolbeans.app.models.base import TimeStampedModel
@@ -93,7 +94,7 @@ class MultipleChoiceModel(BaseQuestionModel):
         return self.correct == choice
 
     def get_answers_list(self):
-        return self.answers.extend(self.correct) #TO DO: sort out display order+
+        return self.answers.extend(self.correct) #TO DO: sort out display order+{anws
 
 
 class TrueFalseQuestionModel(BaseQuestionModel):

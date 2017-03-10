@@ -44,7 +44,7 @@ class DNDCreateView(TemplateView):
 
 
 def preview(request, type, formtype):
-    pathDisplay = 'app/question/' + type + '-Display.html'
+    pathDisplay = 'app/question/' + type + '-Preview.html'
     """
     Method for previewing the question
     :return:
