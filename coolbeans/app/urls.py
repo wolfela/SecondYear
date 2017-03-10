@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^mcq/$', question.MCQCreateView.as_view(), name='mcq'),
     url(r'^mcq/preview/$', question.MCQCreateView.previewMCQ, name='preview'),
     url(r'^mcq/save/$', question.MCQCreateView.saveMCQ, name='save'),
+    url(r'^mcq/question/(?P<pk>\d+)/$', question.MCQQuestionView.show_question, name='MCQquestion'),
     #url(r'^mcq/ajax/validatee/$', question.validatee, name='validatee'),
 
     url(r'^dnd/$', question.DNDCreateView.as_view(), name='dnd'),
