@@ -10,7 +10,7 @@ class MCQCreateView(TemplateView):
     """
     A view for creating Multiple Choice Questions
     """
-    template_name = "app/question/MCQ-Creation-update.html"
+    template_name = "app/question/MCQ-Creation.html"
 
     def previewMCQ(request):
         preview(request, 'MCQ', MCQForm)
@@ -65,6 +65,6 @@ def save(request, type, formtype):
         else:
             form = DNDForm()
 
-        return render(request, pathType, {'form': form},context_instance=RequestContext(request))
+        return render(request, pathType, {'form': form}, context_instance=RequestContext(request))
 
 

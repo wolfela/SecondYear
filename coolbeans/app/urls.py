@@ -30,9 +30,14 @@ urlpatterns = [
 
     # Question editing functions
     url(r'^mcq/$', question.MCQCreateView.as_view(), name='mcq'),
-    url(r'^mcq/preview/$', question.MCQCreateView.preview, name='preview'),
-    url(r'^mcq/save/$', question.MCQCreateView.save, name='save'),
+    url(r'^mcq/preview/$', question.MCQCreateView.previewMCQ, name='preview'),
+    url(r'^mcq/save/$', question.MCQCreateView.saveMCQ, name='save'),
     #url(r'^mcq/ajax/validatee/$', question.validatee, name='validatee'),
+
+    url(r'^dnd/$', question.DNDCreateView.as_view(), name='dnd'),
+    url(r'^dnd/preview/$', question.DNDCreateView.previewDND, name='preview'),
+    url(r'^dnd/save/$', question.DNDCreateView.saveDND, name='save'),
+
 
     # TODO: Admin routes
 ]
