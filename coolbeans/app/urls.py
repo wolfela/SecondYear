@@ -36,12 +36,6 @@ urlpatterns = [
     url(r'^mc/save/$', question.MCCreateView.saveMC, name='save'),
     url(r'^mc/question/(?P<pk>\d+)/$', question.MCQuestionView.show_question, name='mcquestion'),
 
-    # True or False Questions
-    url(r'^tf/$', question.TFCreateView.as_view(), name='tf'),
-    url(r'^tf/preview/$', question.TFCreateView.previewTF, name='preview'),
-    url(r'^tf/save/$', question.TFCreateView.saveTF, name='save'),
-    url(r'^tf/question/(?P<pk>\d+)/$', question.TFQuestionView.show_question, name='tfquestion'),
-
     # Word Matching Questions
     url(r'^wm/$', question.WMCreateView.as_view(), name='wm'),
     url(r'^wm/preview/$', question.WMCreateView.previewWM, name='preview'),
