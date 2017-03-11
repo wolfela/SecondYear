@@ -97,29 +97,6 @@ class MultipleChoiceModel(BaseQuestionModel):
         return self.answers.extend(self.correct) #TO DO: sort out display order+{anws
 
 
-class TrueFalseQuestionModel(BaseQuestionModel):
-    """
-    A True or False Question Type.
-    """
-    title = CharField(max_length=500)
-    answer = BooleanField(blank=False)
-    score = PositiveIntegerField()
-
-    class Meta:
-        verbose_name = "True or False Question"
-        verbose_name_plural = "True or False Questions"
-
-    def check_answer(self, choice):
-        """
-        Checks whether the supplied answer is correct.
-
-        :param choice: The answer provided.
-        :return: bool Whether the answer is correct.
-        """
-
-        return self.answer is choice
-
-
 class WordMatchingQuestionModel(BaseQuestionModel):
     """
     A Word Matching Question Type.

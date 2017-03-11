@@ -1,17 +1,11 @@
 from django.forms import ModelForm
-from coolbeans.app.models.question import MultipleChoiceModel, TrueFalseQuestionModel, WordMatchingQuestionModel, WordScrambleQuestionModel, GapFillQuestionModel
+from coolbeans.app.models.question import MultipleChoiceModel, WordMatchingQuestionModel, WordScrambleQuestionModel, GapFillQuestionModel
 
 # Create the form class.
 
 class MCForm(ModelForm):
     class Meta:
         model = MultipleChoiceModel
-        fields = '__all__'
-
-
-class TFForm(ModelForm):
-    class Meta:
-        model = TrueFalseQuestionModel
         fields = '__all__'
 
 

@@ -1,8 +1,8 @@
 from django.views.generic import TemplateView
 from django.template import RequestContext
 
-from coolbeans.app.forms import MCForm, TFForm, WMForm, WSForm
-from coolbeans.app.models.question import MultipleChoiceModel, WordScrambleQuestionModel, TrueFalseQuestionModel, WordMatchingQuestionModel, GapFillQuestionModel
+from coolbeans.app.forms import MCForm, WMForm, WSForm
+from coolbeans.app.models.question import MultipleChoiceModel, WordScrambleQuestionModel, WordMatchingQuestionModel, GapFillQuestionModel
 from django.shortcuts import render, get_object_or_404, redirect
 
 
@@ -25,27 +25,6 @@ class MCQuestionView(TemplateView):
     def show_question(request, pk):
         question = get_object_or_404(MultipleChoiceModel, pk=pk)
         return render(request, 'app/question/MC-Display.html', {'question': question})
-
-
-class TFCreateView(TemplateView):
-    """
-    A view for creating Multiple Choice Questions
-    """
-    template_name = "app/question/TF-Creation.html"
-
-    def previewTF(request):
-        return preview(request, 'TF', TFForm)
-
-    def saveTF(request):
-        return save(request, 'TF', TFForm)
-
-
-class TFQuestionView(TemplateView):
-    template_name = "app/question/TF-Display.html"
-
-    def show_question(request, pk):
-        question = get_object_or_404(TrueFalseQuestionModel, pk=pk)
-        return render(request, 'app/question/TF-Display.html', {'question': question})
 
 
 class WMCreateView(TemplateView):
