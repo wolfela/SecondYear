@@ -1,1 +1,212 @@
 @import "foundation";
+
+/*
+GENERAL CROSSWORD PARTS
+*/
+
+.crosswordDisplay{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.row{
+  clear: left;
+  white-space: nowrap;
+}
+
+.row > div{
+  float: left;
+  text-align: center;
+  position: relative;
+  height: 40px;
+  width: 40px;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.crosswordNum{
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  font-size: 8px;
+}
+
+.crosswordLetter{
+
+}
+
+
+/*
+CROSSWORD CLUES
+*/
+.clues{
+  padding: 5px;
+  border: 1px solid black;
+  width: 500px;
+  min-height: 200px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.crosswordInput{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.across{
+  float: left;
+  width: 50%;
+}
+
+.down{
+  width: 50%;
+}
+
+.acrossClueBox{
+  height: 200px;
+  overflow-y: scroll;
+}
+
+.downClueBox{
+  height: 200px;
+  overflow-y: scroll;
+}
+
+.blankBox{
+  background-color: #fff;
+}
+
+.emptyBox{
+  background-color: #1e1e1e;
+}
+
+.selected{
+  background-color: #88ff73;
+}
+
+.set {
+  background: #5fbe5f;
+}
+
+/*
+CROSSWORD EDITOR
+*/
+
+.clueInputBox{
+  border: 1px solid black;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  min-height: 150px;
+  width: 700px;
+  margin: 10px auto;
+  background: #f9f9f9;
+}
+
+.clueInputBox p{
+  margin: 10px 10px 0 10px;
+}
+
+.clueInput{
+  width: auto;
+  margin: 10px 20px;
+  resize: vertical;
+}
+
+.clueButton{
+  background: #303030;
+  color: #ffffff;
+  border: none;
+  border-radius: 3px;
+  padding: 5px;
+  margin: 5px 10px;
+  max-width: 100px;
+}
+
+.addClue{
+  float: right;
+}
+
+.deleteClue{
+  float: right;
+}
+
+.editClue{
+  float: left;
+}
+
+.cluesBox{
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+  border-radius: 4px;
+
+}
+
+.clueTable{
+  display: block;
+  width: auto;
+  margin: 10px 15px;
+  cursor: default;
+}
+
+.tableTitle{
+  display: flex;
+  flex-direction: row;
+  padding-right: 17px;
+}
+
+.clueTitle{
+  width: 80%;
+}
+
+.wordTitle{
+  width: 20%;
+}
+
+.clueDiv{
+  min-height: 30px;
+  max-height: 200px;
+  background: #fff;
+  overflow-y: auto;
+  display: block;
+}
+
+.crosswordClueRow{
+  display: flex;
+  flex-direction: row;
+}
+
+.crosswordClueRow:focus{
+  background: #5fbe5f;
+  color: #f9f9f9;
+}
+
+.select{
+  background: #79E263 !important;
+  color: #ffffff !important;
+}
+
+.clueRow{
+  width: 80%;
+}
+
+.wordRow{
+  width: 20%;
+}
+
+.answerBox{
+  width: auto;
+  margin: 10px 40px 10px 20px;
+}

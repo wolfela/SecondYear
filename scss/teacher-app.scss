@@ -1,8 +1,15 @@
 @import "foundation";
 
+.gapFillQuestionDiv{
+  margin-left: 100px;
+  margin-right: 100px;
+  //border: 1px solid rgba(0,0,0,0.3);
+  padding: 10px;
+}
+
 .gapFillQuestions{
   position: relative;
-  display: block;
+  display: inline;
   width: 250px;
   left: 5%;
   top: 10%;
@@ -19,4 +26,116 @@
   border: solid 1px rgba(0,0,0,0.3);
   background-color: #f9f9f9;
   transform: translate(0,+25%);
+}
+
+.gapFillComplete{
+  margin: 20px;
+  float: right;
+}
+
+.sentenceContainer{
+  display: flex;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.answers{
+  position: absolute;
+  top: 200px;
+  left: 100px;
+}
+
+.answer{
+  width: 80px;
+  border: 1px solid black;
+  padding: 1px;
+}
+
+/*
+GAP FILL EDITOR
+*/
+
+#cke_gapFillInput{
+  margin: 20px 20px 10px;
+}
+
+.gapFillSelectBox{
+  min-height: 50px;
+  margin: 10px 20px;
+  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 4px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.gapFillButton{
+  margin-left: 15px;
+  background: #79E263;
+  color: #e1faea;
+  border: none;
+}
+
+.gapFillBack{
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.gapFillDrag{
+  margin: 10px 30px;
+}
+
+.gapFillAnswerOptions{
+  margin: 20px;
+  width: auto;
+  display: block;
+}
+
+.gapFillAlt{
+  margin-left: 20px;
+  margin-right: 20px;
+  border: 1px solid rgba(0,0,0,0.3);
+  display: block;
+  background: #fff;
+}
+
+.gapFillAltAnswers{
+  margin: 0;
+  padding: 5px 0 0 10px;
+  display: block;
+}
+
+.gapFillAltAnswers div:focus{
+  background: #1e1e1e;
+  color: #FFFFFF;
+}
+
+.gapFillAltInput {
+  padding: 0 0 0 10px;
+  margin: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  display: block;
+  outline: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.gapFillAltInput:focus{
+  outline: none;
+}
+
+.gapFillAltAdd{
+  display: inline-block;
+  margin: 10px;
+}
+
+.gapFillAltDelete{
+  display: inline-block;
+  margin: 10px;
+}
+
+.content{
+  margin-bottom: 20px;
 }
