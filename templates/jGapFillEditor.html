@@ -1,0 +1,29 @@
+{% extends "jTemplate" %}
+
+ {% block title %}GapFillEditor{% endblock %}
+ {% block head %} 
+	{{ super() }}
+	    <script src="//cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js"></script>
+ {% endblock %}
+  
+{% block content %}
+
+		<textarea id="gapFillInput" name="gapFillInput">Initial content</textarea>
+        <input type="button" class="gapFillSelect" value="Add Gap" onclick="addGap()"/>
+        <input type="button" class="gapFillDelete" value="Delete Gap" onclick="deleteGap()"/>
+        <!--Need to find out if model store alternative answers or only one answer-->
+        <!--<input type="text" placeholder="Please type in alternative answers"/>-->
+        <!--<input type="button" class="gapFillAlt" value="Add Alternate"/>-->
+        <label><input class="gapFillDrag" type="checkbox"/> Drag and drop</label>
+        <input type="button" class="createGapFill" value="Done" onclick="createQuiz()"/>
+		
+{% endblock %}
+
+{% block sidebarContent %}
+	<a href="#">Create Quiz</a>
+    <a href="#">View Quizzes</a>
+{% endblock %}
+
+{% block extraJS %}
+    <script src="./js/gapFill.js"></script>
+{% endblock %}

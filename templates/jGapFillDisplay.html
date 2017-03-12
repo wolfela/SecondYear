@@ -1,0 +1,22 @@
+{% extends "jTemplate.html" %}
+
+ {% block title %}GapFillDisplay{% endblock %}
+ {% block head %} 
+	{{ super() }}
+	   <link rel="stylesheet" href="./static/css/teacher-app.css">
+ {% endblock %}
+  
+{% block content %}
+ <label class="gapFillQuestions">Hello<span draggable="true" class="gapFillBox"></span>name is</label>
+		
+{% endblock %}
+
+{% block sidebarContent %}
+	<a href="#">Create Quiz</a>
+    <a href="#">View Quizzes</a>
+{% endblock %}
+
+{% block extraJS %}
+    <script src="./js/gapFill.js"></script>
+{% endblock %}
+
