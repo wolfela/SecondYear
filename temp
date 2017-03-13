@@ -1,2 +1,0 @@
-from coolbeans.app.models.questiudwadwadon import MultipleChoiceModel
-MultipleChoiceModel.objects.all()
