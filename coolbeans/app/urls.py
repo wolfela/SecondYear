@@ -32,26 +32,22 @@ urlpatterns = [
 
     # Multiple Choice Questions
     url(r'^mc/$', question.MCCreateView.as_view(), name='mc'),
-    url(r'^mc/preview/$', question.MCCreateView.previewMC, name='preview'),
-    url(r'^mc/save/$', question.MCCreateView.saveMC, name='save'),
+    url(r'^mc/submit/$', question.MCCreateView.submitMC, name='submit'),
     url(r'^mc/question/(?P<pk>\d+)/$', question.MCQuestionView.show_question, name='mcquestion'),
 
     # Word Matching Questions
     url(r'^wm/$', question.WMCreateView.as_view(), name='wm'),
-    url(r'^wm/preview/$', question.WMCreateView.previewWM, name='preview'),
-    url(r'^wm/save/$', question.WMCreateView.saveWM, name='save'),
+    url(r'^wm/submit/$', question.WMCreateView.submitWM, name='submit'),
     url(r'^wm/question/(?P<pk>\d+)/$', question.WMQuestionView.show_question, name='wmquestion'),
 
     # Word Scramble Questions
     url(r'^ws/$', question.WSCreateView.as_view(), name='ws'),
-    url(r'^ws/preview/$', question.WSCreateView.previewWS, name='preview'),
-    url(r'^ws/save/$', question.WSCreateView.saveWS, name='save'),
+    url(r'^ws/submit/$', question.WSCreateView.submitWS, name='submit'),
     url(r'^ws/question/(?P<pk>\d+)/$', question.WSQuestionView.show_question, name='wsquestion'),
 
     # Gap Fill Questions
     url(r'^gf/$', question.GFCreateView.as_view(), name='gf'),
-    url(r'^gf/preview/$', question.GFCreateView.previewGF, name='preview'),
-    url(r'^gf/save/$', question.GFCreateView.saveGF, name='save'),
+    url(r'^gf/submit/$', question.GFCreateView.submitGF, name='submit'),
     url(r'^gf/question/(?P<pk>\d+)/$', question.GFQuestionView.show_question, name='gfquestion'),
 
 

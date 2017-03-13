@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.template import RequestContext
 
-from coolbeans.app.forms import MCForm, WMForm, WSForm
+from coolbeans.app.forms import MCForm, WMForm, WSForm, GFForm
 from coolbeans.app.models.question import MultipleChoiceModel, WordScrambleQuestionModel, WordMatchingQuestionModel, GapFillQuestionModel
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -12,11 +12,8 @@ class MCCreateView(TemplateView):
     """
     template_name = "app/question/MC-Creation.html"
 
-    def previewMC(request):
-        return preview(request, 'MC', MCForm)
-
-    def saveMC(request):
-        return save(request, 'MC', MCForm)
+    def submitMC(request):
+        return submit(request, 'MC', MCForm)
 
 
 class MCQuestionView(TemplateView):
@@ -34,12 +31,8 @@ class WMCreateView(TemplateView):
     template_name = "app/question/WM-Creation.html"
 
 
-    def previewWM(request):
-        return preview(request, 'WM', WMForm)
-
-
-    def saveWM(request):
-        return save(request, 'WM', WMForm)
+    def submitWM(request):
+        return submit(request, 'WM', WMForm)
 
 
 class WMQuestionView(TemplateView):
@@ -57,12 +50,9 @@ class WSCreateView(TemplateView):
     template_name = "app/question/WS-Creation.html"
 
 
-    def previewWS(request):
-        return preview(request, 'WS', WSForm)
+    def submitWS(request):
+        return submit(request, 'WS', WSForm)
 
-
-    def saveWS(request):
-        return save(request, 'WS', WSForm)
 
 
 class WSQuestionView(TemplateView):
@@ -79,13 +69,8 @@ class GFCreateView(TemplateView):
     """
     template_name = "app/question/GF-Creation.html"
 
-
-    def previewGF(request):
-        return preview(request, 'GF', GFForm)
-
-
-    def saveGF(request):
-        return save(request, 'GF', GFForm)
+    def submitGF(request):
+        return submit(request, 'GF', GFForm)
 
 
 class GFQuestionView(TemplateView):
@@ -95,6 +80,16 @@ class GFQuestionView(TemplateView):
         question = get_object_or_404(GapFillQuestionModel, pk=pk)
         return render(request, 'app/question/GF-Display.html', {'question': question})
 
+def submit(request, type, formtype):
+    if 'save_form' in request.POST:
+        return save(request, type, formtype)
+    elif 'preview_form' in request.POST:
+        return preview(request, type, formtype)
+    elif 'cancel_form' in request.POST:
+        return cancel(request, type, formtype)
+
+def cancel(request, type, formtype):
+    return redirect(type.lower())
 
 def preview(request, type, formtype):
     pathDisplay = 'app/question/' + type + '-Preview.html'
