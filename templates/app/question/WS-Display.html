@@ -16,10 +16,8 @@
 
 <div class="wsheading"> <h1>{{ question.title }}</h1></div>
 <div id="columns">
-{% for scramble in question.scrambled_sentence %}
-{% for word in scramble %}
-<div class="column"> {{ word }}</div>
-{% endfor %}
+{% for scramble in question.scrambled_sentence.split(' ') %}
+<div class="column" draggable="true"> {{ scramble }}</div>
 {% endfor %}
 </div>
 {% endblock %}
