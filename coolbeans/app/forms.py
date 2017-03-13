@@ -3,6 +3,7 @@ from coolbeans.app.models.question import MultipleChoiceModel, WordMatchingQuest
 
 # Create the form class.
 
+
 class MCForm(ModelForm):
     class Meta:
         model = MultipleChoiceModel

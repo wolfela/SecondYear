@@ -138,9 +138,9 @@ class WordScrambleQuestionModel(BaseQuestionModel):
     A Word Scrabble Question Type.
     """
     title = CharField(max_length=500)
-    answer = CharField(max_length=500, blank = False)
+    answer = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False))
     scrambled_sentence = CharField(max_length=500, blank = False)
-    score = PositiveIntegerField()
+    score = PositiveIntegerField(blank=True, default=1, null=True)
 
     class Meta:
         verbose_name = "Word Scramble Question"
