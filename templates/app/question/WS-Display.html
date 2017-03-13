@@ -6,18 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template</title>
     <link rel="stylesheet" href="../../../static/css/app.css">
-   <link rel="stylesheet" href="../../../static/css/mcq-display.css">
     <link href="https://fonts.googleapis.com/css?family=Lato|Oswald&amp;subset=latin-ext" rel="stylesheet">
     {#  <script src="../../../node_modules/jquery/dist/jquery.js"></script>#}
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   </head>
   <body>
 
+{% block content %}
+
+<div class="wsheading"> <h1>{{ question.title }}</h1></div>
 <div id="columns">
-  <div class="column" draggable="true"><p>A</p></div>
-  <div class="column" draggable="true"><p>B</p></div>
-  <div class="column" draggable="true"><p>C</p></div>
+{% for scramble in question.scrambled_sentence %}
+{% for word in scramble %}
+<div class="column"> {{ word }}</div>
+{% endfor %}
+{% endfor %}
 </div>
+{% endblock %}
 
 <button type="button" onclick="proceed();">Submit</button> 
 

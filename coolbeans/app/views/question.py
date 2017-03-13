@@ -117,7 +117,7 @@ def save(request, type, formtype):
     if request.method == 'POST':
         form = formtype(request.POST)
         if form.is_valid():
-            question = form.save()
+            form.save()
             return redirect(type.lower())
         else:
             form = formtype()
