@@ -24,34 +24,16 @@
       </div>	<!-- start of title bar -->
       <div class="content scroll-content">		
 
-      				<form action="/mc/save/" method="post">
+            <form action="/mc/submit/" method="post">
       				<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     			<label for="name">Save:  </label>
     			<input id="correct" type="text" name="correct" value="correct answer">
 				<input id="answers" type="text" name="answers" value="the rest of answers">
 				<input id="title" type="text" name="title" value="title">
-    			<input type="submit" value="OK">
+                <input type="submit" name="save_form" value="Save" />
+                <input type="submit" name="preview_form" value="Preview" />
+                <input type="submit" name="cancel_form" value="Cancel" />
 			</form>
-
-
-			<form target="_blank" action="/mc/preview/" method="post">
-      				<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-    			<label for="name">Preview: </label>
-    			<input id="correct" type="text" name="correct" value="correct answer">
-				<input id="answers" type="text" name="answers" value="the rest of answers">
-				<input id="title" type="text" name="title" value="title">
-    			<input type="submit" value="OK">
-			</form>
-			
-		<form>  
-
-
-
-      				
-			
-		 
-
-
 
 			<label><h2 class="mcheading">MCQ Quiz Creation</h2></label>
 			<div>

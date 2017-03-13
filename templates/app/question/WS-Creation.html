@@ -1,1 +1,71 @@
 <!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+    <link rel="stylesheet" href="../../../static/css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Oswald&amp;subset=latin-ext" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="title-bar">
+        <span class="title-bar-title">LQ 		//		TEACHER</span>
+        <div class="title-bar-right">
+          <button class="logoutButton">LOGOUT</button>
+        </div>
+			
+      </div>
+      <div class="content">
+			<div class="medium-6 medium-centered large-4 large-centered columns">
+
+    <form>
+      <div class="row column log-in-form">
+        <h4 class="text-center">Create a Sentence Scramble Question</h4>
+		<input id="manuel-mode" type="checkbox"><label for="manual-mode">Manually Scramble?</label>
+        <label>Enter the sentence to be scrambled
+          <input type="text" placeholder="This is the sentence to be scrambled">
+        </label>
+		 <label>Confirm the sentence to be scrambled
+          <input type="text" placeholder="This is the sentence to be scrambled">
+        </label>
+		
+		 <label>Enter the scrambled version of your sentence
+          <input type="text" placeholder="This is the scrambled sentence">
+        </label>
+		
+		<label>Confirm the scrambled version of your sentence
+          <input type="text" placeholder="This is the scrambled sentence">
+        </label>
+      
+        <p><a type="submit" class="button expanded">Save Question</a></p>
+		
+        <p class="text-left-side text-center text-right-side"><a href="#">Previous     </a><a href="#">Next</a></p>   
+		<p class="text-center"><a href="#">Back</a></p>   
+		
+      </div>
+    </form>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <button class="hamburger" type="button">
+        <span class="topLine"></span>
+        <span class="innerLine"></span>
+        <span class="bottomLine"></span>
+      </button>
+      <div class="menu-content">
+        <nav class="menu-left">
+          <a href="#">Create Quiz</a>
+          <a href="#">View Quizzes</a>
+        </nav>
+      </div>
+    </div>
+
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/what-input/dist/what-input.js"></script>
+    <script src="./node_modules/foundation-sites/dist/js/foundation.js"></script>
+    <script src="./js/menuAnimation.js"></script>
+  </body>
+</html>
