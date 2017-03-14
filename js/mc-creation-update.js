@@ -18,6 +18,112 @@ $(document).ready(function() {
 	});
 
 
+
+
+
+
+// $('#post-form').on('submit', function(){
+
+
+//   console.log("#answers[1]".val());
+
+//   // var txt = $('#correct');
+//   // var txt2 = $('#correct');
+//   // txt.val(["updated ", txt.val()]);
+
+//   // var data = $('post-form').serialize();
+//   // $.post('/mca/submit/', data);
+//   //   setTimeout(function() { correct.value = txt.val(); }, 0);
+//     // event.preventDefault();
+//     // console.log($('answers').val())  // sanity check
+//     // create_post();
+// });
+
+ function create_post() {
+
+var a1=$("#correct").val();
+var a2=$("#answers").val();
+var a3=$("#a3").val();
+var a4=$("#a4").val();
+var title=$("#title").val();
+var list=[a2];
+var myJson = JSON.stringify(list); 
+
+console.log(a1);
+console.log(a2);
+$.ajax({
+    url : './submit/',
+    type: 'POST',
+    data:{
+        'title':title,
+        'answers': myJson,
+        'correct': a1
+            },
+    contentType:'application/json',
+    success: function(data){
+            alert("woo!");
+        window.open("http://localhost:8000/mcq2/")
+       // window.location.assign('http://localhost:8000/mcq2/');
+        //$().redirect('http://localhost:8000/mcq2/', {'a1': 'value1', 'a2': 'value2'});
+    },
+    error: function(){
+        alert('nope');
+    }
+});
+};
+
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+
+
+// function create_post() {
+//     console.log("create post is working!") // sanity check
+//     $.ajax({
+//         url : "/mc/submit/", // the endpoint
+//         type : "POST", // http method
+//         data : { $('post-form').val() }, // data sent with the post request
+
+//         // handle a successful response
+//         success : function() {
+//             console.log("success"); // another sanity check
+//         },
+
+//         // handle a non-successful response
+//         error : function() {
+//             console.log("error"; // provide a bit more info about the error to the console
+//         }
+//     });
+// };
+
+
 $("#saveQuestion").click(function () {
 
 var a1=$("#a1").val();

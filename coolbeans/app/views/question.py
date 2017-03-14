@@ -13,7 +13,8 @@ class MCCreateView(TemplateView):
     template_name = "app/question/MC-Creation.html"
 
     def submitMC(request):
-        return submit(request, 'MC', MCForm)
+        return submitM(request, 'MC', MCForm)
+
 
 
 class MCQuestionView(TemplateView):
@@ -125,3 +126,32 @@ def save(request, type, formtype):
     return render(request, pathType, {'form': form}, context_instance=RequestContext(request))
 
 
+def submitM(request, type, formtype):
+    if 'save_form' in request.POST:
+        return save(request, type, formtype)
+    elif 'preview_form' in request.POST:
+        return previewM(request, type, formtype)
+    elif 'cancel_form' in request.POST:
+        return cancel(request, type, formtype)
+
+
+def previewM(request, type, formtype):
+    pathDisplay = 'app/question/' + type + '-Preview.html'
+    """
+    Method for previewing the question
+    :return:
+    """
+    if request.method == 'POST':
+        form = formtype(request.POST)
+        if form.is_valid():
+            answers = request.POST.getlist('answers[]')
+            form.cleaned_data['answers'] = answers
+            formcopy = formtype(request.POST.copy())
+            formcopy.data['answers'] = answers
+            print(answers)
+            print(formcopy.data['answers'])
+            return render(request, pathDisplay, {'form': formcopy})
+    else:
+        form = formtype()
+
+    return render(request, pathDisplay, {'form': form})

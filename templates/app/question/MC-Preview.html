@@ -31,6 +31,11 @@
       <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
      <p> {{ form.correct.value() }} </p>
       <p> {{ form.answers.value() }} </p>
+
+      {% for answer in form.answers %}
+<div class="mcqtextareas"> <p>{{ answer.split(",") }}</p></div>
+{% endfor %}
+
       <p> {{ form.title.value() }} </p>
     </form>
 
