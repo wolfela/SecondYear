@@ -43,9 +43,11 @@
       <p> {{ form.title.value() }} </p>
     </form> -->
     <div>
+
     {% if form.answers.value() != "" %}
     {% set list = form.answers.value().split(',') %}
-      {% for answer in list %}
+
+    {% for answer in list|shuffle %}
      <input type="checkbox" class="checkbox">
       <p class="answer" id=a1> {{ answer|e }}</p></br>
 
