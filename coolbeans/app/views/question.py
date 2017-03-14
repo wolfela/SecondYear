@@ -36,8 +36,6 @@ class MCCreateView(TemplateView):
                 form.cleaned_data['answers'] = answers
                 formcopy = formtype(request.POST.copy())
                 formcopy.data['answers'] = answers
-                print(answers)
-                print(formcopy.data['answers'])
                 return render(request, pathDisplay, {'form': formcopy})
         else:
             form = formtype()
@@ -56,9 +54,9 @@ class MCCreateView(TemplateView):
             form = formtype(request.POST)
             if form.is_valid():
                 answers = request.POST.getlist('answers[]')
-                form.cleaned_data['answers'] = answers
+                form.cleaned_data['answers'] = ','.join(answers)
                 formcopy = formtype(request.POST.copy())
-                formcopy.data['answers'] = answers
+                formcopy.data['answers'] = ','.join(answers)
                 formcopy.save()
                 return redirect(type.lower())
             else:

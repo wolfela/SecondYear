@@ -24,14 +24,24 @@
       
 {% block content %}
 
-<div class="mcqheading"> <h1>{{ question.title }}</h1></div>
-{% for answer in question.answers %}
-<div class="mcqtextareas"> <p>{{ answer }}</p></div>
-<div class="mcqtextareas"> <p>{{ answer }}</p></div>
-{% endfor %}
-<div class="mcqtextareas"> <p>{{ question.correct }}</p></div>
-
+ <div class="content scroll-content">    
+    <h2 class = "mcqheading">Question x</h2>
     
+    <p class="questions" id=q>{{ question.title }}</p></br>
+    <div>
+    {% if question.answers != "" %}
+    {% set list = question.answers %}
+      {% for answer in list %}
+     <input type="checkbox" class="checkbox">
+      <p class="answer" id=a1> {{ answer|e }}</p></br>
+
+    {% endfor %}
+             {% endif %}
+    
+    
+    </div>
+      </div>  <!-- end of content -->
+    </div>  <!-- end of container -->
 {% endblock %}
 
 
@@ -42,21 +52,3 @@
   </body>
 </html>
 
-<!-- <script type="text/javascript">
-    $(function () {
-        if (window.opener != null && !window.opener.closed) {
-            var parent = $(window.opener.document).contents();
-            console.log(parent.find("#a1").val());
-            var data1 = parent.find("#a1").val();
-            var data2 = parent.find("#a2").val();
-            var data3 = parent.find("#a3").val();
-            var data4 = parent.find("#a4").val();
-            var t = parent.find("#title").val();
-            $("#a1").html(data1);
-            $("#a2").html(data2);
-            $("#a3").html(data3);
-            $("#a4").html(data4);
-            $("#q").html(t);
-        }
-    });
-</script> -->
