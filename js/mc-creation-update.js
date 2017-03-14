@@ -3,7 +3,7 @@ var amount = 4;
 $(document).ready(function() {
 	$('#addField').click(function() {
 		if(amount < 10){
-			$("#addAnswer").append("<input type=\"checkbox\" class=\"checkbox\"> <input type=\"text\" class=\"mcinputbox\" placeholder=\"Type your answer in here\"></br>");
+			$("#addAnswer").append(" <input type=\"text\" class=\"mcinputbox\" name=\"answers[]\" placeholder=\"Type your answer in here\"></br>");
 			amount++;			
 		}
 	});
@@ -124,68 +124,68 @@ $.ajaxSetup({
 // };
 
 
-$("#saveQuestion").click(function () {
+// $("#saveQuestion").click(function () {
 
-var a1=$("#a1").val();
-var a2=$("#a2").val();
-var a3=$("#a3").val();
-var a4=$("#a4").val();
-var title=$("#title").val();
-var list=[a2,a3,a4];
-var myJson = JSON.stringify(list); 
+// var a1=$("#a1").val();
+// var a2=$("#a2").val();
+// var a3=$("#a3").val();
+// var a4=$("#a4").val();
+// var title=$("#title").val();
+// var list=[a2,a3,a4];
+// var myJson = JSON.stringify(list); 
 
-console.log(a1);
-console.log(a2);
-$.ajax({
-    url : './ajax/validate/',
-    type: 'GET',
-    data:{
-        'a1': a1,
-        'list': myJson,
-        'title':title
-            },
-    contentType:'application/json',
-    success: function(data){
-        if(data.is_taken){
-            alert("woo!");
-        }
-        console.log(data.is_taken);
-        window.open("http://localhost:8000/mcq2/")
-       // window.location.assign('http://localhost:8000/mcq2/');
-        //$().redirect('http://localhost:8000/mcq2/', {'a1': 'value1', 'a2': 'value2'});
-    },
-    error: function(){
-        alert('nope');
-    }
-});
-});
+// console.log(a1);
+// console.log(a2);
+// $.ajax({
+//     url : './ajax/validate/',
+//     type: 'GET',
+//     data:{
+//         'a1': a1,
+//         'list': myJson,
+//         'title':title
+//             },
+//     contentType:'application/json',
+//     success: function(data){
+//         if(data.is_taken){
+//             alert("woo!");
+//         }
+//         console.log(data.is_taken);
+//         window.open("http://localhost:8000/mcq2/")
+//        // window.location.assign('http://localhost:8000/mcq2/');
+//         //$().redirect('http://localhost:8000/mcq2/', {'a1': 'value1', 'a2': 'value2'});
+//     },
+//     error: function(){
+//         alert('nope');
+//     }
+// });
+// });
 
 
-$("#cancelQuestion").click(function () {
+// $("#cancelQuestion").click(function () {
 
-var a1=$("#a1").val();
-var a2=$("#a2").val();
-console.log(a1);
-console.log(a2);
-$.ajax({
-    url : './ajax/validatee/',
-    type: 'GET',
-    data:{
-        'a1': a1,
-        'a2': a2
-            },
-    contentType:'application/json',
-    success: function(data){
+// var a1=$("#a1").val();
+// var a2=$("#a2").val();
+// console.log(a1);
+// console.log(a2);
+// $.ajax({
+//     url : './ajax/validatee/',
+//     type: 'GET',
+//     data:{
+//         'a1': a1,
+//         'a2': a2
+//             },
+//     contentType:'application/json',
+//     success: function(data){
         
-        alert(data.is_taken);
+//         alert(data.is_taken);
         
-        console.log(data.is_taken);
-    },
-    error: function(){
-        alert('nope');
-    }
-});
-});
+//         console.log(data.is_taken);
+//     },
+//     error: function(){
+//         alert('nope');
+//     }
+// });
+// });
 
 
 
