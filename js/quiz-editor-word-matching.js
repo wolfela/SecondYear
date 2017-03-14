@@ -15,9 +15,9 @@ $(document).ready(function() {
 	
 });
 
-addIfNotExists = function(array, elem) {
+var addIfNotExists = function(array, elem) {
 	var exists = false;
-	for(a = 0; a < array.length; a++) {
+	for(var a = 0; a < array.length; a++) {
 		if(array[a] == elem) {
 			exists = true;
 		}
@@ -30,7 +30,7 @@ addIfNotExists = function(array, elem) {
 	return array;
 }
 
-addTable = function(pairsArray) {
+var addTable = function(pairsArray) {
 	$('#editing-div').hide();
 	$('#word-sets-div').show();
 	$('#table').empty();
@@ -42,12 +42,12 @@ addTable = function(pairsArray) {
 
 	
 
-	for(i = 0; i < pairsArray.length; i++) {
+	for(var i = 0; i < pairsArray.length; i++) {
 		pageNumbers = addIfNotExists(pageNumbers, pairsArray[i].page);
 	}
 
 	// adding columns
-	for(j = 0; j < pageNumbers.length; j++) {
+	for(var j = 0; j < pageNumbers.length; j++) {
 		pagesAdded++;
 		var rowNum = Math.ceil(pagesAdded / colLimit);
 		if(pagesAdded % colLimit == 0) {
@@ -61,7 +61,7 @@ addTable = function(pairsArray) {
 	}
 		
 	// adding words
-	for(k = 0; k < pairsArray.length; k++) {
+	for(var k = 0; k < pairsArray.length; k++) {
 		var wordA = pairsArray[k].langA;
 		var wordB = pairsArray[k].langB;
 		var pageNum = pairsArray[k].page;
@@ -72,7 +72,7 @@ addTable = function(pairsArray) {
 	}
 
 	// adding action buttons
-	for(l = 0; l < pageNumbers.length; l++) {
+	for(var l = 0; l < pageNumbers.length; l++) {
 		var pageNum = pageNumbers[l];
 		var editButton = '<a class="button edit" id="edit-page' + pageNum + '">Edit</a>';
 		var deleteButton = '<button type="button" class="alert button delete" id="delete' + pageNum + '">Delete</button>';
@@ -92,7 +92,7 @@ addTable = function(pairsArray) {
 		// click listener for delete buttons
 		$('#delete' + pageNum).click(function() {
 			var page = $(this).attr('id').substring(6);
-			for(m = 0; m < wordPairs.length; m++) {
+			for(var m = 0; m < wordPairs.length; m++) {
 				if(wordPairs[m].page == page) {
 					wordPairs.splice(m, 1);
 					m--;
@@ -104,7 +104,7 @@ addTable = function(pairsArray) {
 
 	$('#add-page-button').unbind('click').bind('click', function() {
 		var maxPage = 1;
-		for(i = 0; i < wordPairs.length; i++) {
+		for(var i = 0; i < wordPairs.length; i++) {
 			maxPage = Math.max(wordPairs[i].page, maxPage);
 		}
 		
@@ -116,7 +116,7 @@ addTable = function(pairsArray) {
 }
 
 
-addWordEditor = function(array, page) {
+var addWordEditor = function(array, page) {
 	$('#word-sets-div').hide();
 	$('#editing-div').show();
 
@@ -125,13 +125,13 @@ addWordEditor = function(array, page) {
 	$('#editing-table-div').append('<table id="editing-table"></table>');
 
 	var pairs = [];
-	for(i = 0; i < array.length; i++) {
+	for(var i = 0; i < array.length; i++) {
 		if(array[i].page == page) {
 			pairs.push(array[i]);
 		}
 	}
 
-	for(j = 0; j < pairs.length; j++) {
+	for(var j = 0; j < pairs.length; j++) {
 		var row = '<tr id="pair' + j + '"></tr>';
 		var wordA = '<td><input type="text" class="editor-input" id="wordA' + j + '" value="' + pairs[j].langA + '" placeholder="<insert language A here>" aria-describedby="exampleHelpTex"></td>';
 		var wordB = '<td><input type="text" class="editor-input" id="wordB' + j + '" value="' + pairs[j].langB + '" placeholder="<insert language B here>" aria-describedby="exampleHelpTex"></td>';
@@ -152,7 +152,7 @@ addWordEditor = function(array, page) {
 	$('#editing-table').append('<td><a class="button editor-add" id="add-pair-button">Add</a></td>');
 	$('#add-pair-button').click(function() {
 		var newPairs = [];
-		for(w = 0; w < pairs.length; w++) {
+		for(var w = 0; w < pairs.length; w++) {
 			pairs[w].langA = $('#wordA' + w).val();
 			pairs[w].langB = $('#wordB' + w).val();
 		}
@@ -165,19 +165,19 @@ addWordEditor = function(array, page) {
 	$('#editing-div').append('<button type="button" class="success button" id="save-pairs-button">Save</button>');
 	$('#save-pairs-button').click(function() {
 		// updating words
-		for(w = 0; w < pairs.length; w++) {
+		for(var w = 0; w < pairs.length; w++) {
 			pairs[w].langA = $('#wordA' + w).val();
 			pairs[w].langB = $('#wordB' + w).val();
 		}
 
-		for(i = 0; i < wordPairs.length; i++) {
+		for(var i = 0; i < wordPairs.length; i++) {
 			if(wordPairs[i].page == page) {
 				wordPairs.splice(i, 1);
 				i--;
 			}
 		}
 
-		for(j = 0; j < pairs.length; j++) {
+		for(var j = 0; j < pairs.length; j++) {
 			wordPairs = addIfNotExists(wordPairs, pairs[j]);
 		}
 		

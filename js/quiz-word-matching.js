@@ -40,7 +40,7 @@ $(document).ready(function() {
 	var wordsLangA = [];
 	var wordsLangB = [];
 
-	for(i = 0; i < 5; i++) {
+	for(var i = 0; i < 5; i++) {
 		wordsLangA.push(wordPairs[i].langA);
 		wordsLangB.push(wordPairs[i].langB);
 	}
@@ -50,7 +50,7 @@ $(document).ready(function() {
 	
 
 
-	for(i = 0; i < wordPairs.length; i++) {
+	for(var i = 0; i < wordPairs.length; i++) {
 		var wordA = wordsLangA[i];
 		var wordB = wordsLangB[i];
 	
@@ -71,7 +71,7 @@ $(document).ready(function() {
 	function refreshLines() {
 
 		context.clearRect(0, 0, $canvas.width(), $canvas.height());
-		for(i = 0; i < drawnBetween.length; i++) {
+		for(var i = 0; i < drawnBetween.length; i++) {
 			var link = drawnBetween[i];
 			var leftPos = link.$left.position();
 			var rightPos = link.$right.position();
@@ -87,7 +87,7 @@ $(document).ready(function() {
 	}
 
 	function removeIfExists($button) {
-		for(i = 0; i < drawnBetween.length; i++) {
+		for(var i = 0; i < drawnBetween.length; i++) {
 			var item = drawnBetween[i];	
 			if($button.attr('id') == item.$left.attr('id') || $button.attr('id') == item.$right.attr('id')) {		
 				drawnBetween.splice(i, 1);
@@ -148,7 +148,7 @@ $(document).ready(function() {
             
             var correct = 0;
 
-			for(j = 0; j < drawnBetween.length; j++) {
+			for(var j = 0; j < drawnBetween.length; j++) {
 				var $left = drawnBetween[j].$left;
 				var $right = drawnBetween[j].$right;
 
