@@ -33,7 +33,7 @@
       <p> {{ form.answers.value() }} </p>
 
       {% for answer in form.answers %}
-<div class="mcqtextareas"> <p>{{ answer.split(",") }}</p></div>
+<div class="mcqtextareas"> <p>{{ answer }}</p></div>
 {% endfor %}
 
       <p> {{ form.title.value() }} </p>
