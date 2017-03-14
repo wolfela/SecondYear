@@ -27,8 +27,10 @@
 <div class="mcqheading"> <h1>{{ question.title }}</h1></div>
 {% for answer in question.answers %}
 <div class="mcqtextareas"> <p>{{ answer }}</p></div>
+<div class="mcqtextareas"> <p>{{ answer }}</p></div>
 {% endfor %}
 <div class="mcqtextareas"> <p>{{ question.correct }}</p></div>
+
     
 {% endblock %}
 

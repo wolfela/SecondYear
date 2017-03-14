@@ -21,36 +21,36 @@
         </div>  <!-- end of title bar right -->
       
       </div>  <!-- start of title bar -->
+
+      <form method="get">
+      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
       <div class="content scroll-content">    
     <h2 class = "mcqheading">Question x</h2>
     
-    <p class="questions" id=q>Question goes here?</p></br>
+    <p class="questions" id=q>{{ form.title.value() }}</p></br>
 
 
-    <form method="get">
+<!--     <form method="get">
       <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
      <p> {{ form.correct.value() }} </p>
       <p> {{ form.answers.value() }} </p>
-
-      {% for answer in form.answers %}
-<div class="mcqtextareas"> <p>{{ answer }}</p></div>
+      {% set list = form.answers.value().split(',') %}
+      {% for answer in list %}
+     <p>{{ answer|e }}</p>
 {% endfor %}
 
       <p> {{ form.title.value() }} </p>
-    </form>
-
+    </form> -->
     <div>
-      <input type="checkbox" class="checkbox">
-      <p class="answer" id=a1> answer 1</p></br>
 
-      <input type="checkbox" class="checkbox">
-      <p class="answer" id=a2>answer 2</p></br>
-
-            <input type="checkbox" class="checkbox">
-      <p class="answer" id=a3>answer 3</p></br>
-
-            <input type="checkbox" class="checkbox">
-      <p class="answer" id=a4>answer 4</p></br>
+    {% set list = form.answers.value().split(',') %}
+      {% for answer in list %}
+     <input type="checkbox" class="checkbox">
+      <p class="answer" id=a1> {{ answer|e }}</p></br>
+    {% endfor %}
+    
+    
     </div>
       </div>  <!-- end of content -->
     </div>  <!-- end of container -->

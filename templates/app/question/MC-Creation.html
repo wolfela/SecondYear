@@ -26,55 +26,40 @@
 
             <form action="/mc/submit/" method="post" id='post-form' target="_blank">
       				<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-                <input id="title" type="text" name="title" value="title">
-    			<input id="correct" type="text" name="correct" value="correct answer">
-				<input id="answers" type="text" name="answers[]" value="the rest of answers">
-        <input id="answers" type="text" name="answers[]" value="the rest of answers">
-                <input id="answers" type="text" name="answers" value="the rest of answers">
-        {% set answers = [0, 1, 2, 3, 4] %}
-                <input type="submit" name="save_form" value="Save" />
-                <input type="submit" name="preview_form" target="_blank" value="Preview" />
-                <input type="submit" name="cancel_form" value="Cancel" />
-			</form>
-
-			<label><h2 class="mcheading">MCQ Quiz Creation</h2></label>
-			<div>
-				<h4>Type your question below</h4>
-				<textarea class="mctextareas" placeholder="Type your question in here" id="title"></textarea>
-			</div>
-			
-			<h4>Type your answers below</h4>
+              <label><h2 class="mcheading">MCQ Quiz Creation</h2></label>
+      <div>
+        <h4>Type your question below</h4>
+                <textarea class="mctextareas" placeholder="Type your question in here" name="title"></textarea>
+      <h4>Type your correct answer below</h4>
+                      <div id="addAnswer" >
+          <input id="answers" type="hidden" name="answers" value="HIDDEN ANSWER">
+    			<input id="correct" type="text" class="mcinputbox" name="correct" placeholder="Type your answer in here">
+                <h4>Type your other answers below</h4>
+				<input id="answers" type="text" class="mcinputbox" name="answers[]" placeholder="Type your answer in here">
+        <input id="answers" type="text" class="mcinputbox" name="answers[]" placeholder="Type your answer in here">
+        <input id="answers" type="text" class="mcinputbox" name="answers[]" placeholder="Type your answer in here">
 
 
 
-			
-			<div id="addAnswer">
-				<input type="checkbox" class="checkbox" id="ch1">
-				<input type="text" class="mcinputbox" placeholder="Type your answer in here" id="a1"></br>
-
-				<input type="checkbox" class="checkbox" id="ch2">
-				<input type="text" class="mcinputbox" placeholder="Type your answer in here" id="a2"></br>
-
-				<input type="checkbox" class="checkbox" id="ch3">
-				<input type="text" class="mcinputbox" placeholder="Type your answer in here" id="a3"></br>
-
-				<input type="checkbox" class="checkbox" id="ch4">
-				<input type="text" class="mcinputbox" placeholder="Type your answer in here" id="a4"></br>
-				
-			</div>
-
-			<div class="button-group inputbuttons">
-					<button type="button" class="button" id="addField">Add field</button>
-  					<button type="button" class="button" id="removeField">Remove field</button></br>
-			</div>	
 
 
-			<div class="buttondiv">		
-              <button type="button" class="success button mysavebutton", id="saveQuestion">Save</button>
-              <button type="button" class="button cancelbutton" id="cancelQuestion">Cancel</button>
+                </div>
+
+                      <div class="button-group inputbuttons">
+          <button type="button" class="button" id="addField">Add field</button>
+            <button type="button" class="button" id="removeField">Remove field</button></br>
+      </div>  
+
+            <div class="buttondiv">   
+              <button type="submit" class="button cancelbutton" name="preview_form">Preview</button>
+              <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
+              <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
             </div>
 
-		</form>
+
+			</form>
+
+
 		</div>  <!-- end of content -->
     </div>	<!-- end of container -->
 
