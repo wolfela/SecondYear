@@ -1,5 +1,5 @@
 var wordPairs = [];
-function Word(langA, langB, page) { this.langA = langA; this.langB = langB, this.page = page };
+function Word(langA, langB) { this.langA = langA; this.langB = langB };
 
 $(document).ready(function() {
 
@@ -11,7 +11,7 @@ $(document).ready(function() {
 		wordPairs.push(new Word('wordA5', 'wordB5', 3));
 	}
 
-	addTable(wordPairs);
+	addWordEditor(wordPairs);
 	
 });
 
@@ -30,93 +30,7 @@ var addIfNotExists = function(array, elem) {
 	return array;
 }
 
-var addTable = function(pairsArray) {
-	$('#editing-div').hide();
-	$('#word-sets-div').show();
-	$('#table').empty();
-	$('#table').append('<tr id="row1"></td>');
-
-	var pageNumbers = [];
-	var colLimit = 1;
-	var pagesAdded = 0;
-
-	
-
-	for(var i = 0; i < pairsArray.length; i++) {
-		pageNumbers = addIfNotExists(pageNumbers, pairsArray[i].page);
-	}
-
-	// adding columns
-	for(var j = 0; j < pageNumbers.length; j++) {
-		pagesAdded++;
-		var rowNum = Math.ceil(pagesAdded / colLimit);
-		if(pagesAdded % colLimit == 0) {
-			$('#table').append('<tr id="row' + (rowNum + 1) + '"></tr>');
-		} 
-
-		var pageNum = pageNumbers[j];
-		var elem = '<div class="div-col" id="page' + pageNum + '"></div>';
-		$('#row' + rowNum).append('<td class="cell" id="set' + pageNum + '"></td>');
-		$('#set' + pageNum).append(elem);
-	}
-		
-	// adding words
-	for(var k = 0; k < pairsArray.length; k++) {
-		var wordA = pairsArray[k].langA;
-		var wordB = pairsArray[k].langB;
-		var pageNum = pairsArray[k].page;
-
-		var str = '<p>' + wordA + ' - ' + wordB + '</p>';
-		
-		$('#page' + pageNum).append(str);
-	}
-
-	// adding action buttons
-	for(var l = 0; l < pageNumbers.length; l++) {
-		var pageNum = pageNumbers[l];
-		var editButton = '<a class="button edit" id="edit-page' + pageNum + '">Edit</a>';
-		var deleteButton = '<button type="button" class="alert button delete" id="delete' + pageNum + '">Delete</button>';
-			
-		
-
-		var buttonGroup = '<div class=button-group>' + editButton + deleteButton + '</div>'; 
-		$('#page' + pageNumbers[l]).append(buttonGroup);
-
-		// click listener for edit buttons
-		$('#edit-page' + pageNum).click(function() {
-			var num = $(this).attr('id').substring(9);
-			addWordEditor(wordPairs, num);
-			
-		});
-
-		// click listener for delete buttons
-		$('#delete' + pageNum).click(function() {
-			var page = $(this).attr('id').substring(6);
-			for(var m = 0; m < wordPairs.length; m++) {
-				if(wordPairs[m].page == page) {
-					wordPairs.splice(m, 1);
-					m--;
-				}
-			};
-			addTable(wordPairs);	
-		});
-	}
-
-	$('#add-page-button').unbind('click').bind('click', function() {
-		var maxPage = 1;
-		for(var i = 0; i < wordPairs.length; i++) {
-			maxPage = Math.max(wordPairs[i].page, maxPage);
-		}
-		
-		wordPairs.push(new Word('Word A', 'Word B', maxPage + 1));
-		//document.writeln(maxPage);
-		addWordEditor(wordPairs, maxPage + 1);
-	});
-
-}
-
-
-var addWordEditor = function(array, page) {
+var addWordEditor = function(array) {
 	$('#word-sets-div').hide();
 	$('#editing-div').show();
 
@@ -126,9 +40,8 @@ var addWordEditor = function(array, page) {
 
 	var pairs = [];
 	for(var i = 0; i < array.length; i++) {
-		if(array[i].page == page) {
-			pairs.push(array[i]);
-		}
+		pairs.push(array[i]);
+	
 	}
 
 	for(var j = 0; j < pairs.length; j++) {
@@ -143,7 +56,7 @@ var addWordEditor = function(array, page) {
 		$('#editor-delete' + j).click(function() {
 			var num = $(this).attr('id').substring(13);
 			pairs.splice(num, 1);
-			addWordEditor(pairs, page);
+			addWordEditor(pairs);
 		});
 		
 	}
@@ -156,8 +69,8 @@ var addWordEditor = function(array, page) {
 			pairs[w].langA = $('#wordA' + w).val();
 			pairs[w].langB = $('#wordB' + w).val();
 		}
-		pairs.push(new Word('', '', page));
-		addWordEditor(pairs, page);
+		pairs.push(new Word('', ''));
+		addWordEditor(pairs);
 		
 	});
 
@@ -171,10 +84,9 @@ var addWordEditor = function(array, page) {
 		}
 
 		for(var i = 0; i < wordPairs.length; i++) {
-			if(wordPairs[i].page == page) {
 				wordPairs.splice(i, 1);
 				i--;
-			}
+		
 		}
 
 		for(var j = 0; j < pairs.length; j++) {
