@@ -31,9 +31,9 @@ $(document).ready(function() {
 	$('#results-progress').css('width', (correctPercent * 100 + '%'));
 	$('#results-progress-text').text(Math.trunc(correctPercent * 100) + '%');
 
-	if(correctPercent < 0.25) {
+	if(correctPercent < 0.4) {
 		$('#progress-div').addClass('alert');
-	} else if (correctPercent < 0.75) {
+	} else if (correctPercent < 0.7) {
 		$('#progress-div').addClass('warning');
 	} else {
 		$('#progress-div').addClass('success');
