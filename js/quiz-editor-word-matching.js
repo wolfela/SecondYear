@@ -4,11 +4,11 @@ function Word(langA, langB) { this.langA = langA; this.langB = langB };
 $(document).ready(function() {
 
 	if(wordPairs.length === 0) {
-		wordPairs.push(new Word('wordA1ddddddgrtrehth', 'wordB1ghpowh', 1));
-		wordPairs.push(new Word('wordA2fbdfbd', 'wordB2drfbhdfhbd', 1));
-		wordPairs.push(new Word('wordA3', 'wordB3', 1));
-		wordPairs.push(new Word('wordA4edgfew', 'wordB4esfesf', 2));
-		wordPairs.push(new Word('wordA5', 'wordB5', 3));
+		wordPairs.push(new Word('wordA1ddddddgrtrehth', 'wordB1ghpowh'));
+		wordPairs.push(new Word('wordA2fbdfbd', 'wordB2drfbhdfhbd'));
+		wordPairs.push(new Word('wordA3', 'wordB3'));
+		wordPairs.push(new Word('wordA4edgfew', 'wordB4esfesf'));
+		wordPairs.push(new Word('wordA5', 'wordB5'));
 	}
 
 	addWordEditor(wordPairs);
@@ -46,8 +46,8 @@ var addWordEditor = function(array) {
 
 	for(var j = 0; j < pairs.length; j++) {
 		var row = '<tr id="pair' + j + '"></tr>';
-		var wordA = '<td><input type="text" class="editor-input" id="wordA' + j + '" value="' + pairs[j].langA + '" placeholder="<insert language A here>" aria-describedby="exampleHelpTex"></td>';
-		var wordB = '<td><input type="text" class="editor-input" id="wordB' + j + '" value="' + pairs[j].langB + '" placeholder="<insert language B here>" aria-describedby="exampleHelpTex"></td>';
+		var wordA = '<td><input type="text" class="editor-input" name="listA[]" id="wordA' + j + '" value="' + pairs[j].langA + '" placeholder="<insert language A here>" aria-describedby="exampleHelpTex"></td>';
+		var wordB = '<td><input type="text" class="editor-input"  name="listB[]" id="wordB' + j + '" value="' + pairs[j].langB + '" placeholder="<insert language B here>" aria-describedby="exampleHelpTex"></td>';
 		var deleteButton = '<td><button type="button" class="alert button editor-delete" id="editor-delete' + j + '">Delete</button></td></tr>';
 		
 		$('#editing-table').append(row);
@@ -74,26 +74,5 @@ var addWordEditor = function(array) {
 		
 	});
 
-	// adding save button
-	$('#editing-div').append('<button type="button" class="success button" id="save-pairs-button">Save</button>');
-	$('#save-pairs-button').click(function() {
-		// updating words
-		for(var w = 0; w < pairs.length; w++) {
-			pairs[w].langA = $('#wordA' + w).val();
-			pairs[w].langB = $('#wordB' + w).val();
-		}
-
-		for(var i = 0; i < wordPairs.length; i++) {
-				wordPairs.splice(i, 1);
-				i--;
-		
-		}
-
-		for(var j = 0; j < pairs.length; j++) {
-			wordPairs = addIfNotExists(wordPairs, pairs[j]);
-		}
-		
-		addTable(wordPairs);
-	});
 	
 }
