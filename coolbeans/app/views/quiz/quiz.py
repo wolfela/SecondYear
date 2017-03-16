@@ -12,14 +12,7 @@ class QuizCreateView(View):
     """
     A view for creating quizzes.
     """
-    pass # TODO: Implement this along with QuizEditView
 
-
-class QuizEditView(View):
-    """
-    A view for editing quizzes.
-    """
-    pass # TODO: Implement this along with QuizCreateView
 
 
 class QuestionListView(View):
@@ -35,9 +28,3 @@ class QuestionCreateView(View):
     """
     pass
 
-
-class QuestionEditView(View):
-    """
-    A view for editing a single question.
-    """
-    pass

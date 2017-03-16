@@ -136,6 +136,10 @@ def submit(request, type, formtype):
     elif 'cancel_form' in request.POST:
         return cancel(request, type, formtype)
 
+class QuizCreateView(TemplateView):
+    template_name = "app/quiz/Quiz-Create.html"
+
+
 def cancel(request, type, formtype):
     return redirect(type.lower())
 
