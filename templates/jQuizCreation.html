@@ -1,0 +1,57 @@
+{% extends "jTemplate.html" %}
+
+ {% block title %} WordScramble{% endblock %} 
+ {% block head %} 
+	{{ super() }}
+ {% endblock %}
+  
+{% block content %}
+	<div class="medium-6 medium-centered large-4 large-centered columns">
+
+    <form>
+      <div class="row column log-in-form">
+        <h4 class="text-center">Create a Quiz</h4>
+		
+    
+		 <label>Name:
+          <input type="text" placeholder="Name of the quiz">
+        </label>
+		
+		 <label>Language:
+         <ul class="dropdown menu" data-dropdown-menu>
+			
+			<li><a href="#">Spanish</a></li>
+			<li><a href="#">Japanese</a></li>
+			<li><a href="#">German</a></li>
+			<li><a href="#">French</a></li>
+		
+		</ul>
+        </label>
+		
+		<label>Current Questions:
+          
+        </label>
+      
+      
+		
+		<div class="button-group">
+			<a class="button">Add Question</a>
+			<a class="button">Delete Question</a>
+		</div>
+		 <p><a type="submit" class="button expanded">Done</a></p>
+		
+      </div>
+    </form>
+	
+    </div>
+{% endblock %}
+
+{% block sidebarContent %}
+	<a href="#">Create Quiz</a>
+    <a href="#">View Quizzes</a>
+{% endblock %}
+
+
+
+
+
