@@ -11,21 +11,29 @@ $(document).ready(function() {
     $menuButton.click(function(){
         $menuButton.prop("disabled",true);
         if(isOpen){
-            $content.animate({left: "-=110px",opacity:1},350);
-            $menu.animate({opacity:0, 'z-index': -1},400);
-            $sidebar.animate({width: "-=110px"},350);
-            $title.animate({left: "-=110px"},350);
-            $menuButton.animate({'margin-left' : "10px"},250, function(){
-                $menuButton.toggleClass('cross');
-            });
+            $menuButton.toggleClass('collapse');
+            $menuButton.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
+                function() {
+                    $menuButton.animate(
+                        {opacity:0}, 100, 'linear', setTimeout((function() {
+                        $content.animate({left: "-=110px",opacity:1},350);
+                        $menu.animate({opacity:0, 'z-index': -1},200);
+                        $sidebar.animate({width: "0px"},350)}), 100)
+                    )}
+            );
         }else{
-            $content.animate({left: "+=110px",opacity:0.5},350);
-            $menu.animate({opacity:1, 'z-index': 1},200);
-            $sidebar.animate({width: "+=110px"},350);
-            $title.animate({left: "+=110px"},350);
-            $menuButton.animate({'margin-left': "120px"},350, function(){
-                $menuButton.toggleClass('cross');
-            });
+            $menuButton.toggleClass('collapse');
+            $menuButton.fadeIn(100);
+            $menuButton.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
+                function() {
+                    $menuButton.animate(
+                        {opacity:0}, 100, 'linear' ,setTimeout((function() {
+                            $content.animate({left: "+=110px", opacity: 0.5}, 350);
+                            $menu.animate({opacity: 1, 'z-index': 1}, 200);
+                            $sidebar.animate({width: "170px"}, 350)}), 100)
+                    )
+                }
+            );
         }
         isOpen=!isOpen;
         $menuButton.prop("disabled",false);

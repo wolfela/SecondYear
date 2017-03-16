@@ -34,7 +34,7 @@ TITLE
 .title-bar-title{
   font-family: 'Oswald', 'sans-serif';
   position: absolute;
-  left: 80px;
+  left: 100px;
   top: 30px;
   font-size: 50px;
   color: $LogoColour;
@@ -48,9 +48,7 @@ MENU BUTTON
   width: 40px;
   height: 30px;
   position: relative;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 15px;
+  margin: 20px 10px;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
@@ -79,10 +77,10 @@ MENU BUTTON
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: .1s linear;
-  -moz-transition: .1s linear;
-  -o-transition: .1s linear;
-  transition: .1s linear;
+  -webkit-transition: .2s linear;
+  -moz-transition: .2s linear;
+  -o-transition: .2s linear;
+  transition: .2s linear;
 }
 
 .topLine{
@@ -97,33 +95,71 @@ MENU BUTTON
   top: 20px;
 }
 
-.hamburger.cross .topLine {
-  top: 10px;
-  -webkit-transform: rotate(-135deg);
-  -moz-transform: rotate(-135deg);
-  -o-transform: rotate(-135deg);
-  transform: rotate(-135deg);
-}
-
-.hamburger.cross .innerLine{
+.hamburger.collapse .topLine {
   opacity: 0;
+  -webkit-transform: translate(0,10px);
+  -moz-transform: translate(0,10px);
+  -o-transform: translate(0,10px);
+  transform: translate(0,10px);
 }
 
-.hamburger.cross .bottomLine{
-  top: 10px;
+.hamburger.collapse .innerLine{
+  opacity: 1;
+}
+
+.hamburger.collapse .bottomLine{
+  opacity: 0;
+  -webkit-transform: translate(0,-10px);
+  -moz-transform: translate(0,-10px);
+  -o-transform: translate(0,-10px);
+  transform: translate(0,-10px);
+}
+
+/*
+MENU CROSS
+*/
+.cross{
+  width: 40px;
+  height: 30px;
+  position: relative;
+  margin: 20px 10px;
   -webkit-transform: rotate(135deg);
   -moz-transform: rotate(135deg);
   -o-transform: rotate(135deg);
   transform: rotate(135deg);
+  -webkit-transition: .2s linear;
+  -moz-transition: .2s linear;
+  -o-transition: .2s linear;
+  transition: .2s linear;
+  cursor: pointer;
 }
 
+.crossNegative .crossPositive{
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 40px;
+  background: $BaseColour;
+  border-radius: 4px;
+  opacity: 1;
+  top: 10px;
+  left: 0;
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
+  -webkit-transition: .2s linear;
+  -moz-transition: .2s linear;
+  -o-transition: .2s linear;
+  transition: .2s linear;
+}
 
 /*
 MENU BAR
 */
 .sidebar{
   position: absolute;
-  width: 60px;
+  width: 0;
   top: 0;
   left: 0;
   height: 100%;
