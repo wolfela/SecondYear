@@ -1,5 +1,5 @@
 from coolbeans.api.serializers.base import BaseSerializer
-from coolbeans.app.models import QuestionModel
+from coolbeans.app.models import BaseQuestionModel
 
 
 class QuestionSerializer(BaseSerializer):
@@ -8,7 +8,7 @@ class QuestionSerializer(BaseSerializer):
     """
 
     class Meta:
-        model = QuestionModel
+        model = BaseQuestionModel
         fields = '__all__'
         read_only_fields = ('creator', )
 

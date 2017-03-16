@@ -1,0 +1,85 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+    <link rel="stylesheet" href="../../../static/css/app.css">
+	<link rel="stylesheet" href="../../../static/css/mc-update.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Oswald&amp;subset=latin-ext" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.js"></script>
+	<script type="text/javascript" src="../../../static/js/mc-creation-update.js"></script>
+{#	<script src="../../../node_modules/jquery/dist/jquery.js"></script>#}
+  </head>
+  <body>
+    <div class="container"> <!-- start of container -->
+      <div class="title-bar">	<!-- start of title bar -->
+        <span class="title-bar-title">LQ 		//		TEACHER</span>
+        <div class="title-bar-right">	<!-- start of title bar right -->
+          <button class="logoutButton">LOGOUT</button>
+        </div>	<!-- end of title bar right -->
+			
+      </div>	<!-- start of title bar -->
+      <div class="content scroll-content">		
+
+            <form action="/mc/submit/" method="post" id='post-form' target="_blank">
+      				<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+              <label><h2 class="mcheading">MCQ Quiz Creation</h2></label>
+      <div>
+        <h4>Type your question below</h4>
+                <textarea class="mctextareas" placeholder="Type your question in here" name="title"></textarea>
+      <h4>Type your correct answer below</h4>
+                      <div id="addAnswer" >
+    			<input id="correct" type="text" class="mcinputbox" name="correct" placeholder="Type your answer in here">
+                <h4>Type your other answers below</h4>
+				<input id="answers" type="text" class="mcinputbox" name="answers[]" placeholder="Type your answer in here">
+        <input id="answers" type="text" class="mcinputbox" name="answers[]" placeholder="Type your answer in here">
+        <input id="answers" type="text" class="mcinputbox" name="answers[]" placeholder="Type your answer in here">
+
+
+
+
+
+                </div>
+
+                      <div class="button-group inputbuttons">
+          <button type="button" class="button" id="addField">Add field</button>
+            <button type="button" class="button" id="removeField">Remove field</button></br>
+      </div>  
+
+            <div class="buttondiv">   
+              <button type="submit" class="button cancelbutton" name="preview_form">Preview</button>
+              <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
+              <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
+            </div>
+
+
+			</form>
+
+
+		</div>  <!-- end of content -->
+    </div>	<!-- end of container -->
+
+    <div class="sidebar">
+      <button class="hamburger" type="button">
+        <span class="topLine"></span>
+        <span class="innerLine"></span>
+        <span class="bottomLine"></span>
+      </button>
+      <div class="menu-content">
+        <nav class="menu-left">
+          <a href="#">Create Quiz</a>
+          <a href="#">View Quizzes</a>
+        </nav>
+      </div>
+    </div>
+
+{#    <script src="../../../node_modules/jquery/dist/jquery.js"></script>#}
+{#    <script src="../../../node_modules/what-input/dist/what-input.js"></script>#}
+{#    <script src="../../../node_modules/foundation-sites/dist/js/foundation.js"></script>#}
+    <script src="../../../static/js/menuAnimation.js"></script>
+{#    <script src="../../../js/mc-creation-update.js"></script>#}
+  </body>
+</html>
