@@ -32,7 +32,7 @@
     {% if question.answers != "" %}
     {% set list = question.answers %}
       {% for answer in list %}
-     <input type="checkbox" class="checkbox">
+     <input type="radio" class="checkbox" name="answers">
       <p class="answer" id=a1> {{ answer|e }}</p></br>
 
     {% endfor %}
