@@ -17,6 +17,6 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^', include("coolbeans.app.urls"))
+    url(r'^api/', include("coolbeans.api.urls")),
+    url(r'^', include("coolbeans.app.urls")),
 ]

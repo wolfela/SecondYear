@@ -24,9 +24,10 @@ const scssPaths = {
         `${dirs.scssSrc}/quiz-word-matching.scss`,
         `${dirs.scssSrc}/quiz-editor-word-matching.scss`,
         `${dirs.scssSrc}/app.scss`,
-	`${dirs.scssSrc}/mcq.scss`,
-	`${dirs.scssSrc}/mcq-update.scss`,
-	`${dirs.scssSrc}/mcq-display.scss`
+		    `${dirs.scssSrc}/mcq.scss`,
+		    `${dirs.scssSrc}/mcq-update.scss`,
+		    `${dirs.scssSrc}/mcq-display.scss`,
+		    `${dirs.scssSrc}/results.scss`
     ],
     dest: `${dirs.dest}/css`
 };
@@ -37,8 +38,9 @@ const jsPaths = {
         `${dirs.jsSrc}/teacher-app.js`,
 		    `${dirs.jsSrc}/mcq-creation-update.js`,
 		    `${dirs.jsSrc}/menuAnimation.js`,
-        `${dirs.jsSrc}/gapFill.js`
-        `${dirs.jsSrc}/quiz-word-matching.js`
+        `${dirs.jsSrc}/gapFill.js`,
+        `${dirs.jsSrc}/quiz-word-matching.js`,
+        `${dirs.jsSrc}/results.js`
     ],
     dest: `${dirs.dest}` // For some reason vinyl-source-stream will prepend /js to the final output path
 };
