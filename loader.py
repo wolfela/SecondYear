@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def template_test():
-    return render_template('jMCQ-Creation-update.html', content="?",)
+    return render_template('jResults.html', content="?",)
 
 
 if (__name__ == '__main__'):
