@@ -18,6 +18,14 @@ function initCrossword(id) {
 function initCrosswordQuestion(id) {
     createCrossword(id,16, true);
     actions();
+    var exampleCrossword = {
+        data:[
+            {'direction':'D','length':'5','x':'0','y':'1','clue':'Who made this quiz'},
+            {'direction':'A','length':'5','x':'4','y':'0','clue':'Strongly Dislike'},
+            {'direction':'D','length':'10','x':'0','y':'4','clue':'Worst language'}
+        ]
+    };
+    drawQuestions(exampleCrossword);
 }
 
 //Called to create crossword div
@@ -339,3 +347,11 @@ function actions(){
         }
     });
 }
+
+$(document).ready(function() {
+    if($('#crosswordEditor').length) {
+        initCrossword('#crosswordEditor');
+    }else if($('#crosswordQuestion').length) {
+        initCrosswordQuestion('#crosswordQuestion');
+    }
+});

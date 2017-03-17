@@ -36,11 +36,12 @@ const jsPaths = {
     srcs: [
         `${dirs.jsSrc}/student-app.js`,
         `${dirs.jsSrc}/teacher-app.js`,
-		    `${dirs.jsSrc}/mcq-creation-update.js`,
+		    `${dirs.jsSrc}/mc-creation-update.js`,
 		    `${dirs.jsSrc}/menuAnimation.js`,
         `${dirs.jsSrc}/gapFill.js`,
         `${dirs.jsSrc}/quiz-word-matching.js`,
-        `${dirs.jsSrc}/results.js`
+        `${dirs.jsSrc}/results.js`,
+        `${dirs.jsSrc}/crossword.js`
     ],
     dest: `${dirs.dest}` // For some reason vinyl-source-stream will prepend /js to the final output path
 };
