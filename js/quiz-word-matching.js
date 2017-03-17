@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
 	// SETUP
+
+	// canvas setup for drawing lines between boxes
 	var canvas = document.getElementById('my-canvas');
 	var context = canvas.getContext('2d');
 	canvas.width = window.innerWidth;
@@ -12,14 +14,7 @@ $(document).ready(function() {
 	var offsetX = canvasOffset.left;
 	var offsetY = canvasOffset.top;
 
-	function draw(fromPos, toPos) {
-		context.beginPath();
-		context.moveTo(fromPos.left - offsetX, fromPos.top - offsetY);
-		context.lineTo(toPos.left - offsetX, toPos.top - offsetY);
-		context.stroke();
-	}
-
-	var wordPairs = [];
+	var wordPairs = [];	// array that will be used to display words. Words stored here should be CORRECTLY paired
 	function Word(langA, langB) { this.langA = langA; this.langB = langB };
 
 	wordPairs.push(new Word('wordA1', 'wordB1'));
@@ -27,19 +22,12 @@ $(document).ready(function() {
 	wordPairs.push(new Word('wordA3', 'wordB3'));
 	wordPairs.push(new Word('wordA4', 'wordB4'));
 	wordPairs.push(new Word('wordA5', 'wordB5'));
-
-	function getWordPair(key) {
-		for(i = 0; i < wordPairs.length; i++) {
-			if(key == wordPairs[i].langA) {
-				return wordPairs[i];
-			}
-		}
-		return null;
-	}
 	
-	var wordsLangA = [];
-	var wordsLangB = [];
+	// actual arrays used for displaying words
+	var wordsLangA = [];	// left column words
+	var wordsLangB = [];	// right column words
 
+	// every word pair that exists in the initial wordPairs array gets added to the two above arrays, and then shuffled
 	for(var i = 0; i < 5; i++) {
 		wordsLangA.push(wordPairs[i].langA);
 		wordsLangB.push(wordPairs[i].langB);
@@ -49,7 +37,17 @@ $(document).ready(function() {
 	wordsLangB = shuffle(wordsLangB);
 	
 
+	// associating buttons to words that were shuffled.
+	// this is done in order of rows that the words appear in AFTER they have been shuffled
 
+	// every button gets an id depending on what column they will be display on, and their position in the column
+	// words on the left column have langA in the id, words on the right have langB instead
+	// the number after 'word' in the id represents the column number, starting from 1
+
+	// e.g.:
+	// 	first word on left column gets id #langA-word1-button
+	//	first word on right column gets id #langB-word1-button
+	//	third word on right column gets id #langB-word3-button
 	for(var i = 0; i < wordPairs.length; i++) {
 		var wordA = wordsLangA[i];
 		var wordB = wordsLangB[i];
@@ -61,45 +59,17 @@ $(document).ready(function() {
 		$buttonB.text(wordB);
 	}
 
-	var pairsInWindow = 5;
+	var pairsInWindow = wordPairs.length;
 
-    $('#message').hide();
 
 	// IN ACTION
-	var drawnBetween = [];	// to fill with Drawn objects for buttons to draw lines between
-	function Drawn($leftButton, $rightButton) { this.$left = $leftButton; this.$right = $rightButton }
-	function refreshLines() {
 
-		context.clearRect(0, 0, $canvas.width(), $canvas.height());
-		for(var i = 0; i < drawnBetween.length; i++) {
-			var link = drawnBetween[i];
-			var leftPos = link.$left.position();
-			var rightPos = link.$right.position();
+	var drawnBetween = [];	// to fill with Drawn objects for BUTTONS to draw lines between
+	function Drawn($leftButton, $rightButton) { this.$left = $leftButton; this.$right = $rightButton };
 
-			leftPos.left += link.$left.width();
-			leftPos.top += (link.$left.height() / 2)
-
-			rightPos.top += (link.$right.height() / 2)
-			
-			draw(leftPos, rightPos);		
-		}
-
-	}
-
-	function removeIfExists($button) {
-		for(var i = 0; i < drawnBetween.length; i++) {
-			var item = drawnBetween[i];	
-			if($button.attr('id') == item.$left.attr('id') || $button.attr('id') == item.$right.attr('id')) {		
-				drawnBetween.splice(i, 1);
-			}
-			
-		}
-		//drawBetween.filter(Object);
-	}
-
-	var langAregex = RegExp('langA');
-	var langBregex = RegExp('langB');
-	var $selectedButton = null;
+	var langAregex = RegExp('langA');	// to check if word is on left column
+	var langBregex = RegExp('langB');	// to check if word is on right column
+	var $selectedButton = null;	// it is assumed that no buttons have been clicked before the document is open
 
 	$('.button').click(function() {
 
@@ -111,12 +81,15 @@ $(document).ready(function() {
 			// checks the ids of the buttons to see which side they are on
 			// if the second button is on the same side as the first button, the first becomes de-selected
 			//	without drawing
-			if(!((langAregex.test(firstButtonId) && langAregex.test(secondButtonId)) || 
-				(langBregex.test(firstButtonId) && langBregex.test(secondButtonId)))) {
+			if(!(	// negate result of the two checks below
+				(langAregex.test(firstButtonId) && langAregex.test(secondButtonId)) || // if both buttons are on left column
+				(langBregex.test(firstButtonId) && langBregex.test(secondButtonId)))) { // if both buttons are on right column
 				
-				removeIfExists($selectedButton);
-				removeIfExists($(this));
+				// if the check above passes, then a new link is made while removing links for the two buttons to be used for the new link
+				removeIfExists($selectedButton);	// button that was clicked on first	
+				removeIfExists($(this));	// button that was clicked on second (or the one that was clicked to fire this event)
 
+				// when inserting Drawn objects in the drawnBetween array, buttons on the left should come first
 				if(langAregex.test(firstButtonId)) {
 					drawnBetween.push(new Drawn($selectedButton, $(this)));
 				} else {
@@ -135,19 +108,8 @@ $(document).ready(function() {
 
 		// for checking if all buttons have been linked
 		if(drawnBetween.length == pairsInWindow) {
-            /*print('ob: ' + drawnBetween[0].$left.attr('id') + ' pairs: ' + pairsInWindow);
-			print('ob: ' + drawnBetween[0].$right.attr('id') + ' pairs: ' + pairsInWindow);
-			print('ob: ' + drawnBetween[1].$left.attr('id') + ' pairs: ' + pairsInWindow);
-			print('ob: ' + drawnBetween[1].$right.attr('id') + ' pairs: ' + pairsInWindow);
-			print('ob: ' + drawnBetween[2].$left.attr('id') + ' pairs: ' + pairsInWindow);
-			print('ob: ' + drawnBetween[2].$right.attr('id') + ' pairs: ' + pairsInWindow);
-			print('ob: ' + drawnBetween[3].$left.attr('id') + ' pairs: ' + pairsInWindow);
-			print('ob: ' + drawnBetween[3].$right.attr('id') + ' pairs: ' + pairsInWindow);
-			print('ob: ' + drawnBetween[4].$left.attr('id') + ' pairs: ' + pairsInWindow);
-			print('ob: ' + drawnBetween[4].$right.attr('id') + ' pairs: ' + pairsInWindow);*/
-            
-            var correct = 0;
-
+        		var correct = 0;
+			
 			for(var j = 0; j < drawnBetween.length; j++) {
 				var $left = drawnBetween[j].$left;
 				var $right = drawnBetween[j].$right;
@@ -160,7 +122,7 @@ $(document).ready(function() {
 				$right.removeClass('success alert');
 
 				if($right.text() == answerText) {
-                    correct++;
+                    			correct++;
 					$left.addClass('success');
 					$right.addClass('success');
 				} else {
@@ -169,20 +131,73 @@ $(document).ready(function() {
 				}
 				
 			}
-            var $message = $('#message');
-            $message.show();
-            $message.removeClass('success alert');
-            if(correct == pairsInWindow) {
-                $message.html('<h5>Success!</h5><p>You got every word correct :) Press next to continue</p>');
-                $message.addClass('success');
-            } else {
-                $message.html('<h5>:(</h5><p>You got some answers wrong. Why don\'t you try again?</p>');
-                $message.addClass('alert');
-            }
-		} else {
-            $('#message').hide();
-        }		
+			
+		}		
 	});
+
+	// function for drawing lines between boxes
+	// when calling this function, it should be given two position objects, which can be retrieved
+	// by invoking .position() on a jQuery object
+	function draw(fromPos, toPos) {
+		context.beginPath();
+		context.moveTo(fromPos.left - offsetX, fromPos.top - offsetY);
+		context.lineTo(toPos.left - offsetX, toPos.top - offsetY);
+		context.stroke();
+	}
+
+	// checks to see if there are any word pairs that exist with the given key.
+	// if so, then the Word object containg the pair is returned
+	function getWordPair(key) {
+		for(i = 0; i < wordPairs.length; i++) {
+			if(key == wordPairs[i].langA) {
+				return wordPairs[i];
+			}
+		}
+		return null;
+	}
+
+	// clears the canvas, and redraws the lines depending on the contents of the drawnBetween array
+	function refreshLines() {
+		context.clearRect(0, 0, $canvas.width(), $canvas.height());
+		for(var i = 0; i < drawnBetween.length; i++) {
+			var link = drawnBetween[i];
+			var leftPos = link.$left.position();
+			var rightPos = link.$right.position();
+
+			leftPos.left += link.$left.width();
+			leftPos.top += (link.$left.height() / 2)
+
+			rightPos.top += (link.$right.height() / 2)
+			
+			draw(leftPos, rightPos);		
+		}
+
+	}
+
+	// this function should be used to remove buttons from links to other buttons
+	function removeIfExists($button) {
+		for(var i = 0; i < drawnBetween.length; i++) {
+			var item = drawnBetween[i];	// Drawn pair
+			if($button.attr('id') == item.$left.attr('id') || $button.attr('id') == item.$right.attr('id')) {		
+				drawnBetween.splice(i, 1);
+			}
+			
+		}
+	}
+	
+	// creates an array containing linked Word objects and returns it.
+	// for each Word object, you should use .langA to retrieve the left word, and .langB to retrieve the right word
+	function getLinks() {
+		var linked = [];
+		
+		for(var i = 0; i < drawnBetween.length; i++) {
+			var db = drawnBetween[i];
+			linked.push(new Word(db.$left.text(), db.$right.text()));
+		}
+
+		return linked;
+	}
+
 
 });
 
