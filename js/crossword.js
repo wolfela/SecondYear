@@ -22,6 +22,13 @@ $(document).ready(function() {
 
 
 
+//Used to make crossword quiz
+function initCrosswordQuestion(id) {
+    createCrossword(id,16, true);
+    actions();
+}
+
+
 //Called to create crossword div
 function createCrossword(id, size, question){
     crosswordId = id;
@@ -37,7 +44,7 @@ $("#preview").click(function () {
 //Draws blank crossword grid
 function drawGrid(size, bool){
     gridSize = size;
-    grid = [][];
+    grid = [];
     for(var r=0; r<size; r++){
         var row = $('<div class="row"></div>').appendTo(container);
         grid[r] = [];
@@ -67,12 +74,6 @@ function drawBorders() {
         $(grid[0][i]).css({'border-top':'1px solid #000'});
         $(grid[i][0]).css({'border-left':'1px solid #000'});
     }
-}
-
-//Used to make crossword quiz
-function initCrosswordQuestion(id) {
-    createCrossword(id,16, true);
-    actions();
 }
 
 
@@ -435,10 +436,15 @@ $.ajax({
     data: n,
     contentType:'application/json',
     dataType: 'text',
-    success: function(){
+    success: function(data){
+
+         if (data.redirect) {
+            // data.redirect contains the string URL to redirect to
+            window.location.href = data.redirect;
+        }
             alert("woo!");
 
-        window.open("http://localhost:8000/cw/preview")
+        // window.open("http://localhost:8000/cw/preview")
        // window.location.assign('http://localhost:8000/mcq2/');
         //$().redirect('http://localhost:8000/mcq2/', {'a1': 'value1', 'a2': 'value2'});
     },
@@ -447,15 +453,4 @@ $.ajax({
     }
 });
 });
-
-// $(document).ready(function() {
-//     var exampleCrossword = {
-//         data:[
-//             {'direction':'D','length':'5','x':'0','y':'1','clue':'Who made this quiz'},
-//             {'direction':'A','length':'5','x':'4','y':'0','clue':'Strongly Dislike'},
-//             {'direction':'D','length':'10','x':'0','y':'4','clue':'Worst language'}
-//         ]
-//     };
-//     drawQuestions(exampleCrossword)
-// })
 
