@@ -48,7 +48,7 @@
     {% set list = form.answers.value().split(',') %}
 
     {% for answer in list|shuffle %}
-     <input type="checkbox" class="checkbox">
+     <input type="radio" class="checkbox" name="answers">
       <p class="answer" id=a1> {{ answer|e }}</p></br>
 
     {% endfor %}
