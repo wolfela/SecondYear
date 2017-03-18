@@ -5,19 +5,20 @@ var container,
     cluesList =[],
     answerList =[],
     selectedRow,
-    acrossClues,
-    downClues;
+    selectionData={},
+    crosswordData={};
 
 
 //Used for making crossword editor
 function initCrossword(id) {
     createCrossword(id, 16, false);
     editorActions();
+    crosswordData.data = [];
 }
 
-   $(document).ready(function() {
-        initCrossword('#crosswordEditor')
-    });
+$(document).ready(function() {
+    initCrossword('#crosswordEditor')
+});
 
 //Called to create crossword div
 function createCrossword(id, size, question){
@@ -91,10 +92,18 @@ function validSelection() {
         }
     }
 
-    if(Math.max.apply(null,xArr)-Math.min.apply(null,xArr)!=0){
-        if(Math.max.apply(null,yArr)-Math.min.apply(null,yArr)==0){
-            if(Math.max.apply(null, xArr) - Math.min.apply(null, xArr) == xArr.length - 1){
+    var minX = Math.min.apply(null,xArr),
+        maxX = Math.max.apply(null,xArr),
+        minY = Math.min.apply(null,yArr),
+        maxY = Math.max.apply(null,yArr);
+
+    if(maxX-minX!=0){
+        if(maxY-minY==0){
+            if(maxX - minX == xArr.length - 1){
                 $('.answerBox').attr('maxlength',xArr.length);
+                selectionData.direction = 'D';
+                selectionData.x = minX;
+                selectionData.y = minY;
                 return true;
             }else{
                 return false;
@@ -103,9 +112,12 @@ function validSelection() {
             return false;
         }
     }else{
-        if(Math.max.apply(null,yArr)-Math.min.apply(null,yArr)!=0){
-            if(Math.max.apply(null,yArr)-Math.min.apply(null,yArr)==yArr.length-1) {
+        if(maxY-minY!=0){
+            if(maxY-minY==yArr.length-1) {
                 $('.answerBox').attr('maxlength',xArr.length);
+                selectionData.direction = 'A';
+                selectionData.x = minX;
+                selectionData.y = minY;
                 return true;
             }else{
                 return false;
@@ -144,6 +156,17 @@ function addAnswer(answer) {
     }
 }
 
+function addToCrosswordData(x,y,answer, direction, clue) {
+    var entry = {};
+    entry.direction = direction;
+    entry.length = answer.length;
+    entry.x = x;
+    entry.y = y;
+    entry.clue = clue;
+    entry.word = answer;
+    crosswordData.data.push(entry);
+}
+
 function editorActions(){
     $(document).ready(function() {
         disableForm(true);
@@ -172,6 +195,7 @@ function editorActions(){
             addClueRow(answer, clue);
             addAnswer(answer);
             disableForm(true);
+            addToCrosswordData(selectionData.x,selectionData.y,answer,selectionData.direction,clue);
         }else{
 
         }
@@ -193,7 +217,10 @@ function editorActions(){
     })
 }
 
-
+function getCrosswordData() {
+    console.log(crosswordData);
+    return crosswordData;
+}
 
 /**
 
