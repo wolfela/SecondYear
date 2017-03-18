@@ -132,6 +132,24 @@ class GFQuestionView(TemplateView):
         question = get_object_or_404(GapFillQuestionModel, pk=pk)
         return render(request, 'app/question/GF-Display.html', {'question': question})
 
+
+class CWCreateView(TemplateView):
+    """
+    A view for creating Word Scramble Questions
+    """
+    template_name = "app/question/CW-Creation.html"
+
+    def submitGF(request):
+        return submit(request, 'CW', GFForm)
+
+
+class CWQuestionView(TemplateView):
+    template_name = "app/question/CW-Display.html"
+
+    def show_question(request, pk):
+        question = get_object_or_404(GapFillQuestionModel, pk=pk)
+        return render(request, 'app/question/CW-Display.html', {'question': question})
+
 def submit(request, type, formtype):
     if 'save_form' in request.POST:
         return save(request, type, formtype)

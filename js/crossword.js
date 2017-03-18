@@ -339,3 +339,7 @@ function actions(){
         }
     });
 }
+
+        $(document).ready(function() {
+            initCrossword('#crosswordEditor')
+        })
