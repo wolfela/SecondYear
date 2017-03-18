@@ -1,9 +1,12 @@
+import json
 from django.views.generic import TemplateView
 from django.template import RequestContext
 
 from coolbeans.app.forms import MCForm, WMForm, WSForm, GFForm
 from coolbeans.app.models.question import MultipleChoiceModel, WordScrambleQuestionModel, WordMatchingQuestionModel, GapFillQuestionModel
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
+from django.http import HttpResponse
 
 
 class MCCreateView(TemplateView):
@@ -132,6 +135,10 @@ class GFQuestionView(TemplateView):
         question = get_object_or_404(GapFillQuestionModel, pk=pk)
         return render(request, 'app/question/GF-Display.html', {'question': question})
 
+class CWPreviewView(TemplateView):
+    template_name = "app/question/CW-Preview.html"
+
+
 
 class CWCreateView(TemplateView):
     """
@@ -139,8 +146,33 @@ class CWCreateView(TemplateView):
     """
     template_name = "app/question/CW-Creation.html"
 
-    def submitGF(request):
+    def submitCW(request):
         return submit(request, 'CW', GFForm)
+
+    def validate(request):
+        #json_obj = json.loads(request.GET['dat'])
+        # j = json.loads(request.GET['jdata'])
+        # a1 = request.GET.get('jdata')
+        list = json.loads(request.body.decode('utf-8'))
+        l = request.POST.get('data')
+        print("HERE")
+        print(list['data'])
+        print(l)
+
+        for element in list['data']:
+            del element['word']
+
+        print(list)
+        # q = QuizModel.objects.create()
+        # m = BaseQuestionModel(quiz=q)
+      # m = TestModelll.objects.create(quiz=q,name=1)
+      #   m = MultipleChoiceModel.objects.create(quiz=q, title=t, answers=list, correct=a1)
+        # test.save()
+        data = {
+         'is_taken': 'okay'
+         }
+        message = "yes"
+        return render(request, 'app/question/CW-Preview.html', list)
 
 
 class CWQuestionView(TemplateView):

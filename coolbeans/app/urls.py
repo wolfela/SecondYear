@@ -52,7 +52,9 @@ urlpatterns = [
 
     # Crossword Questions
     url(r'^cw/$', question.CWCreateView.as_view(), name='cw'),
-    url(r'^cw/submit/$', question.CWCreateView.submitGF, name='submit'),
+    url(r'^cw/submit/$', question.CWCreateView.submitCW, name='submit'),
+    url(r'^cw/validate/$', question.CWCreateView.validate, name='validate'),
+    url(r'^cw/preview/$', question.CWPreviewView.as_view(), name='preview'),
     url(r'^cw/question/(?P<pk>\d+)/$', question.CWQuestionView.show_question, name='cwquestion'),
 
 

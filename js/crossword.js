@@ -20,6 +20,8 @@ $(document).ready(function() {
     initCrossword('#crosswordEditor')
 });
 
+
+
 //Called to create crossword div
 function createCrossword(id, size, question){
     crosswordId = id;
@@ -27,10 +29,15 @@ function createCrossword(id, size, question){
     drawGrid(size, question)
 }
 
+$("#preview").click(function () {
+    console.log(crosswordData.data[0].word);
+    console.log("fdfsdfd");
+});
+
 //Draws blank crossword grid
 function drawGrid(size, bool){
     gridSize = size;
-    grid = [];
+    grid = [][];
     for(var r=0; r<size; r++){
         var row = $('<div class="row"></div>').appendTo(container);
         grid[r] = [];
@@ -61,6 +68,13 @@ function drawBorders() {
         $(grid[i][0]).css({'border-left':'1px solid #000'});
     }
 }
+
+//Used to make crossword quiz
+function initCrosswordQuestion(id) {
+    createCrossword(id,16, true);
+    actions();
+}
+
 
 /**
 
@@ -365,4 +379,83 @@ function actions(){
         }
     });
 }
+
+
+// using jQuery
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+
+$("#save").click(function () {
+
+var a1=$("#a1").val();
+var a2=$("#a2").val();
+var a3=$("#a3").val();
+var a4=$("#a4").val();
+var title=$("#title").val();
+var list=[a2,a3,a4];
+var myJson = JSON.stringify(list); 
+var d = getCrosswordData();
+var n = JSON.stringify(d);
+var ans = {data: [{"d":'dsds'},{"d":'dsds'}]};
+var ns = JSON.stringify(ans);
+var easy = JSON.stringify({'kinga': 'ola'});
+
+console.log(a1);
+console.log(a2);
+$.ajax({
+    url : './validate/',
+    type: 'POST',
+    data: n,
+    contentType:'application/json',
+    dataType: 'text',
+    success: function(){
+            alert("woo!");
+
+        window.open("http://localhost:8000/cw/preview")
+       // window.location.assign('http://localhost:8000/mcq2/');
+        //$().redirect('http://localhost:8000/mcq2/', {'a1': 'value1', 'a2': 'value2'});
+    },
+    error: function(){
+        alert('nope');
+    }
+});
+});
+
+// $(document).ready(function() {
+//     var exampleCrossword = {
+//         data:[
+//             {'direction':'D','length':'5','x':'0','y':'1','clue':'Who made this quiz'},
+//             {'direction':'A','length':'5','x':'4','y':'0','clue':'Strongly Dislike'},
+//             {'direction':'D','length':'10','x':'0','y':'4','clue':'Worst language'}
+//         ]
+//     };
+//     drawQuestions(exampleCrossword)
+// })
 
