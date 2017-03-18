@@ -16,7 +16,8 @@ $LoginColour: #488C3A;
 
 body{
   overflow: hidden;
-  background: #303030;
+  background: $BaseColour;
+  overflow-y: auto;
 }
 
 /*
@@ -32,7 +33,7 @@ TITLE
 
 .title-bar-title{
   font-family: 'Oswald', 'sans-serif';
-  position: fixed;
+  position: absolute;
   left: 80px;
   top: 30px;
   font-size: 50px;
@@ -163,8 +164,6 @@ BODY
 .content {
   background: $BaseColour;
   position: absolute;
-  top: 100px;
-  left: 60px;
   height: 100%;
   width: 100%;
 }

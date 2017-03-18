@@ -8,17 +8,16 @@ var container,
     acrossClues,
     downClues;
 
+
 //Used for making crossword editor
 function initCrossword(id) {
     createCrossword(id, 16, false);
     editorActions();
 }
 
-//Used to make crossword quiz
-function initCrosswordQuestion(id) {
-    createCrossword(id,16, true);
-    actions();
-}
+   $(document).ready(function() {
+        initCrossword('#crosswordEditor')
+    });
 
 //Called to create crossword div
 function createCrossword(id, size, question){
@@ -340,6 +339,3 @@ function actions(){
     });
 }
 
-        $(document).ready(function() {
-            initCrossword('#crosswordEditor')
-        })
