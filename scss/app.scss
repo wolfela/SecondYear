@@ -122,36 +122,43 @@ MENU CROSS
   width: 40px;
   height: 30px;
   position: relative;
+  left: 110px;
   margin: 20px 10px;
-  -webkit-transform: rotate(135deg);
-  -moz-transform: rotate(135deg);
-  -o-transform: rotate(135deg);
-  transform: rotate(135deg);
-  -webkit-transition: .2s linear;
-  -moz-transition: .2s linear;
-  -o-transition: .2s linear;
-  transition: .2s linear;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .2s ease-in-out;
+  -moz-transition: .2s ease-in-out;
+  -o-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
   cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+
+  &:hover span{
+    background: $HighlightColour;
+  }
+
 }
 
-.crossNegative .crossPositive{
+.crossNegative, .crossPositive{
   display: block;
   position: absolute;
   height: 4px;
   width: 40px;
   background: $BaseColour;
   border-radius: 4px;
-  opacity: 1;
-  top: 10px;
+  top:13px;
   left: 0;
-  -webkit-transform: rotate(135deg);
-  -moz-transform: rotate(135deg);
-  -o-transform: rotate(135deg);
-  transform: rotate(135deg);
-  -webkit-transition: .2s linear;
-  -moz-transition: .2s linear;
-  -o-transition: .2s linear;
-  transition: .2s linear;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .2s ease-in-out;
+  -moz-transition: .2s ease-in-out;
+  -o-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
 }
 
 /*
