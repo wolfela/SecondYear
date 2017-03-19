@@ -72,6 +72,12 @@ function drawBorders() {
 }
 
 $(document).ready(function() {
+
+    var opener = window.opener;
+    if(opener) {
+        var data = opener.getPreviewData();
+    }
+
     initCrosswordQuestion('#crosswordEditor');
     var exampleCrossword = {
         data:[
@@ -80,7 +86,7 @@ $(document).ready(function() {
             {'direction':'D','length':'10','x':'0','y':'4','clue':'Worst language'}
         ]
     };
-    drawQuestions(exampleCrossword)
+    drawQuestions(data);
 });
 
 /**

@@ -36,10 +36,6 @@ function createCrossword(id, size, question){
     drawGrid(size, question)
 }
 
-$("#preview").click(function () {
-    console.log(crosswordData.data[0].word);
-    console.log("fdfsdfd");
-});
 
 //Draws blank crossword grid
 function drawGrid(size, bool){
@@ -237,6 +233,11 @@ function getCrosswordData() {
     return crosswordData;
 }
 
+ window.getPreviewData = function() {
+    console.log(crosswordData);
+    return crosswordData;
+}
+
 /**
 
     QUESTION DISPLAY METHODS
@@ -415,42 +416,30 @@ $.ajaxSetup({
 
 $("#save").click(function () {
 
-var a1=$("#a1").val();
-var a2=$("#a2").val();
-var a3=$("#a3").val();
-var a4=$("#a4").val();
-var title=$("#title").val();
-var list=[a2,a3,a4];
-var myJson = JSON.stringify(list); 
-var d = getCrosswordData();
-var n = JSON.stringify(d);
-var ans = {data: [{"d":'dsds'},{"d":'dsds'}]};
-var ns = JSON.stringify(ans);
-var easy = JSON.stringify({'kinga': 'ola'});
+var crossword_data = getCrosswordData();
+var data = JSON.stringify(crossword_data);
 
-console.log(a1);
-console.log(a2);
 $.ajax({
-    url : './validate/',
+    url : './submit/',
     type: 'POST',
-    data: n,
+    data: data,
     contentType:'application/json',
     dataType: 'text',
-    success: function(data){
+    success: function(message){
 
-         if (data.redirect) {
-            // data.redirect contains the string URL to redirect to
-            window.location.href = data.redirect;
-        }
-            alert("woo!");
-
-        // window.open("http://localhost:8000/cw/preview")
-       // window.location.assign('http://localhost:8000/mcq2/');
-        //$().redirect('http://localhost:8000/mcq2/', {'a1': 'value1', 'a2': 'value2'});
+        alert("saved!");
+        window.location.href = "/wherever/quiz/create/is";
     },
     error: function(){
         alert('nope');
     }
 });
+});
+
+$("#preview").click(function () {
+
+
+ window.open("http://localhost:8000/cw/preview");
+
 });
 
