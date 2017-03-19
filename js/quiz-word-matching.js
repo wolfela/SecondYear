@@ -16,19 +16,25 @@ $(document).ready(function() {
 
 	var wordPairs = [];	// array that will be used to display words. Words stored here should be CORRECTLY paired
 	function Word(langA, langB) { this.langA = langA; this.langB = langB };
-
-	wordPairs.push(new Word('wordA1', 'wordB1'));
-	wordPairs.push(new Word('wordA2', 'wordB2'));
-	wordPairs.push(new Word('wordA3', 'wordB3'));
-	wordPairs.push(new Word('wordA4', 'wordB4'));
-	wordPairs.push(new Word('wordA5', 'wordB5'));
 	
+	// ADD ACTUAL WORD PAIRS BETWEEN HERE...
+
+	// ...AND HERE
+
+	if(wordPairs.length === 0) {
+		wordPairs.push(new Word('wordA1', 'wordB1'));
+		wordPairs.push(new Word('wordA2', 'wordB2'));
+		wordPairs.push(new Word('wordA3', 'wordB3'));
+		wordPairs.push(new Word('wordA4', 'wordB4'));
+		wordPairs.push(new Word('wordA5', 'wordB5'));
+	}
+
 	// actual arrays used for displaying words
 	var wordsLangA = [];	// left column words
 	var wordsLangB = [];	// right column words
 
 	// every word pair that exists in the initial wordPairs array gets added to the two above arrays, and then shuffled
-	for(var i = 0; i < 5; i++) {
+	for(var i = 0; i < wordPairs.length; i++) {
 		wordsLangA.push(wordPairs[i].langA);
 		wordsLangB.push(wordPairs[i].langB);
 	}
@@ -36,7 +42,7 @@ $(document).ready(function() {
 	wordsLangA = shuffle(wordsLangA);
 	wordsLangB = shuffle(wordsLangB);
 	
-
+	
 	// associating buttons to words that were shuffled.
 	// this is done in order of rows that the words appear in AFTER they have been shuffled
 
@@ -51,12 +57,9 @@ $(document).ready(function() {
 	for(var i = 0; i < wordPairs.length; i++) {
 		var wordA = wordsLangA[i];
 		var wordB = wordsLangB[i];
-	
-		var $buttonA = $('#langA-word' + (i + 1) + '-button');
-		var $buttonB = $('#langB-word' + (i + 1) + '-button');
-
-		$buttonA.text(wordA);
-		$buttonB.text(wordB);
+		
+		var $buttonA = addWordButton(true, i + 1, wordA);
+		var $buttonB = addWordButton(false, i + 1, wordB);
 	}
 
 	var pairsInWindow = wordPairs.length;
@@ -135,6 +138,24 @@ $(document).ready(function() {
 		}		
 	});
 
+	// creates a button for a word, adds it to the button grid, and returns it for use with jQuery
+	function addWordButton(isLeft, row, text) {
+		var id = '';
+		if(isLeft) {
+			id += 'langA-word' + row + '-button';
+		} else {
+			id += 'langB-word' + row + '-button';
+		}
+
+		var html = $('<button type="button" id="' + id + '" class="button grid-button">' + text + '</button>');
+		
+		if(isLeft) {
+			$('#button-grid-left').append(html);
+		} else {
+			$('#button-grid-right').append(html);
+		}
+	}
+
 	// function for drawing lines between boxes
 	// when calling this function, it should be given two position objects, which can be retrieved
 	// by invoking .position() on a jQuery object
@@ -210,11 +231,6 @@ function shuffle(array) {
     }
     return array;
 }
-
-function print(msg) {
-	document.writeln(msg);
-}
-
 
 
 
