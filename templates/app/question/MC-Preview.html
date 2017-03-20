@@ -1,100 +1,36 @@
-<!doctype html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template</title>
-    <link rel="stylesheet" href="../../../static/css/app.css">
-   <link rel="stylesheet" href="../../../static/css/mcq-display.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato|Oswald&amp;subset=latin-ext" rel="stylesheet">
-    {#  <script src="../../../node_modules/jquery/dist/jquery.js"></script>#}
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  </head>
-  <body>
+{% extends "jTemplate.html" %}
 
-    <div class="container"> <!-- start of container -->
-      <div class="title-bar"> <!-- start of title bar -->
-        <span class="title-bar-title">LQ    //    TEACHER</span>
-        <div class="title-bar-right"> <!-- start of title bar right -->
-          <button class="logoutButton">LOGOUT</button>
-        </div>  <!-- end of title bar right -->
-      
-      </div>  <!-- start of title bar -->
+{% block title %}MCQ-Display{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/mc-display.css">
+{% endblock %}
 
-      <form method="get">
-      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-
-      <div class="content scroll-content">    
+{% block content %}
+  <form method="get">
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     <h2 class = "mcqheading">Question x</h2>
-    
+
     <p class="questions" id=q>{{ form.title.value() }}</p></br>
 
-
-<!--     <form method="get">
-      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-     <p> {{ form.correct.value() }} </p>
-      <p> {{ form.answers.value() }} </p>
-      {% set list = form.answers.value().split(',') %}
-      {% for answer in list %}
-     <p>{{ answer|e }}</p>
-{% endfor %}
-
-      <p> {{ form.title.value() }} </p>
-    </form> -->
     <div>
 
-    {% if form.answers.value() != "" %}
-    {% set list = form.answers.value().split(',') %}
-
-    {% for answer in list|shuffle %}
-     <input type="radio" class="checkbox" name="answers">
+      {% if form.answers.value() != "" %}
+      {% set list = form.answers.value().split(',') %}
+  
+      {% for answer in list|shuffle %}
+      <input type="radio" class="checkbox" name="answers">
       <p class="answer" id=a1> {{ answer|e }}</p></br>
 
-    {% endfor %}
-             {% endif %}
-    
-    
+      {% endfor %}
+      {% endif %}
+
+
     </div>
-      </div>  <!-- end of content -->
-    </div>  <!-- end of container -->
+  </form>
+{% endblock %}
 
-    <div class="sidebar">
-      <button class="hamburger" type="button">
-        <span class="topLine"></span>
-        <span class="innerLine"></span>
-        <span class="bottomLine"></span>
-      </button>
-      <div class="menu-content">
-        <nav class="menu-left">
-          <a href="#">Create Quiz</a>
-          <a href="#">View Quizzes</a>
-        </nav>
-      </div>
-    </div>
-
-    <script src="./node_modules/jquery/dist/jquery.js"></script>
-    <script src="./node_modules/what-input/dist/what-input.js"></script>
-    <script src="./node_modules/foundation-sites/dist/js/foundation.js"></script>
-    <script src="./js/menuAnimation.js"></script>
-  </body>
-</html>
-
-<!-- <script type="text/javascript">
-    $(function () {
-        if (window.opener != null && !window.opener.closed) {
-            var parent = $(window.opener.document).contents();
-            console.log(parent.find("#a1").val());
-            var data1 = parent.find("#a1").val();
-            var data2 = parent.find("#a2").val();
-            var data3 = parent.find("#a3").val();
-            var data4 = parent.find("#a4").val();
-            var t = parent.find("#title").val();
-            $("#a1").html(data1);
-            $("#a2").html(data2);
-            $("#a3").html(data3);
-            $("#a4").html(data4);
-            $("#q").html(t);
-        }
-    });
-</script> -->
+{% block sidebarContent %}
+  <a href="#">Create Quiz</a>
+  <a href="#">View Quizzes</a>
+{% endblock %}

@@ -1,9 +1,9 @@
 {% extends "jTemplate.html" %}
 
- {% block title %} WordScramble{% endblock %} 
- {% block head %} 
-	{{ super() }}
- {% endblock %}
+{% block title %} WordScramble{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
   
 {% block content %}
 	<div class="medium-6 medium-centered large-4 large-centered columns">
@@ -11,7 +11,7 @@
     <form>
       <div class="row column log-in-form">
         <h4 class="text-center">Create a Sentence Scramble Question</h4>
-		<input id="manuel-mode" type="checkbox"><label for="manual-mode">Manually Scramble?</label>
+		<input id="manuel-mode" type="checkbox"><label for="manuel-mode">Manually Scramble?</label>
         <label>Enter the sentence to be scrambled
           <input type="text" placeholder="This is the sentence to be scrambled">
         </label>

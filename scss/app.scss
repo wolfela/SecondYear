@@ -249,3 +249,65 @@ LOGIN BUTTON
 .loginButton:hover{
   color: $HighlightColour;
 }
+
+/*
+ERROR DIALOGS
+*/
+
+.modalDialog{
+  position: absolute;
+  width: 250px;
+  height: 120px;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%,-50%);
+  display: block;
+  z-index: 1000;
+  text-align: center;
+}
+
+.error{
+  background: $HighlightColour;
+  border: 2px solid #cc2c2c;
+
+  .modalClose{
+    background: #cc2c2c;
+  }
+}
+
+.uDerp{
+  background: #efe237;
+  border: 2px solid #ccc92b;
+
+  .modalClose{
+    background: #ccc92b;
+  }
+}
+
+.weDerp{
+  background: #3752ef;
+  border: 2px solid #2b33cc;
+
+  .modalClose{
+    background: #2b33cc;
+  }
+}
+
+.modalTitle{
+  font-family: "Oswald", "sans-serif";
+  font-size: 28px;
+  color : #f4f2f2;
+}
+
+.modalText{
+  height: 30px;
+  color : #f4f2f2;
+  font-family: "Lato", "sans-serif";
+}
+
+.modalClose{
+  border: none;
+  color: #f4f2f2;
+  font-family: "Lato", "sans-serif";
+}
