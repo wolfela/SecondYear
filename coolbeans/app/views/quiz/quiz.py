@@ -50,3 +50,7 @@ class QuizAttemptView(View):
     def attemptQuiz(request, pk):
         instance = get_object_or_404(QuizModel, pk=pk)
         return HttpResponseRedirect('/' + instance.questions[0])
+
+    def nextQuestion(request, pk, i):
+        instance = get_object_or_404(QuizModel, pk=pk)
+        return HttpResponseRedirect('/' + instance.questions[int(i)])

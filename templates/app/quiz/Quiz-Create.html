@@ -20,8 +20,34 @@
 	<label>Language:
 	<input type="text" id="language" name="language" placeholder="Language of the quiz"></label>	
 	<label>Current Questions:
-    	<input type="text" id="questions" name="questions" placeholder="URL of Question">
-	<input type="text" id="questions" name="questions" placeholder="URL of Question">
+	<div class="button-group inputbuttons">
+	<div id="addAnswer" >
+	<script>
+	$(document).ready(function() {
+	var amount = 0;
+	$('#addField').click(function() {
+		if(amount < 10){
+			$("#addAnswer").append(" <input type=\"text\" class=\"mcinputbox\" name=\"answers[]\" placeholder=\"Type your answer in here\"></br>");
+			amount++;			
+		}
+	});
+	$('#removeField').click(function() {
+		if(amount > 4){
+			console.log("fsdfdsf");
+			$("#addAnswer input:last").remove();
+			$("#addAnswer input:last").remove();
+			$("#addAnswer br:last").remove();
+			amount--;
+		}
+	});}
+    </script>
+     <div class="button-group inputbuttons">
+        <button type="button" class="button" id="addField">Add field</button>
+    <button type="button" class="button" id="removeField">Remove field</button></br>
+    </div>  
+    </div>
+
+	</label>
 	<div class="buttondiv">
               <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
               <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
