@@ -13,6 +13,8 @@
   <body>
 
 {% block content %}
+<form method="get">
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
 <div class="wsheading"> <h1>{{ question.title }}</h1></div>
 <div id="columns">
@@ -23,7 +25,7 @@
 {% endblock %}
 
 <button type="button" onclick="proceed();">Submit</button> 
-
+</form>
 <style>
 /* Prevent the text contents of draggable elements from being selectable. */
 [draggable] {
