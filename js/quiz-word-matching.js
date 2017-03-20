@@ -12,6 +12,10 @@ $(document).ready(function() {
 	var offsetX = canvasOffset.left - 75;
 	var offsetY = canvasOffset.top - 113;
 
+	$(window).resize(function() {
+		refreshLines();
+	});
+
 	var wordPairs = [];	// array that will be used to display words. Words stored here should be CORRECTLY paired
 	function Word(langA, langB) { this.langA = langA; this.langB = langB };
 	
