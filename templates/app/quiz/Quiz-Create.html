@@ -1,51 +1,27 @@
 {% extends "jTemplate.html" %}
 
  {% block title %} WordScramble{% endblock %} 
- {% block head %} 
+ {% block head %}}
 	{{ super() }}
  {% endblock %}
   
 {% block content %}
 	<div class="medium-6 medium-centered large-4 large-centered columns">
 
-    <form action="/quiz/edit/{{ quiz.pk }}/save/" method="post" id='post-form' target="_blank">
+    <form action="/quiz/edit/{{ quiz.pk }}/submit/" method="post" id='post-form'>
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">>
     <div class="row column log-in-form">
     <h4 class="text-center">Create a Quiz</h4>
 		
     
 	<label>Name:
-        <input type="text" id="title" name="title" placeholder="Name of the quiz">
+        <input type="text" id="title" name="title" value="{{ quiz.title }}">
         </label>	
 	<label>Language:
-	<input type="text" id="language" name="language" placeholder="Language of the quiz"></label>	
+	<input type="text" id="language" name="language" value="{{ quiz.language }}"></label>	
 	<label>Current Questions:
-	<div class="button-group inputbuttons">
-	<div id="addAnswer" >
-	<script>
-	$(document).ready(function() {
-	var amount = 0;
-	$('#addField').click(function() {
-		if(amount < 10){
-			$("#addAnswer").append(" <input type=\"text\" class=\"mcinputbox\" name=\"answers[]\" placeholder=\"Type your answer in here\"></br>");
-			amount++;			
-		}
-	});
-	$('#removeField').click(function() {
-		if(amount > 4){
-			console.log("fsdfdsf");
-			$("#addAnswer input:last").remove();
-			$("#addAnswer input:last").remove();
-			$("#addAnswer br:last").remove();
-			amount--;
-		}
-	});}
-    </script>
-     <div class="button-group inputbuttons">
-        <button type="button" class="button" id="addField">Add field</button>
-    <button type="button" class="button" id="removeField">Remove field</button></br>
-    </div>  
-    </div>
+	<input type="text" id="type" name="type" placeholder="Question Type">
+    <button type="submit" class="button addquestionbutton" name="add_question">Add Question</button>
 
 	</label>
 	<div class="buttondiv">

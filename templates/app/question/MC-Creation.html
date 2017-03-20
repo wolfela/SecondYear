@@ -24,7 +24,7 @@
       </div>	<!-- start of title bar -->
       <div class="content scroll-content">		
 
-            <form action="/mc/submit/" method="post" id='post-form' target="_blank">
+            <form action="/mc/submit/" method="post" id='post-form'>
       				<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
               <label><h2 class="mcheading">MCQ Quiz Creation</h2></label>
       <div>
@@ -37,15 +37,14 @@
 				<input id="answers" type="text" class="mcinputbox" name="answers[]" placeholder="Type your answer in here">
         <input id="answers" type="text" class="mcinputbox" name="answers[]" placeholder="Type your answer in here">
         <input id="answers" type="text" class="mcinputbox" name="answers[]" placeholder="Type your answer in here">
-       <input id="quiz" type="text" class="mcinputbox" name="quiz" placeholder="ID">
-       <input id="position" type="text" class="mcinputbox" name="position" placeholder="pos">
        
 
 
 
 
                 </div>
-
+<input id="quiz" type="text" class="mcinputbox" name="quiz" value="{{ quizid }}">
+       <input id="position" type="text" class="mcinputbox" name="position" value="{{ pos }}">
                       <div class="button-group inputbuttons">
           <button type="button" class="button" id="addField">Add field</button>
             <button type="button" class="button" id="removeField">Remove field</button></br>

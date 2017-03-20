@@ -13,14 +13,15 @@ urlpatterns = [
     # Quiz editing functions
     url(r'^quiz/create$', quiz.QuizCreateView.load),
     url(r'^quiz/edit/(?P<pk>\d+)/$', quiz.QuestionEditView.editQuiz, name='editquiz'),
-    url(r'^quiz/edit/(?P<pk>\d+)/save/$', quiz.QuestionEditView.saveQuiz, name='savequiz'),
+    url(r'^quiz/edit/(?P<pk>\d+)/(?P<questiontype>.*)/(?P<questionid>\d+)/$', quiz.QuestionEditView.editQuiz, name='editquizwithquestion'),
+    url(r'^quiz/edit/(?P<pk>\d+)/submit/$', quiz.QuestionEditView.submitQuiz, name='submitquiz'),
     url(r'^quiz/attempt/(?P<pk>\d+)/$', quiz.QuizAttemptView.attemptQuiz, name='attemptquiz'),
     url(r'^quiz/attempt/(?P<pk>\d+)/next/(?P<i>\d+)/$', quiz.QuizAttemptView.nextQuestion, name='nextquestion'),
 
     # Question functions
 
     # Multiple Choice Questions
-    url(r'^mc/$', question.MCCreateView.as_view(), name='mc'),
+    url(r'^mc/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.MCCreateView.as_view(), name='mc'),
     url(r'^mc/submit/$', question.MCCreateView.submitMC, name='submit'),
     url(r'^mc/question/(?P<pk>\d+)/$', question.MCQuestionView.show_question, name='mcquestion'),
 

@@ -4,13 +4,19 @@ from django.template import RequestContext
 from coolbeans.app.forms import MCForm, WMForm, WSForm, GFForm
 from coolbeans.app.models.question import MultipleChoiceModel, WordScrambleQuestionModel, WordMatchingQuestionModel, GapFillQuestionModel
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponseRedirect
 
+def CreateView(type):
+    return eval(type)
 
 class MCCreateView(TemplateView):
     """
     A view for creating Multiple Choice Questions
     """
     template_name = "app/question/MC-Creation.html"
+
+    def get_template(request):
+        return "app/question/MC-Creation.html"
 
     def submitMC(request):
         return MCCreateView.submit(request, 'MC', MCForm)
@@ -57,8 +63,8 @@ class MCCreateView(TemplateView):
                 form.cleaned_data['answers'] = ','.join(answers)
                 formcopy = formtype(request.POST.copy())
                 formcopy.data['answers'] = ','.join(answers)
-                formcopy.save()
-                return redirect(type.lower())
+                saved = formcopy.save()
+                return HttpResponseRedirect('/quiz/edit/' + form.data['quiz'] + '/mc/' + str(saved.pk))
             else:
                 form = formtype()
 
@@ -175,4 +181,3 @@ def save(request, type, formtype):
             form = formtype()
 
     return render(request, pathType, {'form': form}, context_instance=RequestContext(request))
-

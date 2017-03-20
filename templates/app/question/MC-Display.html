@@ -29,7 +29,7 @@
     
     <p class="questions" id=q>{{ question.title }}</p></br>
     <div>
-    <form action="/quiz/attempt/{{ question.quiz }}/next/{{ question.position}}/" method="post" id='post-form' target="_blank">
+    <form action="/quiz/attempt/{{ question.quiz }}/next/{{ question.position}}/" method="post" id='post-form'>
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     {% if question.answers != "" %}
     {% set list = question.answers %}

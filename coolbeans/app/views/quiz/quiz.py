@@ -1,6 +1,7 @@
 from django.views import View
 from coolbeans.app.forms import QuizForm
 from coolbeans.app.models.quiz import QuizModel
+from coolbeans.app.views.question import CreateView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 
@@ -27,20 +28,37 @@ class QuizCreateView(View):
 class QuestionEditView(View):
     template_name = "app/quiz/Quiz-Create.html"
 
-    def editQuiz(request, pk):
+    def submitQuiz(request, pk):
+        if 'save_form' in request.POST:
+            return QuestionEditView.saveQuiz(request, pk)
+        elif 'add_question' in request.POST:
+            return QuestionEditView.addQuestion(request, pk)
+
+    def addQuestion(request, pk):
         quiz = get_object_or_404(QuizModel, pk=pk)
+        quiz.title = request.POST.get('title')
+        quiz.language = request.POST.get('language')
+        quiz.save()
+        type = request.POST.get('type')
+        return HttpResponseRedirect('/' + type + '/' + str(pk) + '/' + str(len(quiz.questions)))
+
+    def editQuiz(request, pk, questiontype='', questionid=''):
+        quiz = get_object_or_404(QuizModel, pk=pk)
+        if (questiontype is not '' and questionid is not ''):
+            quiz.questions.append(questiontype + '/question/' + str(questionid))
+            quiz.save()
+            print('QUESTIONS:')
+            print(quiz.questions)
         return render(request, 'app/quiz/Quiz-Create.html', {'quiz': quiz})
 
     def saveQuiz(request, pk):
         instance = get_object_or_404(QuizModel, pk=pk)
         if request.method == 'POST':
-            form = QuizForm(request.POST, instance=instance)
+            form = QuizForm(request.POST)
             if form.is_valid():
-                questions = request.POST.getlist('questions')
-                form.cleaned_data['questions'] = ','.join(questions)
-                formcopy = QuizForm(request.POST.copy())
-                formcopy.data['questions'] = ','.join(questions)
-                formcopy.save()
+                instance.title = form.data['title']
+                instance.language = form.data['language']
+                instance.save()
                 return HttpResponseRedirect('/')
             else:
                 form = QuizForm()
@@ -49,8 +67,13 @@ class QuizAttemptView(View):
 
     def attemptQuiz(request, pk):
         instance = get_object_or_404(QuizModel, pk=pk)
+        print('QUESTIONS:')
+        print(instance.questions)
         return HttpResponseRedirect('/' + instance.questions[0])
 
     def nextQuestion(request, pk, i):
         instance = get_object_or_404(QuizModel, pk=pk)
-        return HttpResponseRedirect('/' + instance.questions[int(i)])
+        if (int(i)+1 < len(instance.questions)):
+            return HttpResponseRedirect('/' + instance.questions[int(i)+1])
+        else:
+            return HttpResponseRedirect('/')
