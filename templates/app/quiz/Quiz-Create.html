@@ -1,0 +1,46 @@
+{% extends "jTemplate.html" %}
+
+ {% block title %} WordScramble{% endblock %} 
+ {% block head %} 
+	{{ super() }}
+ {% endblock %}
+  
+{% block content %}
+	<div class="medium-6 medium-centered large-4 large-centered columns">
+
+    <form action="/quiz/edit/{{ quiz.pk }}/save/" method="post" id='post-form' target="_blank">
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">>
+    <div class="row column log-in-form">
+    <h4 class="text-center">Create a Quiz</h4>
+		
+    
+	<label>Name:
+        <input type="text" id="title" name="title" placeholder="Name of the quiz">
+        </label>	
+	<label>Language:
+	<input type="text" id="language" name="language" placeholder="Language of the quiz"></label>	
+	<label>Current Questions:
+    	<input type="text" id="questions" name="questions" placeholder="URL of Question">
+	<input type="text" id="questions" name="questions" placeholder="URL of Question">
+	<div class="buttondiv">
+              <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
+              <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
+        </div>
+	</label>
+
+      
+      </div>
+    </form>
+	
+    </div>
+{% endblock %}
+
+{% block sidebarContent %}
+	<a href="#">Create Quiz</a>
+    <a href="#">View Quizzes</a>
+{% endblock %}
+
+
+
+
+

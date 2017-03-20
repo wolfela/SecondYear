@@ -71,6 +71,7 @@ class MultipleChoiceModel(BaseQuestionModel):
     """
     An MCQ Question Type.
     """
+    quiz = CharField(max_length=500, blank=True)
     title = CharField(max_length=500, blank=False)
     answers = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=True, null=True), blank=True)
     correct = CharField(max_length=255, blank=False)
