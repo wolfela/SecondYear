@@ -5,22 +5,21 @@ $(document).ready(function() {
 	// canvas setup for drawing lines between boxes
 	var canvas = document.getElementById('my-canvas');
 	var context = canvas.getContext('2d');
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
 	context.lineWidth = 2;
 
 	var $canvas = $('#my-canvas');
 	var canvasOffset = $canvas.offset();
-	var offsetX = canvasOffset.left;
-	var offsetY = canvasOffset.top;
+	var offsetX = canvasOffset.left - 75;
+	var offsetY = canvasOffset.top - 113;
 
 	var wordPairs = [];	// array that will be used to display words. Words stored here should be CORRECTLY paired
 	function Word(langA, langB) { this.langA = langA; this.langB = langB };
 	
 	// ADD ACTUAL WORD PAIRS BETWEEN HERE...
-
+	
 	// ...AND HERE
 
+	// if no words were added, the below ones will be used to demonstrate the display
 	if(wordPairs.length === 0) {
 		wordPairs.push(new Word('wordA1', 'wordB1'));
 		wordPairs.push(new Word('wordA2', 'wordB2'));
