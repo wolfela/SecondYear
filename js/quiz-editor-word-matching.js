@@ -1,5 +1,7 @@
 var wordPairs = [];
+var rows = [];
 function Word(langA, langB) { this.langA = langA; this.langB = langB };
+function Row(row, word) { this.row = row, this.word = word };
 
 $(document).ready(function() {
 
@@ -44,12 +46,15 @@ var addWordEditor = function(array) {
 	
 	}
 
+	rows = [];
 	for(var j = 0; j < pairs.length; j++) {
 		var row = '<tr id="pair' + j + '"></tr>';
-		var wordA = '<td><input type="text" class="editor-input" name="listA[]" id="wordA' + j + '" value="' + pairs[j].langA + '" placeholder="<insert language A here>" aria-describedby="exampleHelpTex"></td>';
-		var wordB = '<td><input type="text" class="editor-input"  name="listB[]" id="wordB' + j + '" value="' + pairs[j].langB + '" placeholder="<insert language B here>" aria-describedby="exampleHelpTex"></td>';
+		var wordA = '<td><input type="text" class="editor-input" name="wordA' + j + '" id="wordA' + j + '" value="' + pairs[j].langA + '" placeholder="<insert language A here>" aria-describedby="exampleHelpTex"></td>';
+		var wordB = '<td><input type="text" class="editor-input"  name="wordB' + j + '" id="wordB' + j + '" value="' + pairs[j].langB + '" placeholder="<insert language B here>" aria-describedby="exampleHelpTex"></td>';
 		var deleteButton = '<td><button type="button" class="alert button editor-delete" id="editor-delete' + j + '">Delete</button></td></tr>';
 		
+		rows.push(new Row(j, pairs[j]));
+
 		$('#editing-table').append(row);
 		$('#pair' + j).append(wordA + wordB + deleteButton);
 
@@ -58,21 +63,43 @@ var addWordEditor = function(array) {
 			pairs.splice(num, 1);
 			addWordEditor(pairs);
 		});
+
+		$('#wordA' + j).on('input', function() {
+			var num = parseInt($(this).attr('id').substring(5));
+			rows[num].word.langA = $('#wordA' + num).val();
+		});
+
+		$('#wordB' + j).on('input', function() {
+			var num = parseInt($(this).attr('id').substring(5));
+			rows[num].word.langB = $('#wordB' + num).val();
+		});
 		
 	}
-
+	
 	// adding add button
 	$('#editing-table').append('<td><a class="button editor-add" id="add-pair-button">Add</a></td>');
+	$('#add-pair-button').off('click');
 	$('#add-pair-button').click(function() {
-		var newPairs = [];
-		for(var w = 0; w < pairs.length; w++) {
-			pairs[w].langA = $('#wordA' + w).val();
-			pairs[w].langB = $('#wordB' + w).val();
-		}
 		pairs.push(new Word('', ''));
 		addWordEditor(pairs);
 		
 	});
 
-	
 }
+
+function printPairs() {
+	for(var i = 0; i < rows.length; i++) {
+		document.writeln('(' + rows[i].word.langA + ',' + rows[i].word.langB + ')');
+	}
+}
+
+function getPairs() {
+	var array = [];
+	for(var i = 0; i < rows.length; i++) {
+		array.push(rows[i].word);
+	}
+
+	return array;
+}
+
+
