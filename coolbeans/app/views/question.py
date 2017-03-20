@@ -6,7 +6,7 @@ from coolbeans.app.forms import MCForm, WMForm, WSForm, GFForm
 from coolbeans.app.models.question import MultipleChoiceModel, WordScrambleQuestionModel, WordMatchingQuestionModel, GapFillQuestionModel, CrosswordQuestionModel, BaseQuestionModel
 from coolbeans.app.models.quiz import QuizModel
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 
 
@@ -163,6 +163,7 @@ class CWCreateView(TemplateView):
                                                  x=element['x'],y=element['y'],clue=element['clue'],
                                                  answer=element['word'])
 
+        print(base.id)
         message = "yes"
         return HttpResponse(message)
 
@@ -171,8 +172,12 @@ class CWQuestionView(TemplateView):
     template_name = "app/question/CW-Display.html"
 
     def show_question(request, pk):
-        question = get_object_or_404(GapFillQuestionModel, pk=pk)
-        return render(request, 'app/question/CW-Display.html', {'question': question})
+
+        question = get_object_or_404(BaseQuestionModel, pk=pk)
+        all = question.crosswordquestionmodel_set.all()
+        dictionaries = [obj.as_dict() for obj in all]
+
+        return JsonResponse({'data': dictionaries})
 
 def submit(request, type, formtype):
     if 'save_form' in request.POST:

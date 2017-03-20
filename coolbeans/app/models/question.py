@@ -218,3 +218,12 @@ class CrosswordQuestionModel(TimeStampedModel, SafeDeleteMixin):
         """
 
         return choice==self.answer
+
+    def as_dict(self):
+        return {
+            "direction": self.direction,
+            "length": self.length,
+            "x": self.x,
+            "y": self.y,
+            "clue": self.clue
+        }
