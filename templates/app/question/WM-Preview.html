@@ -12,7 +12,7 @@
 	<!-- Canvas for drawing lines -->
 	<canvas id="my-canvas"></canvas>
 
-	    	 <form method="get">
+	    	 <form method="get" id="form">
       <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
 
@@ -29,7 +29,7 @@
 
     {% for answer in list|shuffle %}
 
-    <button type="button" id="langA-word1-button" class="button grid-button">{{ answer|e }}</button>
+    <button type="button" id="langA-word{{ loop.index }}-button" class="button grid-button">{{ answer|e }}</button>
 
     {% endfor %}
              {% endif %}
@@ -43,7 +43,8 @@
 
     {% for answer in list|shuffle %}
 
-    <button type="button" id="langA-word1-button" class="button grid-button">{{ answer|e }}</button>
+
+    <button type="button" id="langB-word{{ loop.index }}-button" class="button grid-button">{{ answer|e }}</button>
 
     {% endfor %}
              {% endif %}
