@@ -82,8 +82,9 @@ var addWordEditor = function(array) {
 	$('#add-pair-button').click(function() {
 		pairs.push(new Word('', ''));
 		addWordEditor(pairs);
-		
 	});
+
+	document.writeln(getLefts());
 
 }
 
@@ -93,10 +94,32 @@ function printPairs() {
 	}
 }
 
+
+
+// USE THESE FUNCTIONS TO GET WORDS FOR BACKEND PURPOSES
+
 function getPairs() {
 	var array = [];
 	for(var i = 0; i < rows.length; i++) {
 		array.push(rows[i].word);
+	}
+
+	return array;
+}
+
+function getLefts() {
+	var array = [];
+	for(var i = 0; i < rows.length; i++) {
+		array.push(rows[i].word.langA);
+	}
+
+	return array;
+}
+
+function getRights() {
+	var array = [];
+	for(var i = 0; i < rows.length; i++) {
+		array.push(rows[i].word.langB);
 	}
 
 	return array;
