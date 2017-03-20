@@ -1,18 +1,20 @@
 from django.conf.urls import url
 from django.views.generic import RedirectView
 
-from coolbeans.app.views import base, user, question
-from coolbeans.app.views.quiz import attempt
+from coolbeans.app.views import base, question
 from coolbeans.app.views.quiz import quiz
 
 urlpatterns = [
     url(r'^$', base.IndexView.as_view()),
 
     # Quiz functions
-    url(r'^quiz/(?P<pk>\d+)/$', attempt.QuizView.as_view()),
+    # url(r'^quiz/(?P<pk>\d+)/$', attempt.QuizView.as_view()),
 
     # Quiz editing functions
-    url(r'^quiz/create$', quiz.QuizCreateView.as_view()),
+    url(r'^quiz/create$', quiz.QuizCreateView.load),
+    url(r'^quiz/edit/(?P<pk>\d+)/$', quiz.QuestionEditView.editQuiz, name='editquiz'),
+    url(r'^quiz/edit/(?P<pk>\d+)/save/$', quiz.QuestionEditView.saveQuiz, name='savequiz'),
+    url(r'^quiz/attempt/(?P<pk>\d+)/$', quiz.QuizAttemptView.attemptQuiz, name='attemptquiz'),
 
     # Question functions
 

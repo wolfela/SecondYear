@@ -17,7 +17,6 @@ import random
 
 from coolbeans.app.exceptions import HTMLParseError
 from coolbeans.app.models.base import TimeStampedModel
-from coolbeans.app.models.quiz import QuizModel
 
 
 
@@ -27,8 +26,6 @@ class BaseQuestionModel(TimeStampedModel, SafeDeleteMixin):
     """
 
     _safedelete_policy = SOFT_DELETE
-
-    quiz = ForeignKey(QuizModel, on_delete=CASCADE, blank=True, null=True)
     display_with = ForeignKey('self', on_delete=CASCADE, blank=True, null=True)
     display_order = PositiveIntegerField(blank=True, default=1)
 

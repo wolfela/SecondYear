@@ -1,6 +1,6 @@
 from django.db import models
-from django.db.models import ListCharField, CharField, TextField, DateTimeField
-from django.db.models import ForeignKey
+from django.db.models import CharField, TextField, DateTimeField
+from django_mysql.models import ListCharField
 from safedelete import SOFT_DELETE
 from safedelete.models import SafeDeleteMixin
 
@@ -14,7 +14,7 @@ class QuizModel(TimeStampedModel, SafeDeleteMixin):
     """
     _safedelete_policy = SOFT_DELETE
 
-    language = CharField(max_length=255)
-    title = CharField(max_length=255)
-    author = CharField(max_length=255)
+    language = CharField(max_length=255, blank=True)
+    title = CharField(max_length=255, blank=True)
+    author = CharField(max_length=255, blank=True)
     questions = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=True, null=True), blank=True)
