@@ -84,7 +84,7 @@ var addWordEditor = function(array) {
 		addWordEditor(pairs);
 	});
 
-	document.writeln(getLefts());
+	//document.writeln(getPairs()[0].langA);
 
 }
 
