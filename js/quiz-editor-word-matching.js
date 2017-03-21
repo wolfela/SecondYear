@@ -6,11 +6,11 @@ function Row(row, word) { this.row = row, this.word = word };
 $(document).ready(function() {
 
 	if(wordPairs.length === 0) {
-		wordPairs.push(new Word('wordA1ddddddgrtrehth', 'wordB1ghpowh'));
-		wordPairs.push(new Word('wordA2fbdfbd', 'wordB2drfbhdfhbd'));
-		wordPairs.push(new Word('wordA3', 'wordB3'));
-		wordPairs.push(new Word('wordA4edgfew', 'wordB4esfesf'));
-		wordPairs.push(new Word('wordA5', 'wordB5'));
+		wordPairs.push(new Word('Kinga', 'Bojarczuk'));
+		wordPairs.push(new Word('Ajeya', 'Jog'));
+		wordPairs.push(new Word('Tatiana', 'Kmita'));
+		wordPairs.push(new Word('Jared', 'Leto'));
+		wordPairs.push(new Word('Mehdi', 'Ramadgdfgg'));
 	}
 
 	addWordEditor(wordPairs);
