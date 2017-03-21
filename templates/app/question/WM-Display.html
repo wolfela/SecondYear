@@ -1,1 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../static/css/app.css">
+	<link rel="stylesheet" href="../../../static/css/quiz-word-matching.css"
+    </head>
+    <body>
+	
+	<div class="container">
+      		<div class="title-bar">
+        		<span class="title-bar-title">LQ 		//		STUDENT</span>
+        		<div class="title-bar-right">
+         			<button class="logoutButton">LOGOUT</button>
+        		</div>
+			
+      		</div>
+	      	<div class="content"> 
+			<div id="main">
+				<!-- Canvas for drawing lines -->
+				<canvas id="my-canvas" width="700" height="500"></canvas>
+	
+				<!-- Button grid -->
+				<div id="button-grid" class="center">
+					<!-- Left button grid -->
+					<div id="button-grid-left">
+			
+					</div><!-- end of Left button grid-->
+				
+					<!-- Right button grid -->
+					<div id="button-grid-right">
+		
+					</div><!-- end of Right button grid-->
+
+				</div><!-- end of Button grid -->
+			</div>
+     		</div>	
+	</div>
+
+    	<div class="sidebar">
+      		<button class="hamburger" type="button">
+        		<span class="topLine"></span>
+        		<span class="innerLine"></span>
+        		<span class="bottomLine"></span>
+      		</button>
+      		<div class="menu-content">
+        		<nav class="menu-left">
+          			<a href="#">View Quizzes </a>
+          
+        		</nav>
+    		</div>
+   	</div>
+
+
+   	<script src="../../../node_modules/jquery/dist/jquery.js"></script>
+   	<script src="../../../node_modules/what-input/dist/what-input.js"></script>
+  	<script src="../../../node_modules/foundation-sites/dist/js/foundation.js"></script>
+	<script src="../../../static/js/quiz-word-matching.js"></script>
+    </body>
+</html>

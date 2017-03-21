@@ -52,6 +52,13 @@ const jsPaths = {
 gulp.task('scss', () => {
     return gulp.src(scssPaths.srcs)
         .pipe(foreach(function(stream, file) {
+    ],
+    dest: `${dirs.dest}` // For some reason vinyl-source-stream will prepend /js to the final output path
+};
+
+gulp.task('scss', () => {
+    return gulp.src(scssPaths.srcs)
+        .pipe(foreach(function(stream, file) {
             return stream
                 .pipe(gulpif(!util.env.production, sourcemaps.init()))
                 .pipe(sass.sync({

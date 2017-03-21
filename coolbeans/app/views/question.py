@@ -2,7 +2,7 @@ import json
 from django.views.generic import TemplateView
 from django.template import RequestContext
 
-from coolbeans.app.forms import MCForm, WMForm, WSForm, GFForm
+from coolbeans.app.forms import MCForm, WMForm, WSForm, GFForm, TestForm
 from coolbeans.app.models.question import MultipleChoiceModel, WordScrambleQuestionModel, WordMatchingQuestionModel, GapFillQuestionModel, CrosswordQuestionModel, BaseQuestionModel
 from coolbeans.app.models.quiz import QuizModel
 from django.shortcuts import render, get_object_or_404, redirect
@@ -93,7 +93,62 @@ class WMCreateView(TemplateView):
 
 
     def submitWM(request):
-        return submit(request, 'WM', WMForm)
+        return WMCreateView.submit(request, 'WM', WMForm)
+
+    def submit(request, type, formtype):
+        if 'save_form' in request.POST:
+            return WMCreateView.save(request, type, formtype)
+        elif 'preview_form' in request.POST:
+            return WMCreateView.preview(request, type, formtype)
+        elif 'cancel_form' in request.POST:
+            return cancel(request, type, formtype)
+
+
+    def preview(request, type, formtype):
+        pathDisplay = 'app/question/' + type + '-Preview.html'
+        """
+        Method for previewing the question
+        :return:
+        """
+        if request.method == 'POST':
+            form = formtype(request.POST)
+            if form.is_valid():
+                listA = request.POST.getlist('listA[]')
+                form.cleaned_data['listA'] = ','.join(listA)
+                formcopy = formtype(request.POST.copy())
+                formcopy.data['listA'] = ','.join(listA)
+                listB = request.POST.getlist('listB[]')
+                form.cleaned_data['listB'] = ','.join(listB)
+                formcopy.data['listB'] = ','.join(listB)
+                return render(request, pathDisplay, {'form': formcopy})
+        else:
+            form = formtype()
+
+        return render(request, pathDisplay, {'form': form})
+
+
+    def save(request, type, formtype):
+        pathCreation = 'app/question/' + type + '-Creation.html'
+        pathType = '/' + type
+        """
+        Method for saving the question, right now its a preview as well, to be fixed
+        :return:
+        """
+        if request.method == 'POST':
+            form = formtype(request.POST)
+            if form.is_valid():
+                listA = request.POST.getlist('listA[]')
+                form.cleaned_data['listA'] = ','.join(listA)
+                formcopy = formtype(request.POST.copy())
+                formcopy.data['listA'] = ','.join(listA)
+                listB = request.POST.getlist('listB[]')
+                form.cleaned_data['listB'] = ','.join(listB)
+                formcopy.data['listB'] = ','.join(listB)
+                formcopy.save()
+                return redirect(type.lower())
+            else:
+                form = formtype()
+        return render(request, pathType, {'form': form}, context_instance=RequestContext(request))
 
 
 class WMQuestionView(TemplateView):
@@ -102,6 +157,9 @@ class WMQuestionView(TemplateView):
     def show_question(request, pk):
         question = get_object_or_404(WordMatchingQuestionModel, pk=pk)
         return render(request, 'app/question/WM-Display.html', {'question': question})
+
+class WMPreviewView(TemplateView):
+    template_name = "app/question/WM-Preview.html"
 
 
 class WSCreateView(TemplateView):
@@ -217,4 +275,3 @@ def save(request, type, formtype):
             form = formtype()
 
     return render(request, pathType, {'form': form}, context_instance=RequestContext(request))
-
