@@ -23,13 +23,23 @@ $(document).ready(function() {
 	
 	// ...AND HERE
 
+	var opener = window.opener;
+    if(opener) {
+        var data = opener.getLefts();
+        var right = opener.getRights();
+    }
+
+    console.log(data);
+
+    for (var a=0; a < data.length; a++){
+
+    	wordPairs.push(new Word(data[a], right[a]));
+    }
+
+
 	// if no words were added, the below ones will be used to demonstrate the display
 	if(wordPairs.length === 0) {
-		wordPairs.push(new Word('wordA1', 'wordB1'));
-		wordPairs.push(new Word('wordA2', 'wordB2'));
-		wordPairs.push(new Word('wordA3', 'wordB3'));
-		wordPairs.push(new Word('wordA4', 'wordB4'));
-		wordPairs.push(new Word('wordA5', 'wordB5'));
+		wordPairs.push(new Word('SAMPLE', 'WORDS'));
 	}
 
 	// actual arrays used for displaying words

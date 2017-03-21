@@ -12,9 +12,6 @@
 	<!-- Canvas for drawing lines -->
 	<canvas id="my-canvas"></canvas>
 
-	    	 <form method="get" id="form">
-      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-
 
 
 
@@ -24,37 +21,18 @@
 		<!-- Left button grid -->
 		<div id="button-grid-left">
 
-		    {% if form.listA.value() != "" %}
-    {% set list = form.listA.value().split(',') %}
-
-    {% for answer in list|shuffle %}
-
-    <button type="button" id="langA-word{{ loop.index }}-button" class="button grid-button">{{ answer|e }}</button>
-
-    {% endfor %}
-             {% endif %}
 
 		</div><!-- end of Left button grid-->
 				
 		<!-- Right button grid -->
 		<div id="button-grid-right">
-		    {% if form.listB.value() != "" %}
-    {% set list = form.listB.value().split(',') %}
 
-    {% for answer in list|shuffle %}
-
-
-    <button type="button" id="langB-word{{ loop.index }}-button" class="button grid-button">{{ answer|e }}</button>
-
-    {% endfor %}
-             {% endif %}
 		</div><!-- end of Right button grid-->
 
 	</div><!-- end of Button grid -->
 
 
 
-    </form>
 
 
     <div id="message" class="callout">

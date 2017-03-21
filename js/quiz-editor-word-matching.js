@@ -84,7 +84,6 @@ var addWordEditor = function(array) {
 		addWordEditor(pairs);
 	});
 
-	document.writeln(getLefts());
 
 }
 
@@ -98,7 +97,7 @@ function printPairs() {
 
 // USE THESE FUNCTIONS TO GET WORDS FOR BACKEND PURPOSES
 
-function getPairs() {
+window.getPairs = function() {
 	var array = [];
 	for(var i = 0; i < rows.length; i++) {
 		array.push(rows[i].word);
@@ -107,7 +106,7 @@ function getPairs() {
 	return array;
 }
 
-function getLefts() {
+window.getLefts=function() {
 	var array = [];
 	for(var i = 0; i < rows.length; i++) {
 		array.push(rows[i].word.langA);
@@ -116,7 +115,7 @@ function getLefts() {
 	return array;
 }
 
-function getRights() {
+window.getRights= function() {
 	var array = [];
 	for(var i = 0; i < rows.length; i++) {
 		array.push(rows[i].word.langB);
@@ -125,4 +124,63 @@ function getRights() {
 	return array;
 }
 
+
+// using jQuery
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+
+// $("#save").click(function () {
+
+// var wordmatch_data = getCrosswordData();
+// var data = JSON.stringify(crossword_data);
+
+// $.ajax({
+//     url : './submit/',
+//     type: 'POST',
+//     data: data,
+//     contentType:'application/json',
+//     dataType: 'text',
+//     success: function(message){
+
+//         alert("saved!");
+//         window.location.href = "/wherever/quiz/create/is";
+//     },
+//     error: function(){
+//         alert('nope');
+//     }
+// });
+// });
+
+$("#preview").click(function () {
+
+ window.open("http://localhost:8000/wm/preview");
+
+});
 

@@ -149,6 +149,9 @@ class WMQuestionView(TemplateView):
         question = get_object_or_404(WordMatchingQuestionModel, pk=pk)
         return render(request, 'app/question/WM-Display.html', {'question': question})
 
+class WMPreviewView(TemplateView):
+    template_name = "app/question/WM-Preview.html"
+
 
 class WSCreateView(TemplateView):
     """
