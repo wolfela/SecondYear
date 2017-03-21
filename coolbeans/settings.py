@@ -62,7 +62,7 @@ TEMPLATES = [
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': False,
         'OPTIONS': {
-            'environment': 'coolbeans.jinja2.Environment'
+            'environment': 'coolbeans.jinja2.JinjaEnvironment'
         },
     },
 ]

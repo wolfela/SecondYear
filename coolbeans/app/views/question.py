@@ -62,6 +62,7 @@ class MCCreateView(TemplateView):
                 answers = request.POST.getlist('answers[]')
                 form.cleaned_data['answers'] = ','.join(answers)
                 formcopy = formtype(request.POST.copy())
+                answers.append(request.POST.get('correct'))
                 formcopy.data['answers'] = ','.join(answers)
                 saved = formcopy.save()
                 return HttpResponseRedirect('/quiz/edit/' + form.data['quiz'] + '/mc/' + str(saved.pk))

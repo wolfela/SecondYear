@@ -51,7 +51,7 @@ if [ "$1" == "setup" ]; then
 elif [ "$1" == "run" ]; then
   run
 elif [ "$1" == "rebuild" ]; then
-  docker-compose build
+  docker-compose build --no-cache=true
 elif [ "$1" == "reinstall-deps" ]; then
   install-python-deps
   install-node-modules
