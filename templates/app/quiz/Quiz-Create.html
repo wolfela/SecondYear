@@ -9,7 +9,7 @@
 	<div class="medium-6 medium-centered large-4 large-centered columns">
 
     <form action="/quiz/edit/{{ quiz.pk }}/submit/" method="post" id='post-form'>
-    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">>
     <div class="row column log-in-form">
     <h4 class="text-center">Create a Quiz</h4>
 		
@@ -33,6 +33,10 @@
       
       </div>
     </form>
+
+    {% for question in quiz.questions%}
+    <p>{{ question }}</p>
+    {% endfor %}
 	
     </div>
 {% endblock %}
