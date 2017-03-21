@@ -45,6 +45,8 @@ const jsPaths = {
         `${dirs.jsSrc}/generalFunctions.js`
     ],
     dest: `${dirs.dest}` // For some reason vinyl-source-stream will prepend /js to the final output path
+    ],
+    dest: `${dirs.dest}` // For some reason vinyl-source-stream will prepend /js to the final output path
 };
 
 gulp.task('scss', () => {

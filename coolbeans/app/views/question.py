@@ -1,9 +1,18 @@
+import json
 from django.views.generic import TemplateView
 from django.template import RequestContext
 
 from coolbeans.app.forms import MCForm, WMForm, WSForm, GFForm
-from coolbeans.app.models.question import MultipleChoiceModel, WordScrambleQuestionModel, WordMatchingQuestionModel, GapFillQuestionModel
+from coolbeans.app.models.question import MultipleChoiceModel, WordScrambleQuestionModel, WordMatchingQuestionModel, GapFillQuestionModel, CrosswordQuestionModel, BaseQuestionModel
+from coolbeans.app.models.quiz import QuizModel
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
+from django.core import serializers
+
+
+# FOR PRINTING SAVED OBJECTS:
+# data = serializers.serialize("json", CrosswordQuestionModel.objects.all(), indent=4)
+# print(data)
 
 
 class MCCreateView(TemplateView):
@@ -131,6 +140,39 @@ class GFQuestionView(TemplateView):
     def show_question(request, pk):
         question = get_object_or_404(GapFillQuestionModel, pk=pk)
         return render(request, 'app/question/GF-Display.html', {'question': question})
+
+
+
+
+class CWPreviewView(TemplateView):
+    template_name = "app/question/CW-Preview.html"
+
+
+class CWCreateView(TemplateView):
+    """
+    A view for creating Word Scramble Questions
+    """
+    template_name = "app/question/CW-Creation.html"
+
+    def submit(request):
+        json_data = json.loads(request.body.decode('utf-8'))
+        q = QuizModel.objects.create()
+        base = BaseQuestionModel.objects.create(quiz=q)
+        for element in json_data['data']:
+            CrosswordQuestionModel.objects.create(question=base, direction=element['direction'], length=element['length'],
+                                                 x=element['x'],y=element['y'],clue=element['clue'],
+                                                 answer=element['word'])
+
+        message = "yes"
+        return HttpResponse(message)
+
+
+class CWQuestionView(TemplateView):
+    template_name = "app/question/CW-Display.html"
+
+    def show_question(request, pk):
+        question = get_object_or_404(GapFillQuestionModel, pk=pk)
+        return render(request, 'app/question/CW-Display.html', {'question': question})
 
 def submit(request, type, formtype):
     if 'save_form' in request.POST:

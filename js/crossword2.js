@@ -16,11 +16,6 @@ function initCrossword(id) {
     crosswordData.data = [];
 }
 
-$(document).ready(function() {
-    initCrossword('#crosswordEditor')
-});
-
-
 
 //Used to make crossword quiz
 function initCrosswordQuestion(id) {
@@ -36,6 +31,10 @@ function createCrossword(id, size, question){
     drawGrid(size, question)
 }
 
+$("#preview").click(function () {
+    console.log(crosswordData.data[0].word);
+    console.log("fdfsdfd");
+});
 
 //Draws blank crossword grid
 function drawGrid(size, bool){
@@ -72,6 +71,23 @@ function drawBorders() {
     }
 }
 
+$(document).ready(function() {
+
+    var opener = window.opener;
+    if(opener) {
+        var data = opener.getPreviewData();
+    }
+
+    initCrosswordQuestion('#crosswordEditor');
+    var exampleCrossword = {
+        data:[
+            {'direction':'D','length':'5','x':'0','y':'1','clue':'Who made this quiz'},
+            {'direction':'A','length':'5','x':'4','y':'0','clue':'Strongly Dislike'},
+            {'direction':'D','length':'10','x':'0','y':'4','clue':'Worst language'}
+        ]
+    };
+    drawQuestions(data);
+});
 
 /**
 
@@ -229,11 +245,6 @@ function editorActions(){
 }
 
 function getCrosswordData() {
-    console.log(crosswordData);
-    return crosswordData;
-}
-
- window.getPreviewData = function() {
     console.log(crosswordData);
     return crosswordData;
 }
@@ -416,30 +427,37 @@ $.ajaxSetup({
 
 $("#save").click(function () {
 
-var crossword_data = getCrosswordData();
-var data = JSON.stringify(crossword_data);
+var a1=$("#a1").val();
+var a2=$("#a2").val();
+var a3=$("#a3").val();
+var a4=$("#a4").val();
+var title=$("#title").val();
+var list=[a2,a3,a4];
+var myJson = JSON.stringify(list); 
+var d = getCrosswordData();
+var n = JSON.stringify(d);
+var ans = {data: [{"d":'dsds'},{"d":'dsds'}]};
+var ns = JSON.stringify(ans);
+var easy = JSON.stringify({'kinga': 'ola'});
 
+console.log(a1);
+console.log(a2);
 $.ajax({
-    url : './submit/',
+    url : './validate/',
     type: 'POST',
-    data: data,
+    data: n,
     contentType:'application/json',
     dataType: 'text',
-    success: function(message){
+    success: function(){
+            alert("woo!");
 
-        alert("saved!");
-        window.location.href = "/wherever/quiz/create/is";
+        window.open("http://localhost:8000/cw/preview")
+       // window.location.assign('http://localhost:8000/mcq2/');
+        //$().redirect('http://localhost:8000/mcq2/', {'a1': 'value1', 'a2': 'value2'});
     },
     error: function(){
         alert('nope');
     }
 });
-});
-
-$("#preview").click(function () {
-
-
- window.open("http://localhost:8000/cw/preview");
-
 });
 

@@ -50,6 +50,13 @@ urlpatterns = [
     url(r'^gf/submit/$', question.GFCreateView.submitGF, name='submit'),
     url(r'^gf/question/(?P<pk>\d+)/$', question.GFQuestionView.show_question, name='gfquestion'),
 
+    # Crossword Questions
+    url(r'^cw/$', question.CWCreateView.as_view(), name='cw'),
+    url(r'^cw/submit/$', question.CWCreateView.submit, name='submit'),
+    url(r'^cw/preview/$', question.CWPreviewView.as_view(), name='preview'),
+    url(r'^cw/question/(?P<pk>\d+)/$', question.CWQuestionView.show_question, name='cwquestion'),
+
+
 
     # TODO: Admin routes
 ]

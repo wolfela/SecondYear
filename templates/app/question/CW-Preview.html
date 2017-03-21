@@ -5,9 +5,13 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template</title>
-    <link rel="stylesheet" href="./static/css/app.css">
-    <link rel="stylesheet" href="./static/css/student-app.css">
+    <link rel="stylesheet" href="../../../static/css/app.css">
+    <link rel="stylesheet" href="../../../static/css/student-app.css">
     <link href="https://fonts.googleapis.com/css?family=Lato|Oswald&amp;subset=latin-ext" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.js"></script>
+    <script type="text/javascript" src="../../../static/js/mc-creation-update.js"></script>
+    <script src="../../../node_modules/jquery/dist/jquery.js"></script>
   </head>
   <body>
     <div class="container">
@@ -51,19 +55,7 @@
     <script src="./node_modules/what-input/dist/what-input.js"></script>
     <script src="./node_modules/foundation-sites/dist/js/foundation.js"></script>
     <script src="./js/menuAnimation.js"></script>
-    <script src="./static/js/crossword.js"></script>
-    <script type="text/javascript" >
-        $(document).ready(function() {
-            initCrosswordQuestion('#crosswordEditor');
-            var exampleCrossword = {
-                data:[
-                    {'direction':'D','length':'5','x':'0','y':'1','clue':'Who made this quiz'},
-                    {'direction':'A','length':'5','x':'4','y':'0','clue':'Strongly Dislike'},
-                    {'direction':'D','length':'10','x':'0','y':'4','clue':'Worst language'}
-                ]
-            };
-            drawQuestions(exampleCrossword)
-        })
-    </script>
+    <script src="../../../static/js/crossword2.js"></script>
+
   </body>
 </html>

@@ -190,3 +190,31 @@ class GapFillQuestionModel(BaseQuestionModel):
             except (JSONDecodeError, ValidationError) as e:
                 raise HTMLParseError("Gap JSON parsing failed: Invalid syntax") from e
         return True
+
+
+class CrosswordQuestionModel(TimeStampedModel, SafeDeleteMixin):
+    """
+    A Word Scrabble Question Type.
+    """
+    question = ForeignKey(BaseQuestionModel, on_delete=CASCADE, blank=True, null=True)
+    direction = CharField(max_length=500)
+    length = PositiveIntegerField()
+    x = PositiveIntegerField()
+    y = PositiveIntegerField()
+    clue = CharField(max_length=500)
+    score = PositiveIntegerField(blank=True, default=1, null=True)
+    answer = CharField(max_length=500)
+
+    class Meta:
+        verbose_name = "Crossword Question"
+        verbose_name_plural = "Crossword Questions"
+
+    def check_answer(self, choice):
+        """
+        Checks whether the supplied answer is correct.
+
+        :param choice: The answer provided
+        :return: bool Whether the answer is correct.
+        """
+
+        return choice==self.answer
