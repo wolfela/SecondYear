@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 	var $canvas = $('#my-canvas');
 	var canvasOffset = $canvas.offset();
-	var offsetX = canvasOffset.left - 75;
+	var offsetX = canvasOffset.left - 20;
 	var offsetY = canvasOffset.top - 113;
 
 	$(window).resize(function() {
