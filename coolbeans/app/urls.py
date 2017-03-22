@@ -29,12 +29,7 @@ urlpatterns = [
     # Word Matching Questions
     url(r'^wm/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.WMCreateView.as_view(), name='wm'),
     url(r'^wm/submit/$', question.WMCreateView.submitWM, name='submit'),
-<<<<<<< HEAD
-    url(r'^wm/preview/$', question.WMPreviewView.as_view(), name='preview'),
     url(r'^wm/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.WMQuestionView.show_question, name='wmquestion'),
-=======
-    url(r'^wm/question/(?P<pk>\d+)/$', question.WMQuestionView.show_question, name='wmquestion'),
->>>>>>> 32e19497fd6a808fd63a8976eb076a2a5c7b902e
 
     # Word Scramble Questions
     url(r'^ws/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.WSCreateView.as_view(), name='ws'),
