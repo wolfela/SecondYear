@@ -83,10 +83,7 @@ class MCQuestionView(TemplateView):
 
     def check_answer(request, pk, score):
         question = get_object_or_404(MultipleChoiceModel, pk=pk)
-        print("THING")
         answer = request.POST.get('answers')
-        print("FORM IS")
-        print(request.POST)
         if question.check_answer(answer):
             score = int(score) + 1
         return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
@@ -163,9 +160,16 @@ class WMCreateView(TemplateView):
 class WMQuestionView(TemplateView):
     template_name = "app/question/WM-Display.html"
 
-    def show_question(request, pk):
+    def show_question(request, pk, score):
         question = get_object_or_404(WordMatchingModel, pk=pk)
-        return render(request, 'app/question/WM-Display.html', {'question': question})
+        return render(request, 'app/question/WM-Display.html', {'question': question, 'score': score})
+
+    def check_answer(request, pk, score):
+        question = get_object_or_404(WordMatchingModel, pk=pk)
+        answer = request.POST.get('answers')
+        if question.check_answer(answer):
+            score = int(score) + 1
+        return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
 
 
 
@@ -210,9 +214,18 @@ class WSCreateView(TemplateView):
 class WSQuestionView(TemplateView):
     template_name = "app/question/WS-Display.html"
 
-    def show_question(request, pk):
+    def show_question(request, pk, score):
         question = get_object_or_404(WordScrambleQuestionModel, pk=pk)
-        return render(request, 'app/question/WS-Display.html', {'question': question})
+        return render(request, 'app/question/WS-Display.html', {'question': question, 'score': score})
+
+    def check_answer(request, pk, score):
+        question = get_object_or_404(WordScrambleQuestionModel, pk=pk)
+        answer = request.POST.get('answer')
+        print("Answer is:")
+        print(request.POST)
+        if question.check_answer(answer):
+            score = int(score) + 1
+        return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
 
 
 class GFCreateView(TemplateView):
@@ -228,9 +241,16 @@ class GFCreateView(TemplateView):
 class GFQuestionView(TemplateView):
     template_name = "app/question/GF-Display.html"
 
-    def show_question(request, pk):
+    def show_question(request, pk, score):
         question = get_object_or_404(GapFillQuestionModel, pk=pk)
-        return render(request, 'app/question/GF-Display.html', {'question': question})
+        return render(request, 'app/question/GF-Display.html', {'question': question, 'score': score})
+
+    def check_answer(request, pk, score):
+        question = get_object_or_404(GapFillQuestionModel, pk=pk)
+        answer = request.POST.get('answers')
+        if question.check_answer(answer):
+            score = int(score) + 1
+        return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
 
 
 class CWPreviewView(TemplateView):
@@ -270,24 +290,25 @@ class CWCreateView(TemplateView):
 class CWQuestionView(TemplateView):
     template_name = "app/question/CW-Display.html"
 
-    def show_question(request, pk):
+    def show_question(request, pk, score):
 
         question = get_object_or_404(BaseQuestionModel, pk=pk)
         all = question.crosswordquestionmodel_set.all()
         dictionaries = [obj.as_dict() for obj in all]
 
-        return JsonResponse({'data': dictionaries})
+        return JsonResponse({'data': dictionaries, 'score': score})
 
-
-class QuizCreateView(TemplateView):
-    template_name = "app/quiz/Quiz-Create.html"
-
-
-
+    def check_answer(request, pk, score):
+        question = get_object_or_404(CrosswordQuestionModel, pk=pk)
+        answer = request.POST.get('answers')
+        if question.check_answer(answer):
+            score = int(score) + 1
+        return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
 
 
 def cancel(request, type, formtype):
     return redirect(type.lower())
+
 
 def preview(request, type, formtype):
     pathDisplay = 'app/question/' + type + '-Preview.html'

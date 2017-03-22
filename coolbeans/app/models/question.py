@@ -175,7 +175,7 @@ class WordScrambleQuestionModel(BaseQuestionModel):
         :return: bool Whether the answer is correct.
         """
 
-        return choice==self.answer
+        return choice == self.answer
 
 
 class GapFillQuestionModel(BaseQuestionModel):

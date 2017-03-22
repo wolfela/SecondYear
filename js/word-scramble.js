@@ -1,4 +1,8 @@
 var cols = document.querySelectorAll('#boxes .box');
+$(document).ready(function() {
+    changeanswer();
+});
+
 [].forEach.call(cols, function(col) {
     col.addEventListener('dragstart', handleDragStart, false);
     col.addEventListener('dragenter', handleDragEnter, false);
@@ -14,7 +18,6 @@ function handleDragOver(e) {
     if (e.preventDefault) {
         e.preventDefault(); // Necessary. Allows us to drop.
     }
-
     e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
 
     return false;
@@ -58,8 +61,13 @@ function handleDrop(e) {
         dragSrcEl.innerHTML = this.innerHTML;
         this.innerHTML = e.dataTransfer.getData('text/html');
     }
-
     return false;
+}
+
+function changeanswer() {
+    var answer = ['1'];
+    document.getElementById('answer').value = answer;
+    console.log();
 }
 
 function proceed() {
