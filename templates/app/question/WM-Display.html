@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../static/css/app.css">
-	<link rel="stylesheet" href="../../../static/css/quiz-word-matching.css"
-    </head>
-    <body>
-	
-	<div class="container">
-      		<div class="title-bar">
-        		<span class="title-bar-title">LQ 		//		STUDENT</span>
-        		<div class="title-bar-right">
-         			<button class="logoutButton">LOGOUT</button>
-        		</div>
-			
-      		</div>
-	      	<div class="content"> 
-			<div id="main">
+{% extends "jTemplate.html" %}
+
+{% block title %}WM-Display{% endblock %}
+
+{% block head %}
+{{ super() }}  
+	<link rel="stylesheet" href="../../../static/css/quiz-word-matching.css">
+{% endblock %}
+
+{% block content %}
+<div id="main">
 				<!-- Canvas for drawing lines -->
 				<canvas id="my-canvas" width="700" height="500"></canvas>
 	
@@ -33,27 +26,16 @@
 
 				</div><!-- end of Button grid -->
 			</div>
-     		</div>	
-	</div>
-
-    	<div class="sidebar">
-      		<button class="hamburger" type="button">
-        		<span class="topLine"></span>
-        		<span class="innerLine"></span>
-        		<span class="bottomLine"></span>
-      		</button>
-      		<div class="menu-content">
-        		<nav class="menu-left">
-          			<a href="#">View Quizzes </a>
-          
-        		</nav>
-    		</div>
-   	</div>
+{% endblock %}
 
 
-   	<script src="../../../node_modules/jquery/dist/jquery.js"></script>
-   	<script src="../../../node_modules/what-input/dist/what-input.js"></script>
-  	<script src="../../../node_modules/foundation-sites/dist/js/foundation.js"></script>
-	<script src="../../../static/js/quiz-word-matching.js"></script>
-    </body>
-</html>
+{% block sidebarContent %}
+  <a href="#">Create Quiz</a>
+  <a href="#">View Quizzes</a>
+{% endblock %}
+
+{% block extraJS %}
+<script type="text/javascript" src="../../../static/js/quiz-editor-word-matching.js"></script>
+{% endblock %}
+
+
