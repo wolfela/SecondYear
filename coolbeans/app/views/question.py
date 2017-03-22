@@ -108,8 +108,34 @@ class WSCreateView(TemplateView):
 
 
     def submitWS(request):
-        return submit(request, 'WS', WSForm)
+        return WSCreateView.submit(request, 'WS', WSForm)
 
+    def save(request, type, formtype):
+        pathCreation = 'app/question/' + type + '-Creation.html'
+        pathType = '/' + type
+        """
+        Method for saving the question, right now its a preview as well, to be fixed
+        :return:
+        """
+        if request.method == 'POST':
+            form = formtype(request.POST)
+            if form.is_valid():
+                print("HERE")
+                saved = form.save()
+                t = type.lower()
+                return HttpResponseRedirect('/quiz/edit/' + form.data['quiz'] + '/ws/' + str(saved.pk))
+            else:
+                form = formtype()
+
+        return render(request, pathType, {'form': form}, context_instance=RequestContext(request))
+
+    def submit(request, type, formtype):
+        if 'save_form' in request.POST:
+            return WSCreateView.save(request, type, formtype)
+        elif 'preview_form' in request.POST:
+            return preview(request, type, formtype)
+        elif 'cancel_form' in request.POST:
+            return cancel(request, type, formtype)
 
 
 class WSQuestionView(TemplateView):
@@ -137,13 +163,6 @@ class GFQuestionView(TemplateView):
         question = get_object_or_404(GapFillQuestionModel, pk=pk)
         return render(request, 'app/question/GF-Display.html', {'question': question})
 
-def submit(request, type, formtype):
-    if 'save_form' in request.POST:
-        return save(request, type, formtype)
-    elif 'preview_form' in request.POST:
-        return preview(request, type, formtype)
-    elif 'cancel_form' in request.POST:
-        return cancel(request, type, formtype)
 
 class CWPreviewView(TemplateView):
     template_name = "app/question/CW-Preview.html"
@@ -195,6 +214,9 @@ class QuizCreateView(TemplateView):
     template_name = "app/quiz/Quiz-Create.html"
 
 
+
+
+
 def cancel(request, type, formtype):
     return redirect(type.lower())
 
@@ -224,9 +246,21 @@ def save(request, type, formtype):
     if request.method == 'POST':
         form = formtype(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect(type.lower())
+            print("HERE")
+            saved = form.save()
+            t = type.lower()
+            return HttpResponseRedirect('/quiz/edit/' + form.data['quiz'] +'/'+ t +'/' + str(saved.pk))
         else:
             form = formtype()
 
     return render(request, pathType, {'form': form}, context_instance=RequestContext(request))
+
+
+
+def submit(request, type, formtype):
+    if 'save_form' in request.POST:
+        return save(request, type, formtype)
+    elif 'preview_form' in request.POST:
+        return preview(request, type, formtype)
+    elif 'cancel_form' in request.POST:
+        return cancel(request, type, formtype)

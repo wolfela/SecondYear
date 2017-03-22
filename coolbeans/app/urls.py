@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^wm/question/(?P<pk>\d+)/$', question.WMQuestionView.show_question, name='wmquestion'),
 
     # Word Scramble Questions
-    url(r'^ws/$', question.WSCreateView.as_view(), name='ws'),
+    url(r'^ws/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.WSCreateView.as_view(), name='ws'),
     url(r'^ws/submit/$', question.WSCreateView.submitWS, name='submit'),
     url(r'^ws/question/(?P<pk>\d+)/$', question.WSQuestionView.show_question, name='wsquestion'),
 

@@ -14,16 +14,20 @@
 
 {% block content %}
 
+<form action="/quiz/attempt/{{ question.quiz }}/next/{{ question.position}}/" method="post" id='post-form'>
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 <div class="wsheading"> <h1>{{ question.title }}</h1></div>
 <div id="columns">
 {% for scramble in question.scrambled_sentence.split(' ') %}
 <div class="column" draggable="true"> {{ scramble }}</div>
 {% endfor %}
 </div>
+
+<button type="submit" class="success button mysavebutton" name="save_form">Submit</button>
 {% endblock %}
 
-<button type="button" onclick="proceed();">Submit</button> 
 
+</form>
 <style>
 /* Prevent the text contents of draggable elements from being selectable. */
 [draggable] {
