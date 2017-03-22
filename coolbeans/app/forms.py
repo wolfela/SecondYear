@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from coolbeans.app.models.question import MultipleChoiceModel, WordMatchingQuestionModel, WordScrambleQuestionModel, GapFillQuestionModel
+from coolbeans.app.models.question import MultipleChoiceModel, WordMatchingModel, WordScrambleQuestionModel, GapFillQuestionModel
 from coolbeans.app.models.quiz import QuizModel
 
 # Create the form class.
@@ -13,7 +13,7 @@ class MCForm(ModelForm):
 
 class WMForm(ModelForm):
     class Meta:
-        model = WordMatchingQuestionModel
+        model = WordMatchingModel
         fields = '__all__'
 
 

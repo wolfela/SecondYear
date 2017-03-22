@@ -102,8 +102,7 @@ class WordMatchingQuestionModel(BaseQuestionModel):
     """
     title = CharField(max_length=500)
     score = PositiveIntegerField()
-    quiz = CharField(max_length=500, blank=False)
-    position = CharField(max_length=500, blank=False)
+
     quiz = CharField(max_length=500, blank=False)
     position = CharField(max_length=500, blank=False)
 
@@ -134,6 +133,24 @@ class Pair(TimeStampedModel, SafeDeleteMixin):
     question = ForeignKey(WordMatchingQuestionModel, on_delete=CASCADE)
     left_value = CharField(max_length=500, blank=False)
     right_value = CharField(max_length=500, blank = False)
+
+
+class WordMatchingModel(BaseQuestionModel):
+    """
+    A Word Matching Question Type.
+    """
+    title = CharField(max_length=500, blank=True)
+    score = PositiveIntegerField(blank=True, default=1, null=True)
+    listA = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False), blank=True)
+    listB = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False), blank=True)
+    quiz = CharField(max_length=500, blank=False)
+    position = CharField(max_length=500, blank=False)
+
+    class Meta:
+        verbose_name = "Word Matching Question"
+        verbose_name_plural = "Word Matching Questions"
+
+
 
 
 class WordScrambleQuestionModel(BaseQuestionModel):
