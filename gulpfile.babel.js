@@ -27,7 +27,8 @@ const scssPaths = {
 		    `${dirs.scssSrc}/mc.scss`,
 		    `${dirs.scssSrc}/mc-update.scss`,
 		    `${dirs.scssSrc}/mc-display.scss`,
-		    `${dirs.scssSrc}/results.scss`
+		    `${dirs.scssSrc}/results.scss`,
+        `${dirs.scssSrc}/word-scramble.scss`
     ],
     dest: `${dirs.dest}/css`
 };
@@ -42,16 +43,10 @@ const jsPaths = {
         `${dirs.jsSrc}/quiz-word-matching.js`,
         `${dirs.jsSrc}/results.js`,
         `${dirs.jsSrc}/crossword.js`,
-        `${dirs.jsSrc}/generalFunctions.js`
-    ],
-    dest: `${dirs.dest}` // For some reason vinyl-source-stream will prepend /js to the final output path
-    ],
-    dest: `${dirs.dest}` // For some reason vinyl-source-stream will prepend /js to the final output path
-};
-
-gulp.task('scss', () => {
-    return gulp.src(scssPaths.srcs)
-        .pipe(foreach(function(stream, file) {
+        `${dirs.jsSrc}/crossword2.js`,
+        `${dirs.jsSrc}/generalFunctions.js`,
+        `${dirs.jsSrc}/word-scramble.js`,
+        `${dirs.jsSrc}/quiz-editor-word-matching.js`
     ],
     dest: `${dirs.dest}` // For some reason vinyl-source-stream will prepend /js to the final output path
 };
