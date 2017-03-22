@@ -1,0 +1,66 @@
+{% extends "jTemplate.html" %}
+
+ {% block title %}Results{% endblock %} 
+ {% block head %} 
+	{{ super() }}
+	<link rel="stylesheet" href="./static/css/results.css">
+ {% endblock %}
+
+{% block content %}
+<div class="center">
+					<!-- quick summary of results -->
+					<h2 class="center">Results</h2>
+					<table id="summary-table" class="center">
+						<tr>
+							<th class="summary-col1">Quiz</th>
+							<td id="quiz-name-td"></td>
+						</tr>
+						<tr>
+							<th>Questions</th>
+							<td id="questions-total-td"></td>
+						</tr>
+						<tr>
+							<th>Correct</th>
+							<td id="questions-correct-td"></td>
+						</tr>
+						<tr>
+							<th>Incorrect</th>
+							<td id="questions-incorrect-id"></td>
+						</tr>
+					</table>	
+				
+					<!-- progress bar -->
+					<div id="progress-div" class="progress center">
+						<div id="results-progress" class="progress-meter">
+							<p id="results-progress-text" class="progress-meter-text">49%</p>
+						</div>
+					</div>
+
+					<!-- detailed results -->
+					<div id="details-div">
+						<h3>Details</h3>
+						<table id="details-table" class="center">
+							<tr>
+								<th>Question</th>
+								<th>Answer Given</th>
+								<th>Correct?</th>
+							</tr>
+						</table>
+					</div>
+				</div>
+{% endblock %}
+
+{% block sidebarContent %}
+	<a href="#">Create Quiz</a>
+    <a href="#">View Quizzes</a>
+{% endblock %}
+
+{% block extraJS %}
+<script src="./static/js/results.js"></script>
+{% endblock %}
+
+
+
+
+
+

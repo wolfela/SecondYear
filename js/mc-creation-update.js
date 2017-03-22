@@ -3,7 +3,7 @@ var amount = 4;
 $(document).ready(function() {
 	$('#addField').click(function() {
 		if(amount < 10){
-			$("#addAnswer").append(" <input type=\"text\" class=\"mcinputbox\" name=\"answers[]\" placeholder=\"Type your answer in here\"></br>");
+			$("#addAnswer").append(" <input type=\"text\" class=\"mcinputbox\" name=\"answers[]\" placeholder=\"Type your answer in here\">");
 			amount++;			
 		}
 	});
@@ -11,8 +11,6 @@ $(document).ready(function() {
 		if(amount > 4){
 			console.log("fsdfdsf");
 			$("#addAnswer input:last").remove();
-			$("#addAnswer input:last").remove();
-			$("#addAnswer br:last").remove();
 			amount--;
 		}
 	});

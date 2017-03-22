@@ -1,0 +1,60 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+    <link rel="stylesheet" href="./static/css/app.css">
+    <link rel="stylesheet" href="./static/css/teacher-app.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Oswald&amp;subset=latin-ext" rel="stylesheet">
+    <script src="//cdn.ckeditor.com/4.6.2/standard-all/ckeditor.js"></script>
+  </head>
+  <body>
+    <!--<div class="sidebar">-->
+      <!--<button class="hamburger" type="button">-->
+        <!--<span class="topLine"></span>-->
+        <!--<span class="innerLine"></span>-->
+        <!--<span class="bottomLine"></span>-->
+      <!--</button>-->
+      <!--<div class="menu-content">-->
+        <!--<nav class="menu-left">-->
+          <!--<a href="#">Sample Page</a>-->
+          <!--<a href="#">Sample Page</a>-->
+          <!--<a href="#">Sample Page</a>-->
+        <!--</nav>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <div class="container">
+      <div class="title-bar">
+        <span class="title-bar-title">LQ.</span>
+        <div class="title-bar-right">
+          <button class="loginButton">LOGIN</button>
+        </div>
+      </div>
+      <div class="content">
+        <textarea id="gapFillInput" name="gapFillInput"></textarea>
+        <input type="button" class="gapFillBack gapFillButton" value="Back" onclick="openCKEDITOR()">
+        <input type="button" class="gapFillNext gapFillButton" value="Next" onclick="closeCKEDITOR()"/>
+        <div class="gapFillSelectBox"></div>
+        <input type="button" class="gapFillSelect gapFillButton" value="Add Gap" onclick="addGap()"/>
+        <input type="button" class="gapFillDelete gapFillButton" value="Delete Gap" onclick="deleteGap()"/>
+        <select class="gapFillAnswerOptions" onchange="getChange(this)"></select>
+        <div class="gapFillAlt">
+          <div class="gapFillAltAnswers"></div>
+          <input type="text" class="gapFillAltInput" placeholder="Please type in alternate answer"/>
+          <input type="button" class="gapFillAltAdd gapFillButton" value="Add alternative" onclick="addAltGap()"/>
+          <input type="button" class="gapFillAltDelete gapFillButton" value="Remove Alternative" onclick="deleteAltGap()"/>
+        </div>
+        <label><input class="gapFillDrag" type="checkbox"/> Drag and drop</label>
+        <input type="button" class="createGapFill gapFillButton" value="Done"/>
+      </div>
+    </div>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/what-input/dist/what-input.js"></script>
+    <script src="./node_modules/foundation-sites/dist/js/foundation.js"></script>
+    <script src="./js/menuAnimation.js"></script>
+    <script src="./js/gapFill.js"></script>
+  </body>
+</html>

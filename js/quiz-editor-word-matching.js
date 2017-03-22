@@ -30,7 +30,7 @@ var addIfNotExists = function(array, elem) {
 	}
 
 	return array;
-}
+};
 
 var addWordEditor = function(array) {
 	$('#word-sets-div').hide();
@@ -85,7 +85,7 @@ var addWordEditor = function(array) {
 	});
 
 
-}
+};
 
 function printPairs() {
 	for(var i = 0; i < rows.length; i++) {
@@ -104,7 +104,7 @@ window.getPairs = function() {
 	}
 
 	return array;
-}
+};
 
 window.getLefts=function() {
 	var array = [];
@@ -113,7 +113,7 @@ window.getLefts=function() {
 	}
 
 	return array;
-}
+};
 
 window.getRights= function() {
 	var array = [];
@@ -122,7 +122,7 @@ window.getRights= function() {
 	}
 
 	return array;
-}
+};
 
 
 // using jQuery

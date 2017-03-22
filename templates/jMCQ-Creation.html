@@ -1,0 +1,42 @@
+{% extends "jTemplate.html" %}
+
+ {% block title %}MCQ-Creation{% endblock %} 
+ {% block head %} 
+	{{ super() }}
+	 <link rel="stylesheet" href="./static/css/mcq.css">
+ {% endblock %}
+  
+{% block content %}
+
+ <div class="scroll-content">		
+          <h2 class = "mcqheading">MCQ Quiz Creation</h2>
+            <label>
+              <h4>Type your question below</h4>
+                <textarea class = "mcqtextareas" placeholder="Type your question in here"></textarea>
+            </label>
+            <label>
+              <h4>Type your answers below</h4>
+                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
+                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
+                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
+                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
+                <input type="text" class = "mcqinputbox" placeholder="Type your answer in here"></textarea>
+                <!--<div style = "float: right;">
+                  <a href="#0" style = "margin-left: 1.4rem;"class="button">Add field</a>
+                </div>-->
+            </label>
+            <label>		
+              <button type="button" class="success button mysavebutton">Save</button>
+              <button type="button" class="button cancelbutton">Cancel</button>
+            </label>
+      </div> 
+
+
+{% endblock %}
+
+{% block sidebarContent %}
+	<a href="#">Create Quiz</a>
+    <a href="#">View Quizzes</a>
+{% endblock %}
+
+

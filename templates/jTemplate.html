@@ -3,8 +3,6 @@
 
 <head>
     {% block head %}
-	
-    
 		<meta charset="utf-8">
     	<meta http-equiv="x-ua-compatible" content="ie=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,36 +15,35 @@
 <body>
 <div class="container">
       <div class="title-bar">
-        <span class="title-bar-title">LQ.</span>
-        
+          <button class="hamburger" type="button">
+              <span class="topLine"></span>
+              <span class="innerLine"></span>
+              <span class="bottomLine"></span>
+          </button>
+          <span class="title-bar-title">LQ.</span>
       </div>
-    <div class="content">{% block content %}{% endblock %}
-	</div>
+    <div class="content">{% block content %}{% endblock %}</div>
 </div>
 
 <div class="sidebar">
-      <button class="hamburger" type="button">
-        <span class="topLine"></span>
-        <span class="innerLine"></span>
-        <span class="bottomLine"></span>
-      </button>
-
+    <button class="cross" type="button">
+        <span class="crossPositive"></span>
+        <span class="crossNegative"></span>
+    </button>
     <div class="menu-content">
-        <nav class="menu-left"> 
+        <nav class="menu-left">
 			{% block sidebarContent %}
-         
 			{% endblock %}
         </nav>
-      </div>
- 
-
+    </div>
 </div>
 
-	{% block extraJS %}{% endblock %}
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.js"></script>
-    <script src="/static/js/menuAnimation.js"></script>
-	    <script src="./static/js/node_modules/what-input/dist/what-input.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/4.1.1/what-input.js"></script>
+<script src="/static/js/menuAnimation.js"></script>
+{% block extraJS %}{% endblock %}
+
 </body>
 
 

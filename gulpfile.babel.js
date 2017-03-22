@@ -21,12 +21,14 @@ const scssPaths = {
     srcs: [
         `${dirs.scssSrc}/student-app.scss`,
         `${dirs.scssSrc}/teacher-app.scss`,
+        `${dirs.scssSrc}/quiz-word-matching.scss`,
+        `${dirs.scssSrc}/quiz-editor-word-matching.scss`,
         `${dirs.scssSrc}/app.scss`,
         `${dirs.scssSrc}/mc.scss`,
         `${dirs.scssSrc}/mc-update.scss`,
         `${dirs.scssSrc}/mc-display.scss`,
-        `${dirs.scssSrc}/quiz-word-matching.scss`,
-        `${dirs.scssSrc}/quiz-editor-word-matching.scss`,
+        `${dirs.scssSrc}/results.scss`,
+        `${dirs.scssSrc}/word-scramble.scss`
     ],
     dest: `${dirs.dest}/css`
 };
@@ -37,9 +39,13 @@ const jsPaths = {
         `${dirs.jsSrc}/teacher-app.js`,
         `${dirs.jsSrc}/mc-creation-update.js`,
         `${dirs.jsSrc}/menuAnimation.js`,
+        `${dirs.jsSrc}/gapFill.js`,
+        `${dirs.jsSrc}/results.js`,
         `${dirs.jsSrc}/crossword.js`,
         `${dirs.jsSrc}/crossword2.js`,
         `${dirs.jsSrc}/crossword3.js`,
+        `${dirs.jsSrc}/generalFunctions.js`,
+        `${dirs.jsSrc}/word-scramble.js`,
         `${dirs.jsSrc}/quiz-word-matching.js`,
         `${dirs.jsSrc}/quiz-editor-word-matching.js`,
     ],

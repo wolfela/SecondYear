@@ -1,30 +1,20 @@
-<!doctype html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template</title>
-    <link rel="stylesheet" href="../../../static/css/app.css">
-    <link rel="stylesheet" href="../../../static/css/student-app.css">
+{% extends "jTemplate.html" %}
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+{% block title %}CW-Creation{% endblock %}
+{% block head %}
+{{ super() }}
+ <link rel="stylesheet" href="../../../static/css/student-app.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.js"></script>
 {#  <script src="../../../node_modules/jquery/dist/jquery.js"></script>#}
 
 
-    <link href="https://fonts.googleapis.com/css?family=Lato|Oswald&amp;subset=latin-ext" rel="stylesheet">
-  </head>
-  <body>
-    <div class="container">
-      <div class="title-bar">
-        <span class="title-bar-title">LQ.</span>
-        <div class="title-bar-right">
-          <button class="loginButton">LOGIN</button>
-        </div>
-      </div>
-      <div class="content">
-        <div class="crosswordDisplay" id="crosswordEditor"></div>
+{% endblock %}
+
+{% block content %}
+ <div class="crosswordDisplay" id="crosswordEditor"></div>
         <div class="clueInputBox">
           <p>Answer:</p>
           <input class="answerBox" type="text"/>
@@ -49,40 +39,15 @@
               <button type="submit" class="success button mysavebutton" name="save_form" id="save">Save</button>
               <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
             </div>
+	</div>
+{% endblock %}
 
+{% block sidebarContent %}
+  <a href="#">Create Quiz</a>
+  <a href="#">View Quizzes</a>
+{% endblock %}
 
-
-
-
-      </div>
-
-
-
-
-    </div>
-
-
-    <div class="sidebar">
-      <button class="hamburger" type="button">
-        <span class="topLine"></span>
-        <span class="innerLine"></span>
-        <span class="bottomLine"></span>
-      </button>
-      <div class="menu-content">
-        <nav class="menu-left">
-          <a href="#">Sample Page</a>
-          <a href="#">Sample Page</a>
-          <a href="#">Sample Page</a>
-        </nav>
-      </div>
-    </div>
-
-    {#    <script src="../../../node_modules/jquery/dist/jquery.js"></script>#}
-{#    <script src="../../../node_modules/what-input/dist/what-input.js"></script>#}
-{#    <script src="../../../node_modules/foundation-sites/dist/js/foundation.js"></script>#}
-
-    <script src="../../../static/js/menuAnimation.js"></script>
+{% block extraJS %}
     <script src="../../../static/js/crossword.js" l></script>
+{% endblock %}
 
-  </body>
-</html>
