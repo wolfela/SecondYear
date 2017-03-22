@@ -16,20 +16,21 @@ urlpatterns = [
     url(r'^quiz/edit/(?P<pk>\d+)/(?P<questiontype>.*)/(?P<questionid>\d+)/$', quiz.QuestionEditView.editQuiz, name='editquizwithquestion'),
     url(r'^quiz/edit/(?P<pk>\d+)/submit/$', quiz.QuestionEditView.submitQuiz, name='submitquiz'),
     url(r'^quiz/attempt/(?P<pk>\d+)/$', quiz.QuizAttemptView.attemptQuiz, name='attemptquiz'),
-    url(r'^quiz/attempt/(?P<pk>\d+)/next/(?P<i>\d+)/$', quiz.QuizAttemptView.nextQuestion, name='nextquestion'),
-
+    url(r'^quiz/attempt/(?P<pk>\d+)/next/(?P<i>\d+)/(?P<score>\d+)/$', quiz.QuizAttemptView.nextQuestion, name='nextquestion'),
+    url(r'^quiz/score/(?P<score>\d+)', quiz.QuizAttemptView.score, name='resultpage'),
     # Question functions
 
     # Multiple Choice Questions
     url(r'^mc/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.MCCreateView.as_view(), name='mc'),
     url(r'^mc/submit/$', question.MCCreateView.submitMC, name='submit'),
-    url(r'^mc/question/(?P<pk>\d+)/$', question.MCQuestionView.show_question, name='mcquestion'),
+    url(r'^mc/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.MCQuestionView.show_question, name='mcquestion'),
+    url(r'^mc/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.MCQuestionView.check_answer, name='checkmc'),
 
     # Word Matching Questions
     url(r'^wm/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.WMCreateView.as_view(), name='wm'),
     url(r'^wm/submit/$', question.WMCreateView.submitWM, name='submit'),
     url(r'^wm/preview/$', question.WMPreviewView.as_view(), name='preview'),
-    url(r'^wm/question/(?P<pk>\d+)/$', question.WMQuestionView.show_question, name='wmquestion'),
+    url(r'^wm/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.WMQuestionView.show_question, name='wmquestion'),
 
     # Word Scramble Questions
     url(r'^ws/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.WSCreateView.as_view(), name='ws'),

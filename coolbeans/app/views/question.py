@@ -76,9 +76,18 @@ class MCCreateView(TemplateView):
 class MCQuestionView(TemplateView):
     template_name = "app/question/MC-Display.html"
 
-    def show_question(request, pk):
+    def show_question(request, pk, score):
         question = get_object_or_404(MultipleChoiceModel, pk=pk)
-        return render(request, 'app/question/MC-Display.html', {'question': question})
+        return render(request, 'app/question/MC-Display.html', {'question': question, 'score': score})
+
+    def check_answer(request, pk, score):
+        question = get_object_or_404(MultipleChoiceModel, pk=pk)
+        answer = request.POST.get('answers')
+        print("FORM IS")
+        print(request.POST)
+        if question.check_answer(answer):
+            score = int(score) + 1
+        return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
 
 
 class WMCreateView(TemplateView):
