@@ -83,6 +83,7 @@ class MCQuestionView(TemplateView):
 
     def check_answer(request, pk, score):
         question = get_object_or_404(MultipleChoiceModel, pk=pk)
+        print("THING")
         answer = request.POST.get('answers')
         print("FORM IS")
         print(request.POST)
