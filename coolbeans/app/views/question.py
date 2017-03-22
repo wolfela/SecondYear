@@ -43,6 +43,7 @@ class MCCreateView(TemplateView):
                 answers = request.POST.getlist('answers[]')
                 form.cleaned_data['answers'] = answers
                 formcopy = formtype(request.POST.copy())
+                answers.append(request.POST.get('correct'))
                 formcopy.data['answers'] = answers
                 return render(request, pathDisplay, {'form': formcopy})
         else:
@@ -156,8 +157,6 @@ class WMQuestionView(TemplateView):
         question = get_object_or_404(WordMatchingModel, pk=pk)
         return render(request, 'app/question/WM-Display.html', {'question': question})
 
-class WMPreviewView(TemplateView):
-    template_name = "app/question/WM-Preview.html"
 
 
 class WSCreateView(TemplateView):
