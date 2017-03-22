@@ -16,8 +16,7 @@ function loadAltAnswers(altAnswer) {
     var altElement = $('<div class=gapFillAltRow tabindex=1>'+altAnswer+'</div>').appendTo($('.gapFillAltAnswers'));
     $(altElement).click(function () {
         selectedRow = this;
-        console.log('yaya')
-    })
+    });
 }
 
 function addOption(content) {
@@ -63,9 +62,9 @@ function getSelectedElement() {
 function deleteGap() {
     var selected = getSelectedElement();
     if($(selected).is('span')) {
-        $(selected).replaceWith(getSelected().toString())
+        $(selected).replaceWith(getSelected().toString());
     }else{
-        alert('Be more careful selecting pls(ie dont select spaces')
+        alert('Be more careful selecting pls(ie dont select spaces');
     }
 }
 
