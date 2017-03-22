@@ -16,8 +16,8 @@ body {
 }
 
 #my-canvas {
-	width: 100%;
-	height: 100%;
+	margin-left: $grid-spacing;
+	margin-top: 0%;
 	position: absolute;
 	z-index: -1;
 }
@@ -40,4 +40,13 @@ body {
 #button-grid-right {
 	width: $grid-width;
 	margin-left: $grid-spacing;
+}
+
+.content {
+	background: transparent;
+}
+
+#main {
+	width: 100%;
+	height: 100%;
 }

@@ -1,23 +1,25 @@
 var wordPairs = [];
-function Word(langA, langB, page) { this.langA = langA; this.langB = langB, this.page = page };
+var rows = [];
+function Word(langA, langB) { this.langA = langA; this.langB = langB };
+function Row(row, word) { this.row = row, this.word = word };
 
 $(document).ready(function() {
 
 	if(wordPairs.length === 0) {
-		wordPairs.push(new Word('wordA1ddddddgrtrehth', 'wordB1ghpowh', 1));
-		wordPairs.push(new Word('wordA2fbdfbd', 'wordB2drfbhdfhbd', 1));
-		wordPairs.push(new Word('wordA3', 'wordB3', 1));
-		wordPairs.push(new Word('wordA4edgfew', 'wordB4esfesf', 2));
-		wordPairs.push(new Word('wordA5', 'wordB5', 3));
+		wordPairs.push(new Word('Kinga', 'Bojarczuk'));
+		wordPairs.push(new Word('Ajeya', 'Jog'));
+		wordPairs.push(new Word('Tatiana', 'Kmita'));
+		wordPairs.push(new Word('Jared', 'Leto'));
+		wordPairs.push(new Word('Mehdi', 'Ramadgdfgg'));
 	}
 
-	addTable(wordPairs);
+	addWordEditor(wordPairs);
 	
 });
 
-addIfNotExists = function(array, elem) {
+var addIfNotExists = function(array, elem) {
 	var exists = false;
-	for(a = 0; a < array.length; a++) {
+	for(var a = 0; a < array.length; a++) {
 		if(array[a] == elem) {
 			exists = true;
 		}
@@ -30,93 +32,7 @@ addIfNotExists = function(array, elem) {
 	return array;
 }
 
-addTable = function(pairsArray) {
-	$('#editing-div').hide();
-	$('#word-sets-div').show();
-	$('#table').empty();
-	$('#table').append('<tr id="row1"></td>');
-
-	var pageNumbers = [];
-	var colLimit = 1;
-	var pagesAdded = 0;
-
-	
-
-	for(i = 0; i < pairsArray.length; i++) {
-		pageNumbers = addIfNotExists(pageNumbers, pairsArray[i].page);
-	}
-
-	// adding columns
-	for(j = 0; j < pageNumbers.length; j++) {
-		pagesAdded++;
-		var rowNum = Math.ceil(pagesAdded / colLimit);
-		if(pagesAdded % colLimit == 0) {
-			$('#table').append('<tr id="row' + (rowNum + 1) + '"></tr>');
-		} 
-
-		var pageNum = pageNumbers[j];
-		var elem = '<div class="div-col" id="page' + pageNum + '"></div>';
-		$('#row' + rowNum).append('<td class="cell" id="set' + pageNum + '"></td>');
-		$('#set' + pageNum).append(elem);
-	}
-		
-	// adding words
-	for(k = 0; k < pairsArray.length; k++) {
-		var wordA = pairsArray[k].langA;
-		var wordB = pairsArray[k].langB;
-		var pageNum = pairsArray[k].page;
-
-		var str = '<p>' + wordA + ' - ' + wordB + '</p>';
-		
-		$('#page' + pageNum).append(str);
-	}
-
-	// adding action buttons
-	for(l = 0; l < pageNumbers.length; l++) {
-		var pageNum = pageNumbers[l];
-		var editButton = '<a class="button edit" id="edit-page' + pageNum + '">Edit</a>';
-		var deleteButton = '<button type="button" class="alert button delete" id="delete' + pageNum + '">Delete</button>';
-			
-		
-
-		var buttonGroup = '<div class=button-group>' + editButton + deleteButton + '</div>'; 
-		$('#page' + pageNumbers[l]).append(buttonGroup);
-
-		// click listener for edit buttons
-		$('#edit-page' + pageNum).click(function() {
-			var num = $(this).attr('id').substring(9);
-			addWordEditor(wordPairs, num);
-			
-		});
-
-		// click listener for delete buttons
-		$('#delete' + pageNum).click(function() {
-			var page = $(this).attr('id').substring(6);
-			for(m = 0; m < wordPairs.length; m++) {
-				if(wordPairs[m].page == page) {
-					wordPairs.splice(m, 1);
-					m--;
-				}
-			};
-			addTable(wordPairs);	
-		});
-	}
-
-	$('#add-page-button').unbind('click').bind('click', function() {
-		var maxPage = 1;
-		for(i = 0; i < wordPairs.length; i++) {
-			maxPage = Math.max(wordPairs[i].page, maxPage);
-		}
-		
-		wordPairs.push(new Word('Word A', 'Word B', maxPage + 1));
-		//document.writeln(maxPage);
-		addWordEditor(wordPairs, maxPage + 1);
-	});
-
-}
-
-
-addWordEditor = function(array, page) {
+var addWordEditor = function(array) {
 	$('#word-sets-div').hide();
 	$('#editing-div').show();
 
@@ -125,63 +41,146 @@ addWordEditor = function(array, page) {
 	$('#editing-table-div').append('<table id="editing-table"></table>');
 
 	var pairs = [];
-	for(i = 0; i < array.length; i++) {
-		if(array[i].page == page) {
-			pairs.push(array[i]);
-		}
+	for(var i = 0; i < array.length; i++) {
+		pairs.push(array[i]);
+	
 	}
 
-	for(j = 0; j < pairs.length; j++) {
+	rows = [];
+	for(var j = 0; j < pairs.length; j++) {
 		var row = '<tr id="pair' + j + '"></tr>';
-		var wordA = '<td><input type="text" class="editor-input" id="wordA' + j + '" value="' + pairs[j].langA + '" placeholder="<insert language A here>" aria-describedby="exampleHelpTex"></td>';
-		var wordB = '<td><input type="text" class="editor-input" id="wordB' + j + '" value="' + pairs[j].langB + '" placeholder="<insert language B here>" aria-describedby="exampleHelpTex"></td>';
+		var wordA = '<td><input type="text" class="editor-input" name="wordA' + j + '" id="wordA' + j + '" value="' + pairs[j].langA + '" placeholder="<insert language A here>" aria-describedby="exampleHelpTex"></td>';
+		var wordB = '<td><input type="text" class="editor-input"  name="wordB' + j + '" id="wordB' + j + '" value="' + pairs[j].langB + '" placeholder="<insert language B here>" aria-describedby="exampleHelpTex"></td>';
 		var deleteButton = '<td><button type="button" class="alert button editor-delete" id="editor-delete' + j + '">Delete</button></td></tr>';
 		
+		rows.push(new Row(j, pairs[j]));
+
 		$('#editing-table').append(row);
 		$('#pair' + j).append(wordA + wordB + deleteButton);
 
 		$('#editor-delete' + j).click(function() {
 			var num = $(this).attr('id').substring(13);
 			pairs.splice(num, 1);
-			addWordEditor(pairs, page);
+			addWordEditor(pairs);
+		});
+
+		$('#wordA' + j).on('input', function() {
+			var num = parseInt($(this).attr('id').substring(5));
+			rows[num].word.langA = $('#wordA' + num).val();
+		});
+
+		$('#wordB' + j).on('input', function() {
+			var num = parseInt($(this).attr('id').substring(5));
+			rows[num].word.langB = $('#wordB' + num).val();
 		});
 		
 	}
-
+	
 	// adding add button
 	$('#editing-table').append('<td><a class="button editor-add" id="add-pair-button">Add</a></td>');
+	$('#add-pair-button').off('click');
 	$('#add-pair-button').click(function() {
-		var newPairs = [];
-		for(w = 0; w < pairs.length; w++) {
-			pairs[w].langA = $('#wordA' + w).val();
-			pairs[w].langB = $('#wordB' + w).val();
-		}
-		pairs.push(new Word('', '', page));
-		addWordEditor(pairs, page);
-		
+		pairs.push(new Word('', ''));
+		addWordEditor(pairs);
 	});
 
-	// adding save button
-	$('#editing-div').append('<button type="button" class="success button" id="save-pairs-button">Save</button>');
-	$('#save-pairs-button').click(function() {
-		// updating words
-		for(w = 0; w < pairs.length; w++) {
-			pairs[w].langA = $('#wordA' + w).val();
-			pairs[w].langB = $('#wordB' + w).val();
-		}
 
-		for(i = 0; i < wordPairs.length; i++) {
-			if(wordPairs[i].page == page) {
-				wordPairs.splice(i, 1);
-				i--;
-			}
-		}
-
-		for(j = 0; j < pairs.length; j++) {
-			wordPairs = addIfNotExists(wordPairs, pairs[j]);
-		}
-		
-		addTable(wordPairs);
-	});
-	
 }
+
+function printPairs() {
+	for(var i = 0; i < rows.length; i++) {
+		document.writeln('(' + rows[i].word.langA + ',' + rows[i].word.langB + ')');
+	}
+}
+
+
+
+// USE THESE FUNCTIONS TO GET WORDS FOR BACKEND PURPOSES
+
+window.getPairs = function() {
+	var array = [];
+	for(var i = 0; i < rows.length; i++) {
+		array.push(rows[i].word);
+	}
+
+	return array;
+}
+
+window.getLefts=function() {
+	var array = [];
+	for(var i = 0; i < rows.length; i++) {
+		array.push(rows[i].word.langA);
+	}
+
+	return array;
+}
+
+window.getRights= function() {
+	var array = [];
+	for(var i = 0; i < rows.length; i++) {
+		array.push(rows[i].word.langB);
+	}
+
+	return array;
+}
+
+
+// using jQuery
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+
+// $("#save").click(function () {
+
+// var wordmatch_data = getCrosswordData();
+// var data = JSON.stringify(crossword_data);
+
+// $.ajax({
+//     url : './submit/',
+//     type: 'POST',
+//     data: data,
+//     contentType:'application/json',
+//     dataType: 'text',
+//     success: function(message){
+
+//         alert("saved!");
+//         window.location.href = "/wherever/quiz/create/is";
+//     },
+//     error: function(){
+//         alert('nope');
+//     }
+// });
+// });
+
+$("#preview").click(function () {
+
+ window.open("http://localhost:8000/wm/preview");
+
+});
+

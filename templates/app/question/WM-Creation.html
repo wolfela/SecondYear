@@ -1,1 +1,49 @@
-<!doctype html>
+{% extends "jTemplate.html" %}
+
+{% block title %}WM-Creation{% endblock %}
+
+{% block head %}
+{{ super() }}  
+
+<link rel="stylesheet" href="../../../static/css/quiz-editor-word-matching.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.js"></script>
+{% endblock %}
+
+{% block content %} 
+<div class="center" id="canvas">
+
+
+				<h2 class="center-text">Word Matching Quiz Editor</h2>
+
+      <div>
+        <h4>Type your question below</h4>
+                <textarea class="mctextareas" placeholder="Type your question in here" name="title"></textarea>
+      <h4>Type your correct answer below</h4>
+
+
+				<div class="center" id="editing-div">
+			
+				</div>
+            <div class="buttondiv">   
+              <button type="submit" class="button cancelbutton" name="preview_form" id="preview">Preview</button>
+              <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
+              <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
+            </div>
+
+
+
+			</div>
+</div>
+{% endblock %}
+
+{% block sidebarContent %}
+  <a href="#">Create Quiz</a>
+  <a href="#">View Quizzes</a>
+{% endblock %}
+
+{% block extraJS %}
+<script type="text/javascript" src="../../../static/js/quiz-editor-word-matching.js"></script>
+{% endblock %}
+

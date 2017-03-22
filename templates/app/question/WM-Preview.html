@@ -1,1 +1,47 @@
-<!doctype html>
+
+{% extends "jTemplate.html" %}
+
+{% block title %}WM-Creation{% endblock %}
+
+{% block head %}
+{{ super() }}  
+<link rel="stylesheet" href="../../../static/css/quiz-word-matching.css">
+{% endblock %}
+
+{% block content %}
+   <div id="main">
+	<!-- Canvas for drawing lines -->
+	<canvas id="my-canvas" width="700" height="500"></canvas>
+
+
+
+
+	
+	<!-- Button grid -->
+	<div id="button-grid" class="center">
+		<!-- Left button grid -->
+		<div id="button-grid-left">
+
+
+		</div><!-- end of Left button grid-->
+				
+		<!-- Right button grid -->
+		<div id="button-grid-right">
+
+		</div><!-- end of Right button grid-->
+
+	</div><!-- end of Button grid -->
+
+</div>
+
+{% endblock %}
+
+{% block sidebarContent %}
+  <a href="#">Create Quiz</a>
+  <a href="#">View Quizzes</a>
+{% endblock %}
+
+{% block extraJS%}
+<script src="../../../static/js/quiz-word-matching.js"></script>
+{% endblock %}
+
