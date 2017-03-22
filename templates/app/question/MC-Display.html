@@ -29,18 +29,18 @@
     
     <p class="questions" id=q>{{ question.title }}</p></br>
     <div>
-    <form action="/quiz/attempt/{{ question.quiz }}/next/{{ question.position}}/" method="post" id='post-form'>
+    <form action="/mc/question/{{ question.pk }}/{{ score }}/check/" method="post" id='post-form'>
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     </br>
     <div>
     {% if question.answers != "" %}
     {% set list = question.answers %}
       {% for answer in list|shuffle %}
-     <input type="radio" class="checkbox" name="answers">
+     <input type="radio" class="checkbox" name="answers" value={{ answer }}>
       <p class="answer" id=a1> {{ answer|e }}</p></br>
 
     {% endfor %}
-             {% endif %}
+    {% endif %}
     
     
     </div>

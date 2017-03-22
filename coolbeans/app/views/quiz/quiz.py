@@ -66,23 +66,24 @@ class QuestionEditView(View):
 
 class QuizAttemptView(View):
 
+    def score(request, score):
+        return render(request, 'app/quiz/Quiz-Result.html', {'score': score})
+
     def attemptQuiz(request, pk):
         instance = get_object_or_404(QuizModel, pk=pk)
-        print('QUESTIONS:')
-        print(instance.questions)
-        return HttpResponseRedirect('/' + instance.questions[0])
+        return HttpResponseRedirect('/' + instance.questions[0] + '/0')
 
-    def nextQuestion(request, pk, i):
+    def nextQuestion(request, pk, i, score):
         instance = get_object_or_404(QuizModel, pk=pk)
         if (int(i)+1 < len(instance.questions)):
             if request.is_ajax():
-                message = '/' + instance.questions[int(i)+1]
+                message = '/' + instance.questions[int(i)+1] + '/' + score
                 return HttpResponse(message)
             else:
-                return HttpResponseRedirect('/' + instance.questions[int(i)+1])
+                return HttpResponseRedirect('/' + instance.questions[int(i)+1] + '/' + score)
         else:
             if request.is_ajax():
-                message = '/'
+                message = '/quiz/score' + score
                 return HttpResponse(message)
             else:
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/quiz/score/' + score)

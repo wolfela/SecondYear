@@ -74,7 +74,7 @@ class MultipleChoiceModel(BaseQuestionModel):
     title = CharField(max_length=500, blank=False)
     answers = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=True, null=True), blank=True)
     correct = CharField(max_length=255, blank=False)
-    score = PositiveIntegerField(blank=True, default=1, null=True)
+    score = PositiveIntegerField(blank=True, default=0, null=True)
     quiz = CharField(max_length=500, blank=False)
     position = CharField(max_length=500, blank=False)
 
