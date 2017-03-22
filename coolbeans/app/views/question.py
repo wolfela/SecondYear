@@ -193,9 +193,7 @@ class WSCreateView(TemplateView):
         if request.method == 'POST':
             form = formtype(request.POST)
             if form.is_valid():
-                print("HERE")
                 saved = form.save()
-                t = type.lower()
                 return HttpResponseRedirect('/quiz/edit/' + form.data['quiz'] + '/ws/' + str(saved.pk))
             else:
                 form = formtype()
@@ -220,9 +218,10 @@ class WSQuestionView(TemplateView):
 
     def check_answer(request, pk, score):
         question = get_object_or_404(WordScrambleQuestionModel, pk=pk)
-        answer = request.POST.get('answer')
+        answer = request.POST.get('answer').split(",")
         print("Answer is:")
-        print(request.POST)
+        print(question.answer.split(" "))
+        print(answer)
         if question.check_answer(answer):
             score = int(score) + 1
         return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))

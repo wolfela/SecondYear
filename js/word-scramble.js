@@ -1,8 +1,4 @@
 var cols = document.querySelectorAll('#boxes .box');
-$(document).ready(function() {
-    changeanswer();
-});
-
 [].forEach.call(cols, function(col) {
     col.addEventListener('dragstart', handleDragStart, false);
     col.addEventListener('dragenter', handleDragEnter, false);
@@ -60,15 +56,18 @@ function handleDrop(e) {
         // Set the source column's HTML to the HTML of the column we dropped on.
         dragSrcEl.innerHTML = this.innerHTML;
         this.innerHTML = e.dataTransfer.getData('text/html');
+        changeanswer();
     }
     return false;
 }
 
 function changeanswer() {
-    var answer = ['1'];
+    var answer = [];
+    for (var ans of cols) {
+        answer.push($(ans).text());
+    }
     document.getElementById('answer').value = answer;
-    console.log();
-}
+};
 
 function proceed() {
     var form = document.createElement('form');

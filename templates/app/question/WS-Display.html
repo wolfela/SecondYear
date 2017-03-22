@@ -15,17 +15,14 @@
         <div class="wsheading"> <h1>{{ question.title }}</h1></div>
         <div id="boxes">
             {% for scramble in question.scrambled_sentence.split(' ') %}
-            <div class="box" draggable="true"> {{ scramble }}</div>
+            <div class="box" draggable="true">{{ scramble }}</div>
             {% endfor %}
         </div>
 
 </div>
 
-<div id="answer">
-<div class="answer">
-<input type="hidden" name="answer" id="answer" value="">
-</div>
-</div>
+
+<input type="hidden" name="answer" id="answer">
 
 <button type="submit" class="success button mysavebutton" name="save_form">Submit</button>
     </form>
