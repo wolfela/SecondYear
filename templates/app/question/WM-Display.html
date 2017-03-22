@@ -4,7 +4,7 @@
 
 {% block head %}
 {{ super() }}
-	<link rel="stylesheet" href="../../../static/css/quiz-word-matching.css">
+	<link rel="stylesheet" href="/static/css/quiz-word-matching.css">
 {% endblock %}
 
 {% block content %}
@@ -12,7 +12,7 @@
     <!-- Canvas for drawing lines -->
     <canvas id="my-canvas" width="700" height="500"></canvas>
 
-    <form action="/wm/question/{{ question.pk }}/{{ score }}/check//" method="post" id='post-form'>
+    <form action="/ws/question/{{ question.pk }}/{{ score }}/check/" method="post" id='post-form'>
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
         <div id="leftwords">
@@ -72,7 +72,7 @@
 {% endblock %}
 
 {% block extraJS %}
-<script type="text/javascript" src="../../../static/js/quiz-word-matching.js"></script>
+<script type="text/javascript" src="/static/js/quiz-word-matching.js"></script>
 {% endblock %}
 
 
