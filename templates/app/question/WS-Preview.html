@@ -4,27 +4,26 @@
 
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="/static/css/word-scramble.css">
+    <link rel="stylesheet" href="/static/css/word-scramble.css">
 {% endblock %}
 
 {% block content %}
+<div class="alignmentDiv">
+        <form method="get">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
-<form method="get">
-    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        <div class="wsheading"> <h1>{{ form.title.value() }}</h1></div>
+        <div id="boxes">
+            {% set list = form.scrambled_sentence.value().split(' ') %}
+            {% for word in list %}
+            <div class="box" draggable="true"> {{ word }}</div>
+            {% endfor %}
+        </div>
 
-    <div class="wsheading"> <h1>{{ form.title.value() }}</h1></div>
-    <div id="columns">
-        {% set list = form.scrambled_sentence.value().split(' ') %}
-
-        {% for word in list %}
-        <div class="column" draggable="true"> {{ word }}</div>
-        {% endfor %}
-    </div>
-    {% endblock %}
-
-    <button type="button" onclick="proceed();">Submit</button>
-</form>
+</div>
+    </form>
 {% endblock %}
+
 
 {% block sidebarContent %}
 <a href="#">Create Quiz</a>

@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-      <form action="/mc/submit/" method="post" id='post-form' target="_blank">
+      <form action="/mc/submit/" method="post" id='post-form'>
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         <label><h2 class="mcheading">MCQ Quiz Creation</h2></label>
         <div>
@@ -34,6 +34,9 @@
             <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
           </div>
         </div>
+
+        <input id="quiz" type="hidden" class="mcinputbox" name="quiz" value="{{ quizid }}">
+        <input id="position" type="hidden" class="mcinputbox" name="position" value="{{ pos }}">
       </form>
 {% endblock %}
 

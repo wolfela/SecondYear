@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class="alignmentDiv">
-    <form method="get">
+        <form action="/quiz/attempt/{{ question.quiz }}/next/{{ question.position}}/" method="post" id='post-form'>
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
         <div class="wsheading"> <h1>{{ question.title }}</h1></div>
@@ -18,10 +18,11 @@
             <div class="box" draggable="true"> {{ scramble }}</div>
             {% endfor %}
         </div>
-    </form>
+
 </div>
 
 <button type="submit" class="success button mysavebutton" name="save_form">Submit</button>
+    </form>
 {% endblock %}
 
 
