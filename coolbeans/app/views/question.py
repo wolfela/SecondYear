@@ -219,9 +219,6 @@ class WSQuestionView(TemplateView):
     def check_answer(request, pk, score):
         question = get_object_or_404(WordScrambleQuestionModel, pk=pk)
         answer = request.POST.get('answer').split(",")
-        print("Answer is:")
-        print(question.answer.split(" "))
-        print(answer)
         if question.check_answer(answer):
             score = int(score) + 1
         return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
