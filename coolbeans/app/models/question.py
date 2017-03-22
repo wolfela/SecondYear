@@ -102,6 +102,10 @@ class WordMatchingQuestionModel(BaseQuestionModel):
     """
     title = CharField(max_length=500)
     score = PositiveIntegerField()
+    quiz = CharField(max_length=500, blank=False)
+    position = CharField(max_length=500, blank=False)
+    quiz = CharField(max_length=500, blank=False)
+    position = CharField(max_length=500, blank=False)
 
     class Meta:
         verbose_name = "Word Matching Question"
@@ -140,7 +144,8 @@ class WordScrambleQuestionModel(BaseQuestionModel):
     answer = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False))
     scrambled_sentence = CharField(max_length=500, blank = False)
     score = PositiveIntegerField(blank=True, default=1, null=True)
-
+    quiz = CharField(max_length=500, blank=False)
+    position = CharField(max_length=500, blank=False)
     class Meta:
         verbose_name = "Word Scramble Question"
         verbose_name_plural = "Word Scramble Questions"
@@ -160,6 +165,9 @@ class GapFillQuestionModel(BaseQuestionModel):
     """
     A Question Type for gap fill type questions.
     """
+
+    quiz = CharField(max_length=500, blank=False)
+    position = CharField(max_length=500, blank=False)
 
     # Gap schema: <gap answers='["answer1", "answer2"]' />
     text = BleachField(allowed_tags=["gap"], allowed_attributes=["answers"])
@@ -189,3 +197,43 @@ class GapFillQuestionModel(BaseQuestionModel):
             except (JSONDecodeError, ValidationError) as e:
                 raise HTMLParseError("Gap JSON parsing failed: Invalid syntax") from e
         return True
+
+
+class CrosswordQuestionModel(TimeStampedModel, SafeDeleteMixin):
+    """
+    A Word Scrabble Question Type.
+    """
+    question = ForeignKey(BaseQuestionModel, on_delete=CASCADE, blank=True, null=True)
+    direction = CharField(max_length=500)
+    length = PositiveIntegerField()
+    x = PositiveIntegerField()
+    y = PositiveIntegerField()
+    clue = CharField(max_length=500)
+    score = PositiveIntegerField(blank=True, default=1, null=True)
+    answer = CharField(max_length=500)
+    quiz = CharField(max_length=500, blank=False)
+    position = CharField(max_length=500, blank=False)
+
+    class Meta:
+        verbose_name = "Crossword Question"
+        verbose_name_plural = "Crossword Questions"
+
+    def check_answer(self, choice):
+        """
+        Checks whether the supplied answer is correct.
+        :param choice: The answer provided
+        :return: bool Whether the answer is correct.
+        """
+
+        return choice==self.answer
+
+    def as_dict(self):
+        return {
+            "direction": self.direction,
+            "length": self.length,
+            "x": self.x,
+            "y": self.y,
+            "clue": self.clue,
+            "pos": self.position,
+            "quiz": self.quiz
+}

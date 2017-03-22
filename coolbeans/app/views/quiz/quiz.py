@@ -4,6 +4,7 @@ from coolbeans.app.models.quiz import QuizModel
 from coolbeans.app.views.question import CreateView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 
 
 class QuizListView(View):
@@ -74,6 +75,14 @@ class QuizAttemptView(View):
     def nextQuestion(request, pk, i):
         instance = get_object_or_404(QuizModel, pk=pk)
         if (int(i)+1 < len(instance.questions)):
-            return HttpResponseRedirect('/' + instance.questions[int(i)+1])
+            if request.is_ajax():
+                message = '/' + instance.questions[int(i)+1]
+                return HttpResponse(message)
+            else:
+                return HttpResponseRedirect('/' + instance.questions[int(i)+1])
         else:
-            return HttpResponseRedirect('/')
+            if request.is_ajax():
+                message = '/'
+                return HttpResponse(message)
+            else:
+                return HttpResponseRedirect('/')

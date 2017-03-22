@@ -2,9 +2,11 @@ from django.views.generic import TemplateView
 from django.template import RequestContext
 
 from coolbeans.app.forms import MCForm, WMForm, WSForm, GFForm
-from coolbeans.app.models.question import MultipleChoiceModel, WordScrambleQuestionModel, WordMatchingQuestionModel, GapFillQuestionModel
+from coolbeans.app.models.question import MultipleChoiceModel, WordScrambleQuestionModel, WordMatchingQuestionModel, GapFillQuestionModel, CrosswordQuestionModel, BaseQuestionModel
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse
+import json
 
 def CreateView(type):
     return eval(type)
@@ -142,6 +144,52 @@ def submit(request, type, formtype):
         return preview(request, type, formtype)
     elif 'cancel_form' in request.POST:
         return cancel(request, type, formtype)
+
+class CWPreviewView(TemplateView):
+    template_name = "app/question/CW-Preview.html"
+
+
+class CWCreateView(TemplateView):
+    """
+    A view for creating Word Scramble Questions
+    """
+    template_name = "app/question/CW-Creation.html"
+
+    def submit(request):
+        json_data = json.loads(request.body.decode('utf-8'))
+        print(json_data)
+        base = BaseQuestionModel.objects.create()
+
+        quiz =""
+        pos=""
+
+        for element in json_data['q']:
+            quiz = element['quiz']
+            pos = element['pos']
+
+        print(pos)
+
+        for element in json_data['data']:
+            CrosswordQuestionModel.objects.create(question=base, direction=element['direction'], length=element['length'],
+                                                 x=element['x'],y=element['y'],clue=element['clue'],
+                                                 answer=element['word'], quiz=quiz, position=pos)
+
+        print(base.id)
+        message = '/quiz/edit/' + quiz + '/cw/' + str(base.pk)
+        return HttpResponse(message)
+
+
+class CWQuestionView(TemplateView):
+    template_name = "app/question/CW-Display.html"
+
+    def show_question(request, pk):
+
+        question = get_object_or_404(BaseQuestionModel, pk=pk)
+        all = question.crosswordquestionmodel_set.all()
+        dictionaries = [obj.as_dict() for obj in all]
+
+        return JsonResponse({'data': dictionaries})
+
 
 class QuizCreateView(TemplateView):
     template_name = "app/quiz/Quiz-Create.html"
