@@ -9,54 +9,60 @@
 {% endblock %}
 
 {% block content %}
-   <div id="main">
-	<!-- Canvas for drawing lines -->
-	<canvas id="my-canvas" width="700" height="500"></canvas>
+<div id="main">
+    <!-- Canvas for drawing lines -->
+    <canvas id="my-canvas" width="700" height="500"></canvas>
 
-       <form method="get">
-           <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    <form method="get">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
-           <div id="leftwords">
-               {% if form.listA.value() != "" %}
-               {% set list = form.listA.value().split(',') %}
+        <div id="leftwords">
+            {% if form.listA.value() != "" %}
+            {% set list = form.listA.value().split(',') %}
 
-               {% for answer in list %}
-               <input type="hidden" id={{ loop.index }} value={{ answer|e }}>
+            {% for answer in list %}
+            <input type="hidden" id={{ loop.index }} value={{ answer|e }}>
 
-               {% endfor %}
-               {% endif %}
-           </div>
+            {% endfor %}
+            {% endif %}
+        </div>
 
-           <div id="rightwords">
-               {% if form.listA.value() != "" %}
-               {% set list = form.listB.value().split(',') %}
+        <div id="rightwords">
+            {% if form.listA.value() != "" %}
+            {% set list = form.listB.value().split(',') %}
 
-               {% for answer in list %}
-               <input type="hidden" id={{ loop.index }} value={{ answer|e }}>
+            {% for answer in list %}
+            <input type="hidden" id={{ loop.index }} value={{ answer|e }}>
 
-               {% endfor %}
-               {% endif %}
-           </div>
+            {% endfor %}
+            {% endif %}
+        </div>
 
-       </form>
+    </form>
 
-	<!-- Button grid -->
-	<div id="button-grid" class="center">
-		<!-- Left button grid -->
-		<div id="button-grid-left">
+    <!-- Button grid -->
+    <div id="button-grid" class="center">
+        <!-- Left button grid -->
+        <div id="button-grid-left">
 
 
-		</div><!-- end of Left button grid-->
+        </div><!-- end of Left button grid-->
 
-		<!-- Right button grid -->
-		<div id="button-grid-right">
+        <!-- Right button grid -->
+        <div id="button-grid-right">
 
-		</div><!-- end of Right button grid-->
+        </div><!-- end of Right button grid-->
 
-	</div><!-- end of Button grid -->
+    </div><!-- end of Button grid -->
 
 </div>
 
+{% endblock %}
+
+{% block container %}
+<div id="message" class="callout">
+
+</div>
 {% endblock %}
 
 {% block sidebarContent %}
