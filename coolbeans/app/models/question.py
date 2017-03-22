@@ -158,7 +158,7 @@ class WordScrambleQuestionModel(BaseQuestionModel):
     A Word Scrabble Question Type.
     """
     title = CharField(max_length=500)
-    answer = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False))
+    answer = CharField(max_length=255)
     scrambled_sentence = CharField(max_length=500, blank = False)
     score = PositiveIntegerField(blank=True, default=1, null=True)
     quiz = CharField(max_length=500, blank=False)
@@ -175,7 +175,7 @@ class WordScrambleQuestionModel(BaseQuestionModel):
         :return: bool Whether the answer is correct.
         """
 
-        return choice==self.answer
+        return choice == self.answer.split(" ")
 
 
 class GapFillQuestionModel(BaseQuestionModel):

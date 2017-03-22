@@ -29,17 +29,20 @@ urlpatterns = [
     # Word Matching Questions
     url(r'^wm/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.WMCreateView.as_view(), name='wm'),
     url(r'^wm/submit/$', question.WMCreateView.submitWM, name='submit'),
-    url(r'^wm/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.WMQuestionView.show_question, name='wmquestion'),
+    url(r'^wm/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.WMQuestionView.show_question, name='mcquestion'),
+    url(r'^wm/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.WMQuestionView.check_answer, name='checkmc'),
 
     # Word Scramble Questions
     url(r'^ws/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.WSCreateView.as_view(), name='ws'),
     url(r'^ws/submit/$', question.WSCreateView.submitWS, name='submit'),
-    url(r'^ws/question/(?P<pk>\d+)/$', question.WSQuestionView.show_question, name='wsquestion'),
+    url(r'^ws/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.WSQuestionView.show_question, name='mcquestion'),
+    url(r'^ws/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.WSQuestionView.check_answer, name='checkmc'),
 
     # Gap Fill Questions
     url(r'^gf/$', question.GFCreateView.as_view(), name='gf'),
     url(r'^gf/submit/$', question.GFCreateView.submitGF, name='submit'),
-    url(r'^gf/question/(?P<pk>\d+)/$', question.GFQuestionView.show_question, name='gfquestion'),
+    url(r'^gf/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.GFQuestionView.show_question, name='mcquestion'),
+    url(r'^gf/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.GFQuestionView.check_answer, name='checkmc'),
 
     # Crossword Questions
     url(r'^cw/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.CWCreateView.as_view(), name='cw'),

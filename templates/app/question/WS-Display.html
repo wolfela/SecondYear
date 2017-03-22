@@ -9,17 +9,20 @@
 
 {% block content %}
 <div class="alignmentDiv">
-        <form action="/quiz/attempt/{{ question.quiz }}/next/{{ question.position}}/" method="post" id='post-form'>
+        <form action="/ws/question/{{ question.pk }}/{{ score }}/check/" method="post" id='post-form'>
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
         <div class="wsheading"> <h1>{{ question.title }}</h1></div>
         <div id="boxes">
             {% for scramble in question.scrambled_sentence.split(' ') %}
-            <div class="box" draggable="true"> {{ scramble }}</div>
+            <div class="box" draggable="true">{{ scramble }}</div>
             {% endfor %}
         </div>
 
 </div>
+
+
+<input type="hidden" name="answer" id="answer">
 
 <button type="submit" class="success button mysavebutton" name="save_form">Submit</button>
     </form>

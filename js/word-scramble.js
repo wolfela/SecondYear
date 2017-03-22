@@ -14,7 +14,6 @@ function handleDragOver(e) {
     if (e.preventDefault) {
         e.preventDefault(); // Necessary. Allows us to drop.
     }
-
     e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
 
     return false;
@@ -57,10 +56,18 @@ function handleDrop(e) {
         // Set the source column's HTML to the HTML of the column we dropped on.
         dragSrcEl.innerHTML = this.innerHTML;
         this.innerHTML = e.dataTransfer.getData('text/html');
+        changeanswer();
     }
-
     return false;
 }
+
+function changeanswer() {
+    var answer = [];
+    for (var ans of cols) {
+        answer.push($(ans).text());
+    }
+    document.getElementById('answer').value = answer;
+};
 
 function proceed() {
     var form = document.createElement('form');
