@@ -1,18 +1,51 @@
 {% extends "jTemplate.html" %}
 
- {% block title %} WordScramble{% endblock %} 
- {% block head %}
+ {% block title %}Results{% endblock %} 
+ {% block head %} 
 	{{ super() }}
+	<link rel="stylesheet" href="./static/css/results.css">
  {% endblock %}
-  
+
 {% block content %}
-	<p> {{ score }} </p>
+<div class="center">
+					<!-- quick summary of results -->
+					<h2 class="center">Results</h2>
+					<table id="summary-table" class="center">
+						<tr>
+							<th class="summary-col1">Quiz</th>
+							<td id="quiz-name-td">{{ quiz.title }}</td>
+						</tr>
+						<tr>
+							<th>Questions</th>
+							<td id="questions-total-td">{{ questioncount }}</td>
+						</tr>
+						<tr>
+							<th>Correct</th>
+							<td id="questions-correct-td">{{ score }}</td>
+						</tr>
+						<tr>
+							<th>Incorrect</th>
+							<td id="questions-incorrect-id">{{ questioncount - score|int }}</td>
+						</tr>
+					</table>	
+				
+					<!-- progress bar -->
+					<div id="progress-div" class="progress center">
+						<div id="results-progress" class="progress-meter">
+							<p id="results-progress-text" class="progress-meter-text">{{score|int}}</p>
+						</div>
+					</div>
 {% endblock %}
 
 {% block sidebarContent %}
 	<a href="#">Create Quiz</a>
     <a href="#">View Quizzes</a>
 {% endblock %}
+
+{% block extraJS %}
+<script src="../../../static/js/results.js"></script>
+{% endblock %}
+
 
 
 

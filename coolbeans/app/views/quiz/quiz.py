@@ -94,7 +94,7 @@ class QuizAttemptView(View):
                 message = '/quiz/score' + score
                 return HttpResponse(message)
             else:
-                return HttpResponseRedirect('/quiz/score/' + score)
+                return HttpResponseRedirect('/quiz/score/' + pk + '/' + score)
 
     def findQuizPage(request):
         return render(request, 'app/quiz/Quiz-Find.html')
