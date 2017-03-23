@@ -77,3 +77,27 @@ function proceed() {
     document.body.appendChild(form);
     form.submit();
 }
+
+$("#check").click(function () {
+        var correct_string = document.getElementById("correct").value;
+        var correct = correct_string.split(" ");
+        var i = 0; 
+            for (var col of cols) {
+                col.removeEventListener('dragstart', handleDragStart, false);
+                col.removeEventListener('dragenter', handleDragEnter, false);
+                col.removeEventListener('dragover', handleDragOver, false);
+                col.removeEventListener('dragleave', handleDragLeave, false);
+                col.removeEventListener('drop', handleDrop, false);
+                col.removeEventListener('dragend', handleDragEnd, false);
+
+                if($(col).text()==correct[i]){
+                 $(col).addClass('right');
+                }
+                else{
+                    $(col).addClass('wrong');
+                }
+                i++;
+             }
+      
+
+});
