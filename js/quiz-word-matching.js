@@ -131,6 +131,13 @@ $(document).ready(function() {
 	});
 
 	$('#check').click(function() {
+
+				var right = getRightLinked();
+		var left = getLeftLinked();
+		document.getElementById('listA').value = left;
+		console.log(document.getElementById('listA').value);
+		document.getElementById('listB').value = right;	
+
 		drawingIsBlocked = true;
 		// for checking if all buttons have been linked
 		if(drawnBetween.length == pairsInWindow) {
@@ -186,6 +193,12 @@ $(document).ready(function() {
 		context.moveTo(fromPos.left - offsetX, fromPos.top - offsetY);
 		context.lineTo(toPos.left - offsetX, toPos.top - offsetY);
 		context.stroke();
+
+		var right = getRightLinked();
+		var left = getLeftLinked();
+		document.getElementById('listA').value = left;
+
+		document.getElementById('listB').value = right;	
 	}
 
 	// checks to see if there are any word pairs that exist with the given key.
@@ -243,8 +256,43 @@ $(document).ready(function() {
 		return linked;
 	}
 
+	function getLeftLinked() {
+		var linked = [];
+		
+		for(var i = 0; i < drawnBetween.length; i++) {
+			var db = drawnBetween[i];
+			linked.push(db.$left.text());
+		}
+
+		return linked;
+	}
+	function getRightLinked() {
+		var linked = [];
+		
+		for(var i = 0; i < drawnBetween.length; i++) {
+			var db = drawnBetween[i];
+			linked.push(db.$right.text());
+		}
+
+		return linked;
+	}
+
 
 });
+
+
+	$('#submit').click(function() {	
+
+		alert("fdsfsd");
+
+		var right = getRightLinked();
+		var left = getLeftLinked();
+		document.getElementById('listA').value = left;
+
+		alert("here");
+
+		document.getElementById('listB').value = right;	
+	});
 
 function shuffle(array) {
 	for (var i = array.length - 1; i > 0; i--) {

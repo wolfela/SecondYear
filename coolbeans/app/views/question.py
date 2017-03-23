@@ -166,8 +166,11 @@ class WMQuestionView(TemplateView):
 
     def check_answer(request, pk, score):
         question = get_object_or_404(WordMatchingModel, pk=pk)
-        answer = request.POST.get('answers')
-        if question.check_answer(answer):
+        answerA = request.POST.get('listA')
+        aA = answerA.split(",")
+        answerB = request.POST.get('listB')
+        aB = answerB.split(",")
+        if question.check_answer(aA, aB):
             score = int(score) + 1
         return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
 

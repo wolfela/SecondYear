@@ -150,7 +150,31 @@ class WordMatchingModel(BaseQuestionModel):
         verbose_name = "Word Matching Question"
         verbose_name_plural = "Word Matching Questions"
 
+    def check_answer(self, answerA, answerB):
+        """
+        Checks whether the supplied answer is correct.
 
+        :param choice: The answer provided.
+        :return: bool Whether the answer is correct.
+        """
+        if(len(answerA)<len(self.listA) or len(answerB)<len(self.listB)):
+            return False
+
+
+        i=0
+        for a in answerA:
+            j = 0
+            for b in self.listA:
+                if(b==a):
+                    if(self.listB[j]==answerB[i]):
+                        break;
+                    else:
+                        return False
+                j=j+1
+            i=i+1
+
+
+        return True
 
 
 class WordScrambleQuestionModel(BaseQuestionModel):
