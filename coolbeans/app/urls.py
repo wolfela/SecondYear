@@ -5,7 +5,7 @@ from coolbeans.app.views import base, question
 from coolbeans.app.views.quiz import quiz
 
 urlpatterns = [
-    url(r'^$', base.IndexView.as_view()),
+    url(r'^$', quiz.QuizAttemptView.findQuizPage, name='indexpage'),
 
     # Quiz functions
     # url(r'^quiz/(?P<pk>\d+)/$', attempt.QuizView.as_view()),
@@ -17,7 +17,11 @@ urlpatterns = [
     url(r'^quiz/edit/(?P<pk>\d+)/submit/$', quiz.QuestionEditView.submitQuiz, name='submitquiz'),
     url(r'^quiz/attempt/(?P<pk>\d+)/$', quiz.QuizAttemptView.attemptQuiz, name='attemptquiz'),
     url(r'^quiz/attempt/(?P<pk>\d+)/next/(?P<i>\d+)/(?P<score>\d+)/$', quiz.QuizAttemptView.nextQuestion, name='nextquestion'),
-    url(r'^quiz/score/(?P<score>\d+)', quiz.QuizAttemptView.score, name='resultpage'),
+    url(r'^quiz/score/(?P<pk>\d+)/(?P<score>\d+)', quiz.QuizAttemptView.score, name='resultpage'),
+    url(r'^quiz/(?P<pk>\d+)/showid/$', quiz.QuestionEditView.showId, name='showId'),
+    url(r'^quiz/find/$', quiz.QuizAttemptView.findQuizPage, name='findQuiz'),
+    url(r'^quiz/find/go/$', quiz.QuizAttemptView.findQuiz, name='findQuiz'),
+
     # Question functions
 
     # Multiple Choice Questions
