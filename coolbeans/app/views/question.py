@@ -26,30 +26,8 @@ class MCCreateView(TemplateView):
     def submit(request, type, formtype):
         if 'save_form' in request.POST:
             return MCCreateView.save(request, type, formtype)
-        elif 'preview_form' in request.POST:
-            return MCCreateView.preview(request, type, formtype)
         elif 'cancel_form' in request.POST:
             return cancel(request, type, formtype)
-
-    def preview(request, type, formtype):
-        pathDisplay = 'app/question/' + type + '-Preview.html'
-        """
-        Method for previewing the question
-        :return:
-        """
-        if request.method == 'POST':
-            form = formtype(request.POST)
-            if form.is_valid():
-                answers = request.POST.getlist('answers[]')
-                form.cleaned_data['answers'] = answers
-                formcopy = formtype(request.POST.copy())
-                answers.append(request.POST.get('correct'))
-                formcopy.data['answers'] = answers
-                return render(request, pathDisplay, {'form': formcopy})
-        else:
-            form = formtype()
-
-        return render(request, pathDisplay, {'form': form})
 
 
     def save(request, type, formtype):
@@ -105,34 +83,8 @@ class WMCreateView(TemplateView):
     def submit(request, type, formtype):
         if 'save_form' in request.POST:
             return WMCreateView.save(request, type, formtype)
-        elif 'preview_form' in request.POST:
-            return WMCreateView.preview(request, type, formtype)
         elif 'cancel_form' in request.POST:
             return cancel(request, type, formtype)
-
-
-    def preview(request, type, formtype):
-        pathDisplay = 'app/question/' + type + '-Preview.html'
-        """
-        Method for previewing the question
-        :return:
-        """
-        if request.method == 'POST':
-            form = formtype(request.POST)
-            if form.is_valid():
-                listA = request.POST.getlist('listA[]')
-                form.cleaned_data['listA'] = ','.join(listA)
-                formcopy = formtype(request.POST.copy())
-                formcopy.data['listA'] = ','.join(listA)
-                listB = request.POST.getlist('listB[]')
-                form.cleaned_data['listB'] = ','.join(listB)
-                formcopy.data['listB'] = ','.join(listB)
-                print(formcopy.data['listA'])
-                return render(request, pathDisplay, {'form': formcopy})
-        else:
-            form = formtype()
-
-        return render(request, pathDisplay, {'form': form})
 
 
     def save(request, type, formtype):
@@ -212,8 +164,6 @@ class WSCreateView(TemplateView):
     def submit(request, type, formtype):
         if 'save_form' in request.POST:
             return WSCreateView.save(request, type, formtype)
-        elif 'preview_form' in request.POST:
-            return preview(request, type, formtype)
         elif 'cancel_form' in request.POST:
             return cancel(request, type, formtype)
 
@@ -322,22 +272,6 @@ def cancel(request, type, formtype):
     return HttpResponseRedirect('/quiz/edit/' + form.data['quiz'])
 
 
-def preview(request, type, formtype):
-    pathDisplay = 'app/question/' + type + '-Preview.html'
-    """
-    Method for previewing the question
-    :return:
-    """
-    if request.method == 'POST':
-        form = formtype(request.POST)
-        if form.is_valid():
-            return render(request, pathDisplay, {'form': form})
-    else:
-        form = formtype()
-
-    return render(request, pathDisplay, {'form': form})
-
-
 def save(request, type, formtype):
     pathCreation = 'app/question/' + type + '-Creation.html'
     pathType = '/' + type
@@ -362,7 +296,5 @@ def save(request, type, formtype):
 def submit(request, type, formtype):
     if 'save_form' in request.POST:
         return save(request, type, formtype)
-    elif 'preview_form' in request.POST:
-        return preview(request, type, formtype)
     elif 'cancel_form' in request.POST:
         return cancel(request, type, formtype)
