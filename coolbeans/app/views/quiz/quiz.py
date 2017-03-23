@@ -34,6 +34,8 @@ class QuestionEditView(View):
             return QuestionEditView.saveQuiz(request, pk)
         elif 'add_question' in request.POST:
             return QuestionEditView.addQuestion(request, pk)
+        elif 'cancel_form' in request.POST:
+            return QuestionEditView.cancel(request, pk)
 
     def addQuestion(request, pk):
         quiz = get_object_or_404(QuizModel, pk=pk)
@@ -68,6 +70,9 @@ class QuestionEditView(View):
     def showId(request, pk):
         quiz = get_object_or_404(QuizModel, pk=pk)
         return render(request, 'app/quiz/Quiz-ID.html', {'quiz': quiz})
+
+    def cancel(request, pk):
+        return HttpResponseRedirect('/')
 
 
 class QuizAttemptView(View):

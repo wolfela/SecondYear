@@ -1,0 +1,22 @@
+{% extends "jTemplate.html" %}
+
+ {% block title %} WordScramble{% endblock %} 
+ {% block head %}}
+	{{ super() }}
+ {% endblock %}
+  
+{% block content %}
+<form action="/quiz/find/go/" method="post" id='post-form'>
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+<label>Input the code of your quiz. Get this from your teacher.<label>
+<input type="text" name="pk" id="pk" placeholder="The code of your quiz.">
+<div class="buttondiv">
+<button type="submit" class="success button mysavebutton" name="find_form">Find</button>
+</div>
+
+{% endblock %}
+
+{% block sidebarContent %}
+	<a href="#">Create Quiz</a>
+    <a href="#">View Quizzes</a>
+{% endblock %}

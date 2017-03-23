@@ -1,0 +1,20 @@
+{% extends "jTemplate.html" %}
+
+ {% block title %} WordScramble{% endblock %} 
+ {% block head %}}
+	{{ super() }}
+ {% endblock %}
+  
+{% block content %}
+	<p> Your Quiz {{ quiz.title }} is Saved! You and your students can now take it with the code {{ quiz.pk }}  </p>
+{% endblock %}
+
+{% block sidebarContent %}
+	<a href="#">Create Quiz</a>
+    <a href="#">View Quizzes</a>
+{% endblock %}
+
+
+
+
+

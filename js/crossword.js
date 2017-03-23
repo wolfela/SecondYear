@@ -205,7 +205,7 @@ function editorActions(){
             $(this).addClass('selected').removeClass('blankBox');
         }else if($(this).hasClass('selected')){
             $(this).removeClass('selected').addClass('blankBox');
-        }else if($(this).hasClass('.set')){
+        }else if($(this).hasClass('set')){
             $(this).removeClass('set').addClass('setSelected');
         }
         if(validSelection()) {
@@ -429,38 +429,39 @@ $.ajaxSetup({
 
 $("#save").click(function () {
 
-var crossword_data = getCrosswordData();
+	var crossword_data = getCrosswordData();
+	var url = window.location.pathname;
+	var s = url.split("/");
 
+	crossword_data.q.push({'quiz':s[2],'pos':s[3]});
+	var data = JSON.stringify(crossword_data);
+	console.log(data);
 
-var url = window.location.pathname;
+	$.ajax({
+	    url : '../../submit/',
+	    type: 'POST',
+	    data: data,
+	    contentType:'application/json',
+	    dataType: 'text',
+	    success: function(message){
 
-var s = url.split("/");
-
-
-crossword_data.q.push({'quiz':s[2],'pos':s[3]});
-var data = JSON.stringify(crossword_data);
-console.log(data);
-
-$.ajax({
-    url : '../../submit/',
-    type: 'POST',
-    data: data,
-    contentType:'application/json',
-    dataType: 'text',
-    success: function(message){
-
-        window.location.href = message;
-    },
-    error: function(){
-        alert('nope');
-    }
-});
+	        window.location.href = message;
+	    },
+	    error: function(){
+	        alert('nope');
+	    }
+	});
 });
 
 $("#preview").click(function () {
-
-
- window.open("http://localhost:8000/cw/preview");
-
+ 	window.open("http://localhost:8000/cw/preview");
 });
+
+$("#cancel").click(function () {
+	var url = window.location.pathname;
+	var s = url.split("/");
+	var rurl = "../../../quiz/edit/" + s[2];
+	window.location.href = rurl;
+});
+
 
