@@ -257,14 +257,17 @@ class CWQuestionView(TemplateView):
         all = question.crosswordquestionmodel_set.all()
         dictionaries = [obj.as_dict() for obj in all]
 
-        return JsonResponse({'data': dictionaries, 'score': score})
+        return JsonResponse({'data': dictionaries})
 
     def check_answer(request, pk, score):
-        question = get_object_or_404(CrosswordQuestionModel, pk=pk)
-        answer = request.POST.get('answers')
-        if question.check_answer(answer):
+        question = get_object_or_404(BaseQuestionModel, pk=pk)
+        json_data = json.loads(request.body.decode('utf-8'))
+        print(json_data)
+        if question.check_answer(json_data):
             score = int(score) + 1
-        return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
+
+        message = 'lala'
+        return HttpResponse(str(score))
 
 
 def cancel(request, type, formtype):

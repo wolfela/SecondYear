@@ -281,6 +281,7 @@ function drawQuestions(crosswordData){
         answerEntry.length = data[i].length;
         answerEntry.direction = data[i].direction;
         answerEntry.answer = "";
+        answerData.data.push(answerEntry);
         drawQuestionBox(data[i].x,data[i].y,data[i].length,data[i].direction,i+1);
         drawClues(data[i].clue,data[i].direction,data[i].x,data[i].y);
     }
@@ -300,9 +301,9 @@ function getAnswer(startX,startY,length,direction) {
         answer = "";
     for(var i=0;i<parseInt(length);i++){
         if(direction=="D"){
-            answer += $(grid[x+i][y]).find('p').val();
+            answer += $(grid[x+i][y]).find('input').val();
         }else{
-            answer += $(grid[x][y+i]).find('p').val();
+            answer += $(grid[x][y+i]).find('input').val();
         }
     }
     return answer;
@@ -469,26 +470,25 @@ $.ajaxSetup({
 
 $("#submit").click(function () {
 
-    console.log(quiz);
 
+    var crossword_data = getAnswersData();
+    var url = window.location.pathname;
+    var s = url.split("/");
 
-$.ajax({
-    url : '/quiz/attempt/' + quiz + '/next/' + position + '/',
-    type: 'POST',
-    dataType: 'text',
-    success: function(message){
+    var data = JSON.stringify(crossword_data);
 
-        window.location.href = message;
-    },
-    error: function(){
-        alert('nope');
-    }
-});
-});
-
-$("#preview").click(function () {
-
-
- window.open("http://localhost:8000/cw/preview");
+    $.ajax({
+        url : 'check_answer/',
+        type: 'POST',
+        data: data,
+        contentType:'application/json',
+        dataType: 'text',
+        success: function(message){
+            window.location.href = '/quiz/attempt/' + quiz + '/next/' + position + '/' + message
+        },
+        error: function(){
+            alert('nope');
+        }
+    });
 
 });

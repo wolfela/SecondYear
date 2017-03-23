@@ -38,7 +38,17 @@ class BaseQuestionModel(TimeStampedModel, SafeDeleteMixin):
         :param answer: The answer provided.
         :return: bool Whether the answer is correct.
         """
-        raise NotImplementedError()
+        all = self.crosswordquestionmodel_set.all()
+
+        for element in answer['data']:
+            for obj in all:
+                if(obj.x==element['x'] and obj.y==element['y']):
+                    if(element['answer']==obj.answer):
+                        break;
+                    else:
+                        return False
+
+        return True
 
     def get_children(self):
         """
