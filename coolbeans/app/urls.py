@@ -5,7 +5,7 @@ from coolbeans.app.views import base, question
 from coolbeans.app.views.quiz import quiz
 
 urlpatterns = [
-    url(r'^$', base.IndexView.as_view()),
+    url(r'^$', quiz.QuizAttemptView.findQuizPage, name='indexpage'),
 
     # Quiz functions
     # url(r'^quiz/(?P<pk>\d+)/$', attempt.QuizView.as_view()),

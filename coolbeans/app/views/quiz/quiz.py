@@ -98,5 +98,5 @@ class QuizAttemptView(View):
         return render(request, 'app/quiz/Quiz-Find.html')
 
     def findQuiz(request):
-        pk = request.POST.get('pk')
+        pk = request.POST.get('pk')s
         return HttpResponseRedirect('/quiz/attempt/' + pk + '/')
