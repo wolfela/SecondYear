@@ -60,9 +60,14 @@ class QuestionEditView(View):
                 instance.title = form.data['title']
                 instance.language = form.data['language']
                 instance.save()
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/quiz/' + pk + '/showid/')
             else:
                 form = QuizForm()
+
+    def showId(request, pk):
+        quiz = get_object_or_404(QuizModel, pk=pk)
+        return render(request, 'app/quiz/Quiz-ID.html', {'quiz': quiz})
+
 
 class QuizAttemptView(View):
 
@@ -87,3 +92,10 @@ class QuizAttemptView(View):
                 return HttpResponse(message)
             else:
                 return HttpResponseRedirect('/quiz/score/' + score)
+
+    def findQuizPage(request):
+        return render(request, 'app/quiz/Quiz-Find.html')
+
+    def findQuiz(request):
+        pk = request.POST.get('pk')
+        return HttpResponseRedirect('/quiz/attempt/' + pk + '/')

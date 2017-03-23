@@ -18,6 +18,10 @@ urlpatterns = [
     url(r'^quiz/attempt/(?P<pk>\d+)/$', quiz.QuizAttemptView.attemptQuiz, name='attemptquiz'),
     url(r'^quiz/attempt/(?P<pk>\d+)/next/(?P<i>\d+)/(?P<score>\d+)/$', quiz.QuizAttemptView.nextQuestion, name='nextquestion'),
     url(r'^quiz/score/(?P<score>\d+)', quiz.QuizAttemptView.score, name='resultpage'),
+    url(r'^quiz/(?P<pk>\d+)/showid/$', quiz.QuestionEditView.showId, name='showId'),
+    url(r'^quiz/find/$', quiz.QuizAttemptView.findQuizPage, name='findQuiz'),
+    url(r'^quiz/find/go/$', quiz.QuizAttemptView.findQuiz, name='findQuiz'),
+
     # Question functions
 
     # Multiple Choice Questions
