@@ -309,7 +309,7 @@ function drawClues(clue, direction,startX, startY) {
         $(grid[x][y]).addClass('selected').removeClass('blankBox');
         $(grid[x][y]).children().focus();
     });
-    (direction=="D")? $('.acrossClueBox').append(clueRow):$('.downClueBox').append(clueRow);
+    (direction=="D")? $('.downClueBox').append(clueRow):$('.acrossClueBox').append(clueRow);
 }
 
 function gridReplaceClass() {

@@ -4,13 +4,6 @@
 {% block head %}
 {{ super() }}
  <link rel="stylesheet" href="../../../static/css/student-app.css">
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.js"></script>
-{#  <script src="../../../node_modules/jquery/dist/jquery.js"></script>#}
-
-
 {% endblock %}
 
 {% block content %}
@@ -39,7 +32,6 @@
               <button type="submit" class="success button mysavebutton" name="save_form" id="save">Save</button>
               <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
             </div>
-	</div>
 {% endblock %}
 
 {% block sidebarContent %}
@@ -48,6 +40,6 @@
 {% endblock %}
 
 {% block extraJS %}
-    <script src="../../../static/js/crossword.js" l></script>
+    <script src="/static/js/crossword.js"></script>
 {% endblock %}
 

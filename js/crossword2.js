@@ -259,7 +259,7 @@ function drawQuestions(crosswordData){
     var data = crosswordData.data;
     for(var i=0;i<data.length;i++){
         drawQuestionBox(data[i].x,data[i].y,data[i].length,data[i].direction,i+1);
-        drawClues(data[i].clue,data[i].direction,data[i].x,data[i].y)
+        drawClues(data[i].clue,data[i].direction,data[i].x,data[i].y);
     }
 }
 
@@ -294,7 +294,7 @@ function drawClues(clue, direction,startX, startY) {
         $(grid[x][y]).addClass('selected').removeClass('blankBox');
         $(grid[x][y]).children().focus();
     });
-    (direction=="D")? $('.acrossClueBox').append(clueRow):$('.downClueBox').append(clueRow);
+    (direction=="D")? $('.downClueBox').append(clueRow):$('.acrossClueBox').append(clueRow);
 }
 
 function gridReplaceClass() {
