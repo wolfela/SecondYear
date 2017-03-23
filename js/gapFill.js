@@ -104,3 +104,33 @@ function openCKEDITOR() {
     $('.gapFillSelectBox').empty();
     CKEDITOR.instances.gapFillInput.setReadOnly(false);
 }
+
+$(document).ready(function () {
+    $('.gapFillBack').click(function() {
+        openCKEDITOR();
+    });
+
+    $('.gapFillNext').click(function() {
+        closeCKEDITOR();
+    });
+
+    $('.gapFillSelect').click(function() {
+        addGap();
+    });
+
+    $('.gapFillDelete').click(function() {
+        deleteGap();
+    });
+
+    $('.gapFillAltAdd').click(function() {
+        addAltGap();
+    });
+
+    $('.gapFillAltDelete').click(function() {
+        deleteAltGap();
+    });
+
+    $('.gapFillAnswerOptions').change(function() {
+        getChange($('.gapFillAnswerOptions'));
+    })
+});
