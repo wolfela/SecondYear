@@ -72,8 +72,10 @@ class QuestionEditView(View):
 
 class QuizAttemptView(View):
 
-    def score(request, score):
-        return render(request, 'app/quiz/Quiz-Result.html', {'score': score})
+    def score(request, pk, score):
+        quiz = get_object_or_404(QuizModel, pk=pk)
+        questioncount = len(quiz.questions)
+        return render(request, 'app/quiz/Quiz-Result.html', {'score': score, 'quiz': quiz, 'questioncount': questioncount})
 
     def attemptQuiz(request, pk):
         instance = get_object_or_404(QuizModel, pk=pk)
@@ -98,5 +100,5 @@ class QuizAttemptView(View):
         return render(request, 'app/quiz/Quiz-Find.html')
 
     def findQuiz(request):
-        pk = request.POST.get('pk')s
+        pk = request.POST.get('pk')
         return HttpResponseRedirect('/quiz/attempt/' + pk + '/')
