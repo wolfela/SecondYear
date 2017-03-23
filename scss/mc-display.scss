@@ -20,3 +20,12 @@ h2{
 	display: inline-block;
 	font-size: 25px;
 }
+
+.right:after{
+    content : '✓';
+    color : green;
+}
+.wrong:after{
+    content : '✗';
+    color : red;
+}

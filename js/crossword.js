@@ -97,7 +97,7 @@ function validSelection() {
 
     for(var i=0;i<gridSize;i++){
         for(var j=0;j<gridSize;j++){
-            if($(grid[i][j]).hasClass('selected')) {
+            if($(grid[i][j]).hasClass('selected') || $(grid[i][j]).hasClass('doubleSelect')) {
                 xArr.push(i);
                 yArr.push(j);
             }
@@ -147,25 +147,40 @@ function addClueRow(word, clue) {
     $('.clueDiv').append(newRow);
     $(newRow).click(function() {
         selectedRow = this;
-    })
+    });
+    cluesList.push(clue);
+    answerList.push(word);
+    disableForm(true);
+    addToCrosswordData(selectionData.x,selectionData.y,word,selectionData.direction,clue);
 }
 
-function addAnswer(answer) {
+function addAnswer(answer,clue) {
     var chars = answer.split('');
     var charIndex = 0;
     for(var i=0;i<gridSize;i++){
         for(var j=0;j<gridSize;j++){
             if($(grid[i][j]).hasClass('selected')) {
                 $(grid[i][j]).removeClass('selected').addClass('set');
-                $(grid[i][j]).attr('id',answerList.length);
                 $(grid[i][j]).append('<p class=crosswordLetter>'+chars[charIndex]+'</p>');
                 if(charIndex==0){
-                    $(grid[i][j]).prepend('<span class=crosswordNum>'+ answerList.length +'</span>')
+                    $(grid[i][j]).prepend('<span class=crosswordNum>'+ (answerList.length+1) +'</span>')
                 }
                 charIndex+=1;
+            }else if($(grid[i][j]).hasClass('doubleSelect')){
+                if($(grid[i][j]).find('p').text()==chars[charIndex]){
+                    $(grid[i][j]).removeClass('doubleSelect').addClass('set');
+                    if(charIndex==0 && !$(grid[i][j]).find('span').length){
+                        $(grid[i][j]).prepend('<span class=crosswordNum>'+ (answerList.length+1) +'</span>')
+                    }
+                    charIndex+=1;
+                }else{
+                    //errorDialog('Incorrect Letter','Please change letter to the letter in the overlap',1);
+                    return;
+                }
             }
         }
     }
+    addClueRow(answer,clue);
 }
 
 function addToCrosswordData(x,y,answer, direction, clue) {
@@ -190,6 +205,8 @@ function editorActions(){
             $(this).addClass('selected').removeClass('blankBox');
         }else if($(this).hasClass('selected')){
             $(this).removeClass('selected').addClass('blankBox');
+        }else if($(this).hasClass('.set')){
+            $(this).removeClass('set').addClass('setSelected');
         }
         if(validSelection()) {
             disableForm(false);
@@ -202,12 +219,7 @@ function editorActions(){
         var clue = $('.clueInput').val();
         var answer = $('.answerBox').val();
         if(answer.length == $('.answerBox').attr('maxlength')){
-            cluesList.push(clue);
-            answerList.push(answer);
-            addClueRow(answer, clue);
-            addAnswer(answer);
-            disableForm(true);
-            addToCrosswordData(selectionData.x,selectionData.y,answer,selectionData.direction,clue);
+            addAnswer(answer,clue);
         }else{
 
         }

@@ -1,29 +1,53 @@
 {% extends "jTemplate.html" %}
 
- {% block title %} WordScramble{% endblock %} 
- {% block head %}}
+ {% block title %} Create a Quiz {% endblock %} 
+ {% block head %}
 	{{ super() }}
  {% endblock %}
   
 {% block content %}
-	<div class="medium-6 medium-centered large-4 large-centered columns">
+	<div class="medium-2 medium-centered large-8 large-centered columns">
+
 
     <form action="/quiz/edit/{{ quiz.pk }}/submit/" method="post" id='post-form'>
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-    <div class="row column log-in-form">
-    <h4 class="text-center">Create a Quiz</h4>
+    <h3 class="text-center">Create a Quiz</h4>
 		
     
-	<label>Name:
+	<label>Title:
         <input type="text" id="title" name="title" value="{{ quiz.title }}">
-        </label>	
+     </label>	
 	<label>Language:
-	<input type="text" id="language" name="language" value="{{ quiz.language }}"></label>	
-	<label>Current Questions: mc/wm/ws/cw all work
-	<input type="text" id="type" name="type" value="mc">
-    <button type="submit" class="button addquestionbutton" name="add_question">Add Question</button>
+		<input type="text" id="language" name="language" value="{{ quiz.language }}">
+	</label>	
+		    <div >
+	<label>Author:
+        <input type="text" id="author" name="author" value="{{ quiz.author }}">
+    </label>
+      <label>Question Type: </label>
+      <div id="types">
+      <input type="radio" class="checkbox" id="mc" name="type" value="mc"><label >Multiple Choice</label>
+      <input type="radio" class="checkbox" id="wm" name="type" value="wm"><label >Word Match</label>
+      <input type="radio" class="checkbox" id="ws" name="type" value="ws"><label >Word Scramble</label>
+      <input type="radio" class="checkbox" id="cw" name="type" value="cw"><label >Crossword</label>
+      <input type="radio" class="checkbox" id="cw" name="type" value="gf"><label >Gap Fill</label>
+      </div>
+    </div>
+<!-- 	<input type="hidden" id="type" name="type" value="mc"> -->
+    <button type="submit" class="button addquestionbutton" name="add_question" id="add">Add Question</button>
 
 	</label>
+	 <h5>List of Questions: </h5>
+	    {% if quiz.questions is defined and quiz.questions|length > 0 %}
+	    <ol>
+	    {% for question in quiz.questions%}
+    	<li>{{ question }}</li>
+    	{% endfor %}
+    	</ol>
+    	{% else %}
+    	<p>No questions</p>
+		{% endif %}
+
 	<div class="buttondiv">
               <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
               <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
@@ -34,13 +58,12 @@
       </div>
     </form>
 
-    {% for question in quiz.questions%}
-    <p>{{ question }}</p>
-    {% endfor %}
+
 	
     </div>
-{% endblock %}
 
+{% endblock %}
+     <script src="../../../static/js/quiz-create.js"></script>
 {% block sidebarContent %}
 	<a href="#">Create Quiz</a>
     <a href="#">View Quizzes</a>

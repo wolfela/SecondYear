@@ -39,6 +39,7 @@ class QuestionEditView(View):
         quiz = get_object_or_404(QuizModel, pk=pk)
         quiz.title = request.POST.get('title')
         quiz.language = request.POST.get('language')
+        quiz.author = request.POST.get('author')
         quiz.save()
         type = request.POST.get('type')
         return HttpResponseRedirect('/' + type + '/' + str(pk) + '/' + str(len(quiz.questions)))
