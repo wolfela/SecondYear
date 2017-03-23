@@ -21,25 +21,20 @@ $(document).ready(function() {
 	var drawingIsBlocked = false;
 	
 	// ADD ACTUAL WORD PAIRS BETWEEN HERE...
-	
-	// ...AND HERE
 
+    // PREVIEW
 
-    var left = [];
-    var right = [];
-    $('#leftwords').children('input').each(function () {
-    	left.push(this.value);
-	});
+    var opener = window.opener;
+    if(opener) {
+        var data = opener.getLefts();
+        var right = opener.getRights();
 
-	$('#rightwords').children('input').each(function () {
-    	right.push(this.value);
-	});
-
-
-    for (var a=0; a < left.length; a++){
-
-    	wordPairs.push(new Word(left[a], right[a]));
+        for (var a=0; a < data.length; a++){
+    		wordPairs.push(new Word(data[a], right[a]));
+    	}
     }
+
+
 
 
 

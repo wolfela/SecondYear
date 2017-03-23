@@ -38,6 +38,7 @@ const jsPaths = {
         `${dirs.jsSrc}/student-app.js`,
         `${dirs.jsSrc}/teacher-app.js`,
         `${dirs.jsSrc}/mc-creation-update.js`,
+	`${dirs.jsSrc}/mc-preview.js`,
         `${dirs.jsSrc}/menuAnimation.js`,
         `${dirs.jsSrc}/gapFill.js`,
         `${dirs.jsSrc}/results.js`,
@@ -46,8 +47,10 @@ const jsPaths = {
         `${dirs.jsSrc}/crossword3.js`,
         `${dirs.jsSrc}/generalFunctions.js`,
         `${dirs.jsSrc}/word-scramble.js`,
+        `${dirs.jsSrc}/word-scramble-preview.js`,
         `${dirs.jsSrc}/quiz-word-matching.js`,
         `${dirs.jsSrc}/quiz-editor-word-matching.js`,
+        `${dirs.jsSrc}/quiz-preview-word-matching.js`,
     ],
     dest: `${dirs.dest}` // For some reason vinyl-source-stream will prepend /js to the final output path
 };

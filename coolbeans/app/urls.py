@@ -27,24 +27,28 @@ urlpatterns = [
     # Multiple Choice Questions
     url(r'^mc/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.MCCreateView.as_view(), name='mc'),
     url(r'^mc/submit/$', question.MCCreateView.submitMC, name='submit'),
+    url(r'^mc/preview/$', question.MCPreviewView.as_view(), name='preview'),
     url(r'^mc/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.MCQuestionView.show_question, name='mcquestion'),
     url(r'^mc/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.MCQuestionView.check_answer, name='checkmc'),
 
     # Word Matching Questions
     url(r'^wm/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.WMCreateView.as_view(), name='wm'),
     url(r'^wm/submit/$', question.WMCreateView.submitWM, name='submit'),
+    url(r'^wm/preview/$', question.WMPreviewView.as_view(), name='preview'),
     url(r'^wm/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.WMQuestionView.show_question, name='mcquestion'),
     url(r'^wm/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.WMQuestionView.check_answer, name='checkmc'),
 
     # Word Scramble Questions
     url(r'^ws/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.WSCreateView.as_view(), name='ws'),
     url(r'^ws/submit/$', question.WSCreateView.submitWS, name='submit'),
+    url(r'^ws/preview/$', question.WSPreviewView.as_view(), name='preview'),
     url(r'^ws/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.WSQuestionView.show_question, name='mcquestion'),
     url(r'^ws/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.WSQuestionView.check_answer, name='checkmc'),
 
     # Gap Fill Questions
     url(r'^gf/$', question.GFCreateView.as_view(), name='gf'),
     url(r'^gf/submit/$', question.GFCreateView.submitGF, name='submit'),
+    url(r'^gf/preview/$', question.GFPreviewView.as_view(), name='preview'),
     url(r'^gf/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.GFQuestionView.show_question, name='mcquestion'),
     url(r'^gf/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.GFQuestionView.check_answer, name='checkmc'),
 

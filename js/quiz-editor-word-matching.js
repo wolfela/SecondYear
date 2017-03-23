@@ -124,3 +124,9 @@ window.getRights= function() {
 	return array;
 };
 
+$("#preview").click(function () {
+
+ window.open("http://localhost:8000/wm/preview");
+
+});
+

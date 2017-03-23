@@ -88,6 +88,9 @@ class MCQuestionView(TemplateView):
             score = int(score) + 1
         return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
 
+class MCPreviewView(TemplateView):
+    template_name = "app/question/MC-Preview.html"
+
 
 class WMCreateView(TemplateView):
     """
@@ -174,6 +177,9 @@ class WMQuestionView(TemplateView):
             score = int(score) + 1
         return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
 
+class WMPreviewView(TemplateView):
+    template_name = "app/question/WM-Preview.html"
+
 
 
 class WSCreateView(TemplateView):
@@ -226,6 +232,9 @@ class WSQuestionView(TemplateView):
             score = int(score) + 1
         return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
 
+class WSPreviewView(TemplateView):
+    template_name = "app/question/WS-Preview.html"
+
 
 class GFCreateView(TemplateView):
     """
@@ -250,6 +259,9 @@ class GFQuestionView(TemplateView):
         if question.check_answer(answer):
             score = int(score) + 1
         return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
+
+class GFPreviewView(TemplateView):
+    template_name = "app/question/GF-Preview.html"
 
 
 class CWPreviewView(TemplateView):

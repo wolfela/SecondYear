@@ -12,7 +12,7 @@
         <label><h2 class="mcheading">MCQ Quiz Creation</h2></label>
         <div>
           <h4>Type your question below</h4>
-          <textarea class="mctextareas" placeholder="Type your question in here" name="title"></textarea>
+          <textarea class="mctextareas" placeholder="Type your question in here" name="title" id="title"></textarea>
           <h4>Type your correct answer below</h4>
 
           <div id="addAnswer" >
@@ -29,14 +29,14 @@
           </div>
 
           <div class="buttondiv">
-            <button type="submit" class="button mypreviewbutton" name="preview_form">Preview</button>
+            <button type="button" class="button mypreviewbutton" id="preview">Preview</button>
             <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
             <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
           </div>
         </div>
 
-        <input id="quiz" type="hidden" class="mcinputbox" name="quiz" value="{{ quizid }}">
-        <input id="position" type="hidden" class="mcinputbox" name="position" value="{{ pos }}">
+        <input id="quiz" type="hidden" name="quiz" value="{{ quizid }}">
+        <input id="position" type="hidden" name="position" value="{{ pos }}">
       </form>
 {% endblock %}
 
