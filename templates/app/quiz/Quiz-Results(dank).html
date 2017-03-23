@@ -13,26 +13,26 @@
 					<table id="summary-table" class="center">
 						<tr>
 							<th class="summary-col1">Quiz</th>
-							<td id="quiz-name-td"></td>
+							<td id="quiz-name-td">{{ quiz.title }}</td>
 						</tr>
 						<tr>
 							<th>Questions</th>
-							<td id="questions-total-td"></td>
+							<td id="questions-total-td">{{ questioncount }}</td>
 						</tr>
 						<tr>
 							<th>Correct</th>
-							<td id="questions-correct-td"></td>
+							<td id="questions-correct-td">{{ score }}</td>
 						</tr>
 						<tr>
 							<th>Incorrect</th>
-							<td id="questions-incorrect-id"></td>
+							<td id="questions-incorrect-id">{{ questioncount }} - {{ score }}</td>
 						</tr>
 					</table>	
 				
 					<!-- progress bar -->
 					<div id="progress-div" class="progress center">
 						<div id="results-progress" class="progress-meter">
-							<p id="results-progress-text" class="progress-meter-text">49%</p>
+							<p id="results-progress-text" class="progress-meter-text">{{ score }} / {{ questioncount }}</p>
 						</div>
 					</div>
 
