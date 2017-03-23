@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 	var wordPairs = [];	// array that will be used to display words. Words stored here should be CORRECTLY paired
 	function Word(langA, langB) { this.langA = langA; this.langB = langB };
-	var showAnswers = false;
+	var drawingIsBlocked = false;
 	
 	// ADD ACTUAL WORD PAIRS BETWEEN HERE...
 	
@@ -131,6 +131,7 @@ $(document).ready(function() {
 	});
 
 	$('#check').click(function() {
+		drawingIsBlocked = true;
 		// for checking if all buttons have been linked
 		if(drawnBetween.length == pairsInWindow) {
 			var correct = 0;
@@ -200,18 +201,20 @@ $(document).ready(function() {
 
 	// clears the canvas, and redraws the lines depending on the contents of the drawnBetween array
 	function refreshLines() {
-		context.clearRect(0, 0, $canvas.width(), $canvas.height());
-		for(var i = 0; i < drawnBetween.length; i++) {
-			var link = drawnBetween[i];
-			var leftPos = link.$left.position();
-			var rightPos = link.$right.position();
+		if(!drawingIsBlocked) {
+			context.clearRect(0, 0, $canvas.width(), $canvas.height());
+			for(var i = 0; i < drawnBetween.length; i++) {
+				var link = drawnBetween[i];
+				var leftPos = link.$left.position();
+				var rightPos = link.$right.position();
 
-			leftPos.left += link.$left.width();
-			leftPos.top += (link.$left.height() / 2)
+				leftPos.left += link.$left.width();
+				leftPos.top += (link.$left.height() / 2)
 
-			rightPos.top += (link.$right.height() / 2)
+				rightPos.top += (link.$right.height() / 2)
 			
-			draw(leftPos, rightPos);		
+				draw(leftPos, rightPos);		
+			}
 		}
 
 	}
