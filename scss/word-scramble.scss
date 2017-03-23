@@ -37,6 +37,27 @@
   background: #1e1e1e;
   color: #f1f1f1;
 }
+.wrong{
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 50px;
+  max-width: 150px;
+  background: #ff0000;
+  color: #f1f1f1;
+}
+
+.right{
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 50px;
+  max-width: 150px;
+  background: #08D424;
+  color: #f1f1f1;
+}
 
 .box.over {
   background: #3adb76;

@@ -21,10 +21,11 @@
 
 </div>
 
-
+<input type="hidden" id="correct" value="{{ question.answer }}">
 <input type="hidden" name="answer" id="answer">
 
 <button type="submit" class="success button mysavebutton" name="save_form">Submit</button>
+<button type="button" class="success button mysavebutton" id="check">Check Answer</button>
     </form>
 {% endblock %}
 
