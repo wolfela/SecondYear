@@ -18,6 +18,7 @@ $(document).ready(function() {
 
 	var wordPairs = [];	// array that will be used to display words. Words stored here should be CORRECTLY paired
 	function Word(langA, langB) { this.langA = langA; this.langB = langB };
+	var drawingIsBlocked = false;
 	
 	// ADD ACTUAL WORD PAIRS BETWEEN HERE...
 	
@@ -92,48 +93,52 @@ $(document).ready(function() {
 	var $selectedButton = null;	// it is assumed that no buttons have been clicked before the document is open
 
 	$('.button').click(function() {
+		// if the 'Check Answer' button was clicked, don't do anything
+		if($(this).attr('id') != 'check') {
+			// for drawing lines
+			if($selectedButton != null) {
+				var firstButtonId = $selectedButton.attr('id');
+				var secondButtonId = $(this).attr('id');
 
-		// for drawing lines
-		if($selectedButton != null) {
-			var firstButtonId = $selectedButton.attr('id');
-			var secondButtonId = $(this).attr('id');
-
-			// checks the ids of the buttons to see which side they are on
-			// if the second button is on the same side as the first button, the first becomes de-selected
-			//	without drawing
-			if(!(	// negate result of the two checks below
-				(langAregex.test(firstButtonId) && langAregex.test(secondButtonId)) || // if both buttons are on left column
-				(langBregex.test(firstButtonId) && langBregex.test(secondButtonId)))) { // if both buttons are on right column
+				// checks the ids of the buttons to see which side they are on
+				// if the second button is on the same side as the first button, the first becomes de-selected
+				//	without drawing
+				if(!(	// negate result of the two checks below
+					(langAregex.test(firstButtonId) && langAregex.test(secondButtonId)) || // if both buttons are on left column
+					(langBregex.test(firstButtonId) && langBregex.test(secondButtonId)))) { // if both buttons are on right column
 				
-				// if the check above passes, then a new link is made while removing links for the two buttons to be used for the new link
-				removeIfExists($selectedButton);	// button that was clicked on first	
-				removeIfExists($(this));	// button that was clicked on second (or the one that was clicked to fire this event)
+					// if the check above passes, then a new link is made while removing links for the two buttons to be used for the new link
+					removeIfExists($selectedButton);	// button that was clicked on first	
+					removeIfExists($(this));	// button that was clicked on second (or the one that was clicked to fire this event)
 
-				// when inserting Drawn objects in the drawnBetween array, buttons on the left should come first
-				if(langAregex.test(firstButtonId)) {
-					drawnBetween.push(new Drawn($selectedButton, $(this)));
-				} else {
-					drawnBetween.push(new Drawn($(this), $selectedButton));
-				}
+					// when inserting Drawn objects in the drawnBetween array, buttons on the left should come first
+					if(langAregex.test(firstButtonId)) {
+						drawnBetween.push(new Drawn($selectedButton, $(this)));
+					} else {
+						drawnBetween.push(new Drawn($(this), $selectedButton));
+					}
 
-				refreshLines();
+					refreshLines();
 		
+				}
+				$selectedButton = null;
+
+			} else {
+				$selectedButton = $(this);
 			}
-			$selectedButton = null;
 
-		} else {
-			$selectedButton = $(this);
-		}
+		}		
+	});
 
-
+	$('#check').click(function() {
+		drawingIsBlocked = true;
 		// for checking if all buttons have been linked
 		if(drawnBetween.length == pairsInWindow) {
-        		var correct = 0;
+			var correct = 0;
 			
 			for(var j = 0; j < drawnBetween.length; j++) {
 				var $left = drawnBetween[j].$left;
 				var $right = drawnBetween[j].$right;
-
 				var pair = getWordPair($left.text());
 				
 				var answerText = pair.langB;
@@ -142,7 +147,7 @@ $(document).ready(function() {
 				$right.removeClass('success alert');
 
 				if($right.text() == answerText) {
-                    			correct++;
+		            		correct++;
 					$left.addClass('success');
 					$right.addClass('success');
 				} else {
@@ -152,7 +157,7 @@ $(document).ready(function() {
 				
 			}
 			
-		}		
+		}
 	});
 
 	// creates a button for a word, adds it to the button grid, and returns it for use with jQuery
@@ -196,18 +201,20 @@ $(document).ready(function() {
 
 	// clears the canvas, and redraws the lines depending on the contents of the drawnBetween array
 	function refreshLines() {
-		context.clearRect(0, 0, $canvas.width(), $canvas.height());
-		for(var i = 0; i < drawnBetween.length; i++) {
-			var link = drawnBetween[i];
-			var leftPos = link.$left.position();
-			var rightPos = link.$right.position();
+		if(!drawingIsBlocked) {
+			context.clearRect(0, 0, $canvas.width(), $canvas.height());
+			for(var i = 0; i < drawnBetween.length; i++) {
+				var link = drawnBetween[i];
+				var leftPos = link.$left.position();
+				var rightPos = link.$right.position();
 
-			leftPos.left += link.$left.width();
-			leftPos.top += (link.$left.height() / 2)
+				leftPos.left += link.$left.width();
+				leftPos.top += (link.$left.height() / 2)
 
-			rightPos.top += (link.$right.height() / 2)
+				rightPos.top += (link.$right.height() / 2)
 			
-			draw(leftPos, rightPos);		
+				draw(leftPos, rightPos);		
+			}
 		}
 
 	}
