@@ -298,7 +298,7 @@ function getAnswer(startX,startY,length,direction) {
     var x = parseInt(startX),
         y = parseInt(startY),
         answer = "";
-    for(var i=0;i<parseInt(length),i++){
+    for(var i=0;i<parseInt(length);i++){
         if(direction=="D"){
             answer += $(grid[x+i][y]).find('p').val();
         }else{
