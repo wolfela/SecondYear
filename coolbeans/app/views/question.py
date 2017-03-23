@@ -306,7 +306,8 @@ class CWQuestionView(TemplateView):
 
 
 def cancel(request, type, formtype):
-    return redirect(type.lower())
+    form = formtype(request.POST)
+    return HttpResponseRedirect('/quiz/edit/' + form.data['quiz'])
 
 
 def preview(request, type, formtype):
