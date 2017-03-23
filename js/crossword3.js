@@ -7,6 +7,7 @@ var container,
     selectedRow,
     selectionData={},
     crosswordData={},
+    answerData={},
     quiz,
     position;
 
@@ -272,16 +273,44 @@ function getCrosswordData() {
 //Will be used to display crossword questions when provided question data
 function drawQuestions(crosswordData){
     var data = crosswordData.data;
+    answerData.data=[];
     for(var i=0;i<data.length;i++){
+        var answerEntry = {};
+        answerEntry.x = data[i].x;
+        answerEntry.y = data[i].y;
+        answerEntry.length = data[i].length;
+        answerEntry.direction = data[i].direction;
+        answerEntry.answer = "";
         drawQuestionBox(data[i].x,data[i].y,data[i].length,data[i].direction,i+1);
-        drawClues(data[i].clue,data[i].direction,data[i].x,data[i].y)
+        drawClues(data[i].clue,data[i].direction,data[i].x,data[i].y);
     }
+}
+
+function getAnswersData() {
+    var data = answerData.data;
+    for(var i =0;i<data.length;i++){
+        data[i].answer = getAnswer(data[i].x,data[i].y,data[i].length,data[i].direction);
+    }
+    return answerData;
+}
+
+function getAnswer(startX,startY,length,direction) {
+    var x = parseInt(startX),
+        y = parseInt(startY),
+        answer = "";
+    for(var i=0;i<parseInt(length),i++){
+        if(direction=="D"){
+            answer += $(grid[x+i][y]).find('p').val();
+        }else{
+            answer += $(grid[x][y+i]).find('p').val();
+        }
+    }
+    return answer;
 }
 
 function drawQuestionBox(startX,startY,size,direction,number){
     var x = parseInt(startX),
         y = parseInt(startY);
-    console.log('start at: ('+x+','+y+')');
     for(var i =0;i<parseInt(size);i++){
         if(direction=="D"){
             $(grid[x+i][y]).children().css('pointer-events','auto');
@@ -300,7 +329,6 @@ function drawQuestionBox(startX,startY,size,direction,number){
 }
 
 function drawClues(clue, direction,startX, startY) {
-    console.log('Here');
     var clueRow = $('<p>'+clue+'</p>'),
         x = parseInt(startX),
         y = parseInt(startY);
