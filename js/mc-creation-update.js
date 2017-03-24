@@ -30,7 +30,6 @@ $(document).ready(function() {
 			var id_checkbox = $('input[type=radio][name="answers"]:checked').attr('id');
 			var id = id_checkbox.split("-"); 
 			var id_text = id[1];
-
 			$('#choices').children('input').each(function () {
 				if(this.value!=answer){
 					this.disabled=true;
@@ -46,7 +45,6 @@ $(document).ready(function() {
 				var field = document.getElementById(id_text);
 				$(field).addClass('wrong');
 			}
-
 	});
 
 	$("#preview").click(function () {
