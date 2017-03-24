@@ -23,7 +23,7 @@ class QuizCreateView(View):
     def load(request):
         form = QuizForm(request.POST)
         quiz = form.save()
-        string = 'edit/' + str(quiz.pk)
+        string = '/quiz/edit/' + str(quiz.pk)
         return redirect(string)
 
 class QuestionEditView(View):

@@ -17,14 +17,14 @@
 		
 			<div class="buttondiv">
 				<button type="submit" class="success button expanded mysavebutton" name="find_form">Find</button>
-				
-				
-				
-				<h5 class="text-center">Don't have a Quiz?</h5>
-				<button type="submit" class="success button medium-center mydankbutton" name="create-quiz-redirect">Create Quiz</button>
+    </form>
+        <h5 class="text-center">Don't have a Quiz?</h5>
+        <form action="/quiz/create/">
+        <button type="submit" class="success button medium-center mydankbutton" name="create-quiz-redirect" onclick="/quiz/create/">Create Quiz</button>
 			</div>
+			</form>
 		</div>
-	</form>
+
 </div>
 
 {% endblock %}

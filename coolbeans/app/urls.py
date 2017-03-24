@@ -11,7 +11,7 @@ urlpatterns = [
     # url(r'^quiz/(?P<pk>\d+)/$', attempt.QuizView.as_view()),
 
     # Quiz editing functions
-    url(r'^quiz/create$', quiz.QuizCreateView.load),
+    url(r'^quiz/create/$', quiz.QuizCreateView.load),
     url(r'^quiz/edit/(?P<pk>\d+)/$', quiz.QuestionEditView.editQuiz, name='editquiz'),
     url(r'^quiz/edit/(?P<pk>\d+)/(?P<questiontype>.*)/(?P<questionid>\d+)/$', quiz.QuestionEditView.editQuiz, name='editquizwithquestion'),
     url(r'^quiz/edit/(?P<pk>\d+)/submit/$', quiz.QuestionEditView.submitQuiz, name='submitquiz'),
