@@ -7,20 +7,21 @@
 {% endblock %}
 
 {% block content %}
+<form action="/gf/question/{{ question.pk }}/{{ score }}/check/" method="post" id='post-form'>
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 <div class="gapFillQuestionDiv">
     <label class="gapFillQuestions">
     {% for word in gapfilled %}
-    {% if word == '$$$$' %}
-    <span class="gapFillBox"></span>
+    {% if word == '$$ $$' %}
+    <input type="text" id="answers" name="answers">
     {% else %}
-    <p>{{ word }}</p>
+    {{ word }}
     {% endif %}
     {% endfor %}
-    
     </label>
 </div>
-<input type="button" class="gapFillComplete gapFillButton" value="Done"/>
-
+<button type="submit" class="button mynextbutton" name="save_form">Next Question</button>
+</form>
 
 {% endblock %}
 

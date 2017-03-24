@@ -218,13 +218,13 @@ class GFQuestionView(TemplateView):
         gapfilled = question.question.split(" ")
         for index, word in enumerate(gapfilled):
             if word in question.gaps:
-                gapfilled[index] = '$$$$'
+                gapfilled[index] = '$$ $$'
 
         return render(request, 'app/question/GF-Display.html', {'question': question, 'score': score, 'gapfilled': gapfilled})
 
     def check_answer(request, pk, score):
         question = get_object_or_404(GapFillQuestionModel, pk=pk)
-        answer = request.POST.get('answers')
+        answer = request.POST.getlist('answers')
         if question.check_answer(answer):
             score = int(score) + 1
         return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))

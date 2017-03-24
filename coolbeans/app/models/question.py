@@ -222,6 +222,11 @@ class GapFillQuestionModel(BaseQuestionModel):
     question = CharField(max_length=500, blank=False)
     gaps = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False), blank=True)
 
+    def check_answer(self, answers):
+        print(answers)
+        print(self.gaps)
+        return answers == self.gaps
+
 
 class CrosswordQuestionModel(TimeStampedModel, SafeDeleteMixin):
     """
