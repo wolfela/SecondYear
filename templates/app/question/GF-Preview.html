@@ -1,29 +1,15 @@
 {% extends "jTemplate.html" %}
 
-{% block title %}GapFillDisplay{% endblock %}
+{% block title %}GapFillPreview{% endblock %}
 {% block head %}
 {{ super() }}
 <link rel="stylesheet" href="/static/css/teacher-app.css">
 {% endblock %}
 
 {% block content %}
-<div class="gapFillQuestionDiv">
-    <label class="gapFillQuestions">
-        Hello
-        <span class="gapFillBox"></span>
-        name is
-        <span class="gapFillBox"></span>
-        . This is an
-        <span class="gapFillBox"></span>
-        sentence that
-        <span class="gapFillBox"></span>
-        might choose to
-        <span class="gapFillBox"></span>
-        .
-    </label>
+<div class="gapFillQuestionDiv" id="gapFillQuestionDiv">
 </div>
 <input type="button" class="gapFillComplete gapFillButton" value="Done"/>
-
 
 {% endblock %}
 
@@ -33,5 +19,5 @@
 {% endblock %}
 
 {% block extraJS %}
-
+<script src="/static/js/GF-preview.js"></script>
 {% endblock %}

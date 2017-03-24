@@ -9,18 +9,22 @@
 {% block content %}
 <form action="/gf/question/{{ question.pk }}/{{ score }}/check/" method="post" id='post-form'>
 <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-<div class="gapFillQuestionDiv">
+<div class="gapFillQuestionDiv" id="gapFillQuestionDiv">
     <label class="gapFillQuestions">
+    {% set index = [] %}
     {% for word in gapfilled %}
     {% if word == '$$ $$' %}
-    <input type="text" id="answers" name="answers">
+    {% set __ = index.append(1) %}
+    <input type="text" id={{ index|length }} name="answers">
     {% else %}
     {{ word }}
     {% endif %}
     {% endfor %}
     </label>
 </div>
+<input type="hidden" id="correct" value="{{ question.gaps }}">
 <button type="submit" class="button mynextbutton" name="save_form">Next Question</button>
+<button type="button" class="success button mysavebutton" id="check">Check Answer</button>
 </form>
 
 {% endblock %}
@@ -31,5 +35,5 @@
 {% endblock %}
 
 {% block extraJS %}
-
+  <script src="/static/js/GF-display.js"></script>
 {% endblock %}

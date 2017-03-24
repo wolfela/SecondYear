@@ -86,6 +86,7 @@ function getAnswers() {
     document.getElementById('gaps').value = gaps;
 }
 
+
 $(document).ready(function () {
     $('.gapFillBack').click(function() {
         openCKEDITOR();
@@ -110,4 +111,28 @@ $(document).ready(function () {
     $('.gapFillAltDelete').click(function() {
         deleteAltGap();
     });
+
+
+
+});
+
+    window.getPreviewData = function() {
+    //document.getElementById('gaps').value = gaps;
+    var question = getText();
+    question = question.replace(/<p[^>]*>/g, "");
+    question = question.replace(/<\/p[^>]*>/g, "");
+    var all = question.split(" ");
+    for(var i=0; i<all.length; i++){
+    	for(var j=0; j<gaps.length; j++){
+    		if(gaps[j]==all[i]){
+    			all[i]="$$"
+    		}
+    	}
+    }
+
+    return all;
+}
+
+$("#preview").click(function () {
+    window.open("http://localhost:8000/gf/preview");
 });

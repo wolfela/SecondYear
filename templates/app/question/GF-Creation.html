@@ -17,6 +17,7 @@
 <input type="button" class="gapFillDelete gapFillButton" value="Delete Gap"/>
 <form action="/gf/submit/" method="post" id='post-form'>
 <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+<button type="button" class="button mypreviewbutton" id="preview">Preview</button>
 <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
 <button type="submit" class="success button mysavebutton" name="cancel_form">Cancel</button>
 <input type="hidden" id="question" name="question">

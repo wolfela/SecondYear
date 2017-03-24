@@ -41,6 +41,8 @@ const jsPaths = {
 	`${dirs.jsSrc}/mc-preview.js`,
         `${dirs.jsSrc}/menuAnimation.js`,
         `${dirs.jsSrc}/gapFill.js`,
+       	`${dirs.jsSrc}/GF-preview.js`,
+       	`${dirs.jsSrc}/GF-display.js`,
         `${dirs.jsSrc}/results.js`,
         `${dirs.jsSrc}/crossword.js`,
         `${dirs.jsSrc}/crossword2.js`,
