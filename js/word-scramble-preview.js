@@ -61,49 +61,33 @@ function handleDrop(e) {
     return false;
 }
 
-function changeanswer() {
-    var answer = [];
-    for (var ans of cols) {
-        answer.push($(ans).text());
+$(document).ready(function() {
+    var opener = window.opener;
+    if(opener) {
+
+        var sentence = opener.document.getElementById('scrambled_sentence').value;
+
+        console.log(sentence);
+
+        var array = sentence.split(" ");
+
+
+        for(var j = 0; j < array.length; j++){
+            var box = $('<div class="box" draggable="true">' + array[j] + '</div>');
+            $('#boxes').append(box);
+
     }
-    document.getElementById('answer').value = answer;
-};
 
-function proceed() {
-    var form = document.createElement('form');
-    form.setAttribute('method', 'post');
-    form.setAttribute('action', '');
-    form.style.display = 'hidden';
-    document.body.appendChild(form);
-    form.submit();
-}
+    var cols = document.querySelectorAll('#boxes .box');
+    [].forEach.call(cols, function(col) {
+    col.addEventListener('dragstart', handleDragStart, false);
+    col.addEventListener('dragenter', handleDragEnter, false);
+    col.addEventListener('dragover', handleDragOver, false);
+    col.addEventListener('dragleave', handleDragLeave, false);
+    col.addEventListener('drop', handleDrop, false);
+    col.addEventListener('dragend', handleDragEnd, false);
+    });
 
-$("#check").click(function () {
-        var correct_string = document.getElementById("correct").value;
-        var correct = correct_string.split(" ");
-        var i = 0; 
-            for (var col of cols) {
-                col.removeEventListener('dragstart', handleDragStart, false);
-                col.removeEventListener('dragenter', handleDragEnter, false);
-                col.removeEventListener('dragover', handleDragOver, false);
-                col.removeEventListener('dragleave', handleDragLeave, false);
-                col.removeEventListener('drop', handleDrop, false);
-                col.removeEventListener('dragend', handleDragEnd, false);
-
-                if($(col).text()==correct[i]){
-                 $(col).addClass('right');
-                }
-                else{
-                    $(col).addClass('wrong');
-                }
-                i++;
-             }
-      
-
-});
-
-$("#preview").click(function () {
-
- window.open("http://localhost:8000/ws/preview");
+    }
 
 });

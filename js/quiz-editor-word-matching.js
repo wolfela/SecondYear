@@ -6,11 +6,7 @@ function Row(row, word) { this.row = row, this.word = word };
 $(document).ready(function() {
 
 	if(wordPairs.length === 0) {
-		wordPairs.push(new Word('Kinga', 'Bojarczuk'));
-		wordPairs.push(new Word('Ajeya', 'Jog'));
-		wordPairs.push(new Word('Tatiana', 'Kmita'));
-		wordPairs.push(new Word('Jared', 'Leto'));
-		wordPairs.push(new Word('Mehdi', 'Ramadgdfgg'));
+		wordPairs.push(new Word('Example', 'Word'));
 	}
 
 	addWordEditor(wordPairs);
@@ -123,4 +119,10 @@ window.getRights= function() {
 
 	return array;
 };
+
+$("#preview").click(function () {
+
+ window.open("http://localhost:8000/wm/preview");
+
+});
 

@@ -9,19 +9,13 @@
 
 {% block content %}
 <div class="alignmentDiv">
-        <form method="get">
-        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
-        <div class="wsheading"> <h1>{{ form.title.value() }}</h1></div>
+        <div class="wsheading"> <h1></h1></div>
         <div id="boxes">
-            {% set list = form.scrambled_sentence.value().split(' ') %}
-            {% for word in list %}
-            <div class="box" draggable="true"> {{ word }}</div>
-            {% endfor %}
+            <div class="box" draggable="true"></div>
         </div>
 
 </div>
-    </form>
 {% endblock %}
 
 
@@ -31,5 +25,5 @@
 {% endblock %}
 
 {% block extraJS %}
-<script type="text/javascript" src="/static/js/word-scramble.js"></script>
+<script type="text/javascript" src="/static/js/word-scramble-preview.js"></script>
 {% endblock %}

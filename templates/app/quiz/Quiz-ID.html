@@ -1,12 +1,23 @@
 {% extends "jTemplate.html" %}
 
- {% block title %} WordScramble{% endblock %} 
- {% block head %}}
+ {% block title %}Quiz-ID{% endblock %} 
+ {% block head %}
 	{{ super() }}
  {% endblock %}
   
 {% block content %}
-	<p> Your Quiz {{ quiz.title }} is Saved! You and your students can now take it with the code {{ quiz.pk }}  </p>
+ <div class="medium-6 medium-centered large-4 large-centered columns text-center">
+
+	<form action="/quiz/attempt/{{ quiz.pk }}/">
+	
+		<div class="row column quiz-code">
+			<h2 class="text-center">Quiz  {{ quiz.title }}  is Saved!</h2>
+			<h3 class="text-center"> The quiz can be taken with the code:  {{ quiz.pk }}   </h3>
+			<button type="submit" class="success button mydankbutton" name="create-quiz-redirect">Take Quiz</button>
+		</div>
+	</form>
+
+</div>
 {% endblock %}
 
 {% block sidebarContent %}

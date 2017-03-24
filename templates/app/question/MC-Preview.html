@@ -7,30 +7,20 @@
 {% endblock %}
 
 {% block content %}
-  <form method="get">
-    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
     <h2 class = "mcqheading">Question x</h2>
 
-    <p class="questions" id=q>{{ form.title.value() }}</p></br>
-
-    <div>
-
-      {% if form.answers.value() != "" %}
-      {% set list = form.answers.value().split(',') %}
-  
-      {% for answer in list|shuffle %}
-      <input type="radio" class="checkbox" name="answers">
-      <p class="answer" id=a1> {{ answer|e }}</p></br>
-
-      {% endfor %}
-      {% endif %}
-
-
+    <div id="title">
     </div>
-  </form>
+    <div id="choices">
+    </div>
 {% endblock %}
 
 {% block sidebarContent %}
   <a href="#">Create Quiz</a>
   <a href="#">View Quizzes</a>
+{% endblock %}
+
+{% block extraJS %}
+  <script src="/static/js/mc-preview.js"></script>
 {% endblock %}

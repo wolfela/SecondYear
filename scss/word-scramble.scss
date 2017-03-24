@@ -9,6 +9,18 @@
   -webkit-user-drag: element;
 }
 
+h2{
+	margin-left: 1.4rem;
+	font-weight: bold;
+	width: 90%;
+	border-bottom: 2px solid black;
+}
+
+.questions{
+	margin-left: 1.4rem;
+	font-size: 25px;
+}
+
 .alignment{
   position: relative;
   margin-top: 20px;
@@ -72,4 +84,27 @@
   &:hover{
     background: #EF3737;
   }
+}
+
+.mycheckbutton{
+	margin-right: 100px;
+	float: right;
+}
+
+.mybuttons{
+	clear: both;
+}
+
+.mypreviousbutton{
+	margin-top: 30px;
+	margin-left: 10px;
+	float: left;
+	border-radius: 10px;
+}
+
+.mynextbutton{
+	margin-top: 30px;
+	float: right;
+	margin-right: 10px;
+	border-radius: 10px;
 }

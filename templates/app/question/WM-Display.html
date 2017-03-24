@@ -10,8 +10,12 @@
 {% block content %}
 <div id="main">
     <!-- Canvas for drawing lines -->
-    <canvas id="my-canvas" width="700" height="500"></canvas>
+    
+    <h2 class = "mcqheading"> Question {{ question.position }} </h2>
 
+	<p class="questions">{{ question.title }}</p></br>
+
+    <canvas id="my-canvas" width="700" height="500"></canvas>
     <form action="/wm/question/{{ question.pk }}/{{ score }}/check/" method="post" id='post-form'>
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
@@ -56,18 +60,17 @@
 	<input type="hidden" name="listA" id="listA">
     <input type="hidden" name="listB" id="listB">
 
-        <button type="submit" class="success button mysavebutton" name="save_form" >Submit</button>
-	<button type="button" class="success button mysavebutton" id="check">Check Answer</button>
+	<button type="button" class="success button mycheckbutton" id="check">Check Answer</button>
 
-    </form>
-
+	
+	<div class="mybuttons">
+    	<button type="submit" class="button mynextbutton" name="save_form" >Next Question</button>
+    </div>
 </div>
+    </form>
 {% endblock %}
 
 {% block container %}
-<div id="message" class="callout">
-
-</div>
 {% endblock %}
 
 
