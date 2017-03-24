@@ -6,7 +6,7 @@
  {% endblock %}
   
 {% block content %}
-<div class="medium-6 medium-centered large-4 large-centered columns">
+<div class="medium-6 medium-centered large-4 large-centered text-center columns">
 	<form action="/quiz/find/go/" method="post" id='post-form'>
 		<div class="row column quiz-find-form">
 		<h4 class="text-center">Find a Quiz</h4>
@@ -17,6 +17,11 @@
 		
 			<div class="buttondiv">
 				<button type="submit" class="success button expanded mysavebutton" name="find_form">Find</button>
+				
+				
+				
+				<h5 class="text-center">Don't have a Quiz?</h5>
+				<button type="submit" class="success button medium-center mydankbutton" name="create-quiz-redirect">Create Quiz</button>
 			</div>
 		</div>
 	</form>
