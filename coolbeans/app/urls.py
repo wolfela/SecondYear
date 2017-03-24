@@ -46,7 +46,7 @@ urlpatterns = [
     url(r'^ws/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.WSQuestionView.check_answer, name='checkmc'),
 
     # Gap Fill Questions
-    url(r'^gf/$', question.GFCreateView.as_view(), name='gf'),
+    url(r'^gf/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.GFCreateView.as_view(), name='gf'),
     url(r'^gf/submit/$', question.GFCreateView.submitGF, name='submit'),
     url(r'^gf/preview/$', question.GFPreviewView.as_view(), name='preview'),
     url(r'^gf/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.GFQuestionView.show_question, name='mcquestion'),

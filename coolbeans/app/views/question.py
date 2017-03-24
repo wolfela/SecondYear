@@ -182,6 +182,7 @@ class WSQuestionView(TemplateView):
             score = int(score) + 1
         return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
 
+
 class WSPreviewView(TemplateView):
     template_name = "app/question/WS-Preview.html"
 
@@ -193,7 +194,20 @@ class GFCreateView(TemplateView):
     template_name = "app/question/GF-Creation.html"
 
     def submitGF(request):
-        return submit(request, 'GF', GFForm)
+        if 'save_form' in request.POST:
+            return GFCreateView.save(request, 'gf', GFForm)
+        elif 'cancel_form' in request.POST:
+            return cancel(request, 'gf', GFForm)
+
+    def save(request, type, formtype):
+        pathCreation = 'app/question/' + type + '-Creation.html'
+        pathType = '/' + type
+        if request.method == 'POST':
+            form = formtype(request.POST)
+            if form.is_valid():
+                saved = form.save()
+                return HttpResponseRedirect('/quiz/edit/' + form.data['quiz'] + '/gf/' + str(saved.pk))
+
 
 
 class GFQuestionView(TemplateView):
@@ -201,7 +215,12 @@ class GFQuestionView(TemplateView):
 
     def show_question(request, pk, score):
         question = get_object_or_404(GapFillQuestionModel, pk=pk)
-        return render(request, 'app/question/GF-Display.html', {'question': question, 'score': score})
+        gapfilled = question.question.split(" ")
+        for index, word in enumerate(gapfilled):
+            if word in question.gaps:
+                gapfilled[index] = '$$$$'
+
+        return render(request, 'app/question/GF-Display.html', {'question': question, 'score': score, 'gapfilled': gapfilled})
 
     def check_answer(request, pk, score):
         question = get_object_or_404(GapFillQuestionModel, pk=pk)
@@ -209,6 +228,7 @@ class GFQuestionView(TemplateView):
         if question.check_answer(answer):
             score = int(score) + 1
         return HttpResponseRedirect('/quiz/attempt/' + question.quiz + '/next/' + question.position + '/' + str(score))
+
 
 class GFPreviewView(TemplateView):
     template_name = "app/question/GF-Preview.html"
@@ -273,31 +293,3 @@ class CWQuestionView(TemplateView):
 def cancel(request, type, formtype):
     form = formtype(request.POST)
     return HttpResponseRedirect('/quiz/edit/' + form.data['quiz'])
-
-
-def save(request, type, formtype):
-    pathCreation = 'app/question/' + type + '-Creation.html'
-    pathType = '/' + type
-    """
-    Method for saving the question, right now its a preview as well, to be fixed
-    :return:
-    """
-    if request.method == 'POST':
-        form = formtype(request.POST)
-        if form.is_valid():
-            print("HERE")
-            saved = form.save()
-            t = type.lower()
-            return HttpResponseRedirect('/quiz/edit/' + form.data['quiz'] +'/'+ t +'/' + str(saved.pk))
-        else:
-            form = formtype()
-
-    return render(request, pathType, {'form': form}, context_instance=RequestContext(request))
-
-
-
-def submit(request, type, formtype):
-    if 'save_form' in request.POST:
-        return save(request, type, formtype)
-    elif 'cancel_form' in request.POST:
-        return cancel(request, type, formtype)

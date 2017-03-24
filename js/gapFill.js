@@ -1,6 +1,4 @@
-var gaps = new Map(),
-    selectedRow,
-    selectedWord;
+var gaps = [];
 
 CKEDITOR.replace('gapFillInput');
 
@@ -10,21 +8,6 @@ function getText() {
 
 function getSelected() {
     return (document.all) ? document.selection.createRange().text : document.getSelection();
-}
-
-function loadAltAnswers(altAnswer) {
-    var altElement = $('<div class=gapFillAltRow tabindex=1>'+altAnswer+'</div>').appendTo($('.gapFillAltAnswers'));
-    $(altElement).click(function () {
-        selectedRow = this;
-    });
-}
-
-function addOption(content) {
-    var option = '<option value='+content+'>'+content+'</option>';
-    $('.gapFillAnswerOptions').append(option);
-    if($('.gapFillAnswerOptions').children().length==1){
-        selectedWord=content;
-    }
 }
 
 function addGap(){
@@ -37,10 +20,9 @@ function addGap(){
         highlight.style.cssText = 'color:red';
         range.deleteContents();
         range.insertNode(highlight);
-        var altAnswer = [];
-        gaps.set(text,altAnswer);
-        addOption(text);
+        gaps.push(text);
     }
+    getAnswers();
 }
 
 function getSelectedElement() {
@@ -63,33 +45,23 @@ function deleteGap() {
     var selected = getSelectedElement();
     if($(selected).is('span')) {
         $(selected).replaceWith(getSelected().toString());
+        var index = gaps.indexOf(getSelected().toString());
+        gaps.splice(index, 1);
+        getAnswers();
     }else{
         alert('Be more careful selecting pls(ie dont select spaces');
     }
 }
 
-function getChange(select) {
-    selectedWord = select.value;
-    $('.gapFillAltAnswers').empty();
-    var altWords = gaps.get(selectedWord);
-    for(var i=0;i<altWords.length;i++){
-        loadAltAnswers(altWords[i])
-    }
-    $('.gapFillAltInput').val('');
-}
-
-function addAltGap() {
-    var altAnswer = $('.gapFillAltInput').val();
-    gaps.get(selectedWord).push(altAnswer);
-    $('.gapFillAltAnswers').append('<p>'+altAnswer+'</p>')
-    $('.gapFillAltInput').val('');
-}
-
-function deleteAltGap() {
-    // gaps.get(selectedWord).splice(gaps.get(selectedWord).indexOf($(selectedRow).val()),1);
-    console.log($(selectedRow).val());
-    $(selectedRow).remove();
-}
+//function getChange(select) {
+ //   selectedWord = select.value;
+  //  $('.gapFillAltAnswers').empty();
+ //   var altWords = gaps.get(selectedWord);
+ //   for(var i=0;i<altWords.length;i++){
+//        loadAltAnswers(altWords[i])
+ //   }
+ //   $('.gapFillAltInput').val('');
+//}
 
 function closeCKEDITOR(){
     $('.gapFillSelectBox').append('<p>'+ getText() + '</p>');
@@ -103,6 +75,15 @@ function openCKEDITOR() {
     $('.gapFillSelectBox, .gapFillBack').css({'opacity': '0.3','pointer-events':'none'});
     $('.gapFillSelectBox').empty();
     CKEDITOR.instances.gapFillInput.setReadOnly(false);
+}
+
+function getAnswers() {
+    //document.getElementById('gaps').value = gaps;
+    var question = getText();
+    question = question.replace(/<p[^>]*>/g, "");
+    question = question.replace(/<\/p[^>]*>/g, "");
+    document.getElementById('question').value = question;
+    document.getElementById('gaps').value = gaps;
 }
 
 $(document).ready(function () {
@@ -129,8 +110,4 @@ $(document).ready(function () {
     $('.gapFillAltDelete').click(function() {
         deleteAltGap();
     });
-
-    $('.gapFillAnswerOptions').change(function() {
-        getChange($('.gapFillAnswerOptions'));
-    })
 });

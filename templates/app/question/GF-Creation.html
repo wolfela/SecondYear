@@ -8,20 +8,22 @@
 {% endblock %}
 
 {% block content %}
+<p>Instructions: Write the full sentence you wish to add gaps to below. Then click next and select the word you want to make a gap with and click add gap. To remove a gap, select it and click remove gap</p>
 <textarea id="gapFillInput" name="gapFillInput"></textarea>
 <input type="button" class="gapFillBack gapFillButton" value="Back" />
 <input type="button" class="gapFillNext gapFillButton" value="Next" />
 <div class="gapFillSelectBox"></div>
 <input type="button" class="gapFillSelect gapFillButton" value="Add Gap" />
 <input type="button" class="gapFillDelete gapFillButton" value="Delete Gap"/>
-<select class="gapFillAnswerOptions" onchange="getChange(this)"></select>
-<div class="gapFillAlt">
-    <div class="gapFillAltAnswers"></div>
-    <input type="text" class="gapFillAltInput" placeholder="Please type in alternate answer"/>
-    <input type="button" class="gapFillAltAdd gapFillButton" value="Add alternative"/>
-    <input type="button" class="gapFillAltDelete gapFillButton" value="Remove Alternative"/>
-</div>
-<input type="button" class="createGapFill gapFillButton" value="Done"/>
+<form action="/gf/submit/" method="post" id='post-form'>
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+<button type="submit" class="success button mysavebutton" name="save_form">Save</button>
+<button type="submit" class="success button mysavebutton" name="cancel_form">Cancel</button>
+<input type="hidden" id="question" name="question">
+<input type="hidden" id="gaps" name="gaps">
+<input id="quiz" type="hidden" name="quiz" value="{{ quizid }}">
+<input id="position" type="hidden" name="position" value="{{ pos }}">
+</form>
 
 {% endblock %}
 

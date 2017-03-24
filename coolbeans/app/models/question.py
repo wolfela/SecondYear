@@ -219,35 +219,8 @@ class GapFillQuestionModel(BaseQuestionModel):
 
     quiz = CharField(max_length=500, blank=False)
     position = CharField(max_length=500, blank=False)
-
-    # Gap schema: <gap answers='["answer1", "answer2"]' />
-    text = BleachField(allowed_tags=["gap"], allowed_attributes=["answers"])
-    gap_tag_schema = {
-        "type": "array",
-        "items": {
-            "type": "string"
-        }
-    }
-
-    def _clean_fields(self):
-        super().clean_fields()
-
-    # TODO This should be a view method
-    def check_html(self, html):
-        """
-        Checks if the HTML fragment can be accepted. Validates all <gap> tags to see if they conform to the standard.
-        :param html:
-        :return:
-        """
-        bs = BeautifulSoup(html, 'html.parser')
-        for tag in bs.find_all('gap'):
-            if not tag.has_attr('answers'):
-                raise HTMLParseError("One of the gaps is missing an 'answers' attribute")
-            try:
-                validate(json.loads(tag['answers']), self.gap_tag_schema)
-            except (JSONDecodeError, ValidationError) as e:
-                raise HTMLParseError("Gap JSON parsing failed: Invalid syntax") from e
-        return True
+    question = CharField(max_length=500, blank=False)
+    gaps = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False), blank=True)
 
 
 class CrosswordQuestionModel(TimeStampedModel, SafeDeleteMixin):
