@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 	$('#addField').click(function() {
 		if(amount < 10){
-			$("#addAnswer").append(" <input type=\"text\" class=\"mcinputbox\" name=\"answers[]\" placeholder=\"Type your answer in here\">");
+			$("#addAnswer").append(" <input type=\"text\" class=\"mcinputbox\" name=\"answers[]\" placeholder=\"Type your answer in here\" required>");
 			amount++;			
 		}
 	});
