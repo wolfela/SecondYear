@@ -143,16 +143,13 @@ function validSelection() {
 function addClueRow(word, clue) {
     cluesList.push(clue);
     answerList.push(word);
-    console.log('Got here');
     var newRow = $('<div class=crosswordClueRow tabindex=1 id='+cluesList.length+'></div>');
     $('<p class=wordRow>' + word + '</p>').appendTo(newRow);
     $('<p class=clueRow contenteditable=true>' + clue + '</p>').appendTo(newRow);
-    console.log('And here');
     $('.clueDiv').append(newRow);
     $(newRow).click(function() {
         selectedRow = this;
     });
-    console.log($('.'));
     disableForm(true);
     addToCrosswordData(selectionData.x,selectionData.y,word,selectionData.direction,clue);
 }
@@ -185,7 +182,6 @@ function addAnswer(answer,clue) {
             }
         }
     }
-    console.log('YEAH BOI');
     addClueRow(answer,clue);
 }
 
