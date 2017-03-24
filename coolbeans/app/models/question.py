@@ -285,6 +285,7 @@ class CrosswordQuestionModel(TimeStampedModel, SafeDeleteMixin):
             "x": self.x,
             "y": self.y,
             "clue": self.clue,
+            "answer": self.answer,
             "pos": self.position,
             "quiz": self.quiz
 }

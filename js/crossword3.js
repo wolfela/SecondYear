@@ -9,7 +9,9 @@ var container,
     crosswordData={},
     answerData={},
     quiz,
-    position;
+    position,
+    correct_data,
+    answered_data;
 
 
 //Used for making crossword editor
@@ -86,11 +88,9 @@ $(document).ready(function() {
 
         if(data!=null){
 
-        position =data.data[0].pos;
-        quiz =data.data[0].quiz;
-
-        console.log(data.data[0].pos);
-        console.log(data.data[0].quiz);
+        position = data.data[0].pos;
+        quiz = data.data[0].quiz;
+        correct_data = data;
 
         }
 
@@ -316,6 +316,7 @@ function drawQuestionBox(startX,startY,size,direction,number){
         if(direction=="D"){
             $(grid[x+i][y]).children().css('pointer-events','auto');
             $(grid[x+i][y]).removeClass('emptyBox').addClass('blankBox');
+            $(grid[x+1][y]).attr('id','2');
             if(i==0){
                 $(grid[x+i][y]).prepend('<span class=crosswordNum>'+ number +'</span>');
             }
@@ -470,12 +471,14 @@ $.ajaxSetup({
 
 $("#submit").click(function () {
 
-
-    var crossword_data = getAnswersData();
+    if(answered_data == null){
+        answered_data = getAnswersData();
+    }
+    
     var url = window.location.pathname;
     var s = url.split("/");
 
-    var data = JSON.stringify(crossword_data);
+    var data = JSON.stringify(answered_data);
 
     $.ajax({
         url : 'check_answer/',
@@ -492,3 +495,49 @@ $("#submit").click(function () {
     });
 
 });
+
+$("#check").click(function () {
+    answered_data=getAnswersData();
+    checkAll();
+});
+
+function checkAll() {
+    var data = getAnswersData().data;
+    for(var i =0;i<data.length;i++){
+        checkOne(data[i].x,data[i].y,data[i].length,data[i].direction,correct_data.data[i].answer);
+    }
+}
+
+function checkOne(startX,startY,length,direction,answer) {
+    var x = parseInt(startX),
+        y = parseInt(startY),
+        answers=answer.split("");
+    for(var i=0;i<parseInt(length);i++){
+        if(direction=="D"){
+            if($(grid[x+i][y]).find('input').val()==answers[i]){
+                var letter = $(grid[x+i][y]).find('input').val();
+                $(grid[x+i][y]).empty();
+                $(grid[x+i][y]).addClass('right');
+                $(grid[x+i][y]).append('<p class=crosswordLetter>'+ letter+'</p>');
+            }else{
+                var letter = $(grid[x+i][y]).find('input').val();
+                $(grid[x+i][y]).empty();
+                $(grid[x+i][y]).addClass('wrong');
+                $(grid[x+i][y]).append('<p class=crosswordLetter>'+ letter+'</p>');
+            }
+        }else{
+            if($(grid[x][y+i]).find('input').val()==answers[i]){
+                var letter = $(grid[x][y+i]).find('input').val();
+                $(grid[x][y+i]).empty();
+                $(grid[x][y+i]).addClass('right');
+                $(grid[x][y+i]).append('<p class=crosswordLetter>'+ letter+'</p>');
+            }
+            else{
+                var letter = $(grid[x][y+i]).find('input').val();
+                $(grid[x][y+i]).empty();
+                $(grid[x][y+i]).addClass('wrong');
+                $(grid[x][y+i]).append('<p class=crosswordLetter>'+ letter+'</p>');
+            }
+        }
+    }
+}
