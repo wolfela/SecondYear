@@ -2,7 +2,6 @@ var amount = 4;
 
 $(document).ready(function() {
 
-
 	$('#addField').click(function() {
 		if(amount < 10){
 			$("#addAnswer").append(" <input type=\"text\" class=\"mcinputbox\" name=\"answers[]\" placeholder=\"Type your answer in here\">");
@@ -16,15 +15,9 @@ $(document).ready(function() {
 			amount--;
 		}
 
-
 	});
 
-
-
-
-
 	$("#check").click(function () {
-
 			var answer = document.querySelector('input[name="answers"]:checked').value;
 			var correct = document.getElementById("correct").value;
 			var id_checkbox = $('input[type=radio][name="answers"]:checked').attr('id');
@@ -35,8 +28,6 @@ $(document).ready(function() {
 					this.disabled=true;
 				}
 			});
-
-
 			if(correct==answer){
 				var field = document.getElementById(id_text);
 				$(field).addClass('right');
