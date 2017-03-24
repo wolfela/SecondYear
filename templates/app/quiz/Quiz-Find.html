@@ -6,12 +6,20 @@
  {% endblock %}
   
 {% block content %}
-<form action="/quiz/find/go/" method="post" id='post-form'>
-<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-<label>Input the code of your quiz. Get this from your teacher.<label>
-<input type="text" name="pk" id="pk" placeholder="The code of your quiz.">
-<div class="buttondiv">
-<button type="submit" class="success button mysavebutton" name="find_form">Find</button>
+<div class="medium-6 medium-centered large-4 large-centered columns">
+	<form action="/quiz/find/go/" method="post" id='post-form'>
+		<div class="row column quiz-find-form">
+		<h4 class="text-center">Find a Quiz</h4>
+			<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+		
+			<label>Input your Quiz Code. Get this from your teacher.</label>
+			<input type="text" name="pk" id="pk" placeholder="Quiz Code goes here.">
+		
+			<div class="buttondiv">
+				<button type="submit" class="success button expanded mysavebutton" name="find_form">Find</button>
+			</div>
+		</div>
+	</form>
 </div>
 
 {% endblock %}
