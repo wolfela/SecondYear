@@ -512,32 +512,33 @@ function checkOne(startX,startY,length,direction,answer) {
     var x = parseInt(startX),
         y = parseInt(startY),
         answers=answer.split("");
+        
     for(var i=0;i<parseInt(length);i++){
         if(direction=="D"){
-            if($(grid[x+i][y]).find('input').val()==answers[i]){
-                var letter = $(grid[x+i][y]).find('input').val();
-                $(grid[x+i][y]).empty();
-                $(grid[x+i][y]).addClass('right');
-                $(grid[x+i][y]).append('<p class=crosswordLetter>'+ letter+'</p>');
-            }else{
-                var letter = $(grid[x+i][y]).find('input').val();
-                $(grid[x+i][y]).empty();
-                $(grid[x+i][y]).addClass('wrong');
-                $(grid[x+i][y]).append('<p class=crosswordLetter>'+ letter+'</p>');
+            var letter = $(grid[x+i][y]).find('input').val();
+
+            if(letter==answers[i]){
+                checkLetter(x+i,y,'right',letter); 
+
+            }else if(letter){
+                checkLetter(x+i,y,'wrong',letter);
             }
+
         }else{
-            if($(grid[x][y+i]).find('input').val()==answers[i]){
-                var letter = $(grid[x][y+i]).find('input').val();
-                $(grid[x][y+i]).empty();
-                $(grid[x][y+i]).addClass('right');
-                $(grid[x][y+i]).append('<p class=crosswordLetter>'+ letter+'</p>');
+            var letter = $(grid[x][y+i]).find('input').val();
+
+            if(letter==answers[i]){
+                checkLetter(x,y+i,'right',letter);
             }
-            else{
-                var letter = $(grid[x][y+i]).find('input').val();
-                $(grid[x][y+i]).empty();
-                $(grid[x][y+i]).addClass('wrong');
-                $(grid[x][y+i]).append('<p class=crosswordLetter>'+ letter+'</p>');
+            else if(letter){
+                checkLetter(x,y+i,'wrong',letter);
             }
         }
     }
+}
+
+function checkLetter(x,y,type,letter){
+    $(grid[x][y]).empty();
+    $(grid[x][y]).addClass(type);
+    $(grid[x][y]).append('<p class=crosswordLetter>'+ letter+'</p>');
 }

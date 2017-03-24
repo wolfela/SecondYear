@@ -216,11 +216,12 @@ class GFQuestionView(TemplateView):
     def show_question(request, pk, score):
         question = get_object_or_404(GapFillQuestionModel, pk=pk)
         gapfilled = question.question.split(" ")
+        gaps = question.gaps
         for index, word in enumerate(gapfilled):
             if word in question.gaps:
                 gapfilled[index] = '$$ $$'
 
-        return render(request, 'app/question/GF-Display.html', {'question': question, 'score': score, 'gapfilled': gapfilled})
+        return render(request, 'app/question/GF-Display.html', {'question': question, 'score': score, 'gapfilled': gapfilled, 'gaps': gaps})
 
     def check_answer(request, pk, score):
         question = get_object_or_404(GapFillQuestionModel, pk=pk)
