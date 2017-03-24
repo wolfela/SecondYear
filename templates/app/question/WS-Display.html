@@ -9,24 +9,28 @@
 
 {% block content %}
 <div class="alignmentDiv">
+		<h2 class = "mcqheading"> Question {{ question.position}}</h2>
         <form action="/ws/question/{{ question.pk }}/{{ score }}/check/" method="post" id='post-form'>
-        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        	<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
-        <div class="wsheading"> <h1>{{ question.title }}</h1></div>
-        <div id="boxes">
-            {% for scramble in question.scrambled_sentence.split(' ') %}
-            <div class="box" draggable="true">{{ scramble }}</div>
-            {% endfor %}
-        </div>
-
+        	<div class="wsheading"> <p class="questions">{{ question.title }}<p></div>
+        	<div id="boxes">
+            	{% for scramble in question.scrambled_sentence.split(' ') %}
+           	 	<div class="box" draggable="true">{{ scramble }}</div>
+            	{% endfor %}
+        	</div>
+        	<button type="button" class="success button mycheckbutton" id="check">Check Answer</button>
 </div>
-
-<input type="hidden" id="correct" value="{{ question.answer }}">
-<input type="hidden" name="answer" id="answer">
-
-<button type="submit" class="success button mysavebutton" name="save_form">Submit</button>
-<button type="button" class="success button mysavebutton" id="check">Check Answer</button>
-    </form>
+			<div class="mybuttons">
+				<button type="submit" class="button mypreviousbutton" name="save_form">Previous Question</button>
+				<button type="submit" class="button mynextbutton" name="save_form">Next Question</button>
+				<!-- below is the original button before i added the above button
+				<button type="submit" class="success button mysavebutton" name="save_form">Submit</button> -->
+			</div>
+		
+			<input type="hidden" id="correct" value="{{ question.answer }}">
+			<input type="hidden" name="answer" id="answer">
+    	</form>
 {% endblock %}
 
 

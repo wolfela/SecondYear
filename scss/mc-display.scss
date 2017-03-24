@@ -29,3 +29,24 @@ h2{
     content : '✗';
     color : red;
 }
+.mycheckbutton{
+	float: right;
+	margin-right: 100px;
+}
+
+.mybuttons{
+	clear: both;
+}
+.mypreviousbutton{
+	margin-top: 30px;
+	margin-left: 10px;
+	float: left;
+	border-radius: 10px;
+}
+.mynextbutton{
+	margin-top: 30px;
+	float: right;
+	margin-right: 10px;
+	border-radius: 10px;
+}
+
