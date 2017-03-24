@@ -76,9 +76,9 @@ function drawBorders() {
 
 /**
 
-    QUESTION EDITOR METHOD
+ QUESTION EDITOR METHOD
 
-**/
+ **/
 
 function disableForm(toggle) {
     if(toggle) {
@@ -141,6 +141,8 @@ function validSelection() {
 }
 
 function addClueRow(word, clue) {
+    cluesList.push(clue);
+    answerList.push(word);
     var newRow = $('<div class=crosswordClueRow tabindex=1 id='+cluesList.length+'></div>');
     $('<p class=wordRow>' + word + '</p>').appendTo(newRow);
     $('<p class=clueRow contenteditable=true>' + clue + '</p>').appendTo(newRow);
@@ -148,8 +150,6 @@ function addClueRow(word, clue) {
     $(newRow).click(function() {
         selectedRow = this;
     });
-    cluesList.push(clue);
-    answerList.push(word);
     disableForm(true);
     addToCrosswordData(selectionData.x,selectionData.y,word,selectionData.direction,clue);
 }
@@ -161,6 +161,7 @@ function addAnswer(answer,clue) {
         for(var j=0;j<gridSize;j++){
             if($(grid[i][j]).hasClass('selected')) {
                 $(grid[i][j]).removeClass('selected').addClass('set');
+                $(grid[i][j]).attr('id',(answerList.length+1));
                 $(grid[i][j]).append('<p class=crosswordLetter>'+chars[charIndex]+'</p>');
                 if(charIndex==0){
                     $(grid[i][j]).prepend('<span class=crosswordNum>'+ (answerList.length+1) +'</span>')
@@ -169,9 +170,10 @@ function addAnswer(answer,clue) {
             }else if($(grid[i][j]).hasClass('doubleSelect')){
                 if($(grid[i][j]).find('p').text()==chars[charIndex]){
                     $(grid[i][j]).removeClass('doubleSelect').addClass('set');
-                    if(charIndex==0 && !$(grid[i][j]).find('span').length){
+                    if(charIndex==0 && $(grid[i][j]).find('span').length==0){
                         $(grid[i][j]).prepend('<span class=crosswordNum>'+ (answerList.length+1) +'</span>')
                     }
+                    $(grid[i][j]).attr('id',$(grid[i][j]).attr('id')+','+ (answerList.length+1));
                     charIndex+=1;
                 }else{
                     //errorDialog('Incorrect Letter','Please change letter to the letter in the overlap',1);
@@ -194,6 +196,39 @@ function addToCrosswordData(x,y,answer, direction, clue) {
     crosswordData.data.push(entry);
 }
 
+function clearBox(x,y,index) {
+    var ids = $(grid[x][y]).attr('id').split(',');
+    if(ids.indexOf(index)!=-1){
+        if(ids.length ==1) {
+            $(grid[x][y]).empty().removeClass('set').addClass('blankBox');
+            $(grid[x][y]).removeAttr("id");
+        }else{
+            ids.splice(ids.indexOf(index),1);
+            $(grid[x][y]).attr('id',ids.join(','));
+        }
+    }
+}
+
+function correctIndexes(index) {
+    $('.crosswordNum').each(function(){
+        if(parseInt($(this).text()) >index){
+            $(this).text(parseInt($(this).text()) -1);
+        }
+    });
+
+    $('.set').each(function() {
+        if(parseInt($(this).attr('id')) >index){
+            $(this).attr('id',parseInt($(this).attr('id'))-1);
+        }
+    });
+
+    $('.crosswordClueRow').each(function() {
+        if(parseInt($(this).attr('id')) >index){
+            $(this).attr('id',parseInt($(this).attr('id'))-1);
+        }
+    })
+}
+
 function editorActions(){
     $(document).ready(function() {
         disableForm(true);
@@ -206,7 +241,9 @@ function editorActions(){
         }else if($(this).hasClass('selected')){
             $(this).removeClass('selected').addClass('blankBox');
         }else if($(this).hasClass('set')){
-            $(this).removeClass('set').addClass('setSelected');
+            $(this).removeClass('set').addClass('doubleSelect');
+        }else if($(this).hasClass('doubleSelect')){
+            $(this).removeClass('doubleSelect').addClass('set');
         }
         if(validSelection()) {
             disableForm(false);
@@ -227,17 +264,18 @@ function editorActions(){
 
     $('.deleteClue').click(function() {
         var index = $(selectedRow).attr('id');
-        answerList.splice(index,1);
-        cluesList.splice(index,1);
+        answerList.splice(index-1,1);
+        cluesList.splice(index-1,1);
         for(var i=0;i<gridSize;i++){
             for(var j=0;j<gridSize;j++){
-                if($(grid[i][j]).hasClass('set') && $(grid[i][j]).attr('id')==index){
-                    $(grid[i][j]).empty().removeClass('set').addClass('blank');
+                if($(grid[i][j]).hasClass('set')){
+                    clearBox(i,j,index)
                 }
             }
         }
+        correctIndexes(index);
         $(selectedRow).remove();
-        $('.clueDiv').children.length != 0 && $('.cluesBox').css({'opacity': '0.2', 'pointer-events': 'none'});
+        $('.clueDiv').children.length == 0 && $('.cluesBox').css({'opacity': '0.2', 'pointer-events': 'none'});
     })
 }
 
@@ -246,16 +284,16 @@ function getCrosswordData() {
     return crosswordData;
 }
 
- window.getPreviewData = function() {
+window.getPreviewData = function() {
     console.log(crosswordData);
     return crosswordData;
 }
 
 /**
 
-    QUESTION DISPLAY METHODS
+ QUESTION DISPLAY METHODS
 
-**/
+ **/
 
 //Will be used to display crossword questions when provided question data
 function drawQuestions(crosswordData){
@@ -395,7 +433,6 @@ function actions(){
     });
 }
 
-
 // using jQuery
 function getCookie(name) {
     var cookieValue = null;
@@ -429,39 +466,39 @@ $.ajaxSetup({
 
 $("#save").click(function () {
 
-	var crossword_data = getCrosswordData();
-	var url = window.location.pathname;
-	var s = url.split("/");
+    var crossword_data = getCrosswordData();
+    var url = window.location.pathname;
+    var s = url.split("/");
 
-	crossword_data.q.push({'quiz':s[2],'pos':s[3]});
-	var data = JSON.stringify(crossword_data);
-	console.log(data);
+    crossword_data.q.push({'quiz':s[2],'pos':s[3]});
+    var data = JSON.stringify(crossword_data);
+    console.log(data);
 
-	$.ajax({
-	    url : '../../submit/',
-	    type: 'POST',
-	    data: data,
-	    contentType:'application/json',
-	    dataType: 'text',
-	    success: function(message){
+    $.ajax({
+        url : '../../submit/',
+        type: 'POST',
+        data: data,
+        contentType:'application/json',
+        dataType: 'text',
+        success: function(message){
 
-	        window.location.href = message;
-	    },
-	    error: function(){
-	        alert('nope');
-	    }
-	});
+            window.location.href = message;
+        },
+        error: function(){
+            alert('nope');
+        }
+    });
 });
 
 $("#preview").click(function () {
- 	window.open("http://localhost:8000/cw/preview");
+    window.open("http://localhost:8000/cw/preview");
 });
 
 $("#cancel").click(function () {
-	var url = window.location.pathname;
-	var s = url.split("/");
-	var rurl = "../../../quiz/edit/" + s[2];
-	window.location.href = rurl;
+    var url = window.location.pathname;
+    var s = url.split("/");
+    var rurl = "../../../quiz/edit/" + s[2];
+    window.location.href = rurl;
 });
 
 
