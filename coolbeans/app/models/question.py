@@ -10,10 +10,12 @@ from coolbeans.app.models.base import TimeStampedModel
 
 class BaseQuestionModel(TimeStampedModel, SafeDeleteMixin):
     """
-    A base model for a Question.
+    A base model for a Question that stores quiz id and position in the quiz for each question.
     """
 
     _safedelete_policy = SOFT_DELETE
+    quiz = CharField(max_length=500, blank=False)
+    position = CharField(max_length=500, blank=False)
 
     objects = InheritanceManager()
 
@@ -44,8 +46,7 @@ class MultipleChoiceModel(BaseQuestionModel):
     answers = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=True, null=True), blank=True)
     correct = CharField(max_length=255, blank=False)
     score = PositiveIntegerField(blank=True, default=0, null=True)
-    quiz = CharField(max_length=500, blank=False)
-    position = CharField(max_length=500, blank=False)
+
 
     class Meta:
         verbose_name = "Multiple Choice Question"
@@ -70,8 +71,6 @@ class WordMatchingModel(BaseQuestionModel):
     score = PositiveIntegerField(blank=True, default=1, null=True)
     listA = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False), blank=True)
     listB = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False), blank=True)
-    quiz = CharField(max_length=500, blank=False)
-    position = CharField(max_length=500, blank=False)
 
     class Meta:
         verbose_name = "Word Matching Question"
@@ -110,8 +109,7 @@ class WordScrambleQuestionModel(BaseQuestionModel):
     title = CharField(max_length=500)
     answer = CharField(max_length=500)
     score = PositiveIntegerField(blank=True, default=1, null=True)
-    quiz = CharField(max_length=500, blank=False)
-    position = CharField(max_length=500, blank=False)
+
     class Meta:
         verbose_name = "Word Scramble Question"
         verbose_name_plural = "Word Scramble Questions"
@@ -132,8 +130,7 @@ class GapFillQuestionModel(BaseQuestionModel):
     A Question Type for gap fill type questions. Stores the whole questions and a list of gap words.
     """
 
-    quiz = CharField(max_length=500, blank=False)
-    position = CharField(max_length=500, blank=False)
+
     question = CharField(max_length=500, blank=False)
     gaps = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False), blank=True)
 
