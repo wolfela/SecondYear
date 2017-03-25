@@ -81,7 +81,7 @@ function proceed() {
 $("#check").click(function () {
         var correct_string = document.getElementById("correct").value;
         var correct = correct_string.split(" ");
-        var i = 0; 
+        var i = 0;
             for (var col of cols) {
                 col.removeEventListener('dragstart', handleDragStart, false);
                 col.removeEventListener('dragenter', handleDragEnter, false);
@@ -98,9 +98,30 @@ $("#check").click(function () {
                 }
                 i++;
              }
-      
 
 });
+
+
+  $('#post-form').on('submit', function(event) {
+
+    var $btn = $(document.activeElement);
+    if($btn.attr('name') == 'save_form') {
+      var allFilled = true;
+      $('.req').each(function() {
+        if($(this).val() == '') {
+          allFilled = false;
+        }
+      });
+
+      if(!allFilled) {
+        alert('You have missed out one of more fields :( Please fill all of them in');
+        event.preventDefault();
+      }
+    }
+
+  });
+
+
 
 $("#preview").click(function () {
 
