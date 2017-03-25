@@ -7,13 +7,13 @@
 
 {% block content %}
     <div class="medium-6 medium-centered large-4 large-centered columns">
-      <form action=/ws/submit/ method="post">
+      <form action=/ws/submit/ method="post" id="post-form">
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         <div class="row column log-in-form">
           <h4 class="text-center">Create a Sentence Scramble Question</h4>
-          <input type="text" id="title" name="title" placeholder="Enter the question title">
+          <input type="text" id="title" class="req" name="title" placeholder="Enter the question title">
           <label>Enter the sentence to be scrambled
-            <input type="text" id="answer" name="answer" placeholder="This is the sentence to be scrambled">
+            <input type="text" id="answer" class="req" name="answer" placeholder="This is the sentence to be scrambled">
           </label>
             <div class="buttondiv">
               <button type="button" class="button cancelbutton" id="preview">Preview</button>

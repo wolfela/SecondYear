@@ -20,7 +20,7 @@
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
       <div>
         <h4>Type your question below</h4>
-                <textarea class="mctextareas" placeholder="Type your question in here" name="title"></textarea>
+                <textarea class="mctextareas req" placeholder="Type your question in here" name="title"></textarea>
       <h4>Type your correct answer below</h4>
 
           <input id="quiz" type="hidden" class="mcinputbox" name="quiz" value="{{ quizid }}">
@@ -47,4 +47,3 @@
 {% block extraJS %}
 <script type="text/javascript" src="../../../static/js/quiz-editor-word-matching.js"></script>
 {% endblock %}
-
