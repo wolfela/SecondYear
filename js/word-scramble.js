@@ -102,8 +102,7 @@ $("#check").click(function () {
 });
 
 
-  $('#post-form').on('submit', function(event) {
-
+$('#post-form').on('submit', function(event) {
     var $btn = $(document.activeElement);
     if($btn.attr('name') == 'save_form') {
       var allFilled = true;
@@ -114,17 +113,27 @@ $("#check").click(function () {
       });
 
       if(!allFilled) {
-        alert('You have missed out one of more fields :( Please fill all of them in');
+        alert('You have missed out one or more fields :( Please fill all of them in');
         event.preventDefault();
       }
     }
 
-  });
+});
 
 
 
 $("#preview").click(function () {
+  var allFilled = true;
+  $('.req').each(function() {
+    if($(this).val() == '') {
+      allFilled = false;
+    }
+  });
 
- window.open("http://localhost:8000/ws/preview");
+  if(allFilled) {
+    window.open("http://localhost:8000/ws/preview");
 
+  } else {
+    alert('You have missed out one or more fields :( Please fill all of them in');
+  }
 });

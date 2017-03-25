@@ -92,7 +92,7 @@ var addWordEditor = function(array) {
 			});
 
 			if(!allFilled) {
-				alert('You have missed out one of more fields :( Please fill all of them in');
+				alert('You have missed out one or more fields :( Please fill all of them in');
 				event.preventDefault();
 			}
 		}
@@ -140,7 +140,18 @@ window.getRights= function() {
 };
 
 $("#preview").click(function () {
+	var allFilled = true;
+  $('.req').each(function() {
+    if($(this).val() == '') {
+      allFilled = false;
+    }
+  });
 
- window.open("http://localhost:8000/wm/preview");
+  if(allFilled) {
+    window.open("http://localhost:8000/wm/preview");
+
+  } else {
+    alert('You have missed out one or more fields :( Please fill all of them in');
+  }
 
 });
