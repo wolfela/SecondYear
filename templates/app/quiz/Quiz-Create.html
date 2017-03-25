@@ -10,7 +10,7 @@
 
 
     <form action="/quiz/edit/{{ quiz.pk }}/submit/" method="post" id='post-form'>
-    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" required>
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     <h3 class="text-center">Create a Quiz</h4>
 		
     
@@ -18,11 +18,11 @@
         <input type="text" id="title" name="title" value="{{ quiz.title }}" required>
      </label>	
 	<label>Language:
-		<input type="text" id="language" name="language" value="{{ quiz.language }}" required>
+		<input type="text" id="language" name="language" value="{{ quiz.language }}">
 	</label>	
 		    <div >
 	<label>Author:
-        <input type="text" id="author" name="author" value="{{ quiz.author }}" required>
+        <input type="text" id="author" name="author" value="{{ quiz.author }}">
     </label>
       <label>Question Type: </label>
       <div id="types">

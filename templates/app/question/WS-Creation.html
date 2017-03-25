@@ -11,12 +11,12 @@
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         <div class="row column log-in-form">
           <h4 class="text-center">Create a Sentence Scramble Question</h4>
-          <input type="text" id="title" name="title" placeholder="Enter the question title" required>
+          <input type="text" id="title" name="title" placeholder="Enter the question title">
           <label>Enter the sentence to be scrambled
-            <input type="text" id="answer" name="answer" placeholder="This is the sentence to be scrambled" required>
+            <input type="text" id="answer" name="answer" placeholder="This is the sentence to be scrambled">
           </label>
           <label>Enter the scrambled version of your sentence
-            <input type="text" id="scrambled_sentence" name="scrambled_sentence" placeholder="This is the scrambled sentence" required>
+            <input type="text" id="scrambled_sentence" name="scrambled_sentence" placeholder="This is the scrambled sentence">
           </label>
             <div class="buttondiv">
               <button type="button" class="button cancelbutton" id="preview">Preview</button>
