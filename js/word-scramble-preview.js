@@ -65,17 +65,19 @@ $(document).ready(function() {
     var opener = window.opener;
     if(opener) {
 
-        var sentence = opener.document.getElementById('scrambled_sentence').value;
+        var sentence = opener.document.getElementById('answer').value;
+        var original = sentence.split(" ");
+        var scrambled = sentence.split(" ");
 
-        console.log(sentence);
+        scrambled = shuffle(scrambled);
 
-        var array = sentence.split(" ");
+        while(arraysEqual(original,scrambled)){
+            scrambled = shuffle(scrambled);
+        }
 
-
-        for(var j = 0; j < array.length; j++){
-            var box = $('<div class="box" draggable="true">' + array[j] + '</div>');
+        for(var j = 0; j < scrambled.length; j++){
+            var box = $('<div class="box" draggable="true">' + scrambled[j] + '</div>');
             $('#boxes').append(box);
-
     }
 
     var cols = document.querySelectorAll('#boxes .box');
@@ -89,5 +91,27 @@ $(document).ready(function() {
     });
 
     }
+
+    function shuffle(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
+
+function arraysEqual(a, b) {
+  if (a === b) return true;
+  if (a == null || b == null) return false;
+  if (a.length != b.length) return false;
+
+  for (var i = 0; i < a.length; ++i) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+}
+
 
 });

@@ -16,6 +16,7 @@ class JinjaEnvironment(Environment):
     def __init__(self,**kwargs):
         super(JinjaEnvironment, self).__init__(**kwargs)
         self.filters['shuffle'] = filter_shuffle
+        self.filters['shuffle_unique'] = filter_shuffle_unique
 
 
 import random
@@ -27,3 +28,22 @@ def filter_shuffle(seq):
         return result
     except:
         return seq
+
+def filter_shuffle_unique(seq):
+    try:
+        scrambled = list(seq)
+        original = list(seq)
+        random.shuffle(scrambled)
+        while(equals_list(scrambled,original)):
+            random.shuffle(scrambled)
+        return scrambled
+    except:
+        return seq
+
+def equals_list(seq1, seq2):
+    i=0
+    for e in seq1:
+        if(seq2[i]!=e):
+            return False
+        i+=1
+    return True
