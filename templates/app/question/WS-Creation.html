@@ -3,32 +3,31 @@
 {% block title %} WordScramble{% endblock %}
 {% block head %}
 {{ super() }}
+<link rel="stylesheet" href="/static/css/word-scramble.css"/>
 {% endblock %}
 
 {% block content %}
-    <div class="medium-6 medium-centered large-4 large-centered columns">
       <form action=/ws/submit/ method="post">
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-        <div class="row column log-in-form">
+        <div class="">
           <h4 class="text-center">Create a Sentence Scramble Question</h4>
           <input type="text" id="title" name="title" placeholder="Enter the question title" required>
           <label>Enter the sentence to be scrambled
-            <input type="text" id="answer" name="answer" placeholder="This is the sentence to be scrambled" required>
+            <textarea type="text" id="answer" name="answer" placeholder="This is the sentence to be scrambled" required></textarea>
           </label>
           <label>Enter the scrambled version of your sentence
-            <input type="text" id="scrambled_sentence" name="scrambled_sentence" placeholder="This is the scrambled sentence" required>
+            <textarea type="text" id="scrambled_sentence" name="scrambled_sentence" placeholder="This is the scrambled sentence" required></textarea>
           </label>
             <div class="buttondiv">
+              <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
               <button type="button" class="button cancelbutton" id="preview">Preview</button>
               <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
-              <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
             </div>
         </div>
 
           <input id="quiz" type="hidden" class="mcinputbox" name="quiz" value="{{ quizid }}">
           <input id="position" type="hidden" class="mcinputbox" name="position" value="{{ pos }}">
       </form>
-    </div>
 {% endblock %}
 
 {% block sidebarContent %}

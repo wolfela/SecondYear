@@ -24,7 +24,6 @@ const scssPaths = {
         `${dirs.scssSrc}/quiz-word-matching.scss`,
         `${dirs.scssSrc}/quiz-editor-word-matching.scss`,
         `${dirs.scssSrc}/app.scss`,
-        `${dirs.scssSrc}/mc.scss`,
         `${dirs.scssSrc}/mc-update.scss`,
         `${dirs.scssSrc}/mc-display.scss`,
         `${dirs.scssSrc}/results.scss`,

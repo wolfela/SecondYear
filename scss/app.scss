@@ -13,7 +13,6 @@ $HighlightColour: #EF3737;
 $LogoColour: #1e1e1e;
 $LoginColour: #488C3A;
 
-
 body{
   overflow: hidden;
   background: $BaseColour;
@@ -206,21 +205,20 @@ MENU BAR
 /*
 BODY
 */
-.content {
+.content{
   background: $BaseColour;
   width: 100%;
-  display: block;
-  overflow: auto;
+  display: flex;
+
 }
 
 .contentBody{
-  margin-left: auto;
-  margin-right: auto;
+  margin: 2em auto;
   width: 80%;
   background: #fefefe;
   display: block;
   overflow: visible;
-  padding: 20px;
+  padding: 2em;
 }
 
 /*
@@ -322,4 +320,29 @@ ERROR DIALOGS
   border: none;
   color: #f4f2f2;
   font-family: "Lato", "sans-serif";
+}
+
+
+/*
+BUTTON STYLING
+*/
+
+.button{
+  background: $LoginColour !important;
+  color: #fefefe !important;
+}
+
+.success{
+  background: #3adb76 !important;
+}
+
+/*
+TEXT STYLING
+ */
+h2, h4{
+  font-family: "Oswald", "sans-serif";
+}
+
+textarea, label, input[type=text], button{
+  font-family: "Raleway", "sans-serif";
 }

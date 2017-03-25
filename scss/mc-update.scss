@@ -1,13 +1,28 @@
-h4 {	
+h4{
+	font-size: 1.3em;
 	text-align: left;
 	margin-left: 1.4rem;
 	border-bottom: 2px solid black;
-	width: 90%;
+	width: 40%;
 }
 
-.scroll-content{
-	height: 600px;
-	overflow: auto;
+@media only screen and (max-width: 1000px) {
+	h4 {
+		font-size: 1.1em;
+		width: 50%;
+	}
+}
+
+@media only screen and (max-width: 650px) {
+	h4{
+		width: 60%;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	h4{
+		width: 80%;
+	}
 }
 
 .mcheading{
@@ -22,6 +37,7 @@ h4 {
 }
 
 .mcinputbox{
+	font-family: "Raleway", "sans-serif";
 	margin-left: 1.4rem; 
 	display: inline-block; 
 	width: 90%;
@@ -39,27 +55,39 @@ h4 {
 }
 
 .buttondiv{
+	margin-left: 1.4rem;
+	width: 90%;
 	clear: both;
 }
 
-.mypreviewbutton{
-	display: block; 
-	margin-left: auto; 
-	margin-right: auto; 
-	width: 70%;
+.buttondiv button{
+	display: inline-block;
+	padding: 10px 20px;
+	min-width: 100px;
 }
 
-.mysavebutton{
-	display: block; 
-	margin-left: auto; 
-	margin-right: auto; 
-	width: 70%;
+.buttondiv button:last-child{
+	float: right;
 }
 
-.cancelbutton{
-	display: block;
-	margin-left: auto; 
-	margin-right: auto; 
-	margin-bottom: 40px;
-	width: 70%
+@media only screen and (max-width: 450px) {
+	.buttondiv button:last-child{
+		float: none;
+		margin: 0;
+		display: inline-block;
+	}
+
+	.buttondiv button{
+		margin-bottom: 0.5rem;
+	}
+
+	.inputbuttons{
+		text-align: left;
+		margin-right: 0;
+	}
+
+	.inputbuttons button{
+		display: inline-block;
+
+	}
 }
