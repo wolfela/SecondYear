@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'django_bleach',
     'rest_framework',
     'dynamic_rest',
-    'coolbeans.app',
-    'coolbeans.api'
+    'coolbeans.app'
 ]
 
 MIDDLEWARE = [

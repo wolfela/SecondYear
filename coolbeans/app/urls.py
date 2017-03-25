@@ -1,14 +1,13 @@
 from django.conf.urls import url
-from django.views.generic import RedirectView
 
-from coolbeans.app.views import base, question
-from coolbeans.app.views.quiz import quiz
+from coolbeans.app.views import question
+from coolbeans.app.views import quiz
 
 urlpatterns = [
+
+    #Main page
     url(r'^$', quiz.QuizAttemptView.findQuizPage, name='indexpage'),
 
-    # Quiz functions
-    # url(r'^quiz/(?P<pk>\d+)/$', attempt.QuizView.as_view()),
 
     # Quiz editing functions
     url(r'^quiz/create/$', quiz.QuizCreateView.load),
@@ -35,22 +34,22 @@ urlpatterns = [
     url(r'^wm/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.WMCreateView.as_view(), name='wm'),
     url(r'^wm/submit/$', question.WMCreateView.submitWM, name='submit'),
     url(r'^wm/preview/$', question.WMPreviewView.as_view(), name='preview'),
-    url(r'^wm/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.WMQuestionView.show_question, name='mcquestion'),
-    url(r'^wm/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.WMQuestionView.check_answer, name='checkmc'),
+    url(r'^wm/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.WMQuestionView.show_question, name='wmquestion'),
+    url(r'^wm/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.WMQuestionView.check_answer, name='checkwm'),
 
     # Word Scramble Questions
     url(r'^ws/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.WSCreateView.as_view(), name='ws'),
     url(r'^ws/submit/$', question.WSCreateView.submitWS, name='submit'),
     url(r'^ws/preview/$', question.WSPreviewView.as_view(), name='preview'),
-    url(r'^ws/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.WSQuestionView.show_question, name='mcquestion'),
-    url(r'^ws/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.WSQuestionView.check_answer, name='checkmc'),
+    url(r'^ws/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.WSQuestionView.show_question, name='wsquestion'),
+    url(r'^ws/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.WSQuestionView.check_answer, name='checkws'),
 
     # Gap Fill Questions
     url(r'^gf/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.GFCreateView.as_view(), name='gf'),
     url(r'^gf/submit/$', question.GFCreateView.submitGF, name='submit'),
     url(r'^gf/preview/$', question.GFPreviewView.as_view(), name='preview'),
-    url(r'^gf/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.GFQuestionView.show_question, name='mcquestion'),
-    url(r'^gf/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.GFQuestionView.check_answer, name='checkmc'),
+    url(r'^gf/question/(?P<pk>\d+)/(?P<score>\d+)/$', question.GFQuestionView.show_question, name='gfquestion'),
+    url(r'^gf/question/(?P<pk>\d+)/(?P<score>\d+)/check/$', question.GFQuestionView.check_answer, name='checkgf'),
 
     # Crossword Questions
     url(r'^cw/(?P<quizid>\d+)/(?P<pos>\d+)/$', question.CWCreateView.as_view(), name='cw'),
@@ -60,8 +59,4 @@ urlpatterns = [
     url(r'^cw/question/(?P<pk>\d+)/(?P<score>\d+)/show/$', question.CWQuestionView.show_question, name='cwquestionn'),
     url(r'^cw/question/(?P<pk>\d+)/(?P<score>\d+)/check_answer/$', question.CWQuestionView.check_answer, name='checkcw')
 
-
-
-
-    # TODO: Admin routes
 ]

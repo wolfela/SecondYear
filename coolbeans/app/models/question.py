@@ -45,7 +45,6 @@ class MultipleChoiceModel(BaseQuestionModel):
     title = CharField(max_length=500, blank=False)
     answers = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=True, null=True), blank=True)
     correct = CharField(max_length=255, blank=False)
-    score = PositiveIntegerField(blank=True, default=0, null=True)
 
 
     class Meta:
@@ -68,7 +67,6 @@ class WordMatchingModel(BaseQuestionModel):
     A Word Matching Question Type. It stores two arrays of corresponding values.
     """
     title = CharField(max_length=500, blank=True)
-    score = PositiveIntegerField(blank=True, default=1, null=True)
     listA = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False), blank=True)
     listB = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False), blank=True)
 
@@ -108,7 +106,6 @@ class WordScrambleQuestionModel(BaseQuestionModel):
     """
     title = CharField(max_length=500)
     answer = CharField(max_length=500)
-    score = PositiveIntegerField(blank=True, default=1, null=True)
 
     class Meta:
         verbose_name = "Word Scramble Question"
@@ -129,7 +126,6 @@ class GapFillQuestionModel(BaseQuestionModel):
     """
     A Question Type for gap fill type questions. Stores the whole questions and a list of gap words.
     """
-
 
     question = CharField(max_length=500, blank=False)
     gaps = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False), blank=True)
@@ -156,7 +152,6 @@ class CrosswordQuestionModel(TimeStampedModel, SafeDeleteMixin):
     x = PositiveIntegerField()
     y = PositiveIntegerField()
     clue = CharField(max_length=500)
-    score = PositiveIntegerField(blank=True, default=1, null=True)
     answer = CharField(max_length=500)
     quiz = CharField(max_length=500, blank=False)
     position = CharField(max_length=500, blank=False)
@@ -179,4 +174,4 @@ class CrosswordQuestionModel(TimeStampedModel, SafeDeleteMixin):
             "answer": self.answer,
             "pos": self.position,
             "quiz": self.quiz
-}
+            }
