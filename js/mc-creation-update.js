@@ -4,8 +4,8 @@ $(document).ready(function() {
 
 	$('#addField').click(function() {
 		if(amount < 10){
-			$("#addAnswer").append(" <input type=\"text\" class=\"mcinputbox\" name=\"answers[]\" placeholder=\"Type your answer in here\">");
-			amount++;			
+			$("#addAnswer").append(" <input type=\"text\" class=\"mcinputbox req\" name=\"answers[]\" placeholder=\"Type your answer in here\">");
+			amount++;
 		}
 	});
 	$('#removeField').click(function() {
@@ -21,7 +21,7 @@ $(document).ready(function() {
 			var answer = document.querySelector('input[name="answers"]:checked').value;
 			var correct = document.getElementById("correct").value;
 			var id_checkbox = $('input[type=radio][name="answers"]:checked').attr('id');
-			var id = id_checkbox.split("-"); 
+			var id = id_checkbox.split("-");
 			var id_text = id[1];
 			$('#choices').children('input').each(function () {
 				if(this.value!=answer){
@@ -41,6 +41,25 @@ $(document).ready(function() {
 	$("#preview").click(function () {
 
 	 	window.open("http://localhost:8000/mc/preview");
+
+	});
+
+	$('#post-form').on('submit', function(event) {
+
+		var $btn = $(document.activeElement);
+		if($btn.attr('name') == 'save_form') {
+			var allFilled = true;
+			$('.req').each(function() {
+				if($(this).val() == '') {
+					allFilled = false;
+				}
+			});
+
+			if(!allFilled) {
+				alert('You have missed out one of more fields :( Please fill all of them in');
+				event.preventDefault();
+			}
+		}
 
 	});
 
