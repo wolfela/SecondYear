@@ -10,7 +10,7 @@ $(document).ready(function() {
 	}
 
 	addWordEditor(wordPairs);
-	
+
 });
 
 var addIfNotExists = function(array, elem) {
@@ -39,16 +39,16 @@ var addWordEditor = function(array) {
 	var pairs = [];
 	for(var i = 0; i < array.length; i++) {
 		pairs.push(array[i]);
-	
+
 	}
 
 	rows = [];
 	for(var j = 0; j < pairs.length; j++) {
 		var row = '<tr id="pair' + j + '"></tr>';
-		var wordA = '<td><input type="text" class="editor-input" name="listA[]" id="wordA' + j + '" value="' + pairs[j].langA + '" placeholder="<insert language A here>" aria-describedby="exampleHelpTex"></td>';
-		var wordB = '<td><input type="text" class="editor-input"  name="listB[]" id="wordB' + j + '" value="' + pairs[j].langB + '" placeholder="<insert language B here>" aria-describedby="exampleHelpTex"></td>';
+		var wordA = '<td><input type="text" class="editor-input req" name="listA[]" id="wordA' + j + '" value="' + pairs[j].langA + '" placeholder="<insert language A here>" aria-describedby="exampleHelpTex"></td>';
+		var wordB = '<td><input type="text" class="editor-input req"  name="listB[]" id="wordB' + j + '" value="' + pairs[j].langB + '" placeholder="<insert language B here>" aria-describedby="exampleHelpTex"></td>';
 		var deleteButton = '<td><button type="button" class="alert button editor-delete" id="editor-delete' + j + '">Delete</button></td></tr>';
-		
+
 		rows.push(new Row(j, pairs[j]));
 
 		$('#editing-table').append(row);
@@ -69,15 +69,34 @@ var addWordEditor = function(array) {
 			var num = parseInt($(this).attr('id').substring(5));
 			rows[num].word.langB = $('#wordB' + num).val();
 		});
-		
+
 	}
-	
+
 	// adding add button
 	$('#editing-table').append('<td><a class="button editor-add" id="add-pair-button">Add</a></td>');
 	$('#add-pair-button').off('click');
 	$('#add-pair-button').click(function() {
 		pairs.push(new Word('', ''));
 		addWordEditor(pairs);
+	});
+
+	$('#post-form').on('submit', function(event) {
+
+		var $btn = $(document.activeElement);
+		if($btn.attr('name') == 'save_form') {
+			var allFilled = true;
+			$('.req').each(function() {
+				if($(this).val() == '') {
+					allFilled = false;
+				}
+			});
+
+			if(!allFilled) {
+				alert('You have missed out one of more fields :( Please fill all of them in');
+				event.preventDefault();
+			}
+		}
+
 	});
 
 
@@ -125,4 +144,3 @@ $("#preview").click(function () {
  window.open("http://localhost:8000/wm/preview");
 
 });
-
