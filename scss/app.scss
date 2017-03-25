@@ -165,20 +165,22 @@ MENU CROSS
 MENU BAR
 */
 .sidebar{
-  position: absolute;
+  position: fixed;
   width: 0;
   top: 0;
   left: 0;
-  height: 100%;
+  height: 100vh;
   background: $MenuColour;
+  display: block;
+  overflow: visible;
 }
 
 .menu-content{
   display: block;
-  position: absolute;
-  opacity: 1;
+  opacity: 0;
+  pointer-events: none;
   width: 170px;
-  height: 100%;
+  height: 100vh;
   z-index: -1;
   background: transparent;
   font-family: "Lato", "sans-serif";
@@ -206,9 +208,19 @@ BODY
 */
 .content {
   background: $BaseColour;
-  position: absolute;
-  height: 100%;
   width: 100%;
+  display: block;
+  overflow: auto;
+}
+
+.contentBody{
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  background: #fefefe;
+  display: block;
+  overflow: visible;
+  padding: 20px;
 }
 
 /*

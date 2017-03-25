@@ -40,6 +40,7 @@ $(document).ready(function() {
                     {opacity:0}, 150, 'linear' ,setTimeout((function() {
                         $content.animate({opacity: 0.5}, 350);
                         $menu.animate({opacity: 1, 'z-index': 1}, 200);
+                        $menu.css('pointer-events','auto');
                         $sidebar.animate({width: "170px"}, 350);
                         $menuCross.animate({opacity:'1'},300,'linear',function() {
                             $menuCross.css('pointer-events','auto');
@@ -57,7 +58,8 @@ $(document).ready(function() {
         $menuCross.animate(
             {opacity: '0'}, 150,'linear',setTimeout((function() {
                 $content.animate({opacity: 1}, 350);
-                $menu.animate({opacity: 1, 'z-index': -1}, 200);
+                $menu.animate({opacity: 0, 'z-index': -1}, 200);
+                $menu.css('pointer-events','none');
                 $sidebar.animate({width: "0px"}, 350);
                 $menuButton.animate({opacity: 1},300,'linear',function() {
                     $menuButton.css('pointer-events','auto');
