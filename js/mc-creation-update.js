@@ -47,7 +47,7 @@ $(document).ready(function() {
 		});
 
 		if(allFilled) {
-			window.open("http://localhost:8000/mc/preview");
+			window.open("/mc/preview");
 
 		} else {
 			alert('You have missed out one or more fields :( Please fill all of them in');

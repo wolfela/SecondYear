@@ -162,7 +162,7 @@ $("#preview").click(function () {
     }
 
   if(allFilled) {
-    window.open("http://localhost:8000/gf/preview");
+    window.open("/gf/preview");
 
   } else {
     alert('You did not add any gaps. Please add at least one!');
