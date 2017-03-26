@@ -14,8 +14,8 @@ class BaseQuestionModel(TimeStampedModel, SafeDeleteMixin):
     """
 
     _safedelete_policy = SOFT_DELETE
-    quiz = CharField(max_length=500, blank=False)
-    position = CharField(max_length=500, blank=False)
+    quiz = CharField(max_length=500, blank=False, default="0")
+    position = CharField(max_length=500, blank=False, default="0")
 
     objects = InheritanceManager()
 
