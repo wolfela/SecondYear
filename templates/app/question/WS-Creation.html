@@ -7,13 +7,13 @@
 {% endblock %}
 
 {% block content %}
-      <form action=/ws/submit/ method="post">
+      <form action=/ws/submit/ method="post" id='post-form'>
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         <div class="">
           <h3 class="text-center">Create a Sentence Scramble Question</h3>
           <input type="text" id="title" class="req" name="title" placeholder="Enter the question title">
           <label>Enter the sentence to be scrambled
-            <textarea type="text" id="answer" name="answer" placeholder="This is the sentence to be scrambled"></textarea>
+            <textarea type="text" class="req" name="answer" id="answer" placeholder="This is the sentence to be scrambled"></textarea>
           </label>
             <div class="buttondiv">
               <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
