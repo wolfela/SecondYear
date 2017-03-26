@@ -110,10 +110,13 @@ $('#post-form').on('submit', function(event) {
         if($(this).val() == '') {
           allFilled = false;
         }
+        if(!document.getElementById('answer').value.includes(" ")){
+            allFilled = false;
+        }
       });
 
       if(!allFilled) {
-        alert('You have missed out one or more fields :( Please fill all of them in');
+        alert('You have missed out one or more fields. Please fill all of them in!');
         event.preventDefault();
       }
     }
@@ -128,12 +131,15 @@ $("#preview").click(function () {
     if($(this).val() == '') {
       allFilled = false;
     }
+    if(!document.getElementById('answer').value.includes(" ")){
+        allFilled = false;
+    }
   });
 
   if(allFilled) {
     window.open("http://localhost:8000/ws/preview");
 
   } else {
-    alert('You have missed out one or more fields :( Please fill all of them in');
+    alert('You have missed out one or more fields. Please fill all of them in!');
   }
 });
