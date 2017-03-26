@@ -21,7 +21,7 @@
             {% set list = question.listA %}
 
             {% for answer in list %}
-            <input type="hidden" id={{ loop.index }} value={{ answer|e }}>
+            <input type="hidden" id={{ loop.index }} value="{{ answer|e }}">
 
             {% endfor %}
             {% endif %}
@@ -32,7 +32,7 @@
             {% set list = question.listB %}
 
             {% for answer in list %}
-            <input type="hidden" id={{ loop.index }} value={{ answer|e }}>
+            <input type="hidden" id={{ loop.index }} value="{{ answer|e }}">
 
             {% endfor %}
             {% endif %}
