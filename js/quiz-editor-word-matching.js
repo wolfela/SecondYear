@@ -6,7 +6,8 @@ function Row(row, word) { this.row = row, this.word = word };
 $(document).ready(function() {
 
 	if(wordPairs.length === 0) {
-		wordPairs.push(new Word('Example', 'Word'));
+		wordPairs.push(new Word('', ''));
+		wordPairs.push(new Word('', ''));
 	}
 
 	addWordEditor(wordPairs);
@@ -45,14 +46,19 @@ var addWordEditor = function(array) {
 	rows = [];
 	for(var j = 0; j < pairs.length; j++) {
 		var row = '<tr id="pair' + j + '"></tr>';
-		var wordA = '<td><input type="text" class="editor-input req" name="listA[]" id="wordA' + j + '" value="' + pairs[j].langA + '" placeholder="<insert language A here>" aria-describedby="exampleHelpTex"></td>';
-		var wordB = '<td><input type="text" class="editor-input req"  name="listB[]" id="wordB' + j + '" value="' + pairs[j].langB + '" placeholder="<insert language B here>" aria-describedby="exampleHelpTex"></td>';
+		var wordA = '<td><input type="text" class="editor-input req" name="listA[]" id="wordA' + j + '" value="' + pairs[j].langA + '" placeholder="insert language A here" aria-describedby="exampleHelpTex"></td>';
+		var wordB = '<td><input type="text" class="editor-input req"  name="listB[]" id="wordB' + j + '" value="' + pairs[j].langB + '" placeholder="insert language B here" aria-describedby="exampleHelpTex"></td>';
 		var deleteButton = '<td><button type="button" class="alert button editor-delete" id="editor-delete' + j + '">Delete</button></td></tr>';
 
 		rows.push(new Row(j, pairs[j]));
 
 		$('#editing-table').append(row);
-		$('#pair' + j).append(wordA + wordB + deleteButton);
+		if(j==0 || j==1){
+			$('#pair' + j).append(wordA + wordB);
+		} else{
+			$('#pair' + j).append(wordA + wordB + deleteButton);
+		}
+		
 
 		$('#editor-delete' + j).click(function() {
 			var num = $(this).attr('id').substring(13);
