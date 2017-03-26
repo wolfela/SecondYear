@@ -164,8 +164,13 @@ class QuizAttemptView(View):
 
     def findQuiz(request):
         """
-        Method for redirecting to the searched quiz
+        Method for redirecting to the searched quiz or making an alert if it doesnt exist
         :return: http response redirect to the quiz attempt for that quiz
         """
         pk = request.POST.get('pk')
-        return HttpResponseRedirect('/quiz/attempt/' + pk + '/')
+        if(pk.isdigit()):
+            quiz = QuizModel.objects.filter(pk=pk)
+            if(quiz):
+                return HttpResponseRedirect('/quiz/attempt/' + pk + '/')
+
+        return render(request, 'app/quiz/Quiz-Find.html', {'alert': "Wrong Quiz Code. Try again!"})
