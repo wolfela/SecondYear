@@ -74,16 +74,15 @@ class QuestionEditView(View):
         quiz = get_object_or_404(QuizModel, pk=pk)
         if questiontype is not '' and questionid is not '':
             if questiontype == 'mc':
-                question = get_object_or_404(MultipleChoiceModel, pk=questionid)
+                questiontitle = "Multiple Choice"
             elif questiontype == 'ws':
-                question = get_object_or_404(WordScrambleQuestionModel, pk=questionid)
+                questiontitle = "Word Scramble"
             elif questiontype == 'wm':
-                question = get_object_or_404(WordMatchingModel, pk=questionid)
+                questiontitle = "Word Match"
             elif questiontype == 'cw':
-                question = get_object_or_404(CrosswordQuestionModel, pk=questionid)
+                questiontitle = "Crossword"
             elif questiontype == 'gf':
-                question = get_object_or_404(GapFillQuestionModel, pk=questionid)
-            questiontitle = question.title
+                questiontitle = "Gapfill"
             quiz.questions.append(questiontype + '/question/' + str(questionid))
             quiz.questiontitles.append(questiontitle)
             quiz.save()

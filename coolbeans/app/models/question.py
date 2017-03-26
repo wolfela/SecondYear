@@ -136,8 +136,6 @@ class GapFillQuestionModel(BaseQuestionModel):
         :param answers: The answers provided
         :return: bool Whether the answer is correct.
         """
-        print(answers)
-        print(self.gaps)
         return answers == self.gaps
 
 
