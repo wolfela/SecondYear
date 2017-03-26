@@ -125,7 +125,6 @@ $(document).ready(function () {
 });
 
     window.getPreviewData = function() {
-    //document.getElementById('gaps').value = gaps;
     var question = getText();
     question = question.replace(/<p[^>]*>/g, "");
     question = question.replace(/<\/p[^>]*>/g, "");
@@ -141,6 +140,31 @@ $(document).ready(function () {
     return all;
 }
 
+
+$('#post-form').on('submit', function(event) {
+    var allFilled = true;
+    var $btn = $(document.activeElement);
+    if($btn.attr('name') == 'save_form') {
+    if(gaps.length==0){
+        allFilled = false;
+    }
+    }
+    if(!allFilled) {
+        alert('You did not add any gaps. Please add at least one!');
+        event.preventDefault();
+    }
+});
+
 $("#preview").click(function () {
+  var allFilled = true;
+    if(gaps.length==0){
+        allFilled = false;
+    }
+
+  if(allFilled) {
     window.open("http://localhost:8000/gf/preview");
+
+  } else {
+    alert('You did not add any gaps. Please add at least one!');
+  }
 });

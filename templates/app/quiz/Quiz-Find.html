@@ -14,12 +14,21 @@
 
 			<label>Input your Quiz Code. Get this from your teacher.</label>
 			<input type="text" name="pk" id="pk" placeholder="Quiz Code goes here.">
-			<button type="submit" class="button mysavebutton" name="find_form">Find</button>
-		</div>
-	</form>
-	<h5 class="text-center">Don't have a Quiz?</h5>
-	<form action="/quiz/create/">
-		<button type="submit" class="button mydankbutton" name="create-quiz-redirect" onclick="/quiz/create/">Create Quiz</button>
-	</form>
 
+			<div class="buttondiv">
+			 <input id="alert" type="hidden" name="alert" value="{{ alert }}">
+				<button type="submit" class="button expanded mysavebutton" name="find_form">Find</button>
+    </form>
+        <h5 class="text-center">Don't have a Quiz?</h5>
+        <form action="/quiz/create/">
+
+        <button type="submit" class=" button medium-center mydankbutton" name="create-quiz-redirect" onclick="/quiz/create/">Create Quiz</button>
+			</div>
+			</form>
+		</div>
+
+{% endblock %}
+
+{% block extraJS %}
+     <script src="/static/js/quiz-create.js"></script>
 {% endblock %}

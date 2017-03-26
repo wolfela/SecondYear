@@ -1,39 +1,27 @@
-import json
-from json.decoder import JSONDecodeError
-
-from bs4 import BeautifulSoup
 from django.db.models import CASCADE
-from django.db.models import CharField, PositiveIntegerField, BooleanField, TextField
-from django.db.models import ForeignKey, Model
-from django_bleach.models import BleachField
+from django.db.models import CharField, PositiveIntegerField
+from django.db.models import ForeignKey
 from django_mysql.models import ListCharField
-from jsonschema import ValidationError
-from jsonschema import validate
 from model_utils.managers import InheritanceManager
 from safedelete import SOFT_DELETE
 from safedelete.models import SafeDeleteMixin
-from django.core.exceptions import ObjectDoesNotExist
-import random
-
-from coolbeans.app.exceptions import HTMLParseError
 from coolbeans.app.models.base import TimeStampedModel
-
 
 
 class BaseQuestionModel(TimeStampedModel, SafeDeleteMixin):
     """
-    A base model for a Question.
+    A base model for a Question that stores quiz id and position in the quiz for each question.
     """
 
     _safedelete_policy = SOFT_DELETE
-    display_with = ForeignKey('self', on_delete=CASCADE, blank=True, null=True)
-    display_order = PositiveIntegerField(blank=True, default=1)
+    quiz = CharField(max_length=500, blank=False)
+    position = CharField(max_length=500, blank=False)
 
     objects = InheritanceManager()
 
     def check_answer(self, answer):
         """
-        Checks whether the supplied answer is correct.
+        Checks whether the supplied crossword answer is correct
 
         :param answer: The answer provided.
         :return: bool Whether the answer is correct.
@@ -50,43 +38,14 @@ class BaseQuestionModel(TimeStampedModel, SafeDeleteMixin):
 
         return True
 
-    def get_children(self):
-        """
-        Returns all the questions that are displayed together
-        :return: all the questions displayed together
-        """
-
-        return BaseQuestionModel.objects.filter(display_with = self)
-
-
-
-class PlaceholderQuestionModel(BaseQuestionModel):
-    """
-    A question model for placeholder information.
-    """
-    information = TextField()
-
-
-    def check_answer(self, answer):
-        """
-        Checks whether the supplied answer is correct.
-
-        :param answer: The answer provided.
-        :return: bool Whether the answer is correct.
-        """
-        return None # undefined behaviour
-
-
 class MultipleChoiceModel(BaseQuestionModel):
     """
-    An MCQ Question Type.
+    An MC Question Type. It stores an array of all answers and seperately the correct answer.
     """
     title = CharField(max_length=500, blank=False)
     answers = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=True, null=True), blank=True)
     correct = CharField(max_length=255, blank=False)
-    score = PositiveIntegerField(blank=True, default=0, null=True)
-    quiz = CharField(max_length=500, blank=False)
-    position = CharField(max_length=500, blank=False)
+
 
     class Meta:
         verbose_name = "Multiple Choice Question"
@@ -102,59 +61,14 @@ class MultipleChoiceModel(BaseQuestionModel):
 
         return self.correct == choice
 
-    def get_answers_list(self):
-        return self.answers.extend(self.correct) #TO DO: sort out display order+{anws
-
-
-class WordMatchingQuestionModel(BaseQuestionModel):
-    """
-    A Word Matching Question Type.
-    """
-    title = CharField(max_length=500)
-    score = PositiveIntegerField()
-
-    quiz = CharField(max_length=500, blank=False)
-    position = CharField(max_length=500, blank=False)
-
-    class Meta:
-        verbose_name = "Word Matching Question"
-        verbose_name_plural = "Word Matching Questions"
-
-    def check_answer(self, choice, answer):
-        """
-        Checks whether the supplied answer is correct.
-
-        :param choice: The answer provided in "left | right" format
-        :return: bool Whether the answer is correct.
-        """
-        try:
-            pair = Pair.objects.filter(question=self).get(left_value=choice)
-        except ObjectDoesNotExist:
-            print("Wrong entry or choice does not exist")
-            raise
-
-        return pair.right_value == answer
-
-
-class Pair(TimeStampedModel, SafeDeleteMixin):
-    """
-    A pair value for a word matching question type
-    """
-    question = ForeignKey(WordMatchingQuestionModel, on_delete=CASCADE)
-    left_value = CharField(max_length=500, blank=False)
-    right_value = CharField(max_length=500, blank = False)
-
 
 class WordMatchingModel(BaseQuestionModel):
     """
-    A Word Matching Question Type.
+    A Word Matching Question Type. It stores two arrays of corresponding values.
     """
     title = CharField(max_length=500, blank=True)
-    score = PositiveIntegerField(blank=True, default=1, null=True)
     listA = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False), blank=True)
     listB = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False), blank=True)
-    quiz = CharField(max_length=500, blank=False)
-    position = CharField(max_length=500, blank=False)
 
     class Meta:
         verbose_name = "Word Matching Question"
@@ -163,13 +77,12 @@ class WordMatchingModel(BaseQuestionModel):
     def check_answer(self, answerA, answerB):
         """
         Checks whether the supplied answer is correct.
-
-        :param choice: The answer provided.
+        :param answerA: list of left values
+        :param answerB: list of corresponding right values
         :return: bool Whether the answer is correct.
         """
         if(len(answerA)<len(self.listA) or len(answerB)<len(self.listB)):
             return False
-
 
         i=0
         for a in answerA:
@@ -189,14 +102,11 @@ class WordMatchingModel(BaseQuestionModel):
 
 class WordScrambleQuestionModel(BaseQuestionModel):
     """
-    A Word Scrabble Question Type.
+    A Word Scrabble Question Type. It stores an answer sentence.
     """
     title = CharField(max_length=500)
-    answer = CharField(max_length=255)
-    scrambled_sentence = CharField(max_length=500, blank = False)
-    score = PositiveIntegerField(blank=True, default=1, null=True)
-    quiz = CharField(max_length=500, blank=False)
-    position = CharField(max_length=500, blank=False)
+    answer = CharField(max_length=500)
+
     class Meta:
         verbose_name = "Word Scramble Question"
         verbose_name_plural = "Word Scramble Questions"
@@ -214,15 +124,18 @@ class WordScrambleQuestionModel(BaseQuestionModel):
 
 class GapFillQuestionModel(BaseQuestionModel):
     """
-    A Question Type for gap fill type questions.
+    A Question Type for gap fill type questions. Stores the whole questions and a list of gap words.
     """
 
-    quiz = CharField(max_length=500, blank=False)
-    position = CharField(max_length=500, blank=False)
     question = CharField(max_length=500, blank=False)
     gaps = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=False), blank=True)
 
     def check_answer(self, answers):
+        """
+        Checks whether the supplied answer is correct.
+        :param answers: The answers provided
+        :return: bool Whether the answer is correct.
+        """
         print(answers)
         print(self.gaps)
         return answers == self.gaps
@@ -230,7 +143,8 @@ class GapFillQuestionModel(BaseQuestionModel):
 
 class CrosswordQuestionModel(TimeStampedModel, SafeDeleteMixin):
     """
-    A Word Scrabble Question Type.
+    A Crossword Entry Question Type. Stores base question as Foreign Key.
+    One entry holds one word, its direction, starting coordinates (x,y) and clue
     """
     question = ForeignKey(BaseQuestionModel, on_delete=CASCADE, blank=True, null=True)
     direction = CharField(max_length=500)
@@ -238,7 +152,6 @@ class CrosswordQuestionModel(TimeStampedModel, SafeDeleteMixin):
     x = PositiveIntegerField()
     y = PositiveIntegerField()
     clue = CharField(max_length=500)
-    score = PositiveIntegerField(blank=True, default=1, null=True)
     answer = CharField(max_length=500)
     quiz = CharField(max_length=500, blank=False)
     position = CharField(max_length=500, blank=False)
@@ -247,16 +160,11 @@ class CrosswordQuestionModel(TimeStampedModel, SafeDeleteMixin):
         verbose_name = "Crossword Question"
         verbose_name_plural = "Crossword Questions"
 
-    def check_answer(self, choice):
-        """
-        Checks whether the supplied answer is correct.
-        :param choice: The answer provided
-        :return: bool Whether the answer is correct.
-        """
-
-        return choice==self.answer
-
     def as_dict(self):
+        """
+        Method for retrieving the data from the database as a dict
+        :return: dict with selected fields
+        """
         return {
             "direction": self.direction,
             "length": self.length,
@@ -266,4 +174,4 @@ class CrosswordQuestionModel(TimeStampedModel, SafeDeleteMixin):
             "answer": self.answer,
             "pos": self.position,
             "quiz": self.quiz
-}
+            }
