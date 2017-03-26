@@ -8,18 +8,18 @@
   
 {% block content %}
     <form action="/quiz/edit/{{ quiz.pk }}/submit/" method="post" id='post-form'>
-        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" required>
-        <h3 class="text-center">Create a Quiz</h3>
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        <h2 class="text-center">Create a Quiz</h2>
 
             <label>Title:
-                <input type="text" id="title" name="title" value="{{ quiz.title }}" required>
+                <input type="text" id="title" name="title" value="{{ quiz.title }}">
             </label>
             <label>Language:
-                <input type="text" id="language" name="language" value="{{ quiz.language }}" required>
+                <input type="text" id="language" name="language" value="{{ quiz.language }}">
             </label>
             <div>
                 <label>Author:
-                    <input type="text" id="author" name="author" value="{{ quiz.author }}" required>
+                    <input type="text" id="author" name="author" value="{{ quiz.author }}">
                 </label>
                 <label>Question Type: </label>
                 <div id="types">
@@ -45,13 +45,8 @@
             {% endif %}
 
             <div class="buttondiv">
-                <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
                 <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
+                <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
             </div>
     </form>
-{% endblock %}
-
-{% block sidebarContent %}
-	<a href="#">Create Quiz</a>
-    <a href="#">View Quizzes</a>
 {% endblock %}

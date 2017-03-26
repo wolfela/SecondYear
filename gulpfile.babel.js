@@ -28,7 +28,7 @@ const scssPaths = {
         `${dirs.scssSrc}/mc-display.scss`,
         `${dirs.scssSrc}/results.scss`,
         `${dirs.scssSrc}/word-scramble.scss`,
-        `${dirs.scssSrc}/quiz-create.scss`
+        `${dirs.scssSrc}/quizzes.scss`
     ],
     dest: `${dirs.dest}/css`
 };

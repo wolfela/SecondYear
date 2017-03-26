@@ -16,10 +16,18 @@ function addGap(){
     if(text.length!=0) {
         var highlight = document.createElement('SPAN');
         var range = selected.getRangeAt(0);
-        highlight.textContent = text;
+        highlight.textContent = text.trim();
         highlight.style.cssText = 'color:red';
         range.deleteContents();
         range.insertNode(highlight);
+        if(/^\s/.test(text)){
+            highlight.parentNode.insertBefore(document.createTextNode(" "),highlight);
+            console.log('Added before');
+        }
+        if(text.endsWith(' ')){
+            highlight.parentNode.insertBefore(document.createTextNode(" "),highlight.nextSibling);
+            console.log('Added after');
+        }
         gaps.push(text);
     }
     getAnswers();

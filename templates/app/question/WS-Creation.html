@@ -10,7 +10,7 @@
       <form action=/ws/submit/ method="post">
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         <div class="">
-          <h4 class="text-center">Create a Sentence Scramble Question</h4>
+          <h3 class="text-center">Create a Sentence Scramble Question</h3>
           <input type="text" id="title" name="title" placeholder="Enter the question title">
           <label>Enter the sentence to be scrambled
             <textarea type="text" id="answer" name="answer" placeholder="This is the sentence to be scrambled"></textarea>
@@ -28,11 +28,6 @@
           <input id="quiz" type="hidden" class="mcinputbox" name="quiz" value="{{ quizid }}">
           <input id="position" type="hidden" class="mcinputbox" name="position" value="{{ pos }}">
       </form>
-{% endblock %}
-
-{% block sidebarContent %}
-  <a href="#">Create Quiz</a>
-  <a href="#">View Quizzes</a>
 {% endblock %}
 
 {% block extraJS %}

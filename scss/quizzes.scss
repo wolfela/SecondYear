@@ -1,0 +1,47 @@
+/*
+Quiz Create Styles
+*/
+
+#types label{
+  display: inline-block;
+  margin-left: 10px;
+}
+
+#types label:first-child{
+  margin-left: 0;
+}
+
+.buttondiv .mysavebutton{
+  float: right;
+}
+
+/*
+Quiz Find Styles
+*/
+.quiz-find-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .mysavebutton{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  label{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #pk{
+    max-width: 50%;
+  }
+}
+
+.mydankbutton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}

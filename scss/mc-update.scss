@@ -1,28 +1,6 @@
 h4{
-	font-size: 1.3em;
 	text-align: left;
 	margin-left: 1.4rem;
-	border-bottom: 2px solid black;
-	width: 40%;
-}
-
-@media only screen and (max-width: 1000px) {
-	h4 {
-		font-size: 1.1em;
-		width: 50%;
-	}
-}
-
-@media only screen and (max-width: 650px) {
-	h4{
-		width: 60%;
-	}
-}
-
-@media only screen and (max-width: 500px) {
-	h4{
-		width: 80%;
-	}
 }
 
 .mcheading{

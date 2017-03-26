@@ -17,6 +17,13 @@
   padding: 0;
 }
 
+.gapFillQuestions input[type=text]{
+  display: inline-block;
+  min-width: 50px;
+  width: auto;
+  max-width: 100px;
+}
+
 .gapFillBox{
   width: 50px;
   height: 25px;
@@ -146,6 +153,22 @@ GAP FILL EDITOR
   margin: 10px;
 }
 
-.content{
-  margin-bottom: 20px;
+.h4Override{
+  width: 60% !important;
+}
+
+#post-form button{
+  margin: 2em auto 0;
+}
+
+.mynextbutton{
+  float: right;
+}
+
+.mysavebutton{
+  float: right;
+}
+
+#check{
+  float: left;
 }

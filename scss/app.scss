@@ -332,6 +332,10 @@ BUTTON STYLING
   color: #fefefe !important;
 }
 
+.button:not(.mysavebutton):hover{
+  background: #3A722F !important;
+}
+
 .success{
   background: #3adb76 !important;
 }
@@ -339,10 +343,35 @@ BUTTON STYLING
 /*
 TEXT STYLING
  */
-h2, h4{
+h2, h3{
   font-family: "Oswald", "sans-serif";
 }
 
-textarea, label, input[type=text], button{
+textarea, label, input[type=text], .button, button, h4, p{
   font-family: "Raleway", "sans-serif";
+}
+
+h4{
+  font-size: 1.3em;
+  border-bottom: 2px solid black;
+  width: 40%;
+}
+
+@media only screen and (max-width: 1000px) {
+  h4 {
+    font-size: 1.1em;
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  h4{
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  h4{
+    width: 80%;
+  }
 }

@@ -396,6 +396,10 @@ function actions(){
                             // }
                             return;
                             break;
+                        case 9:
+                            event.preventDefault();
+                            return;
+                            break;
                         case 37:
                             if (y == 0) {
                                 return;

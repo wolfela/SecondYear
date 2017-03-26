@@ -8,29 +8,28 @@
 {% endblock %}
 
 {% block content %}
-<p>Instructions: Write the full sentence you wish to add gaps to below. Then click next and select the word you want to make a gap with and click add gap. To remove a gap, select it and click remove gap</p>
+<h2 class="text-center">Gap Fill Question Editor</h2>
+<h4 class="h4Override">Please write the passage in the editor below</h4>
 <textarea id="gapFillInput" name="gapFillInput"></textarea>
-<input type="button" class="gapFillBack gapFillButton" value="Back" />
-<input type="button" class="gapFillNext gapFillButton" value="Next" />
+<p>Press next when you're done</p>
+<input type="button" class="gapFillBack button" value="Back" />
+<input type="button" class="gapFillNext button" value="Next" />
+<h4>Select the words that should be gaps</h4>
 <div class="gapFillSelectBox"></div>
-<input type="button" class="gapFillSelect gapFillButton" value="Add Gap" />
-<input type="button" class="gapFillDelete gapFillButton" value="Delete Gap"/>
+<p>To remove a gap select it and press delete gap</p>
+<input type="button" class="gapFillSelect button" value="Add Gap" />
+<input type="button" class="gapFillDelete button" value="Delete Gap"/>
 <form action="/gf/submit/" method="post" id='post-form'>
-<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-<button type="button" class="button mypreviewbutton" id="preview">Preview</button>
-<button type="submit" class="success button mysavebutton" name="save_form">Save</button>
-<button type="submit" class="success button mysavebutton" name="cancel_form">Cancel</button>
-<input type="hidden" id="question" name="question">
-<input type="hidden" id="gaps" name="gaps">
-<input id="quiz" type="hidden" name="quiz" value="{{ quizid }}">
-<input id="position" type="hidden" name="position" value="{{ pos }}">
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
+    <button type="button" class="button mypreviewbutton" id="preview">Preview</button>
+    <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
+    <input type="hidden" id="question" name="question">
+    <input type="hidden" id="gaps" name="gaps">
+    <input id="quiz" type="hidden" name="quiz" value="{{ quizid }}">
+    <input id="position" type="hidden" name="position" value="{{ pos }}">
 </form>
 
-{% endblock %}
-
-{% block sidebarContent %}
-<a href="#">Create Quiz</a>
-<a href="#">View Quizzes</a>
 {% endblock %}
 
 {% block extraJS %}
