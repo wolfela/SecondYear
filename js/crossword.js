@@ -466,32 +466,53 @@ $.ajaxSetup({
 
 $("#save").click(function () {
 
-    var crossword_data = getCrosswordData();
-    var url = window.location.pathname;
-    var s = url.split("/");
+    var allFilled = true;
+    if(cluesList.length==0){
+        allFilled = false;
+    }
 
-    crossword_data.q.push({'quiz':s[2],'pos':s[3]});
-    var data = JSON.stringify(crossword_data);
-    console.log(data);
+    if(allFilled) {
+        var crossword_data = getCrosswordData();
+        var url = window.location.pathname;
+        var s = url.split("/");
 
-    $.ajax({
-        url : '../../submit/',
-        type: 'POST',
-        data: data,
-        contentType:'application/json',
-        dataType: 'text',
-        success: function(message){
+        crossword_data.q.push({'quiz':s[2],'pos':s[3]});
+        var data = JSON.stringify(crossword_data);
+        console.log(data);
 
-            window.location.href = message;
-        },
-        error: function(){
-            alert('nope');
-        }
-    });
+        $.ajax({
+            url : '../../submit/',
+            type: 'POST',
+            data: data,
+            contentType:'application/json',
+            dataType: 'text',
+            success: function(message){
+
+                window.location.href = message;
+            },
+            error: function(){
+                alert('nope');
+            }
+        });
+
+    } else {
+        alert('You did not add any words. Please add at least one!');
+    }
+    
 });
 
 $("#preview").click(function () {
+    var allFilled = true;
+    if(cluesList.length==0){
+        allFilled = false;
+    }
+
+  if(allFilled) {
     window.open("http://localhost:8000/cw/preview");
+
+  } else {
+    alert('You did not add any words. Please add at least one!');
+  }
 });
 
 $("#cancel").click(function () {
