@@ -15,7 +15,9 @@
     {% for word in gapfilled %}
     {% if word == '$$ $$' %}
     {% set __ = index.append(1) %}
+    <div class="gapFillQuestionDiv" id="gapFillQuestionDiv">
     <input type="text" id={{ index|length }} name="answers">
+    </div>
     {% else %}
     {{ word }}
     {% endif %}

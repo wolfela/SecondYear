@@ -15,3 +15,4 @@ class QuizModel(TimeStampedModel, SafeDeleteMixin):
     title = CharField(max_length=255, blank=True)
     author = CharField(max_length=255, blank=True)
     questions = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=True, null=True), blank=True)
+    questiontitles = ListCharField(max_length=255, base_field=CharField(max_length=255, blank=True, null=True), blank=True)

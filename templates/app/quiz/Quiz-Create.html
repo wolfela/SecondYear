@@ -38,9 +38,9 @@
 
 	</label>
 	 <h5>List of Questions: </h5>
-	    {% if quiz.questions is defined and quiz.questions|length > 0 %}
+	    {% if quiz.questiontitles is defined and quiz.questiontitles|length > 0 %}
 	    <ol>
-	    {% for question in quiz.questions%}
+	    {% for question in quiz.questiontitles%}
     	<li>{{ question }}</li>
     	{% endfor %}
     	</ol>

@@ -1,6 +1,7 @@
 from django.views import View
 from coolbeans.app.forms import QuizForm
 from coolbeans.app.models.quiz import QuizModel
+from coolbeans.app.models.question import MultipleChoiceModel, WordScrambleQuestionModel, WordMatchingModel, GapFillQuestionModel, CrosswordQuestionModel, BaseQuestionModel
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
@@ -71,11 +72,21 @@ class QuestionEditView(View):
         :return: updated view
         """
         quiz = get_object_or_404(QuizModel, pk=pk)
-        if (questiontype is not '' and questionid is not ''):
+        if questiontype is not '' and questionid is not '':
+            if questiontype == 'mc':
+                question = get_object_or_404(MultipleChoiceModel, pk=questionid)
+            elif questiontype == 'ws':
+                question = get_object_or_404(WordScrambleQuestionModel, pk=questionid)
+            elif questiontype == 'wm':
+                question = get_object_or_404(WordMatchingModel, pk=questionid)
+            elif questiontype == 'cw':
+                question = get_object_or_404(CrosswordQuestionModel, pk=questionid)
+            elif questiontype == 'gf':
+                question = get_object_or_404(GapFillQuestionModel, pk=questionid)
+            questiontitle = question.title
             quiz.questions.append(questiontype + '/question/' + str(questionid))
+            quiz.questiontitles.append(questiontitle)
             quiz.save()
-            print('QUESTIONS:')
-            print(quiz.questions)
         return render(request, 'app/quiz/Quiz-Create.html', {'quiz': quiz})
 
     def saveQuiz(request, pk):
@@ -174,3 +185,4 @@ class QuizAttemptView(View):
                 return HttpResponseRedirect('/quiz/attempt/' + pk + '/')
 
         return render(request, 'app/quiz/Quiz-Find.html', {'alert': "Wrong Quiz Code. Try again!"})
+
