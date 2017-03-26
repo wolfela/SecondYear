@@ -12,10 +12,7 @@
     <!-- Canvas for drawing lines -->
     
     <h2 class = "mcqheading"> Question {{ question.position }} </h2>
-
-	<p class="questions">{{ question.title }}</p></br>
-
-    <canvas id="my-canvas" width="700" height="500"></canvas>
+	<p class="questions">{{ question.title }}</p>
     <form action="/wm/question/{{ question.pk }}/{{ score }}/check/" method="post" id='post-form'>
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
@@ -41,8 +38,6 @@
             {% endif %}
         </div>
 
-
-
         <!-- Button grid -->
         <div id="button-grid" class="center">
             <!-- Left button grid -->
@@ -61,13 +56,13 @@
     <input type="hidden" name="listB" id="listB">
 
 	<button type="button" class="success button mycheckbutton" id="check">Check Answer</button>
-
 	
 	<div class="mybuttons">
     	<button type="submit" class="button mynextbutton" name="save_form" >Next Question</button>
     </div>
-</div>
     </form>
+    <canvas id="my-canvas" width="700" height="500"></canvas>
+</div>
 {% endblock %}
 
 {% block extraJS %}

@@ -9,12 +9,6 @@ body {
 	background-color: $back-color;
 }
 
-.center {
-	margin: auto;
-	width: 45%;
-	padding: 20px;
-}
-
 h2{
 	margin-left: 1.4rem;
 	font-weight: bold;
@@ -23,10 +17,9 @@ h2{
 }
 
 #my-canvas {
-	margin-left: $grid-spacing;
-	margin-top: 0%;
-	position: absolute;
-	z-index: -1;
+	margin-top: 0;
+	position: static;
+	z-index: 1;
 }
 
 #button-grid {
@@ -37,6 +30,7 @@ h2{
 	width: 180px;
 	height: 50px;
 	margin-bottom: 40px;
+	z-index: 20;
 }
 
 #button-grid-left {
