@@ -1,12 +1,5 @@
 @import "foundation";
 
-$back-color: #EDEDED;
-
-
-body {
-	background-color: $back-color;
-}
-
 .center {
 	margin: auto;
 	width: 80%;
@@ -14,18 +7,6 @@ body {
 
 .center-text {
 	text-align: center;
-}
-
-#canvas {
-	margin: auto;
-	margin-top: 2%;
-	width: 80%;
-	height: 75%;
-	padding: 20px;
-	background-color: #FFFFFF;
-	border-radius: 30px;
-	z-index: -1;
-	overflow: auto;
 }
 
 .div-col {
@@ -70,6 +51,7 @@ body {
 
 .editor-delete {
 	float: right;
+	background: #EF3737 !important;
 }
 
 .editor-add {
@@ -78,5 +60,9 @@ body {
 }
 
 #save-pairs-button {
+	float: right;
+}
+
+.mysavebutton{
 	float: right;
 }

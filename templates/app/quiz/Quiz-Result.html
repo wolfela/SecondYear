@@ -3,7 +3,7 @@
  {% block title %}Results{% endblock %} 
  {% block head %} 
 	{{ super() }}
-	<link rel="stylesheet" href="./static/css/results.css">
+	<link rel="stylesheet" href="/static/css/results.css">
  {% endblock %}
 
 {% block content %}
@@ -35,11 +35,7 @@
 							<p id="results-progress-text" class="progress-meter-text">{{score|int}}</p>
 						</div>
 					</div>
-{% endblock %}
-
-{% block sidebarContent %}
-	<a href="#">Create Quiz</a>
-    <a href="#">View Quizzes</a>
+</div>
 {% endblock %}
 
 {% block extraJS %}

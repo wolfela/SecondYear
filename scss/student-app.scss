@@ -27,6 +27,21 @@ GENERAL CROSSWORD PARTS
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+  
+  @media only screen and (max-width: 930px) {
+    height: 30px;
+    width: 30px;
+  }
+  
+  @media only screen and (max-width: 720px) {
+    height: 25px;
+    width: 25px;
+  }
+
+  @media only screen and (max-width: 620px) {
+    height: 15px;
+    width: 15px;
+  }
 }
 
 .crosswordNum{
@@ -36,10 +51,6 @@ GENERAL CROSSWORD PARTS
   font-size: 8px;
 }
 
-.crosswordLetter{
-
-}
-
 
 /*
 CROSSWORD CLUES
@@ -47,7 +58,7 @@ CROSSWORD CLUES
 .clues{
   padding: 5px;
   border: 1px solid black;
-  width: 500px;
+  max-width: 500px;
   min-height: 200px;
   display: flex;
   margin-left: auto;
@@ -219,4 +230,20 @@ CROSSWORD EDITOR
 .answerBox{
   width: auto;
   margin: 10px 40px 10px 20px;
+}
+
+.buttondiv {
+  margin: 2em auto 0;
+
+  .mysavebutton {
+    float: right;
+  }
+}
+
+#submit{
+  float: right;
+}
+
+#check{
+  float: left;
 }

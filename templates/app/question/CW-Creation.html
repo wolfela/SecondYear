@@ -7,37 +7,34 @@
 {% endblock %}
 
 {% block content %}
- <div class="crosswordDisplay" id="crosswordEditor"></div>
-        <div class="clueInputBox">
-          <p>Answer:</p>
-          <input class="answerBox" type="text"/>
-          <p>Clue:</p>
-          <textarea class="clueInput"></textarea>
-          <input class="addClue clueButton" type="button" value="Add"/>
-        </div>
-        <div class="cluesBox">
-          <div class="clueTable">
+    <h3 class="text-center">Crossword Question Editor</h3>
+    <div class="crosswordDisplay" id="crosswordEditor"></div>
+    <div class="clueInputBox">
+        <p>Answer:</p>
+        <input class="answerBox" type="text"/>
+        <p>Clue:</p>
+        <textarea class="clueInput"></textarea>
+        <input class="addClue clueButton" type="button" value="Add"/>
+    </div>
+    <div class="cluesBox">
+        <div class="clueTable">
             <div class="tableTitle">
-              <p class="wordTitle">Word</p>
-              <p class="clueTitle">Clue</p>
+                <p class="wordTitle">Word</p>
+                <p class="clueTitle">Clue</p>
             </div>
             <div class="clueDiv"></div>
-          </div>
-          <input class="deleteClue clueButton" type="button" value="Delete Word"/>
-
         </div>
+        <input class="deleteClue clueButton" type="button" value="Delete Word"/>
 
-                <div class="buttondiv">   
-              <button type="button" class="button mypreviewbutton" name="preview_form" id="preview">Preview</button>
-              <button type="submit" class="success button mysavebutton" name="save_form" id="save">Save</button>
-              <button type="button" class="button cancelbutton" name="cancel_form" id="cancel">Cancel</button>
-            </div>
+    </div>
+
+    <div class="buttondiv">
+        <button type="button" class="button cancelbutton" name="cancel_form" id="cancel">Cancel</button>
+        <button type="button" class="button mypreviewbutton" name="preview_form" id="preview">Preview</button>
+        <button type="submit" class="success button mysavebutton" name="save_form" id="save">Save</button>
+    </div>
 {% endblock %}
 
-{% block sidebarContent %}
-  <a href="#">Create Quiz</a>
-  <a href="#">View Quizzes</a>
-{% endblock %}
 
 {% block extraJS %}
     <script src="/static/js/crossword.js"></script>

@@ -108,3 +108,12 @@ h2{
 	margin-right: 10px;
 	border-radius: 10px;
 }
+
+#answer, #scrambled_sentence{
+  min-height: 5em;
+  resize: horizontal;
+}
+
+.mysavebutton{
+  float: right;
+}

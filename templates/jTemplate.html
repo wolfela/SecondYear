@@ -8,7 +8,7 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     	<title>{% block title %}{% endblock %} </title>
 		<link rel="stylesheet" href="/static/css/app.css" />
-		<link href="https://fonts.googleapis.com/css?family=Lato|Oswald&amp;subset=latin-ext" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Raleway|Oswald&amp;subset=latin-ext" rel="stylesheet">
     {% endblock %}
 </head>
 
@@ -22,7 +22,11 @@
           </button>
           <span class="title-bar-title">LQ.</span>
       </div>
-    <div class="content">{% block content %}{% endblock %}</div>
+    <div class="content">
+        <div class="contentBody">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
     {% block container %} {% endblock %}
 </div>
 
@@ -33,8 +37,8 @@
     </button>
     <div class="menu-content">
         <nav class="menu-left">
-			{% block sidebarContent %}
-			{% endblock %}
+            <a href="/quiz/create/">Create Quiz</a>
+            <a href="/quiz/find/">View Quizzes</a>
         </nav>
     </div>
 </div>

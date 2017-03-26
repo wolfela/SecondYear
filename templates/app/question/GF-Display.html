@@ -25,15 +25,10 @@
     </label>
 </div>
 <input type="hidden" id="correct" value="{{ question.gaps }}">
-<button type="submit" class="button mynextbutton" name="save_form">Next Question</button>
 <button type="button" class="success button mysavebutton" id="check">Check Answer</button>
+<button type="submit" class="button mynextbutton" name="save_form">Next Question</button>
 </form>
 
-{% endblock %}
-
-{% block sidebarContent %}
-<a href="#">Create Quiz</a>
-<a href="#">View Quizzes</a>
 {% endblock %}
 
 {% block extraJS %}

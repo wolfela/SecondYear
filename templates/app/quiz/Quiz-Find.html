@@ -3,37 +3,30 @@
  {% block title %} WordScramble{% endblock %} 
  {% block head %}
 	{{ super() }}
+<link rel="stylesheet" href="/static/css/quizzes.css"/>
  {% endblock %}
   
 {% block content %}
-<div class="medium-6 medium-centered large-4 large-centered text-center columns">
 	<form action="/quiz/find/go/" method="post" id='post-form'>
 		<div class="row column quiz-find-form">
-		<h4 class="text-center">Find a Quiz</h4>
+			<h3 class="text-center">Find a Quiz</h3>
 			<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-		
+
 			<label>Input your Quiz Code. Get this from your teacher.</label>
 			<input type="text" name="pk" id="pk" placeholder="Quiz Code goes here.">
-		
+
 			<div class="buttondiv">
 			 <input id="alert" type="hidden" name="alert" value="{{ alert }}">
-				<button type="submit" class="success button expanded mysavebutton" name="find_form">Find</button>
+				<button type="submit" class="button expanded mysavebutton" name="find_form">Find</button>
     </form>
         <h5 class="text-center">Don't have a Quiz?</h5>
         <form action="/quiz/create/">
 
-        <button type="submit" class="success button medium-center mydankbutton" name="create-quiz-redirect" onclick="/quiz/create/">Create Quiz</button>
+        <button type="submit" class=" button medium-center mydankbutton" name="create-quiz-redirect" onclick="/quiz/create/">Create Quiz</button>
 			</div>
 			</form>
 		</div>
 
-</div>
-
-{% endblock %}
-
-{% block sidebarContent %}
-	<a href="#">Create Quiz</a>
-    <a href="#">View Quizzes</a>
 {% endblock %}
 
 {% block extraJS %}

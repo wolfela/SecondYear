@@ -3,73 +3,50 @@
  {% block title %} Create a Quiz {% endblock %} 
  {% block head %}
 	{{ super() }}
+    <link rel="stylesheet" href="/static/css/quiz-create.css"/>
  {% endblock %}
   
 {% block content %}
-	<div class="medium-2 medium-centered large-8 large-centered columns">
-
-
     <form action="/quiz/edit/{{ quiz.pk }}/submit/" method="post" id='post-form'>
-    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-    <h3 class="text-center">Create a Quiz</h4>
-		
-    
-	<label>Title:
-        <input type="text" id="title" name="title" value="{{ quiz.title }}">
-     </label>	
-	<label>Language:
-		<input type="text" id="language" name="language" value="{{ quiz.language }}">
-	</label>	
-		    <div >
-	<label>Author:
-        <input type="text" id="author" name="author" value="{{ quiz.author }}">
-    </label>
-      <label>Question Type: </label>
-      <div id="types">
-      <input type="radio" class="checkbox" id="mc" name="type" value="mc"><label >Multiple Choice</label>
-      <input type="radio" class="checkbox" id="wm" name="type" value="wm"><label >Word Match</label>
-      <input type="radio" class="checkbox" id="ws" name="type" value="ws"><label >Word Scramble</label>
-      <input type="radio" class="checkbox" id="cw" name="type" value="cw"><label >Crossword</label>
-      <input type="radio" class="checkbox" id="cw" name="type" value="gf"><label >Gap Fill</label>
-      </div>
-    </div>
-<!-- 	<input type="hidden" id="type" name="type" value="mc"> -->
-    <button type="submit" class="button addquestionbutton" name="add_question" id="add">Add Question</button>
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        <h2 class="text-center">Create a Quiz</h2>
 
-	</label>
-	 <h5>List of Questions: </h5>
+            <label>Title:
+                <input type="text" id="title" name="title" value="{{ quiz.title }}">
+            </label>
+            <label>Language:
+                <input type="text" id="language" name="language" value="{{ quiz.language }}">
+            </label>
+            <div>
+                <label>Author:
+                    <input type="text" id="author" name="author" value="{{ quiz.author }}">
+                </label>
+                <label>Question Type: </label>
+                <div id="types">
+                    <label><input type="radio" class="checkbox" id="mc" name="type" value="mc">Multiple Choice</label>
+                    <label><input type="radio" class="checkbox" id="wm" name="type" value="wm">Word Match</label>
+                    <label><input type="radio" class="checkbox" id="ws" name="type" value="ws">Word Scramble</label>
+                    <label><input type="radio" class="checkbox" id="cw" name="type" value="cw">Crossword</label>
+                    <label><input type="radio" class="checkbox" id="cw" name="type" value="gf">Gap Fill</label>
+                </div>
+            </div>
+            <!-- 	<input type="hidden" id="type" name="type" value="mc"> -->
+            <button type="submit" class="button addquestionbutton" name="add_question" id="add">Add Question</button>
+
+            <h5>List of Questions: </h5>
 	    {% if quiz.questiontitles is defined and quiz.questiontitles|length > 0 %}
-	    <ol>
+            <ol>
 	    {% for question in quiz.questiontitles%}
-    	<li>{{ question }}</li>
-    	{% endfor %}
-    	</ol>
-    	{% else %}
-    	<p>No questions</p>
-		{% endif %}
+                <li>{{ question }}</li>
+                {% endfor %}
+            </ol>
+            {% else %}
+            <p>No questions</p>
+            {% endif %}
 
-	<div class="buttondiv">
-              <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
-              <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
-        </div>
-	</label>
-
-      
-      </div>
+            <div class="buttondiv">
+                <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
+                <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
+            </div>
     </form>
-
-
-	
-    </div>
-
 {% endblock %}
-     <script src="../../../static/js/quiz-create.js"></script>
-{% block sidebarContent %}
-	<a href="#">Create Quiz</a>
-    <a href="#">View Quizzes</a>
-{% endblock %}
-
-
-
-
-
