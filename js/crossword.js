@@ -507,8 +507,9 @@ $("#preview").click(function () {
         allFilled = false;
     }
 
+
   if(allFilled) {
-    window.open("http://localhost:8000/cw/preview");
+    window.open("/cw/preview");
 
   } else {
     alert('You did not add any words. Please add at least one!');
@@ -521,5 +522,7 @@ $("#cancel").click(function () {
     var rurl = "../../../quiz/edit/" + s[2];
     window.location.href = rurl;
 });
+
+
 
 

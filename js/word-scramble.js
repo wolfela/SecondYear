@@ -137,7 +137,7 @@ $("#preview").click(function () {
   });
 
   if(allFilled) {
-    window.open("http://localhost:8000/ws/preview");
+    window.open("/ws/preview");
 
   } else {
     alert('You have missed out one or more fields. Please fill all of them in!');
