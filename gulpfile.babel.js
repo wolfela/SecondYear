@@ -54,6 +54,7 @@ const jsPaths = {
         `${dirs.jsSrc}/quiz-editor-word-matching.js`,
         `${dirs.jsSrc}/quiz-preview-word-matching.js`,
         `${dirs.jsSrc}/quiz-create.js`,
+        `${dirs.jsSrc}/quiz-find.js`,
     ],
     dest: `${dirs.dest}` // For some reason vinyl-source-stream will prepend /js to the final output path
 };

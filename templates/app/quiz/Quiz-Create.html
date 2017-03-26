@@ -32,7 +32,7 @@
             </div>
             <!-- 	<input type="hidden" id="type" name="type" value="mc"> -->
             <button type="submit" class="button addquestionbutton" name="add_question" id="add">Add Question</button>
-
+            <input id="titles" type="hidden" value="{{ quiz.questiontitles }}">
             <h5>List of Questions: </h5>
 	    {% if quiz.questiontitles is defined and quiz.questiontitles|length > 0 %}
             <ol>
@@ -43,10 +43,13 @@
             {% else %}
             <p>No questions</p>
             {% endif %}
-
             <div class="buttondiv">
                 <button type="submit" class="button cancelbutton" name="cancel_form">Cancel</button>
                 <button type="submit" class="success button mysavebutton" name="save_form">Save</button>
             </div>
     </form>
 {% endblock %}
+{% block extraJS %}
+     <script src="/static/js/quiz-create.js"></script>
+{% endblock %}
+
