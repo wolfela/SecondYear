@@ -78,7 +78,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'coolbeans',
         'USER': 'root',
-        'PASSWORD': 'bleh',
+        'PASSWORD': 'root',
         'OPTIONS': {
             # Sets SQL Strict Mode
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
