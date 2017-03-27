@@ -1,33 +1,29 @@
-# (insert name here) - An interactive language learning system
+LQ - An Interactive Language Learning System
 
-# Setting up the development environment
+Dependencies:
 
-1. [Get Docker](https://docs.docker.com/engine/installation/). You'll also need docker-compose and npm.
-2. Run `./build.sh setup` and wait for the Docker instance to be set up. You'll need to enter your password during the process. You may have to `chmod +x ./build.sh` as well.
-3. Run `./build.sh run` to run the Docker container. The website will be available from `localhost:8000`.
-4. If you have PyCharm, you can set up a Remote Interpreter - [instructions are here](https://www.jetbrains.com/help/pycharm/2016.3/configuring-remote-interpreters-via-ssh.html).
-Host: localhost:2222
-Username: docker
-Password: Password
-python interpreter path: /usr/local/bin/python
-Path mappings: \<your local project folder\> -> /code
+Please make sure you have all of these installed before running the application: (We recommend using this on Ubuntu 14.04+ however any Linux should work as long as you can install these)
 
-# Using build.sh
+-   python3
+-   mysql-server and mariadb
+-   libmysqlclient-dev
+-   python3-setuptools 
+-   python3-dev 
+-   pip3 and easy_install
+-   Your Distributions Version of build-essential
+-   npm
 
-The following commands are exposed in `build.sh`:
+If using ubuntu, please make a symbolic link between nodejs and node:
 
-    * `setup` - sets up Docker, install npm dependencies and migrate the database.
-    * `run` - Runs Docker.
-    * `migrate` - Migrates the database.
-    * `make-shell` - Creates a shell instance in the web container.
-    * `rebuild` - Rebuild the Docker containers - this will wipe your database as well!
-    * `reinstall-deps` - Reinstalls Python and npm dependencies.
-    * `shutdown` - Shuts down the Docker instances.
+ln -s /usr/bin/nodejs /usr/bin/node
 
-# Using gulp
+Deployment:
 
-Gulp is an automated build system which can help you with compiling SCSS and JavaScript into a single file ready for production.
+First you need to install MySql and save the root password. Then you need to create a new database named "coolbeans" (use this tutorial if unsure how https://www.digitalocean.com/community/tutorials/a-basic-mysql-tutorial). Set the root password in coolbeans/settings.py under the line 'PASSWORD' in the DATABASES section. We recommend using root / root for the purposes of this project.
 
-    * `gulp` will compile the SCSS and JavaScript and put them in the right directory.
-    * `gulp --production` does the above, but with production settings (i.e. all files minified)
-    * `gulp watch` will watch for changes in the source files, and recompiles them if necessary.
+Once this is set, you need to run build.bash using sudo or root. If it completes with no problems, you can then run:
+
+python3 manage.py runserver
+
+This will turn the server on under localhost:8000. If you wish to set a different URL, run it with python3 manage.py runserver 0.0.0.0:8000 and configure your webserver to redirect to port 8000 under the URL you wish.
+
