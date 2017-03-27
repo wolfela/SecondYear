@@ -131,7 +131,6 @@ $("#post-form").on('submit', function(event) {
 
 
 $("#preview").click(function () {
-    alert("here");
   var allFilled = true;
   $('.req').each(function() {
     if($(this).val() == '') {
