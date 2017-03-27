@@ -19,9 +19,9 @@ $(document).ready(function() {
 	var wordPairs = [];	// array that will be used to display words. Words stored here should be CORRECTLY paired
 	function Word(langA, langB) { this.langA = langA; this.langB = langB };
 	var drawingIsBlocked = false;
-	
+
 	// ADD ACTUAL WORD PAIRS BETWEEN HERE...
-	
+
 	// ...AND HERE
 
 
@@ -60,8 +60,8 @@ $(document).ready(function() {
 
 	wordsLangA = shuffle(wordsLangA);
 	wordsLangB = shuffle(wordsLangB);
-	
-	
+
+
 	// associating buttons to words that were shuffled.
 	// this is done in order of rows that the words appear in AFTER they have been shuffled
 
@@ -76,7 +76,7 @@ $(document).ready(function() {
 	for(var i = 0; i < wordPairs.length; i++) {
 		var wordA = wordsLangA[i];
 		var wordB = wordsLangB[i];
-		
+
 		var $buttonA = addWordButton(true, i + 1, wordA);
 		var $buttonB = addWordButton(false, i + 1, wordB);
 	}
@@ -107,9 +107,9 @@ $(document).ready(function() {
 				if(!(	// negate result of the two checks below
 					(langAregex.test(firstButtonId) && langAregex.test(secondButtonId)) || // if both buttons are on left column
 					(langBregex.test(firstButtonId) && langBregex.test(secondButtonId)))) { // if both buttons are on right column
-				
+
 					// if the check above passes, then a new link is made while removing links for the two buttons to be used for the new link
-					removeIfExists($selectedButton);	// button that was clicked on first	
+					removeIfExists($selectedButton);	// button that was clicked on first
 					removeIfExists($(this));	// button that was clicked on second (or the one that was clicked to fire this event)
 
 					// when inserting Drawn objects in the drawnBetween array, buttons on the left should come first
@@ -120,7 +120,7 @@ $(document).ready(function() {
 					}
 
 					refreshLines();
-		
+
 				}
 				$selectedButton = null;
 
@@ -128,7 +128,7 @@ $(document).ready(function() {
 				$selectedButton = $(this);
 			}
 
-		}		
+		}
 	});
 
 	$('#check').click(function() {
@@ -137,20 +137,20 @@ $(document).ready(function() {
 		var left = getLeftLinked();
 		document.getElementById('listA').value = left;
 		console.log(document.getElementById('listA').value);
-		document.getElementById('listB').value = right;	
+		document.getElementById('listB').value = right;
 
 		drawingIsBlocked = true;
 		// for checking if all buttons have been linked
 		if(drawnBetween.length == pairsInWindow) {
 			var correct = 0;
-			
+
 			for(var j = 0; j < drawnBetween.length; j++) {
 				var $left = drawnBetween[j].$left;
 				var $right = drawnBetween[j].$right;
 				var pair = getWordPair($left.text());
-				
+
 				var answerText = pair.langB;
-				
+
 				$left.removeClass('success alert');
 				$right.removeClass('success alert');
 
@@ -162,9 +162,9 @@ $(document).ready(function() {
 					$left.addClass('alert');
 					$right.addClass('alert');
 				}
-				
+
 			}
-			
+
 		}
 	});
 
@@ -178,7 +178,7 @@ $(document).ready(function() {
 		}
 
 		var html = $('<button type="button" id="' + id + '" class="button grid-button">' + text + '</button>');
-		
+
 		if(isLeft) {
 			$('#button-grid-left').append(html);
 		} else {
@@ -199,7 +199,7 @@ $(document).ready(function() {
 		var left = getLeftLinked();
 		document.getElementById('listA').value = left;
 
-		document.getElementById('listB').value = right;	
+		document.getElementById('listB').value = right;
 	}
 
 	// checks to see if there are any word pairs that exist with the given key.
@@ -226,8 +226,8 @@ $(document).ready(function() {
 				leftPos.top += (link.$left.height() / 2)
 
 				rightPos.top += (link.$right.height() / 2)
-			
-				draw(leftPos, rightPos);		
+
+				draw(leftPos, rightPos);
 			}
 		}
 
@@ -237,18 +237,18 @@ $(document).ready(function() {
 	function removeIfExists($button) {
 		for(var i = 0; i < drawnBetween.length; i++) {
 			var item = drawnBetween[i];	// Drawn pair
-			if($button.attr('id') == item.$left.attr('id') || $button.attr('id') == item.$right.attr('id')) {		
+			if($button.attr('id') == item.$left.attr('id') || $button.attr('id') == item.$right.attr('id')) {
 				drawnBetween.splice(i, 1);
 			}
-			
+
 		}
 	}
-	
+
 	// creates an array containing linked Word objects and returns it.
 	// for each Word object, you should use .langA to retrieve the left word, and .langB to retrieve the right word
 	function getLinks() {
 		var linked = [];
-		
+
 		for(var i = 0; i < drawnBetween.length; i++) {
 			var db = drawnBetween[i];
 			linked.push(new Word(db.$left.text(), db.$right.text()));
@@ -259,7 +259,7 @@ $(document).ready(function() {
 
 	function getLeftLinked() {
 		var linked = [];
-		
+
 		for(var i = 0; i < drawnBetween.length; i++) {
 			var db = drawnBetween[i];
 			linked.push(db.$left.text());
@@ -269,7 +269,7 @@ $(document).ready(function() {
 	}
 	function getRightLinked() {
 		var linked = [];
-		
+
 		for(var i = 0; i < drawnBetween.length; i++) {
 			var db = drawnBetween[i];
 			linked.push(db.$right.text());

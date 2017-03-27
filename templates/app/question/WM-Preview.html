@@ -1,7 +1,7 @@
 
 {% extends "jTemplate.html" %}
 
-{% block title %}WM-Creation{% endblock %}
+{% block title %}Word Matching Question Preview{% endblock %}
 
 {% block head %}
 {{ super() }}
@@ -11,23 +11,23 @@
 {% block content %}
 <div id="main">
 <p> Connect the words that you think correspond. You can then check your answer or move straight to the next question.</p>
-    <!-- Canvas for drawing lines -->
-    <canvas id="my-canvas" width="700" height="500"></canvas>
 
-    <!-- Button grid -->
-    <div id="button-grid" class="center">
-        <!-- Left button grid -->
-        <div id="button-grid-left">
+    <div class="alignButtons">
+        <canvas id="my-canvas" width="700" height="300"></canvas>
+        <!-- Button grid -->
+        <div id="button-grid" class="center">
+            <!-- Left button grid -->
+            <div id="button-grid-left">
 
+            </div><!-- end of Left button grid-->
 
-        </div><!-- end of Left button grid-->
+            <!-- Right button grid -->
+            <div id="button-grid-right">
 
-        <!-- Right button grid -->
-        <div id="button-grid-right">
+            </div><!-- end of Right button grid-->
 
-        </div><!-- end of Right button grid-->
-
-    </div><!-- end of Button grid -->
+        </div><!-- end of Button grid -->
+    </div>
 
 </div>
 

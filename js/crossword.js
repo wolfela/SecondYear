@@ -258,7 +258,7 @@ function editorActions(){
         if(answer.length == $('.answerBox').attr('maxlength')){
             addAnswer(answer,clue);
         }else{
-
+            alert("Please type in a word that is the same length as the number of boxes selected");
         }
     });
 
@@ -266,10 +266,11 @@ function editorActions(){
         var index = $(selectedRow).attr('id');
         answerList.splice(index-1,1);
         cluesList.splice(index-1,1);
+        crosswordData.data.splice(index-1,1);
         for(var i=0;i<gridSize;i++){
             for(var j=0;j<gridSize;j++){
                 if($(grid[i][j]).hasClass('set')){
-                    clearBox(i,j,index)
+                    clearBox(i,j,index);
                 }
             }
         }

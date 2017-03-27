@@ -10,7 +10,7 @@ $(document).ready(function() {
 	var $canvas = $('#my-canvas');
 	var canvasOffset = $canvas.offset();
 	var offsetX = canvasOffset.left - 20;
-	var offsetY = canvasOffset.top - 113;
+	var offsetY = canvasOffset.top + 10;
 
 	$(window).resize(function() {
 		refreshLines();
@@ -186,15 +186,9 @@ $(document).ready(function() {
 	// by invoking .position() on a jQuery object
 	function draw(fromPos, toPos) {
 		context.beginPath();
-		context.moveTo(fromPos.left - offsetX, fromPos.top - offsetY);
-		context.lineTo(toPos.left - offsetX, toPos.top - offsetY);
+		context.moveTo(fromPos.left, fromPos.top);
+		context.lineTo(toPos.left, toPos.top);
 		context.stroke();
-
-		var right = getRightLinked();
-		var left = getLeftLinked();
-		document.getElementById('listA').value = left;
-
-		document.getElementById('listB').value = right;	
 	}
 
 	// checks to see if there are any word pairs that exist with the given key.

@@ -1,6 +1,6 @@
 {% extends "jTemplate.html" %}
 
-{% block title %}CW-Creation{% endblock %}
+{% block title %}Crossword Question Editor{% endblock %}
 {% block head %}
 {{ super() }}
  <link rel="stylesheet" href="../../../static/css/student-app.css">
@@ -15,7 +15,7 @@
         <input class="answerBox" type="text"/>
         <p>Clue:</p>
         <textarea class="clueInput"></textarea>
-        <input class="addClue clueButton" type="button" value="Add"/>
+        <input class="addClue clueButton button" type="button" value="Add"/>
     </div>
     <div class="cluesBox">
         <div class="clueTable">
@@ -25,7 +25,7 @@
             </div>
             <div class="clueDiv"></div>
         </div>
-        <input class="deleteClue clueButton" type="button" value="Delete Word"/>
+        <input class="deleteClue clueButton button" type="button" value="Delete Word"/>
 
     </div>
 

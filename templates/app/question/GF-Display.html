@@ -1,6 +1,6 @@
 {% extends "jTemplate.html" %}
 
-{% block title %}GapFillDisplay{% endblock %}
+{% block title %}Gap Fill Display{% endblock %}
 {% block head %}
 {{ super() }}
 <link rel="stylesheet" href="/static/css/teacher-app.css">
@@ -16,9 +16,7 @@
     {% for word in gapfilled %}
     {% if word == '$$ $$' %}
     {% set __ = index.append(1) %}
-    <div class="gapFillQuestionDiv" id="gapFillQuestionDiv">
     <input type="text" id={{ index|length }} name="answers">
-    </div>
     {% else %}
     {{ word }}
     {% endif %}

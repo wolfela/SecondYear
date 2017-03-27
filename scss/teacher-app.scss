@@ -3,14 +3,13 @@
 .gapFillQuestionDiv{
   margin-left: 100px;
   margin-right: 100px;
-  //border: 1px solid rgba(0,0,0,0.3);
   padding: 10px;
 }
 
 .gapFillQuestions{
   position: relative;
   display: inline;
-  width: 250px;
+  min-width: 250px;
   left: 5%;
   top: 10%;
   margin: 0;
