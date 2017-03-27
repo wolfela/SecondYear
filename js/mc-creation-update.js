@@ -50,7 +50,7 @@ $(document).ready(function() {
 			window.open("/mc/preview");
 
 		} else {
-			alert('You have missed out one or more fields :( Please fill all of them in');
+			alert('You have missed out one or more fields. Please fill all of them in!');
 		}
 
 	});
@@ -67,7 +67,7 @@ $(document).ready(function() {
 			});
 
 			if(!allFilled) {
-				alert('You have missed out one or more fields Please fill all of them in!');
+				alert('You have missed out one or more fields. Please fill all of them in!');
 				event.preventDefault();
 			}
 		}
