@@ -10,6 +10,7 @@
 {% block content %}
 	<div class="alignmentDiv">
 		<h2 class = "mcqheading"> Question {{ question.position}}</h2>
+		<p> Reorder these words by clicking and dragging to the order you think is right. You can then check your answer or move straight onto the next question </p>
 		<form action="/ws/question/{{ question.pk }}/{{ score }}/check/" method="post" id='post-form'>
 			<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 

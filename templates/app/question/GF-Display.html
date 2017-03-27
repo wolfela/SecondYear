@@ -10,6 +10,7 @@
 <form action="/gf/question/{{ question.pk }}/{{ score }}/check/" method="post" id='post-form'>
 <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 <div class="gapFillQuestionDiv" id="gapFillQuestionDiv">
+<p> Type the words you think should be in each gap. Then you can check your answer or press next </p>
     <label class="gapFillQuestions">
     {% set index = [] %}
     {% for word in gapfilled %}

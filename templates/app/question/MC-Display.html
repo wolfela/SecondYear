@@ -10,7 +10,7 @@
 <form action="/mc/question/{{ question.pk }}/{{ score }}/check/" method="post" id='post-form'>
 <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 	<h2 class = "mcqheading"> Question {{ question.position}} </h2>
-
+    <p> Select one answer. You can then check it, or move straight to the next question <p>
 	<p class="questions" id=q>{{ question.title }}</p>
 	<div id="choices">
 		{% if question.answers != "" %}

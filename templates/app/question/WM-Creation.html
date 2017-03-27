@@ -12,7 +12,7 @@
         <form action="/wm/submit/" method="post" id='post-form'>
             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
             <div>
-                <h4>Type your question below</h4>
+                <h4>Type your question below. The words on the left will need to be matched to the correct words on the right when someone attempts this question.</h4>
                 <textarea class="mctextareas req" placeholder="Type your question in here" name="title" ></textarea>
                 <h4>Type your correct answer below</h4>
 
