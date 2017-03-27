@@ -101,31 +101,37 @@ $("#check").click(function () {
 
 });
 
+$(document).ready(function() {
 
-$('#post-form').on('submit', function(event) {
+$("#post-form").on('submit', function(event) {
     var $btn = $(document.activeElement);
     if($btn.attr('name') == 'save_form') {
-      var allFilled = true;
-      $('.req').each(function() {
-        if($(this).val() == '') {
-          allFilled = false;
+        var allFilled = true;
+
+        $('.req').each(function() {
+            if($(this).val() == '') {
+            allFilled = false;
         }
+        });
         if(!document.getElementById('answer').value.includes(" ")){
             allFilled = false;
         }
-      });
 
-      if(!allFilled) {
-        alert('You have missed out one or more fields. Please fill all of them in!');
-        event.preventDefault();
-      }
+
+        if(!allFilled) {
+            alert('You have missed out one or more fields. Please fill all of them in!');
+            event.preventDefault();
+
+        }
     }
 
+});
 });
 
 
 
 $("#preview").click(function () {
+    alert("here");
   var allFilled = true;
   $('.req').each(function() {
     if($(this).val() == '') {
@@ -135,6 +141,10 @@ $("#preview").click(function () {
         allFilled = false;
     }
   });
+  if(document.getElementById('answer').value=='' ||
+            document.getElementById('title').value ==''){
+            allFilled=false;
+        }
 
   if(allFilled) {
     window.open("/ws/preview");
