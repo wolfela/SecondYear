@@ -191,8 +191,8 @@ $(document).ready(function() {
 	// by invoking .position() on a jQuery object
 	function draw(fromPos, toPos) {
 		context.beginPath();
-		context.moveTo(fromPos.left - offsetX, fromPos.top - offsetY);
-		context.lineTo(toPos.left - offsetX, toPos.top - offsetY);
+		context.moveTo(fromPos.left, fromPos.top);
+		context.lineTo(toPos.left, toPos.top);
 		context.stroke();
 
 		var right = getRightLinked();

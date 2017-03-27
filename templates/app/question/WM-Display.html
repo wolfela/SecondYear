@@ -10,9 +10,9 @@
 {% block content %}
 <div id="main">
     <!-- Canvas for drawing lines -->
-    
+
     <h2 class = "mcqheading"> Question {{ question.position }} </h2>
-	<p class="questions">{{ question.title }}</p>
+    <p class="questions">{{ question.title }}</p>
     <form action="/wm/question/{{ question.pk }}/{{ score }}/check/" method="post" id='post-form'>
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
@@ -38,30 +38,31 @@
             {% endif %}
         </div>
 
-        <!-- Button grid -->
-        <div id="button-grid" class="center">
-            <!-- Left button grid -->
-            <div id="button-grid-left">
+        <div class="alignButtons">
+            <canvas id="my-canvas" width="700" height="300"></canvas>
+            <!-- Button grid -->
+            <div id="button-grid" class="center">
+                <!-- Left button grid -->
+                <div id="button-grid-left">
 
-            </div><!-- end of Left button grid-->
+                </div><!-- end of Left button grid-->
 
-            <!-- Right button grid -->
-            <div id="button-grid-right">
+                <!-- Right button grid -->
+                <div id="button-grid-right">
 
-            </div><!-- end of Right button grid-->
+                </div><!-- end of Right button grid-->
 
-        </div><!-- end of Button grid -->
+            </div><!-- end of Button grid -->
+        </div>
 
-	<input type="hidden" name="listA" id="listA">
-    <input type="hidden" name="listB" id="listB">
+        <input type="hidden" name="listA" id="listA">
+        <input type="hidden" name="listB" id="listB">
 
-	<button type="button" class="success button mycheckbutton" id="check">Check Answer</button>
-	
-	<div class="mybuttons">
-    	<button type="submit" class="button mynextbutton" name="save_form" >Next Question</button>
-    </div>
+        <div class="mybuttons">
+            <button type="button" class="success button mycheckbutton" id="check">Check Answer</button>
+            <button type="submit" class="button mynextbutton" name="save_form" >Next Question</button>
+        </div>
     </form>
-    <canvas id="my-canvas" width="700" height="500"></canvas>
 </div>
 {% endblock %}
 

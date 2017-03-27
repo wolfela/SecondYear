@@ -209,7 +209,6 @@ BODY
   background: $BaseColour;
   width: 100%;
   display: flex;
-
 }
 
 .contentBody{
@@ -219,6 +218,7 @@ BODY
   display: block;
   overflow: visible;
   padding: 2em;
+  z-index: 1;
 }
 
 /*
