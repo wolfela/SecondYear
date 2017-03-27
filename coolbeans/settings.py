@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_bleach',
     'rest_framework',
     'dynamic_rest',
+    'django_extensions',
     'coolbeans.app'
 ]
 
