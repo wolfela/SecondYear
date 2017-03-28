@@ -27,3 +27,9 @@ python3 manage.py runserver
 
 This will turn the server on under localhost:8000. If you wish to set a different URL, run it with python3 manage.py runserver 0.0.0.0:8000 and configure your webserver to redirect to port 8000 under the URL you wish.
 
+If you would like to see a live demo of the site, please go to:
+
+http://178.62.82.130:8000/
+
+If this site ever goes down, email adrian.abramowski@kcl.ac.uk
+
